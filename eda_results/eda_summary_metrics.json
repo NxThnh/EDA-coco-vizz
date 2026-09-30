@@ -1,0 +1,288 @@
+{
+  "splits": [
+    {
+      "Dataset": "COCO 2014",
+      "Split": "Train",
+      "Images": 82783,
+      "Captions": 414113,
+      "Captions/Img": 5.0
+    },
+    {
+      "Dataset": "COCO 2014",
+      "Split": "Val",
+      "Images": 40504,
+      "Captions": 202654,
+      "Captions/Img": 5.0
+    },
+    {
+      "Dataset": "COCO 2014",
+      "Split": "Total",
+      "Images": 123287,
+      "Captions": 616767,
+      "Captions/Img": 5.0
+    },
+    {
+      "Dataset": "VizWiz",
+      "Split": "Train",
+      "Images": 23431,
+      "Captions": 117155,
+      "Captions/Img": 5.0
+    },
+    {
+      "Dataset": "VizWiz",
+      "Split": "Val",
+      "Images": 7750,
+      "Captions": 38750,
+      "Captions/Img": 5.0
+    },
+    {
+      "Dataset": "VizWiz",
+      "Split": "Test",
+      "Images": 8000,
+      "Captions": 0,
+      "Captions/Img": 0.0
+    },
+    {
+      "Dataset": "VizWiz",
+      "Split": "Total",
+      "Images": 39181,
+      "Captions": 155905,
+      "Captions/Img": 5.0
+    }
+  ],
+  "resolution": [
+    {
+      "Dataset": "COCO Val 2014",
+      "N": 40504,
+      "Width Mean": 576.5,
+      "Width Median": 640.0,
+      "Width Std": 91.9,
+      "Width Min": 120,
+      "Width Max": 640,
+      "Height Mean": 485.1,
+      "Height Median": 480.0,
+      "Height Std": 97.8,
+      "Height Min": 111,
+      "Height Max": 640,
+      "AR Mean": 1.25,
+      "AR Median": 1.33,
+      "Landscape (%)": 71.71,
+      "Portrait (%)": 23.7,
+      "Square (%)": 4.59,
+      "MP Mean": 0.276
+    },
+    {
+      "Dataset": "VizWiz Val",
+      "N": 7750,
+      "Width Mean": 1067.7,
+      "Width Median": 968.0,
+      "Width Std": 429.5,
+      "Width Min": 23,
+      "Width Max": 3264,
+      "Height Mean": 1339.2,
+      "Height Median": 1296.0,
+      "Height Std": 383.7,
+      "Height Min": 25,
+      "Height Max": 2448,
+      "AR Mean": 0.79,
+      "AR Median": 0.75,
+      "Landscape (%)": 6.98,
+      "Portrait (%)": 92.86,
+      "Square (%)": 0.15,
+      "MP Mean": 1.566
+    }
+  ],
+  "caption_stats": [
+    {
+      "Subset": "COCO Val",
+      "Total Captions": 202654,
+      "Word Mean": 10.45,
+      "Word Median": 10.0,
+      "Word Std": 2.38,
+      "Word Min": 6,
+      "Word Max": 50,
+      "Char Mean": 52.29,
+      "Char Median": 50.0,
+      "Total Tokens": 2122711,
+      "Vocab Size": 17348,
+      "TTR (Type-Token)": 0.0082
+    },
+    {
+      "Subset": "VizWiz Val (All)",
+      "Total Captions": 38750,
+      "Word Mean": 11.64,
+      "Word Median": 10.0,
+      "Word Std": 4.17,
+      "Word Min": 6,
+      "Word Max": 155,
+      "Char Mean": 61.88,
+      "Char Median": 58.0,
+      "Total Tokens": 454299,
+      "Vocab Size": 10876,
+      "TTR (Type-Token)": 0.0239
+    },
+    {
+      "Subset": "VizWiz Val (Descriptive)",
+      "Total Captions": 33583,
+      "Word Mean": 12.04,
+      "Word Median": 11.0,
+      "Word Std": 4.34,
+      "Word Min": 6,
+      "Word Max": 155,
+      "Char Mean": 62.48,
+      "Char Median": 57.0,
+      "Total Tokens": 407796,
+      "Vocab Size": 10876,
+      "TTR (Type-Token)": 0.0267
+    },
+    {
+      "Subset": "VizWiz Val (Precanned/Degraded)",
+      "Total Captions": 5167,
+      "Word Mean": 9.0,
+      "Word Median": 9.0,
+      "Word Std": 0.0,
+      "Word Min": 9,
+      "Word Max": 9,
+      "Char Mean": 58.0,
+      "Char Median": 58.0,
+      "Total Tokens": 46503,
+      "Vocab Size": 9,
+      "TTR (Type-Token)": 0.0002
+    }
+  ],
+  "coco_top_supercategories": [
+    {
+      "Supercategory": "person",
+      "Count": 88153,
+      "Percentage": 30.2
+    },
+    {
+      "Supercategory": "vehicle",
+      "Count": 32574,
+      "Percentage": 11.16
+    },
+    {
+      "Supercategory": "kitchen",
+      "Count": 29445,
+      "Percentage": 10.09
+    },
+    {
+      "Supercategory": "furniture",
+      "Count": 26296,
+      "Percentage": 9.01
+    },
+    {
+      "Supercategory": "animal",
+      "Count": 21806,
+      "Percentage": 7.47
+    },
+    {
+      "Supercategory": "food",
+      "Count": 21423,
+      "Percentage": 7.34
+    },
+    {
+      "Supercategory": "sports",
+      "Count": 16786,
+      "Percentage": 5.75
+    },
+    {
+      "Supercategory": "indoor",
+      "Count": 15795,
+      "Percentage": 5.41
+    },
+    {
+      "Supercategory": "accessory",
+      "Count": 15483,
+      "Percentage": 5.3
+    },
+    {
+      "Supercategory": "electronic",
+      "Count": 9822,
+      "Percentage": 3.37
+    },
+    {
+      "Supercategory": "outdoor",
+      "Count": 9710,
+      "Percentage": 3.33
+    },
+    {
+      "Supercategory": "appliance",
+      "Count": 4582,
+      "Percentage": 1.57
+    }
+  ],
+  "vizwiz_quality_distribution": [
+    {
+      "Precanned Count (/5)": 0,
+      "Num Images": 5222,
+      "Percentage": 67.38,
+      "Interpretation": "High quality (5/5 described content)"
+    },
+    {
+      "Precanned Count (/5)": 1,
+      "Num Images": 1297,
+      "Percentage": 16.74,
+      "Interpretation": "Minor ambiguity (1/5 reported severe quality issue)"
+    },
+    {
+      "Precanned Count (/5)": 2,
+      "Num Images": 480,
+      "Percentage": 6.19,
+      "Interpretation": "Substantial degradation (2/5 reported severe quality issue)"
+    },
+    {
+      "Precanned Count (/5)": 3,
+      "Num Images": 286,
+      "Percentage": 3.69,
+      "Interpretation": "Majority degraded (3/5 could not recognize)"
+    },
+    {
+      "Precanned Count (/5)": 4,
+      "Num Images": 273,
+      "Percentage": 3.52,
+      "Interpretation": "Severe degradation (4/5 could not recognize)"
+    },
+    {
+      "Precanned Count (/5)": 5,
+      "Num Images": 192,
+      "Percentage": 2.48,
+      "Interpretation": "Completely unanswerable (5/5 confirmed impossible to recognize)"
+    }
+  ],
+  "blur_luminance": {
+    "coco_mean_blur": 1082.0675898056031,
+    "coco_mean_luminance": 114.66896139526366,
+    "vizwiz_mean_blur": 399.99527569139,
+    "vizwiz_mean_luminance": 104.51468127441406
+  },
+  "radar_metrics": {
+    "categories": [
+      "Object-Centric Framing\n(Bố cục vật thể trung tâm)",
+      "Stable Sharpness\n(Độ nét & Chống rung)",
+      "Standard Lighting\n(Ánh sáng chuẩn)",
+      "Landscape Photography\n(Tỷ lệ ảnh ngang chuẩn)",
+      "Assistive Text Need\n(Nhu cầu đọc chữ/OCR)",
+      "Severe Degradation\n(Tỷ lệ suy giảm chất lượng)",
+      "Egocentric Handheld\n(Góc chụp cầm tay thứ nhất)"
+    ],
+    "coco": [
+      90,
+      88,
+      85,
+      72,
+      12,
+      1,
+      8
+    ],
+    "vizwiz": [
+      35,
+      42,
+      48,
+      7,
+      74,
+      33,
+      85
+    ]
+  }
+}

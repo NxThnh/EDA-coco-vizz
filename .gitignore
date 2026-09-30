@@ -1,0 +1,26 @@
+# Large dataset archives (multi-gigabyte zips)
+*.zip
+*.tar
+*.tar.gz
+*.gz
+
+# Raw dataset image folders
+coco/
+vizwiz/
+
+# Python cache & environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Jupyter & IDE
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# Scratch & temporary files
+scratch/
+*.tmp

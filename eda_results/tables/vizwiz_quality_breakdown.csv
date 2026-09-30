@@ -1,0 +1,7 @@
+Precanned Count (/5),Num Images,Percentage,Interpretation
+0,5222,67.38,High quality (5/5 described content)
+1,1297,16.74,Minor ambiguity (1/5 reported severe quality issue)
+2,480,6.19,Substantial degradation (2/5 reported severe quality issue)
+3,286,3.69,Majority degraded (3/5 could not recognize)
+4,273,3.52,Severe degradation (4/5 could not recognize)
+5,192,2.48,Completely unanswerable (5/5 confirmed impossible to recognize)
