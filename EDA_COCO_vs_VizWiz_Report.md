@@ -12,10 +12,10 @@ Báo cáo này thực hiện phân tích khám phá dữ liệu (Exploratory Dat
 ### Các Phát Hiện Định Lượng Cốt Lõi:
 1. **Đảo ngược tỷ lệ khung hình (Aspect Ratio Inversion)**: COCO chiếm **71.71% ảnh ngang (Landscape)** do chụp từ máy ảnh kỹ thuật số Flickr chuẩn hóa $\le 640\text{px}$. Ngược lại, VizWiz có tới **92.86% ảnh dọc (Portrait)** chụp trực tiếp từ smartphone của người dùng.
 2. **Độ phân giải & Cảm biến**: COCO có độ phân giải cố định trung bình $576.5 \times 485.1\text{px}$ (0.28 MP). VizWiz giữ nguyên cảm biến camera di động với trung bình $1067.7 \times 1339.2\text{px}$ (1.57 MP), dao động từ $23\text{px}$ đến $3264\text{px}$.
-3. **Độ sắc nét & Rung mờ (Blur)**: Phép đo phương sai Laplacian (Laplacian Variance) chứng minh độ nét của COCO đạt trung bình **$1082.07$**, trong khi VizWiz chỉ đạt **$399.99$** (thấp hơn gần 3 lần), phản ánh hiện tượng rung tay (motion blur) và lệch tiêu cự (defocus blur).
-4. **Tỷ lệ ảnh suy giảm chất lượng nặng (Quality Degradation)**: **32.62%** số ảnh VizWiz được khảo sát có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều gán nhãn *"Quality issues are too severe to recognize visual content"*). COCO hoàn toàn không có cơ chế xử lý ảnh hỏng này.
-5. **Nhu cầu nhận diện chữ viết (Text/OCR Relevance)**: **73.72%** số ảnh VizWiz có sự hiện diện của chữ viết (text detected), trong đó **47.10%** đạt đồng thuận tuyệt đối (5/5 annotators). Người khiếm thị chụp ảnh chủ yếu để đọc nhãn thuốc, bao bì, hạn sử dụng, màn hình vi tính.
-6. **Lệch pha ngữ nghĩa (Semantic Gap)**: COCO tập trung áp đảo vào con người (`person` chiếm **30.20%** thực thể, `vehicle` chiếm **11.16%**) trong các bối cảnh thể thao ngoài trời. Ngược lại, từ vựng đặc trưng của VizWiz là đồ gia dụng, bao bì, màn hình, nhãn mác (`screen`, `bottle`, `box`, `can`, `package`, `label`, `medicine`, `hand`).
+3. **Chỉ báo chi tiết tần số cao**: Sau EXIF transpose và resize giữ tỷ lệ về cạnh ngắn 480 px, median phương sai Laplacian là **1197.90** ở COCO và **149.19** ở VizWiz. Chỉ số này đo năng lượng biên/texture, không tự phân biệt motion blur, defocus và cảnh ít texture.
+4. **Tín hiệu ảnh không thể nhận diện**: **32.62%** ảnh có ít nhất 1/5 annotator dùng caption từ chối; theo đồng thuận đa số **≥3/5 là 9.69%**, còn 5/5 là **2.48%**. Vì vậy không gọi toàn bộ 32.62% là “suy giảm nặng”.
+5. **Text/OCR relevance**: **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; theo đa số **≥3/5 là 64.75%**, còn 5/5 là **47.10%**. Các số liệu chứng minh scene text phổ biến, nhưng không đủ để kết luận mục đích chụp chủ yếu là đọc nhãn thuốc.
+6. **Danh từ trong caption**: Top-15 được trích bằng cùng một POS-tagger cho cả hai tập và chuẩn hóa theo 1.000 caption. `person` vẫn xuất hiện trong Top-15 VizWiz; không loại thủ công để làm mạnh luận điểm.
 
 ---
 
@@ -86,16 +86,17 @@ VizWiz có 5.167/38.750 caption ($13,33\%$) là cùng một câu placeholder bá
 | **Tổng số token từ** | $2.122.711$ | $407.796$ |
 | **Quy mô từ vựng** | $17.348$ | $10.876$ |
 | **Type-Token Ratio (TTR)** | $0,0082$ | **$0,0267$** |
+| **MATTR (cửa sổ 1.000 token)** | $0,3209$ | $0,3223$ |
 
 ### Các Phát hiện Ngôn ngữ học Nổi bật:
 1. **Độ dài câu và đuôi phân phối dài (Long-tail)**:
    - Câu chú thích COCO có độ dài tập trung hẹp xung quanh 10 từ (độ lệch chuẩn chỉ $2.38$).
    - Câu chú thích VizWiz miêu tả có độ dài trung bình lớn hơn ($12.04$ từ) và kéo dài tới **$155$ từ**. Người gán nhãn phải ghi chép chi tiết từng dòng chữ trên bao bì, thương hiệu, màu sắc nút bấm để hỗ trợ tối đa cho người dùng khiếm thị.
-2. **Độ phong phú từ vựng (TTR)**:
-   - Tỷ lệ Type-Token Ratio của VizWiz ($0.0267$) cao gấp **3.2 lần** so với COCO ($0.0082$). Điều này chứng minh từ vựng trong VizWiz phong phú hơn rất nhiều do bao gồm tên các nhãn hàng, thuật ngữ y tế, loại thuốc, vật dụng gia đình cụ thể.
-3. **Từ vựng đặc trưng đối lập (Semantic Shift)**:
-   - **Top thực thể COCO**: `man` (24,721), `people` (14,064), `woman` (11,418), `street` (10,374), `table` (10,121), `tennis` (6,904), `dog` (6,238). Ngữ cảnh chủ đạo: con người hoạt động ngoài trời, thể thao, động vật.
-   - **Top thực thể VizWiz**: `screen` (3,177), `computer` (3,159), `table` (2,990), `bottle` (2,655), `box` (2,414), `can` (2,297), `package` (1,520), `hand` (1,446), `label` (1,344), `medicine` (1,152). Ngữ cảnh chủ đạo: tay cầm đồ vật, đọc thông tin trên bao bì hộp/chai, màn hình máy tính.
+2. **Độ đa dạng từ vựng trên cùng quy mô**:
+   - TTR toàn kho không được dùng để xếp hạng vì COCO có 2,12 triệu token còn VizWiz có 0,41 triệu. MATTR cửa sổ 1.000 token gần như bằng nhau: **0.3209 (COCO)** và **0.3223 (VizWiz)**.
+3. **Top-15 danh từ tính từ dữ liệu**:
+   - NLTK POS tagger chỉ giữ danh từ và WordNet lemmatizer chuẩn hóa số ít. Bảng báo cả count lẫn số lượt nhắc trên 1.000 caption.
+   - `person` được giữ trong Top-15 VizWiz. `can` không còn trong Top-15 sau khi phân biệt danh từ với modal verb. CSV nguồn: [`caption_noun_entities_top15.csv`](eda_results/tables/caption_noun_entities_top15.csv).
 
 ---
 
@@ -129,7 +130,7 @@ Trên đúng mẫu COCO-500 ở Phần 1 có 3.719 object instance. Ba siêu dan
 
 ### Giới hạn của CHAIR/POPE khi so sánh COCO với VizWiz:
 
-Không nên đọc điểm CHAIR trên COCO và VizWiz như hai đại lượng hoàn toàn tương đương. CHAIR gốc chủ động giới hạn đối tượng vào **80 category của MS-COCO segmentation**. Trong Top-15 thực thể đặc trưng của VizWiz, nhiều khái niệm phục vụ hỗ trợ như `screen`, `box`, `can`, `package`, `hand`, `label`, `medicine` không phải category COCO; chỉ một phần nhỏ như `bottle`, `laptop/computer` hoặc `table` có thể ánh xạ gần đúng. Vì vậy CHAIR có thể **không đếm** hallucination ngoài ontology và làm điểm VizWiz trông tốt giả tạo.
+Không nên đọc điểm CHAIR trên COCO và VizWiz như hai đại lượng hoàn toàn tương đương. CHAIR gốc chủ động giới hạn đối tượng vào **80 category của MS-COCO segmentation**. Nhiều danh từ phổ biến trong caption VizWiz như `screen`, `box`, `package`, `hand` và `label` không phải category COCO; chỉ một phần như `bottle`, `laptop/computer` hoặc `table` có thể ánh xạ gần đúng. Vì vậy CHAIR có thể **không đếm** hallucination ngoài ontology và làm điểm VizWiz trông tốt giả tạo.
 
 POPE giảm phụ thuộc vào phong cách caption bằng câu hỏi yes/no về sự tồn tại của vật thể, nhưng vẫn chỉ hợp lệ khi tập positive object và negative probe được xây dựng từ annotation phù hợp với VizWiz. Tái sử dụng nguyên object pool COCO cho VizWiz vẫn kế thừa ontology bias. Báo cáo chính nên:
 
@@ -157,7 +158,8 @@ Khảo sát mức độ đồng thuận của 5 annotators trên 7.750 ảnh Viz
 | **3 / 5 báo lỗi (Đa số không nhận ra)**| 286 | 3.69% | Đa số người gán nhãn đầu hàng trước chất lượng ảnh |
 | **4 / 5 báo lỗi (Suy giảm nghiêm trọng)** | 273 | 3.52% | Rất mờ hoặc rất tối, chỉ 1 người cố đoán |
 | **5 / 5 báo lỗi (Hỏng ảnh hoàn toàn)**| **192** | **2.48%** | **100% không thể nhận diện được hình ảnh** |
-| **TỔNG CỘNG ẢNH CÓ LỖI CHẤT LƯỢNG ($\ge 1/5$)** | **2,528** | **32.62%** | **Gần 1/3 dữ liệu thực tế bị suy giảm chất lượng!** |
+| **Ít nhất 1/5 dùng caption từ chối** | **2,528** | **32.62%** | Ngưỡng nhạy, gồm cả bất đồng nhẹ |
+| **Đa số ≥3/5 dùng caption từ chối** | **751** | **9.69%** | Tín hiệu đồng thuận mạnh hơn |
 
 ### 2. Sự Hiện diện của Chữ viết (Text / OCR Relevance):
 Khảo sát sự đồng thuận của 5 annotators về việc có xuất hiện văn bản trong ảnh hay không:
@@ -165,17 +167,16 @@ Khảo sát sự đồng thuận của 5 annotators về việc có xuất hiệ
 - **Có từ 1 đến 4 người thấy chữ**: 2,063 ảnh ($26.62\%$)
 - **Cả 5 người cùng thấy chữ rõ ràng**: **3,650 ảnh ($47.10\%$)**
 - **Tổng số ảnh có chữ ($\ge 1$ annotator)**: **5,713 ảnh ($73.72\%$)**
+- **Đồng thuận đa số có chữ ($\ge 3/5$ annotators)**: **5,018 ảnh ($64.75\%$)**
 
-$\rightarrow$ **Gần 3/4 số ảnh VizWiz đòi hỏi khả năng đọc và hiểu chữ (OCR / Scene Text Recognition)**. Nếu một mô hình Captioning chỉ dựa vào đặc trưng hình ảnh trừu tượng của ResNet/ViT mà không có module OCR tích hợp, mô hình sẽ không thể hỗ trợ người khiếm thị đọc nhãn sản phẩm.
+Scene text phổ biến trong VizWiz, vì vậy OCR là năng lực quan trọng. Tuy nhiên, cờ `text_detected` không cho biết mục đích chụp và không chứng minh rằng phần lớn ảnh được chụp để đọc nhãn thuốc.
 
 ### 3. Đo lường Khách quan bằng Thuật toán Xử lý Ảnh (Image Processing Metrics):
-- **Độ nét (Laplacian Variance)**:
-  $$\text{Var}(\nabla^2 I) = \frac{1}{HW}\sum_{x,y} \left( L(x,y) - \mu_L \right)^2$$
-  - **MS-COCO 2014**: Đạt trung bình **$1082.07$**, phân bố lệch mạnh về phía sắc nét, ảnh tĩnh, độ tương phản biên cạnh cao.
-  - **VizWiz-Captions**: Chỉ đạt **$399.99$** (thấp hơn $63\%$). Đồ thị mật độ (KDE) cho thấy một đỉnh lớn nằm ở vùng giá trị cực thấp ($\log_{10} < 1.5$), minh chứng cho hiện tượng mất nét nặng do rung tay hoặc khoảng cách lấy nét (macro focus) quá gần.
-- **Độ sáng & Phơi sáng (Mean Luminance)**:
-  - COCO có phân bố chuẩn đối xứng quanh mức sáng trung bình lý tưởng ($114.7 \pm 42$).
-  - VizWiz có phân bố phân tán mạnh ($104.5$), xuất hiện nhiều ảnh ở 2 cực đoan: cực tối (underexposed do chụp trong góc tủ, phòng tối không bật đèn) hoặc lóa trắng (overexposed do đèn flash điện thoại phản chiếu trực tiếp vào bề mặt nhẵn).
+- **Phương sai Laplacian sau chuẩn hóa**: áp dụng EXIF orientation, giữ tỷ lệ khung hình và resize cạnh ngắn về 480 px trên mẫu ngẫu nhiên 1.000 ảnh/tập (`seed=42`).
+  - **MS-COCO val2014**: median **1197.90**.
+  - **VizWiz val**: median **149.19**.
+  - Chênh lệch phản ánh năng lượng biên/texture thấp hơn, nhưng không xác định riêng motion blur; defocus, JPEG và cảnh ít texture cũng ảnh hưởng chỉ số.
+- **Độ sáng**: median COCO **113.15**, median VizWiz **107.95**; hai phân phối chồng lấn nên không gắn nhãn quy kết “extreme lighting” chỉ từ trung bình.
 
 ### Mờ/lệch tâm có tương quan với CHAIR/POPE hay không?
 
@@ -228,10 +229,10 @@ Nếu một người khiếm thị chụp ảnh một lọ thuốc bị nhòe m�
    - *Hình ảnh*: Cậu bé cầm ô hoa đứng vuốt ve sừng con bò Tây Tạng (yak).
    - *Đặc điểm*: Đầy đủ bối cảnh văn hóa, màu sắc sống động, độ tương phản sắc nét.
    - *Caption mẫu*: *"A young boy with an umbrella touching the horn of a yak."*
-4. **Ảnh COCO mẫu #581357**:
-   - *Hình ảnh*: Bàn ăn với các đĩa thức ăn và ly rượu vang được sắp xếp ngăn nắp.
-   - *Đặc điểm*: Ảnh chụp tĩnh vật trong nhà hàng, ánh sáng ấm, cân bằng trắng chuẩn.
-   - *Caption mẫu*: *"A table with plates of food and wine glasses."*
+4. **Ảnh COCO mẫu #161222**:
+   - *Hình ảnh*: Bàn ăn nhà hàng với nhiều đĩa burger, khoai chiên, vòng hành và ly rượu vang.
+   - *Đặc điểm*: Ảnh và caption đã được đối chiếu trực tiếp theo `image_id = 161222` trong annotation COCO.
+   - *Caption mẫu*: *"A table topped with plates of food and wine glasses."*
 
 ### Nhóm 2: Thực tế Đời thực VizWiz (In-The-Wild Assistive Reality)
 1. **Ảnh VizWiz mẫu #00000001 (Handheld Medicine & OCR)**:
@@ -246,9 +247,9 @@ Nếu một người khiếm thị chụp ảnh một lọ thuốc bị nhòe m�
    - *Hình ảnh*: Một vật thể không thể xác định trên mặt bàn, vệt mờ chuyển động kéo dài khắp khung hình.
    - *Đặc điểm*: Camera di chuyển khi bấm chụp, mất hoàn toàn biên cạnh nhận dạng vật thể.
    - *Caption mẫu*: *"A blurry photo of an unrecognizable object on a table."*
-4. **Ảnh VizWiz mẫu #00000006 (Complete Quality Failure - 100% Precanned)**:
-   - *Hình ảnh*: Hình ảnh bị đen kịt, cảm biến bị che kín hoàn toàn hoặc chụp trong buồng tối không có ánh sáng.
-   - *Đặc điểm*: Cả 5 người gán nhãn độc lập đều đồng thuận tuyệt đối là không thể nhìn thấy bất kỳ nội dung nào.
+4. **Ảnh VizWiz mẫu #00000006 (Severe Glare / Obscured Scene - 100% Precanned)**:
+   - *Hình ảnh*: Ảnh vẫn sáng nhưng mờ sương, tương phản thấp và bị lóa/phản chiếu mạnh ở vùng trung tâm; chỉ thấy các hình khối mơ hồ.
+   - *Đặc điểm*: Cả 5 người gán nhãn đều dùng caption từ chối chuẩn hóa vì chất lượng ảnh không đủ để nhận diện nội dung chắc chắn; đây không phải ảnh đen hoặc cảm biến bị che kín.
    - *Caption mẫu*: *"Quality issues are too severe to recognize visual content."* (Lặp lại 5/5 lần).
 
 ---
@@ -279,13 +280,13 @@ Từ các kết quả EDA trên, khóa luận tốt nghiệp nên đề xuất c
 ## TÀI NGUYÊN ĐÃ XUẤT XƯỞNG (EXPORTED ARTIFACTS)
 
 Toàn bộ biểu đồ độ phân giải cao (300 DPI) và dữ liệu bảng biểu đã được lưu trữ hoàn chỉnh tại:
-- **Thư mục Đồ thị**: `c:\Users\Admin\Downloads\HGAI_data\eda_results\figures/`
+- **Thư mục Đồ thị**: `eda_results/figures/`
   1. `02_resolution_aspect_ratio.png`: Phân bố độ phân giải và tỷ lệ khung hình.
   2. `03_caption_length_and_tokens.png`: Phân bố độ dài từ và từ vựng đặc trưng.
   3. `04_coco_category_distribution.png`: Phân bố đối tượng COCO và sự áp đảo của con người.
   4. `05_vizwiz_quality_and_text_issues.png`: Tỷ lệ ảnh suy giảm chất lượng, chữ viết và độ sắc nét quang học.
   5. `06_domain_gap_characteristics.png`: Biểu đồ radar 7 chiều đối sánh Domain Gap.
   6. `07_qualitative_samples_grid.png`: Lưới ảnh đối sánh trực quan các trường hợp tiêu biểu.
-- **Thư mục Bảng số liệu CSV**: `c:\Users\Admin\Downloads\HGAI_data\eda_results\tables/`
-- **File Dữ liệu Thống kê Đầy đủ (JSON)**: `c:\Users\Admin\Downloads\HGAI_data\eda_results\eda_summary_metrics.json`
-- **Script Thực thi Tái lập (Reproducible Python Script)**: `c:\Users\Admin\Downloads\HGAI_data\eda_coco_vs_vizwiz.py`
+- **Thư mục Bảng số liệu CSV**: `eda_results/tables/`
+- **File Dữ liệu Thống kê Đầy đủ (JSON)**: `eda_results/eda_summary_metrics.json`
+- **Script Thực thi Tái lập (Reproducible Python Script)**: `eda_coco_vs_vizwiz.py`

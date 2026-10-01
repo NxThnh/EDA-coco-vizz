@@ -16,7 +16,7 @@ if sys.stdout.encoding != 'utf-8':
     except Exception:
         pass
 
-BASE_DIR = r"c:\Users\Admin\Downloads\HGAI_data"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUT_NB_PATH = os.path.join(BASE_DIR, "EDA_COCO_vs_VizWiz_Report.ipynb")
 FIG_DIR = os.path.join(BASE_DIR, "eda_results", "figures")
 TAB_DIR = os.path.join(BASE_DIR, "eda_results", "tables")
@@ -112,15 +112,15 @@ Trong các bài toán Thị giác - Ngôn ngữ (Vision-Language), **MS-COCO** �
 2. **📐 Chênh lệch Cảm biến & Kích thước Hình ảnh:**
    - COCO có độ phân giải cố định trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
    - VizWiz giữ nguyên độ phân giải cảm biến camera di động với trung bình $1067.7 \times 1339.2\text{px}$ (1.57 MP), dao động cực đoan từ $23\text{px}$ đến $3264\text{px}$.
-3. **🌫️ Độ sắc nét Quang học & Rung mờ (Blur):**
-   - Phương sai Laplacian ($\text{Var}(\nabla^2 I)$) của COCO đạt **1082.07**, trong khi VizWiz chỉ đạt **399.99** (kém gần 3 lần), phản ánh hiện tượng rung tay (motion blur) và sai tiêu cự (defocus blur).
-4. **⚠️ Tỷ lệ Suy giảm Chất lượng Nặng (Quality Degradation):**
-   - **32.62%** số ảnh VizWiz được khảo sát có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều xác nhận không thể nhận diện).
+3. **🌫️ Chỉ báo chi tiết tần số cao của ảnh:**
+   - Sau EXIF transpose và resize giữ tỷ lệ về cạnh ngắn 480 px, median phương sai Laplacian là **1197.90** ở COCO và **149.19** ở VizWiz. Đây là chỉ báo độ mạnh biên/texture, không tự phân biệt motion blur, defocus và cảnh ít texture.
+4. **⚠️ Tín hiệu ảnh không thể nhận diện:**
+   - **32.62%** ảnh có ít nhất 1/5 annotator dùng caption từ chối; ngưỡng đồng thuận đa số **≥3/5 là 9.69%**, và đồng thuận tuyệt đối 5/5 là **2.48%**. Vì vậy 32.62% không được gọi là “suy giảm nặng”.
 5. **🔤 Nhu cầu Đọc Chữ viết (Scene Text / OCR Relevance):**
-   - **73.72%** số ảnh VizWiz có sự hiện diện của chữ viết (text detected), trong đó **47.10%** đạt đồng thuận tuyệt đối (5/5 annotators). Người khiếm thị chụp ảnh chủ yếu để đọc nhãn thuốc, hạn dùng, màn hình vi tính.
+   - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; theo đồng thuận đa số **≥3/5 là 64.75%**, và 47.10% đạt 5/5. Dữ liệu cho thấy scene text phổ biến, nhưng không đủ để kết luận mục đích chụp chủ yếu là đọc nhãn thuốc.
 6. **👥 Lệch pha Ngữ nghĩa (Semantic Shift):**
    - COCO tập trung vào con người (`person` chiếm **30.20%**) và hoạt động ngoài trời/thể thao.
-   - VizWiz tập trung vào đồ vật cầm tay hàng ngày: `screen`, `computer`, `bottle`, `box`, `can`, `package`, `hand`, `label`, `medicine`."""
+   - So sánh danh từ caption được báo theo số lượt nhắc trên 1.000 caption cho cả hai tập. `person` vẫn xuất hiện trong Top-15 VizWiz; không loại thủ công để làm mạnh luận điểm."""
 cells.append(create_markdown_cell(cell1_md))
 
 # ==============================================================================
@@ -129,20 +129,30 @@ cells.append(create_markdown_cell(cell1_md))
 cell2_code = """import os
 import json
 import base64
+import subprocess
+import sys
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
 from IPython.display import display, HTML, Image as IPImage
 
-# Định nghĩa các đường dẫn thư mục làm việc
-BASE_DIR = r"c:\\Users\\Admin\\Downloads\\HGAI_data"
+# Tự tìm thư mục dự án từ thư mục chạy notebook hoặc các thư mục cha.
+_roots = [Path.cwd(), *Path.cwd().parents]
+BASE_DIR = str(next((p for p in _roots if (p / "eda_coco_vs_vizwiz.py").exists()), Path.cwd()))
 COCO_DIR = os.path.join(BASE_DIR, "coco")
 VIZWIZ_DIR = os.path.join(BASE_DIR, "vizwiz")
 RESULTS_DIR = os.path.join(BASE_DIR, "eda_results")
 FIG_DIR = os.path.join(RESULTS_DIR, "figures")
 TAB_DIR = os.path.join(RESULTS_DIR, "tables")
 METRICS_JSON = os.path.join(RESULTS_DIR, "eda_summary_metrics.json")
+ANALYSIS_SCRIPT = os.path.join(BASE_DIR, "eda_coco_vs_vizwiz.py")
+
+# Đặt REBUILD=True để tính lại CSV/JSON/hình từ annotation và ảnh gốc.
+REBUILD = False
+if REBUILD or not os.path.exists(METRICS_JSON):
+    subprocess.run([sys.executable, ANALYSIS_SCRIPT], cwd=BASE_DIR, check=True)
 
 # Cấu hình hiển thị pandas
 pd.set_option('display.max_columns', 25)
@@ -162,13 +172,15 @@ def render_table(df, title=""):
     display(HTML(html))
 
 def show_figure(filename, title="", caption="", width=950):
-    \"\"\"Hiển thị biểu đồ độ phân giải cao kèm chú thích học thuật\"\"\"
+    \"\"\"Nhúng ảnh bằng data URI để notebook vẫn chạy khi di chuyển/export.\"\"\"
     filepath = os.path.join(FIG_DIR, filename)
     if os.path.exists(filepath):
+        with open(filepath, "rb") as f:
+            image_uri = "data:image/png;base64," + base64.b64encode(f.read()).decode("ascii")
         html_caption = f\"\"\"
         <div style="text-align: center; margin: 15px auto 25px auto; max-width: {width}px;">
             <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.12); border: 1px solid #e0e0e0;">
-                <img src="{filepath}" style="width: 100%; height: auto; display: block;" />
+                <img src="{image_uri}" style="width: 100%; height: auto; display: block;" />
             </div>
             <p style="font-size: 0.9em; color: #555; margin-top: 8px; font-style: italic;">
                 <b>{title}</b>: {caption}
@@ -290,9 +302,9 @@ cell9_md = """---
 
 Khảo sát dùng $202,654$ caption COCO và **33,583 caption VizWiz mô tả hợp lệ**. Toàn bộ 5,167 placeholder báo lỗi chất lượng ($13.33\%$) bị loại khỏi thống kê ngôn ngữ, token và thực thể.
 
-Độ phong phú từ vựng được đo lường bằng chỉ số **Type-Token Ratio (TTR)**:
-$$\\text{TTR} = \\frac{|\\mathcal{V}|}{N_{\\text{tokens}}}$$
-Trong đó $|\\mathcal{V}|$ là số từ vựng duy nhất (Vocab Size) và $N_{\\text{tokens}}$ là tổng số lượng từ xuất hiện trong tập văn bản."""
+TTR toàn kho được giữ lại chỉ như thống kê mô tả vì phụ thuộc mạnh vào kích thước corpus. So sánh chính dùng **Moving-Average Type-Token Ratio (MATTR)** với cửa sổ cố định 1.000 token, nhờ đó hai tập được đánh giá trên cùng quy mô ngữ liệu.
+
+Top-15 thực thể được tính trực tiếp từ caption bằng NLTK POS tagger: chỉ giữ danh từ (`NN`, `NNS`, `NNP`, `NNPS`), lemmatize về số ít, rồi loại các từ quy chiếu ảnh/vị trí chung (`image`, `photo`, `photograph`, `picture`, `top`, `front`, `side`, `background`, `foreground`, `center`, `middle`). Quy tắc và số đếm thô được lưu trong CSV để kiểm tra."""
 cells.append(create_markdown_cell(cell9_md))
 
 # ==============================================================================
@@ -322,88 +334,23 @@ exec_counter += 1
 # ==============================================================================
 # CELL 11: Section 3 - Semantic Entities Comparison Code (Code)
 # ==============================================================================
-cell11_code = """# So sánh Top 15 thực thể ngữ nghĩa đặc trưng xuất hiện nhiều nhất
-coco_entities = [
-    {"Entity": "man", "Count": 24721, "Context": "Con người / Nam giới"},
-    {"Entity": "people", "Count": 14064, "Context": "Nhóm người"},
-    {"Entity": "woman", "Count": 11418, "Context": "Con người / Nữ giới"},
-    {"Entity": "street", "Count": 10374, "Context": "Đường phố ngoài trời"},
-    {"Entity": "table", "Count": 10121, "Context": "Bàn ăn / Bàn làm việc"},
-    {"Entity": "tennis", "Count": 6904, "Context": "Thể thao ngoài trời"},
-    {"Entity": "dog", "Count": 6238, "Context": "Thú cưng / Động vật"},
-    {"Entity": "train", "Count": 5990, "Context": "Phương tiện giao thông"},
-    {"Entity": "baseball", "Count": 5786, "Context": "Thể thao ngoài trời"},
-    {"Entity": "kitchen", "Count": 5312, "Context": "Phòng bếp gia đình"},
-    {"Entity": "beach", "Count": 5110, "Context": "Bãi biển / Du lịch"},
-    {"Entity": "food", "Count": 4980, "Context": "Món ăn trên đĩa"},
-    {"Entity": "room", "Count": 4890, "Context": "Phòng ở trong nhà"},
-    {"Entity": "cat", "Count": 4650, "Context": "Thú cưng / Động vật"},
-    {"Entity": "horse", "Count": 4210, "Context": "Động vật / Ngoài trời"}
-]
+# Reproducible table loaded from the POS-tagged counts generated by
+# eda_coco_vs_vizwiz.py.
+cell11_code = """# Top-15 danh từ được tính từ caption; không có số liệu gõ tay.
+df_entities = pd.read_csv(os.path.join(TAB_DIR, "caption_noun_entities_top15.csv"))
+df_coco_ent = df_entities[df_entities["Dataset"] == "COCO val2014 captions"].reset_index(drop=True)
+df_viz_ent = df_entities[df_entities["Dataset"] == "VizWiz val descriptive captions"].reset_index(drop=True)
 
-vizwiz_entities = [
-    {"Entity": "screen", "Count": 3177, "Context": "Màn hình vi tính / TV"},
-    {"Entity": "computer", "Count": 3159, "Context": "Máy vi tính / Laptop"},
-    {"Entity": "table", "Count": 2990, "Context": "Bàn đặt vật thể"},
-    {"Entity": "bottle", "Count": 2655, "Context": "Chai nước / Chai thuốc"},
-    {"Entity": "box", "Count": 2414, "Context": "Hộp sản phẩm / Bao bì"},
-    {"Entity": "can", "Count": 2297, "Context": "Lon nước / Đồ hộp"},
-    {"Entity": "package", "Count": 1520, "Context": "Gói hàng / Túi bọc"},
-    {"Entity": "hand", "Count": 1446, "Context": "Bàn tay cầm đồ vật"},
-    {"Entity": "label", "Count": 1344, "Context": "Nhãn mác sản phẩm"},
-    {"Entity": "phone", "Count": 1280, "Context": "Điện thoại di động"},
-    {"Entity": "paper", "Count": 1210, "Context": "Tờ giấy / Hóa đơn"},
-    {"Entity": "medicine", "Count": 1152, "Context": "Thuốc uống / Vỉ thuốc"},
-    {"Entity": "jar", "Count": 1080, "Context": "Lọ thủy tinh / Gia vị"},
-    {"Entity": "keyboard", "Count": 990, "Context": "Bàn phím máy tính"},
-    {"Entity": "card", "Count": 870, "Context": "Thẻ ngân hàng / Card"}
-]
+render_table(df_coco_ent, "Top 15 danh từ trong caption MS-COCO val2014")
+render_table(df_viz_ent, "Top 15 danh từ trong caption VizWiz val")"""
 
-df_coco_ent = pd.DataFrame(coco_entities)
-df_viz_ent = pd.DataFrame(vizwiz_entities)
-
-display(HTML("<div style='display: flex; gap: 20px;'>"))
-render_table(df_coco_ent, "Top 15 Thực thể Đặc trưng trong MS-COCO")
-render_table(df_viz_ent, "Top 15 Thực thể Đặc trưng trong VizWiz-Captions")
-display(HTML("</div>"))"""
-
-df_c_ent = pd.DataFrame([
-    {"Entity": "man", "Count": 24721, "Context": "Con người / Nam giới"},
-    {"Entity": "people", "Count": 14064, "Context": "Nhóm người"},
-    {"Entity": "woman", "Count": 11418, "Context": "Con người / Nữ giới"},
-    {"Entity": "street", "Count": 10374, "Context": "Đường phố ngoài trời"},
-    {"Entity": "table", "Count": 10121, "Context": "Bàn ăn / Bàn làm việc"},
-    {"Entity": "tennis", "Count": 6904, "Context": "Thể thao ngoài trời"},
-    {"Entity": "dog", "Count": 6238, "Context": "Thú cưng / Động vật"},
-    {"Entity": "train", "Count": 5990, "Context": "Phương tiện giao thông"},
-    {"Entity": "baseball", "Count": 5786, "Context": "Thể thao ngoài trời"},
-    {"Entity": "kitchen", "Count": 5312, "Context": "Phòng bếp gia đình"},
-    {"Entity": "beach", "Count": 5110, "Context": "Bãi biển / Du lịch"},
-    {"Entity": "food", "Count": 4980, "Context": "Món ăn trên đĩa"},
-    {"Entity": "room", "Count": 4890, "Context": "Phòng ở trong nhà"},
-    {"Entity": "cat", "Count": 4650, "Context": "Thú cưng / Động vật"},
-    {"Entity": "horse", "Count": 4210, "Context": "Động vật / Ngoài trời"}
-])
-df_v_ent = pd.DataFrame([
-    {"Entity": "screen", "Count": 3177, "Context": "Màn hình vi tính / TV"},
-    {"Entity": "computer", "Count": 3159, "Context": "Máy vi tính / Laptop"},
-    {"Entity": "table", "Count": 2990, "Context": "Bàn đặt vật thể"},
-    {"Entity": "bottle", "Count": 2655, "Context": "Chai nước / Chai thuốc"},
-    {"Entity": "box", "Count": 2414, "Context": "Hộp sản phẩm / Bao bì"},
-    {"Entity": "can", "Count": 2297, "Context": "Lon nước / Đồ hộp"},
-    {"Entity": "package", "Count": 1520, "Context": "Gói hàng / Túi bọc"},
-    {"Entity": "hand", "Count": 1446, "Context": "Bàn tay cầm đồ vật"},
-    {"Entity": "label", "Count": 1344, "Context": "Nhãn mác sản phẩm"},
-    {"Entity": "phone", "Count": 1280, "Context": "Điện thoại di động"},
-    {"Entity": "paper", "Count": 1210, "Context": "Tờ giấy / Hóa đơn"},
-    {"Entity": "medicine", "Count": 1152, "Context": "Thuốc uống / Vỉ thuốc"},
-    {"Entity": "jar", "Count": 1080, "Context": "Lọ thủy tinh / Gia vị"},
-    {"Entity": "keyboard", "Count": 990, "Context": "Bàn phím máy tính"},
-    {"Entity": "card", "Count": 870, "Context": "Thẻ ngân hàng / Card"}
-])
+# Outputs nhúng cũng lấy từ chính CSV tính toán, bảo đảm khớp với code của cell.
+df_entities_build = pd.read_csv(os.path.join(TAB_DIR, "caption_noun_entities_top15.csv"))
+df_c_ent = df_entities_build[df_entities_build["Dataset"] == "COCO val2014 captions"].reset_index(drop=True)
+df_v_ent = df_entities_build[df_entities_build["Dataset"] == "VizWiz val descriptive captions"].reset_index(drop=True)
 
 out11 = [
-    make_display_output(html_text=f"""<div style="display: flex; gap: 20px; flex-wrap: wrap;"><div style="flex: 1; min-width: 300px;"><div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Top 15 Thực thể Đặc trưng trong MS-COCO</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_c_ent.to_html(classes='table table-hover table-striped', index=False)}</div></div></div><div style="flex: 1; min-width: 300px;"><div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Top 15 Thực thể Đặc trưng trong VizWiz-Captions</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_v_ent.to_html(classes='table table-hover table-striped', index=False)}</div></div></div></div>""")
+    make_display_output(html_text=f"""<div style="display: flex; gap: 20px; flex-wrap: wrap;"><div style="flex: 1; min-width: 300px;"><div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Top 15 danh từ trong caption MS-COCO val2014</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_c_ent.to_html(classes='table table-hover table-striped', index=False)}</div></div></div><div style="flex: 1; min-width: 300px;"><div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Top 15 danh từ trong caption VizWiz val</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_v_ent.to_html(classes='table table-hover table-striped', index=False)}</div></div></div></div>""")
 ]
 cells.append(create_code_cell(cell11_code, out11, exec_counter))
 exec_counter += 1
@@ -416,9 +363,11 @@ cell12_md = """### 💡 Phát Hiện Ngôn Ngữ Học Cốt Lõi:
 1. **Phân bố độ dài câu chú thích (Long-tail Distribution):**
    - COCO có độ dài câu tập trung rất chặt chẽ xung quanh mức **10.45 từ** ($\pm 2.38$). Hầu hết là các câu miêu tả khái quát cấu trúc đơn giản (*"A man standing on a street"*).
    - VizWiz (nhóm miêu tả thường) có độ dài trung bình **12.04 từ** ($\pm 4.34$) và kéo dài tới **155 từ**. Người gán nhãn bắt buộc phải ghi lại chi tiết các dòng văn bản, nhãn hiệu sản phẩm, thành phần, màu sắc phím bấm để hỗ trợ người khiếm thị.
-2. **Độ phong phú từ vựng (Type-Token Ratio - TTR):**
-   - TTR của VizWiz đạt **$0.0267$**, cao gấp **3.25 lần** so với COCO ($0.0082$).
-   - Sự khác biệt này phản ánh thực tế rằng COCO sử dụng các danh từ bao quát (xe cộ, con vật), trong khi VizWiz chứa hàng ngàn tên sản phẩm, nhãn hiệu thương mại, tên thuốc và thông số kỹ thuật đa dạng."""
+2. **Độ đa dạng từ vựng trên cùng cửa sổ token:**
+   - TTR toàn kho là 0.0082 (COCO) và 0.0267 (VizWiz), nhưng không dùng để xếp hạng vì hai corpus có 2.12 triệu và 0.41 triệu token.
+   - MATTR cửa sổ 1.000 token gần như bằng nhau: **0.3209 (COCO)** và **0.3223 (VizWiz)**. Dữ liệu hiện tại không hỗ trợ kết luận “VizWiz phong phú hơn 3.25 lần”.
+3. **Danh từ trong caption:**
+   - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. `person` xuất hiện trong Top-15 VizWiz; `can` không còn nằm trong Top-15 sau khi phân biệt danh từ với modal verb."""
 cells.append(create_markdown_cell(cell12_md))
 
 # ==============================================================================
@@ -473,22 +422,21 @@ cell15_md = """### 🎓 Luận Điểm Phê Phán Cho Khóa Luận (Critical The
    - **MS-COCO hoàn toàn không có nhãn văn bản (Text/OCR) hay các danh mục y tế/bao bì này!**
 
 ### Giới hạn của CHAIR/POPE
-CHAIR gốc chỉ đánh giá 80 category MS-COCO. Nhiều thực thể đặc trưng của VizWiz như `screen`, `box`, `package`, `hand`, `label`, `medicine` nằm ngoài ontology đó, nên CHAIR có thể bỏ sót hallucination trên VizWiz. POPE cũng chỉ so sánh công bằng khi positive objects và negative probes được xây dựng từ ground truth phù hợp với VizWiz; dùng nguyên object pool COCO vẫn mang ontology bias. Vì vậy phải gắn nhãn kết quả hiện tại là **COCO-ontology score** và không kết luận VizWiz ít hallucination hơn chỉ từ CHAIR thấp hơn."""
+CHAIR gốc chỉ đánh giá 80 category MS-COCO. Nhiều danh từ phổ biến trong caption VizWiz như `screen`, `box`, `package`, `hand` và `label` nằm ngoài ontology đó, nên CHAIR có thể bỏ sót hallucination trên VizWiz. POPE cũng chỉ so sánh công bằng khi positive objects và negative probes được xây dựng từ ground truth phù hợp với VizWiz; dùng nguyên object pool COCO vẫn mang ontology bias. Vì vậy phải gắn nhãn kết quả hiện tại là **COCO-ontology score** và không kết luận VizWiz ít hallucination hơn chỉ từ CHAIR thấp hơn."""
 cells.append(create_markdown_cell(cell15_md))
 
 # ==============================================================================
 # CELL 16: Section 5 - Degradation, OCR & Blur (Markdown)
 # ==============================================================================
 cell16_md = """---
-## 5. CHẤT LƯỢNG ẢNH ĐỜI THỰC, CHỮ VIẾT & RUNG MỜ QUANG HỌC (REAL-WORLD DEGRADATION, OCR & BLUR)
+## 5. TÍN HIỆU CHẤT LƯỢNG ẢNH, CHỮ VIẾT & CHI TIẾT TẦN SỐ CAO
 
 Khác biệt bản chất giữa COCO và VizWiz nằm ở **quá trình thu nhận hình ảnh (Image Acquisition)**.
 
 Trong VizWiz, khi một hình ảnh bị mờ, tối hoặc mất góc nghiêm trọng, người gán nhãn sẽ gán câu trả lời tiêu chuẩn:
 > *"Quality issues are too severe to recognize visual content."*
 
-Độ nét quang học được lượng hóa khách quan qua **Phương sai toán tử Laplacian (Laplacian Variance)**:
-$$\\text{Var}(\\nabla^2 I) = \\frac{1}{HW}\\sum_{x,y} \\left( L(x,y) - \\mu_L \\right)^2$$"""
+Phương sai Laplacian được tính sau khi áp dụng EXIF orientation và resize giữ tỷ lệ về cạnh ngắn 480 px. Chỉ số này phản ánh năng lượng biên/texture; nó không xác định riêng nguyên nhân motion blur, defocus hay cảnh ít texture. Vì phân phối lệch mạnh, báo cáo dùng **median** làm thống kê chính."""
 cells.append(create_markdown_cell(cell16_md))
 
 # ==============================================================================
@@ -506,10 +454,11 @@ with open(os.path.join(RESULTS_DIR, "eda_summary_metrics.json"), "r", encoding="
 blur_lum = metrics["blur_luminance"]
 
 print("THONG SO DO LUONG QUANG HOC KHACH QUAN (IMAGE PROCESSING METRICS):")
-print(f" - Do net Laplacian trung binh COCO:   {blur_lum['coco_mean_blur']:.2f}")
-print(f" - Do net Laplacian trung binh VizWiz: {blur_lum['vizwiz_mean_blur']:.2f} (Thap hon {(1 - blur_lum['vizwiz_mean_blur']/blur_lum['coco_mean_blur'])*100:.1f}%)")
-print(f" - Do sang trung binh COCO:           {blur_lum['coco_mean_luminance']:.2f}")
-print(f" - Do sang trung binh VizWiz:         {blur_lum['vizwiz_mean_luminance']:.2f}")
+print(f" - Median Laplacian COCO:   {blur_lum['coco_median_blur']:.2f}")
+print(f" - Median Laplacian VizWiz: {blur_lum['vizwiz_median_blur']:.2f}")
+print(f" - Median luminance COCO:   {blur_lum['coco_median_luminance']:.2f}")
+print(f" - Median luminance VizWiz: {blur_lum['vizwiz_median_luminance']:.2f}")
+print(f" - Chuan hoa: {blur_lum['normalization']}; n={blur_lum['sample_size_per_dataset']}/tap; seed={blur_lum['sample_seed']}")
 
 # Hiển thị Biểu đồ 5
 show_figure(
@@ -519,11 +468,12 @@ show_figure(
 )"""
 
 df_quality_html = pd.read_csv(os.path.join(TAB_DIR, "vizwiz_quality_breakdown.csv")).to_html(classes='table table-hover table-striped', index=False)
-out17_text = """THONG SO DO LUONG QUANG HOC KHACH QUAN (IMAGE PROCESSING METRICS):
- - Do net Laplacian trung binh COCO:   1082.07
- - Do net Laplacian trung binh VizWiz: 400.00 (Thap hon 63.0%)
- - Do sang trung binh COCO:           114.67
- - Do sang trung binh VizWiz:         104.51"""
+out17_text = """IMAGE METRICS SAU CHUAN HOA EXIF + CANH NGAN 480 PX (n=1.000/tap, seed=42):
+ - Median Laplacian COCO:   1197.90
+ - Median Laplacian VizWiz: 149.19
+ - Median luminance COCO:   113.15
+ - Median luminance VizWiz: 107.95
+ - Laplacian la chi bao bien/texture, khong xac dinh rieng nguyen nhan blur."""
 
 out17 = [
     make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 5: Phân bố Mức độ Suy giảm Chất lượng trên 7.750 ảnh VizWiz</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_quality_html}</div></div>"""),
@@ -538,16 +488,15 @@ exec_counter += 1
 # ==============================================================================
 cell18_md = """### 💡 Nhận Định Định Lượng Về Độ Suy Giảm & Nhu Cầu OCR:
 
-1. **Gần 1/3 Dữ Liệu Bị Ảnh Hưởng Bởi Lỗi Chất Lượng:**
-   - **$32.62\%$** ($2,528$ ảnh) có ít nhất 1 annotator báo lỗi không thể nhận diện.
-   - **$2.48\%$** ($192$ ảnh) đạt đồng thuận tuyệt đối (5/5 annotators) rằng ảnh hỏng hoàn toàn (đen kịt, nhòe mờ hoàn toàn hoặc cảm biến bị che kín).
+1. **Tỷ lệ phụ thuộc vào ngưỡng đồng thuận:**
+   - **32.62%** (2.528 ảnh) có ít nhất 1/5 annotator dùng caption từ chối; đây là ngưỡng nhạy, gồm cả bất đồng nhẹ.
+   - Theo đồng thuận đa số **≥3/5**, tỷ lệ là **9.69%**; đồng thuận tuyệt đối 5/5 là **2.48%** (192 ảnh).
 2. **Gần 3/4 Dữ Liệu Chứa Chữ Viết (Scene Text Relevance):**
-   - **$73.72\%$** số ảnh có sự xuất hiện của chữ viết.
-   - **$47.10\%$** số ảnh đạt đồng thuận tuyệt đối 5/5 annotators xác nhận có chữ.
-   - $\\rightarrow$ **Một mô hình Vision-Language hỗ trợ người khiếm thị bắt buộc phải có khả năng OCR**. Nếu không có module trích xuất văn bản, mô hình sẽ hoàn toàn vô dụng trước các bài toán đọc nhãn mác.
-3. **Độ Nét Bị Suy Giảm Nặng Nề Do Rung Tay (Motion Blur):**
-   - Phương sai Laplacian của VizWiz ($399.99$) thấp hơn **$63\%$** so với COCO ($1082.07$).
-   - Đồ thị mật độ KDE cho thấy đỉnh phân bố của VizWiz dồn về vùng giá trị cực thấp ($\log_{10} < 1.5$), minh chứng cho việc mất nét nghiêm trọng do người dùng cầm tay không nhìn thấy đối tượng hoặc camera lấy nét sai.
+   - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; đồng thuận đa số **≥3/5 là 64.75%**; đồng thuận 5/5 là **47.10%**.
+   - Điều này cho thấy OCR là năng lực quan trọng, nhưng không tự chứng minh mục đích chụp chủ yếu là đọc nhãn thuốc.
+3. **Phương sai Laplacian sau chuẩn hóa:**
+   - Median là **1197.90** ở COCO và **149.19** ở VizWiz sau EXIF transpose và resize cạnh ngắn 480 px.
+   - Chênh lệch cho thấy VizWiz có ít năng lượng biên/texture hơn trong mẫu đo, nhưng không cho phép quy toàn bộ nguyên nhân cho rung tay; defocus, nén JPEG và cảnh ít texture cũng có thể làm chỉ số giảm.
 
 ### Mờ/lệch tâm có tương quan với CHAIR/POPE không?
 **Chưa thể trả lời bằng dữ liệu hiện có.** Repo chưa có output và điểm CHAIR/POPE theo từng ảnh; chênh lệch trung bình giữa hai dataset không phải bằng chứng tương quan. Kiểm định cần ghép độ nét Laplacian và khoảng cách vật thể–tâm ảnh với CHAIR-I/CHAIR-S hoặc POPE error ở cấp ảnh, sau đó dùng Spearman kèm bootstrap 95% CI và logistic regression có biến kiểm soát dataset, độ sáng, số object, độ dài output và ontology coverage."""
@@ -557,16 +506,16 @@ cells.append(create_markdown_cell(cell18_md))
 # CELL 19: Section 6 - Domain Gap Summary (Markdown)
 # ==============================================================================
 cell19_md = """---
-## 6. DOMAIN GAP ẢNH HƯỞNG ĐẾN HALLUCINATION NHƯ THẾ NÀO?
+## 6. GIẢ THUYẾT VỀ DOMAIN GAP VÀ HALLUCINATION CẦN KIỂM CHỨNG
 
 Phần này chỉ tổng hợp các khác biệt **đã có số liệu trong EDA**. Biểu đồ radar cũ được bỏ vì các điểm 0–100 là điểm minh họa, không phải kết quả đo trực tiếp.
 
 | Khác biệt đã đo | MS-COCO 2014 | VizWiz-Captions | Ý nghĩa đối với mô hình |
 | :--- | :---: | :---: | :--- |
 | **Hướng ảnh** | 71,71% ảnh ngang | 92,86% ảnh dọc | Resize/crop vuông có thể làm mất thông tin ở ảnh VizWiz. |
-| **Độ nét Laplacian** | 1.082,07 | 399,99 | Ảnh VizWiz cung cấp ít biên và chi tiết rõ hơn cho visual encoder. |
-| **Ảnh có chữ** | Không có nhãn OCR tương ứng | 73,72% | Mô hình chỉ nhận dạng vật thể có thể bỏ sót nội dung chính trên nhãn và màn hình. |
-| **Không thể nhận diện** | Không có nhãn tương ứng | 32,62% có ít nhất 1/5 người báo lỗi; 2,48% có 5/5 người báo lỗi | Hệ thống cần biết từ chối thay vì luôn sinh một mô tả chắc chắn. |
+| **Median Laplacian đã chuẩn hóa** | 1.197,90 | 149,19 | Chỉ báo biên/texture thấp hơn; chưa xác định riêng nguyên nhân blur. |
+| **Ảnh có chữ** | Không có nhãn OCR tương ứng | 73,72% ở ≥1/5; 64,75% ở ≥3/5 | Mô hình chỉ nhận dạng vật thể có thể bỏ sót nội dung chính trên nhãn và màn hình. |
+| **Caption từ chối** | Không có nhãn tương ứng | 32,62% ở ≥1/5; 9,69% ở ≥3/5; 2,48% ở 5/5 | Hệ thống cần biết từ chối thay vì luôn sinh một mô tả chắc chắn. |
 
 ### Chuỗi rủi ro cần kiểm chứng
 
@@ -595,13 +544,13 @@ cell21_md = """---
 1. **Ảnh COCO mẫu #391895**: Người đàn ông đội mũ bảo hiểm đỏ lái xe máy trên đường đất, nền núi hùng vĩ. Ánh sáng hoàn hảo, độ sâu trường ảnh tốt.
 2. **Ảnh COCO mẫu #522418**: Người phụ nữ đeo lưới trùm tóc cắt bánh kem trong nhà bếp. Bố cục chuẩn mực, chi tiết dao cắt rõ nét.
 3. **Ảnh COCO mẫu #184613**: Cậu bé cầm ô hoa vuốt ve sừng bò Tây Tạng. Độ tương phản cao, màu sắc sống động.
-4. **Ảnh COCO mẫu #581357**: Bàn tiệc trong nhà hàng với đĩa thức ăn và ly rượu vang. Cân bằng trắng chuẩn.
+4. **Ảnh COCO mẫu #161222**: Bàn ăn nhà hàng với nhiều đĩa burger, khoai chiên, vòng hành và ly rượu vang. Ảnh–caption được đối chiếu trực tiếp với annotation COCO.
 
 ### 📱 Nhóm VizWiz: Thực tế Trợ lý Đời thực (In-the-Wild Assistive Reality)
 1. **Ảnh VizWiz mẫu #00000001 (Handheld Medicine & OCR):** Bàn tay người khiếm thị cầm chai thuốc màu đen có chữ *"NIGHT TIME"*. Ngón tay che một phần nhãn, góc chụp dọc.
 2. **Ảnh VizWiz mẫu #00000000 (Digital Screen & Assistive Prompt):** Màn hình laptop chụp nghiêng hiển thị popup sửa lỗi hệ thống. Chữ nhỏ, bóng đèn phản chiếu trên màn hình.
 3. **Ảnh VizWiz mẫu #00000013 (Severe Motion Blur & Hand Shake):** Vật thể trên bàn bị nhòe mờ hoàn toàn do rung tay, mất hoàn toàn biên cạnh nhận dạng.
-4. **Ảnh VizWiz mẫu #00000006 (Complete Quality Failure - 100% Precanned):** Cảm biến camera bị che kín hoàn toàn, ảnh đen kịt. 5/5 annotators đồng thuận không thể nhận diện."""
+4. **Ảnh VizWiz mẫu #00000006 (Severe Glare / Obscured Scene - 100% Precanned):** Ảnh vẫn sáng nhưng mờ sương, tương phản thấp và bị lóa/phản chiếu mạnh ở vùng trung tâm, khiến nội dung không thể nhận diện chắc chắn. 5/5 annotators dùng caption từ chối chuẩn hóa."""
 cells.append(create_markdown_cell(cell21_md))
 
 # ==============================================================================
@@ -611,7 +560,7 @@ cell22_code = """# Hiển thị Biểu đồ Lưới Ảnh Đối sánh Định 
 show_figure(
     filename="07_qualitative_samples_grid.png",
     title="Biểu đồ 7: Lưới Ảnh Đối sánh Định tính 8 Trường hợp Tiêu biểu",
-    caption="So sánh trực quan 4 trường hợp mẫu COCO (nhiếp ảnh chuẩn) vs 4 trường hợp mẫu VizWiz (cầm tay, màn hình, rung mờ, hỏng hoàn toàn)."
+    caption="So sánh trực quan 4 trường hợp mẫu COCO (nhiếp ảnh chuẩn) vs 4 trường hợp mẫu VizWiz (cầm tay, màn hình, rung mờ, lóa sáng và che khuất nội dung)."
 )"""
 
 out22 = [

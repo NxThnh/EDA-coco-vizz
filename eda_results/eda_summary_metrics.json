@@ -105,7 +105,8 @@
       "Char Median": 50.0,
       "Total Tokens": 2122711,
       "Vocab Size": 17348,
-      "TTR (Type-Token)": 0.0082
+      "TTR (corpus-size dependent)": 0.0082,
+      "MATTR (window=1000)": 0.3209
     },
     {
       "Subset": "VizWiz-Captions (placeholder removed)",
@@ -119,7 +120,8 @@
       "Char Median": 57.0,
       "Total Tokens": 407796,
       "Vocab Size": 10876,
-      "TTR (Type-Token)": 0.0267
+      "TTR (corpus-size dependent)": 0.0267,
+      "MATTR (window=1000)": 0.3223
     }
   ],
   "coco_top_supercategories": [
@@ -222,11 +224,26 @@
       "Interpretation": "Completely unanswerable (5/5 confirmed impossible to recognize)"
     }
   ],
+  "vizwiz_thresholds": {
+    "quality_any_ge_1_of_5_pct": 32.61935483870968,
+    "quality_majority_ge_3_of_5_pct": 9.69032258064516,
+    "quality_unanimous_5_of_5_pct": 2.47741935483871,
+    "text_any_ge_1_of_5_pct": 73.71612903225807,
+    "text_majority_ge_3_of_5_pct": 64.7483870967742,
+    "text_unanimous_5_of_5_pct": 47.096774193548384
+  },
   "blur_luminance": {
-    "coco_mean_blur": 1082.0675898056031,
-    "coco_mean_luminance": 114.66896139526366,
-    "vizwiz_mean_blur": 399.99527569139,
-    "vizwiz_mean_luminance": 104.51468127441406
+    "normalization": "EXIF transpose; preserve aspect ratio; resize short edge to 480 px",
+    "sample_size_per_dataset": 1000,
+    "sample_seed": 42,
+    "coco_mean_blur": 2051.827617618561,
+    "coco_median_blur": 1197.9013671875,
+    "coco_mean_luminance": 112.34848989582062,
+    "coco_median_luminance": 113.1485366821289,
+    "vizwiz_mean_blur": 301.3529376379717,
+    "vizwiz_median_blur": 149.19358825683594,
+    "vizwiz_mean_luminance": 109.63701720833778,
+    "vizwiz_median_luminance": 107.94696426391602
   },
   "radar_metrics": {
     "categories": [

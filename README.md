@@ -20,15 +20,15 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 2. **Độ phân giải & Cảm biến:**
    - COCO chuẩn hóa cố định trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
    - VizWiz giữ nguyên cảm biến camera di động với trung bình $1067.7 \times 1339.2\text{px}$ (1.57 MP), dao động từ $23\text{px}$ đến $3264\text{px}$.
-3. **Độ sắc nét Quang học & Rung mờ (Blur):**
-   - Phép đo phương sai Laplacian ($\text{Var}(\nabla^2 I)$) của COCO đạt **1082.07**, trong khi VizWiz chỉ đạt **399.99** (kém gần 3 lần), phản ánh hiện tượng rung tay (motion blur) và lệch tiêu cự (defocus blur).
-4. **Tỷ lệ Ảnh Suy giảm Chất lượng (Degradation):**
-   - **32.62%** số ảnh trong VizWiz Val có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều xác nhận không thể nhận diện).
+3. **Chỉ báo chi tiết tần số cao:**
+   - Sau EXIF transpose và resize cạnh ngắn 480 px, median Laplacian là **1197.90** (COCO) và **149.19** (VizWiz). Đây không phải bộ phân loại riêng cho motion blur.
+4. **Tín hiệu ảnh không thể nhận diện:**
+   - **32.62%** ảnh có ít nhất 1/5 annotator dùng caption từ chối; tỷ lệ đồng thuận đa số **≥3/5 là 9.69%**, và 5/5 là **2.48%**.
 5. **Nhu cầu Nhận diện Chữ viết (Scene Text / OCR Relevance):**
-   - **73.72%** số ảnh VizWiz có chứa chữ viết (nhãn thuốc, bao bì, hạn dùng, màn hình vi tính).
+   - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; tỷ lệ đồng thuận đa số **≥3/5 là 64.75%**.
 6. **Lệch pha Ngữ nghĩa (Semantic Shift):**
    - COCO tập trung vào con người (`person` chiếm **30.20%**) và thể thao ngoài trời.
-   - VizWiz tập trung vào đồ gia dụng, nhãn hàng, thuốc men, bao bì và màn hình vi tính (`screen`, `bottle`, `box`, `can`, `package`, `hand`, `label`, `medicine`).
+   - Top-15 danh từ được POS-tag trực tiếp từ caption và chuẩn hóa theo 1.000 caption; `person` vẫn nằm trong Top-15 VizWiz và `can` không nằm trong Top-15 sau POS disambiguation.
 
 ---
 
@@ -65,7 +65,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 
 ### 1. Cài đặt Môi trường
 ```bash
-pip install pandas numpy matplotlib seaborn pillow
+pip install -r requirements-eda.txt
 ```
 
 ### 2. Chạy Phân Tích & Sinh Lại Kết Quả
