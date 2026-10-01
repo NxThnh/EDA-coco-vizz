@@ -93,7 +93,7 @@ cell1_md = """# 🔬 BÁO CÁO PHÂN TÍCH KHÁM PHÁ DỮ LIỆU (EDA)
 <div style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
     <h3 style="margin-top: 0; color: #ffeb3b;">📋 THÔNG TIN BÁO CÁO</h3>
     <ul style="margin-bottom: 0; line-height: 1.8;">
-        <li><b>Tập dữ liệu khảo sát:</b> MS-COCO 2014 (Train & Val) vs VizWiz-Captions (Train, Val, Test)</li>
+        <li><b>Tập dữ liệu khảo sát:</b> Hai miền ảnh MS-COCO 2014 và VizWiz-Captions; không trình bày theo train/val/test</li>
         <li><b>Quy mô mẫu phân tích:</b> 123,287 ảnh COCO (616,767 captions) | 39,181 ảnh VizWiz (155,905 captions)</li>
         <li><b>Tập trung phân tích sâu:</b> 40,504 ảnh COCO Val2014 vs 7,750 ảnh VizWiz Val (đánh giá chi tiết điểm ảnh & chú thích)</li>
         <li><b>Mục tiêu chính:</b> Định lượng hóa khoảng cách miền dữ liệu (Domain Gap) nhằm đề xuất giải pháp kỹ thuật, chiến lược tiền xử lý và kiến trúc mô hình Image Captioning tối ưu cho người khiếm thị.</li>
@@ -185,38 +185,33 @@ cells.append(create_code_cell(cell2_code, out2, exec_counter))
 exec_counter += 1
 
 # ==============================================================================
-# CELL 3: Section 1 - Dataset Scale & Split Statistics (Markdown)
+# CELL 3: Section 1 - Analysis Scope (Markdown)
 # ==============================================================================
 cell3_md = """---
-## 1. QUY MÔ & PHÂN CHIA TẬP DỮ LIỆU (DATASET SPLITS & SCALE)
+## 1. PHẠM VI ĐỐI SÁNH DỮ LIỆU
 
-Trong nghiên cứu học máy, quy mô và giao thức phân chia tập dữ liệu (Train/Val/Test) quyết định khả năng tổng quát hóa của mô hình. 
-- **MS-COCO 2014:** Tập dữ liệu tiêu chuẩn được thu thập từ nền tảng Flickr, đại diện cho ảnh chụp đời sống hàng ngày với bố cục chuyên nghiệp.
-- **VizWiz-Captions:** Tập dữ liệu thu thập trực tiếp từ ứng dụng hỗ trợ người khiếm thị trên điện thoại thông minh, bao gồm cả các hình ảnh chất lượng thấp và câu hỏi thực tế.
-
-Cả hai tập dữ liệu đều áp dụng giao thức crowdsourcing chuẩn: **Mỗi hình ảnh được gán nhãn độc lập bởi 5 annotators khác nhau**."""
+Phần mở đầu mô tả hai miền dữ liệu thay vì chia theo train/validation/test. Phân tích dùng ảnh COCO có đủ caption và instance annotation, ảnh VizWiz có đủ ảnh gốc và caption, cùng một mẫu COCO-500 (`seed=42`) để kiểm tra độ ổn định của Bảng 2 và Bảng 4."""
 cells.append(create_markdown_cell(cell3_md))
 
 # ==============================================================================
 # CELL 4: Section 1 - Code & Display Table & Figure (Code)
 # ==============================================================================
-cell4_code = """# Đọc bảng tổng hợp quy mô tập dữ liệu
-df_splits = pd.read_csv(os.path.join(TAB_DIR, "dataset_overview.csv"))
+cell4_code = """# Phạm vi phân tích theo miền dữ liệu (không chia train/val/test)
+df_scope = pd.DataFrame([
+    {"Miền dữ liệu": "MS-COCO 2014", "Phạm vi": "40.504 ảnh", "Vai trò": "Miền ảnh chuẩn/curated"},
+    {"Miền dữ liệu": "VizWiz-Captions", "Phạm vi": "7.750 ảnh", "Vai trò": "Miền hỗ trợ thị giác đời thực"},
+    {"Miền dữ liệu": "COCO-500", "Phạm vi": "500 ảnh (seed=42)", "Vai trò": "Chạy lại Bảng 2 và Bảng 4"},
+])
+render_table(df_scope, "Bảng 1: Phạm vi đối sánh dữ liệu")"""
 
-# Hiển thị bảng
-render_table(df_splits, "Bảng 1: Thống kê Quy mô và Phân chia Tập dữ liệu COCO 2014 vs VizWiz")
-
-# Hiển thị Biểu đồ 1
-show_figure(
-    filename="01_dataset_splits_comparison.png",
-    title="Biểu đồ 1: So sánh Phân chia Tập dữ liệu COCO 2014 vs VizWiz",
-    caption="So sánh số lượng hình ảnh và số lượng câu chú thích qua các phân tập Train, Val, Test."
-)"""
-
-df_splits_html = pd.read_csv(os.path.join(TAB_DIR, "dataset_overview.csv")).to_html(classes='table table-hover table-striped', index=False)
+df_scope = pd.DataFrame([
+    {"Miền dữ liệu": "MS-COCO 2014", "Phạm vi": "40.504 ảnh", "Vai trò": "Miền ảnh chuẩn/curated"},
+    {"Miền dữ liệu": "VizWiz-Captions", "Phạm vi": "7.750 ảnh", "Vai trò": "Miền hỗ trợ thị giác đời thực"},
+    {"Miền dữ liệu": "COCO-500", "Phạm vi": "500 ảnh (seed=42)", "Vai trò": "Chạy lại Bảng 2 và Bảng 4"},
+])
+df_splits_html = df_scope.to_html(classes='table table-hover table-striped', index=False)
 out4 = [
-    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 1: Thống kê Quy mô và Phân chia Tập dữ liệu COCO 2014 vs VizWiz</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_splits_html}</div></div>"""),
-    make_display_output(png_b64=get_image_b64("01_dataset_splits_comparison.png"), plain_text="<Figure 1: Dataset Splits Comparison>")
+    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 1: Phạm vi đối sánh dữ liệu</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_splits_html}</div></div>""")
 ]
 cells.append(create_code_cell(cell4_code, out4, exec_counter))
 exec_counter += 1
@@ -224,10 +219,8 @@ exec_counter += 1
 # ==============================================================================
 # CELL 5: Section 1 - Analytical Commentary (Markdown)
 # ==============================================================================
-cell5_md = """### 💡 Nhận xét & Đánh giá Học thuật về Quy mô:
-- **Tương quan quy mô:** Tổng số ảnh của MS-COCO 2014 ($123,287$ ảnh) lớn gấp **3.14 lần** so với VizWiz ($39,181$ ảnh). Số lượng câu chú thích của COCO ($616,767$) gấp gần **4 lần** VizWiz ($155,905$).
-- **Giao thức chú thích:** Cả hai tập dữ liệu đều đạt tỷ lệ trung bình chuẩn $5.00$ chú thích / hình ảnh. Tuy nhiên, trong khi 100% ảnh COCO đều có chú thích miêu tả thông thường, tập VizWiz có tới **13.33%** chú thích là câu báo lỗi tiêu chuẩn (*"Quality issues are too severe to recognize visual content"*).
-- **Thách thức:** Do kích thước VizWiz nhỏ hơn đáng kể, việc áp dụng kỹ thuật **Transfer Learning** (khởi tạo từ checkpoint huấn luyện trên COCO rồi fine-tune sang VizWiz) là định hướng tối ưu, nhưng đòi hỏi phải giải quyết triệt để Domain Gap."""
+cell5_md = """### Quy ước đơn vị phân tích
+Thống kê ảnh dùng số ảnh; phân tích ngôn ngữ chỉ dùng caption mô tả hợp lệ; phân bố đối tượng dùng số object instance. Có **5.167 caption VizWiz (13,33%)** là placeholder báo lỗi chất lượng. Chúng bị loại khỏi thống kê ngôn ngữ/token/thực thể và chỉ được giữ như nhãn chất lượng ở phần sau."""
 cells.append(create_markdown_cell(cell5_md))
 
 # ==============================================================================
@@ -283,7 +276,10 @@ Hầu hết các kiến trúc Vision-Language hiện đại (CLIP, ViT-B/16, Swi
    - Với COCO ($71.71\%$ ảnh ngang), người chụp là người sáng mắt nên chủ thể luôn nằm ở vùng trung tâm (Center Bias). Phép cắt giữa giữ lại được hầu như toàn bộ thông tin quan trọng.
    - Với VizWiz, **người khiếm thị không nhìn thấy màn hình để căn khung ngắm**, dẫn đến hiện tượng vật thể chính bị lệch rìa (Off-center) hoặc chỉ thấy một nửa. **Phép Center Crop sẽ vô tình cắt mất dòng chữ hoặc chi tiết cần nhận dạng!**
 3. **Đề xuất Kiến trúc cho Khóa Luận:**
-   - Áp dụng kỹ thuật **Smart Letterbox Padding** (giữ nguyên tỷ lệ khung hình gốc và chèn dải viền giá trị trung bình) thay vì Direct Resize hoặc Center Crop thông thường."""
+   - Áp dụng kỹ thuật **Smart Letterbox Padding** (giữ nguyên tỷ lệ khung hình gốc và chèn dải viền giá trị trung bình) thay vì Direct Resize hoặc Center Crop thông thường.
+
+### Phân tích Visual-token
+Với patch $P\times P$, số visual-token xấp xỉ $\lceil H'/P\rceil\lceil W'/P\rceil$. Fixed square preprocessing cho hai dataset cùng số token danh nghĩa nhưng VizWiz bị nén/crop nhiều hơn. Dynamic tiling giữ chi tiết tốt hơn nhưng ảnh dọc và chữ nhỏ của VizWiz cần nhiều token hơn. Vì vậy báo cáo thực nghiệm phải ghi image size, patch size, crop/pad/tile, số visual-token trung bình và tỷ lệ vùng ảnh bị crop."""
 cells.append(create_markdown_cell(cell8_md))
 
 # ==============================================================================
@@ -292,7 +288,7 @@ cells.append(create_markdown_cell(cell8_md))
 cell9_md = """---
 ## 3. PHÂN TÍCH CHÚ THÍCH & ĐẶC TRƯNG NGÔN NGỮ (CAPTION LINGUISTICS & VOCABULARY SHIFT)
 
-Khảo sát được thực hiện trên toàn bộ $202,654$ câu chú thích COCO Val và $38,750$ câu chú thích VizWiz Val.
+Khảo sát dùng $202,654$ caption COCO và **33,583 caption VizWiz mô tả hợp lệ**. Toàn bộ 5,167 placeholder báo lỗi chất lượng ($13.33\%$) bị loại khỏi thống kê ngôn ngữ, token và thực thể.
 
 Độ phong phú từ vựng được đo lường bằng chỉ số **Type-Token Ratio (TTR)**:
 $$\\text{TTR} = \\frac{|\\mathcal{V}|}{N_{\\text{tokens}}}$$
@@ -474,7 +470,10 @@ cell15_md = """### 🎓 Luận Điểm Phê Phán Cho Khóa Luận (Critical The
      - Đọc hạn sử dụng trên hộp sữa (`expiration date`, `box`).
      - Đọc thông báo lỗi trên màn hình máy tính (`screen popup`, `error dialog`).
      - Phân biệt các lọ gia vị và đồ hộp trong bếp (`can`, `bottle`, `jar`).
-   - **MS-COCO hoàn toàn không có nhãn văn bản (Text/OCR) hay các danh mục y tế/bao bì này!**"""
+   - **MS-COCO hoàn toàn không có nhãn văn bản (Text/OCR) hay các danh mục y tế/bao bì này!**
+
+### Giới hạn của CHAIR/POPE
+CHAIR gốc chỉ đánh giá 80 category MS-COCO. Nhiều thực thể đặc trưng của VizWiz như `screen`, `box`, `package`, `hand`, `label`, `medicine` nằm ngoài ontology đó, nên CHAIR có thể bỏ sót hallucination trên VizWiz. POPE cũng chỉ so sánh công bằng khi positive objects và negative probes được xây dựng từ ground truth phù hợp với VizWiz; dùng nguyên object pool COCO vẫn mang ontology bias. Vì vậy phải gắn nhãn kết quả hiện tại là **COCO-ontology score** và không kết luận VizWiz ít hallucination hơn chỉ từ CHAIR thấp hơn."""
 cells.append(create_markdown_cell(cell15_md))
 
 # ==============================================================================
@@ -548,7 +547,10 @@ cell18_md = """### 💡 Nhận Định Định Lượng Về Độ Suy Giảm & 
    - $\\rightarrow$ **Một mô hình Vision-Language hỗ trợ người khiếm thị bắt buộc phải có khả năng OCR**. Nếu không có module trích xuất văn bản, mô hình sẽ hoàn toàn vô dụng trước các bài toán đọc nhãn mác.
 3. **Độ Nét Bị Suy Giảm Nặng Nề Do Rung Tay (Motion Blur):**
    - Phương sai Laplacian của VizWiz ($399.99$) thấp hơn **$63\%$** so với COCO ($1082.07$).
-   - Đồ thị mật độ KDE cho thấy đỉnh phân bố của VizWiz dồn về vùng giá trị cực thấp ($\log_{10} < 1.5$), minh chứng cho việc mất nét nghiêm trọng do người dùng cầm tay không nhìn thấy đối tượng hoặc camera lấy nét sai."""
+   - Đồ thị mật độ KDE cho thấy đỉnh phân bố của VizWiz dồn về vùng giá trị cực thấp ($\log_{10} < 1.5$), minh chứng cho việc mất nét nghiêm trọng do người dùng cầm tay không nhìn thấy đối tượng hoặc camera lấy nét sai.
+
+### Mờ/lệch tâm có tương quan với CHAIR/POPE không?
+**Chưa thể trả lời bằng dữ liệu hiện có.** Repo chưa có output và điểm CHAIR/POPE theo từng ảnh; chênh lệch trung bình giữa hai dataset không phải bằng chứng tương quan. Kiểm định cần ghép độ nét Laplacian và khoảng cách vật thể–tâm ảnh với CHAIR-I/CHAIR-S hoặc POPE error ở cấp ảnh, sau đó dùng Spearman kèm bootstrap 95% CI và logistic regression có biến kiểm soát dataset, độ sáng, số object, độ dài output và ontology coverage."""
 cells.append(create_markdown_cell(cell18_md))
 
 # ==============================================================================

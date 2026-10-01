@@ -108,21 +108,7 @@
       "TTR (Type-Token)": 0.0082
     },
     {
-      "Subset": "VizWiz Val (All)",
-      "Total Captions": 38750,
-      "Word Mean": 11.64,
-      "Word Median": 10.0,
-      "Word Std": 4.17,
-      "Word Min": 6,
-      "Word Max": 155,
-      "Char Mean": 61.88,
-      "Char Median": 58.0,
-      "Total Tokens": 454299,
-      "Vocab Size": 10876,
-      "TTR (Type-Token)": 0.0239
-    },
-    {
-      "Subset": "VizWiz Val (Descriptive)",
+      "Subset": "VizWiz Val (placeholder removed)",
       "Total Captions": 33583,
       "Word Mean": 12.04,
       "Word Median": 11.0,
@@ -134,20 +120,6 @@
       "Total Tokens": 407796,
       "Vocab Size": 10876,
       "TTR (Type-Token)": 0.0267
-    },
-    {
-      "Subset": "VizWiz Val (Precanned/Degraded)",
-      "Total Captions": 5167,
-      "Word Mean": 9.0,
-      "Word Median": 9.0,
-      "Word Std": 0.0,
-      "Word Min": 9,
-      "Word Max": 9,
-      "Char Mean": 58.0,
-      "Char Median": 58.0,
-      "Total Tokens": 46503,
-      "Vocab Size": 9,
-      "TTR (Type-Token)": 0.0002
     }
   ],
   "coco_top_supercategories": [

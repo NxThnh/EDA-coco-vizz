@@ -336,9 +336,9 @@ print(f"Saved: {fig_path2}")
 print("\n[3/7] Analyzing Captions, Vocabulary & Lexical Diversity...")
 
 coco_captions = [a["caption"].strip() for a in coco_val_cap["annotations"]]
-viz_captions_all = [a["caption"].strip() for a in viz_val["annotations"]]
+# Placeholder captions are quality labels, not natural-language descriptions.
+# Exclude them from every linguistic/token/entity statistic below.
 viz_captions_norm = [a["caption"].strip() for a in viz_val["annotations"] if not a.get("is_precanned")]
-viz_captions_prec = [a["caption"].strip() for a in viz_val["annotations"] if a.get("is_precanned")]
 
 def compute_caption_stats(name, caps):
     word_lens = [len(c.split()) for c in caps]
@@ -363,9 +363,7 @@ def compute_caption_stats(name, caps):
 
 cap_stats = [
     compute_caption_stats("COCO Val", coco_captions),
-    compute_caption_stats("VizWiz Val (All)", viz_captions_all),
-    compute_caption_stats("VizWiz Val (Descriptive)", viz_captions_norm),
-    compute_caption_stats("VizWiz Val (Precanned/Degraded)", viz_captions_prec)
+    compute_caption_stats("VizWiz Val (placeholder removed)", viz_captions_norm),
 ]
 
 df_caps = pd.DataFrame(cap_stats)
@@ -375,7 +373,6 @@ print(df_caps[["Subset", "Total Captions", "Word Mean", "Word Median", "Word Max
 
 # Word length arrays for plotting
 coco_wlens = [len(c.split()) for c in coco_captions]
-viz_wlens_all = [len(c.split()) for c in viz_captions_all]
 viz_wlens_norm = [len(c.split()) for c in viz_captions_norm]
 
 # Top keywords extraction (stop words filtered)
@@ -410,9 +407,9 @@ ax1.set_title('(A) Word Count Distribution (Trimodal vs Extended Tail)', fontsiz
 ax1.legend(frameon=True, facecolor='white', framealpha=0.9)
 
 # (B) Boxplot Comparison
-data_box = [coco_wlens, viz_wlens_all, viz_wlens_norm]
-labels_box = ['COCO Val', 'VizWiz (All)', 'VizWiz (Descriptive)']
-colors_box = ['#3498db', '#e67e22', '#d35400']
+data_box = [coco_wlens, viz_wlens_norm]
+labels_box = ['COCO Val', 'VizWiz (placeholder removed)']
+colors_box = ['#3498db', '#d35400']
 bplot = ax2.boxplot(data_box, patch_artist=True, labels=labels_box, showfliers=False, medianprops=dict(color='black', linewidth=1.5))
 for patch, color in zip(bplot['boxes'], colors_box):
     patch.set_facecolor(color)

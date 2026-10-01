@@ -24,3 +24,12 @@ env/
 # Scratch & temporary files
 scratch/
 *.tmp
+
+# Web & Node dependencies/build outputs
+node_modules/
+.site-init/
+.wrangler/
+dist/
+work/
+.openai/
+

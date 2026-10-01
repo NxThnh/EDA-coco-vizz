@@ -1,5 +1,3 @@
 Subset,Total Captions,Word Mean,Word Median,Word Std,Word Min,Word Max,Char Mean,Char Median,Total Tokens,Vocab Size,TTR (Type-Token)
 COCO Val,202654,10.45,10.0,2.38,6,50,52.29,50.0,2122711,17348,0.0082
-VizWiz Val (All),38750,11.64,10.0,4.17,6,155,61.88,58.0,454299,10876,0.0239
-VizWiz Val (Descriptive),33583,12.04,11.0,4.34,6,155,62.48,57.0,407796,10876,0.0267
-VizWiz Val (Precanned/Degraded),5167,9.0,9.0,0.0,9,9,58.0,58.0,46503,9,0.0002
+VizWiz Val (placeholder removed),33583,12.04,11.0,4.34,6,155,62.48,57.0,407796,10876,0.0267
