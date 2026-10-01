@@ -225,7 +225,7 @@ viz_land, viz_port, viz_sq = classify_orientation(viz_ar)
 
 res_stats = [
     {
-        "Dataset": "COCO Val 2014",
+        "Dataset": "MS-COCO 2014",
         "N": len(coco_w),
         "Width Mean": round(float(np.mean(coco_w)), 1),
         "Width Median": float(np.median(coco_w)),
@@ -245,7 +245,7 @@ res_stats = [
         "MP Mean": round(float(np.mean(coco_mp)), 3)
     },
     {
-        "Dataset": "VizWiz Val",
+        "Dataset": "VizWiz-Captions",
         "N": len(viz_w),
         "Width Mean": round(float(np.mean(viz_w)), 1),
         "Width Median": float(np.median(viz_w)),
@@ -362,8 +362,8 @@ def compute_caption_stats(name, caps):
     }
 
 cap_stats = [
-    compute_caption_stats("COCO Val", coco_captions),
-    compute_caption_stats("VizWiz Val (placeholder removed)", viz_captions_norm),
+    compute_caption_stats("MS-COCO 2014", coco_captions),
+    compute_caption_stats("VizWiz-Captions (placeholder removed)", viz_captions_norm),
 ]
 
 df_caps = pd.DataFrame(cap_stats)

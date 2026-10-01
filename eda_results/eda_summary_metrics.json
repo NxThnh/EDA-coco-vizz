@@ -52,7 +52,7 @@
   ],
   "resolution": [
     {
-      "Dataset": "COCO Val 2014",
+      "Dataset": "MS-COCO 2014",
       "N": 40504,
       "Width Mean": 576.5,
       "Width Median": 640.0,
@@ -72,7 +72,7 @@
       "MP Mean": 0.276
     },
     {
-      "Dataset": "VizWiz Val",
+      "Dataset": "VizWiz-Captions",
       "N": 7750,
       "Width Mean": 1067.7,
       "Width Median": 968.0,
@@ -94,7 +94,7 @@
   ],
   "caption_stats": [
     {
-      "Subset": "COCO Val",
+      "Subset": "MS-COCO 2014",
       "Total Captions": 202654,
       "Word Mean": 10.45,
       "Word Median": 10.0,
@@ -108,7 +108,7 @@
       "TTR (Type-Token)": 0.0082
     },
     {
-      "Subset": "VizWiz Val (placeholder removed)",
+      "Subset": "VizWiz-Captions (placeholder removed)",
       "Total Captions": 33583,
       "Word Mean": 12.04,
       "Word Median": 11.0,

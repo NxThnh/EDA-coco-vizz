@@ -13,7 +13,7 @@ Báo cáo này thực hiện phân tích khám phá dữ liệu (Exploratory Dat
 1. **Đảo ngược tỷ lệ khung hình (Aspect Ratio Inversion)**: COCO chiếm **71.71% ảnh ngang (Landscape)** do chụp từ máy ảnh kỹ thuật số Flickr chuẩn hóa $\le 640\text{px}$. Ngược lại, VizWiz có tới **92.86% ảnh dọc (Portrait)** chụp trực tiếp từ smartphone của người dùng.
 2. **Độ phân giải & Cảm biến**: COCO có độ phân giải cố định trung bình $576.5 \times 485.1\text{px}$ (0.28 MP). VizWiz giữ nguyên cảm biến camera di động với trung bình $1067.7 \times 1339.2\text{px}$ (1.57 MP), dao động từ $23\text{px}$ đến $3264\text{px}$.
 3. **Độ sắc nét & Rung mờ (Blur)**: Phép đo phương sai Laplacian (Laplacian Variance) chứng minh độ nét của COCO đạt trung bình **$1082.07$**, trong khi VizWiz chỉ đạt **$399.99$** (thấp hơn gần 3 lần), phản ánh hiện tượng rung tay (motion blur) và lệch tiêu cự (defocus blur).
-4. **Tỷ lệ ảnh suy giảm chất lượng nặng (Quality Degradation)**: **32.62%** số ảnh trong VizWiz Val có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều gán nhãn *"Quality issues are too severe to recognize visual content"*). COCO hoàn toàn không có cơ chế xử lý ảnh hỏng này.
+4. **Tỷ lệ ảnh suy giảm chất lượng nặng (Quality Degradation)**: **32.62%** số ảnh VizWiz được khảo sát có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều gán nhãn *"Quality issues are too severe to recognize visual content"*). COCO hoàn toàn không có cơ chế xử lý ảnh hỏng này.
 5. **Nhu cầu nhận diện chữ viết (Text/OCR Relevance)**: **73.72%** số ảnh VizWiz có sự hiện diện của chữ viết (text detected), trong đó **47.10%** đạt đồng thuận tuyệt đối (5/5 annotators). Người khiếm thị chụp ảnh chủ yếu để đọc nhãn thuốc, bao bì, hạn sử dụng, màn hình vi tính.
 6. **Lệch pha ngữ nghĩa (Semantic Gap)**: COCO tập trung áp đảo vào con người (`person` chiếm **30.20%** thực thể, `vehicle` chiếm **11.16%**) trong các bối cảnh thể thao ngoài trời. Ngược lại, từ vựng đặc trưng của VizWiz là đồ gia dụng, bao bì, màn hình, nhãn mác (`screen`, `bottle`, `box`, `can`, `package`, `label`, `medicine`, `hand`).
 
@@ -21,7 +21,7 @@ Báo cáo này thực hiện phân tích khám phá dữ liệu (Exploratory Dat
 
 ## PHẦN 1: PHẠM VI ĐỐI SÁNH DỮ LIỆU
 
-Phần mở đầu không chia theo train/validation/test vì mục tiêu ở đây là mô tả **hai miền dữ liệu**, không phải giao thức huấn luyện. Các phân tích chi tiết sử dụng đúng hai tập ảnh có đủ ảnh gốc và chú thích cần thiết:
+Phần mở đầu mô tả **hai miền dữ liệu** theo đúng phạm vi ảnh và chú thích thực tế được khảo sát:
 
 | Miền dữ liệu | Phạm vi dùng trong EDA | Vai trò trong đối sánh | Đặc trưng thu nhận |
 | :--- | :---: | :--- | :--- |
@@ -35,11 +35,11 @@ Phần mở đầu không chia theo train/validation/test vì mục tiêu ở đ
 
 ## PHẦN 2: ĐỘ PHÂN GIẢI & TỶ LỆ KHUNG HÌNH (RESOLUTION & ASPECT RATIO)
 
-Khảo sát được thực hiện trên 40,504 ảnh `COCO val2014` và toàn bộ 7,750 file ảnh nhị phân gốc của `VizWiz val`:
+Khảo sát được thực hiện trên 40.504 ảnh MS-COCO 2014 và 7.750 ảnh VizWiz-Captions có trong phạm vi dữ liệu hiện tại:
 
 Để đối chiếu theo yêu cầu với đúng 500 ảnh COCO, một mẫu ngẫu nhiên cố định (`seed=42`) cũng được chạy lại riêng. Mẫu cho kết quả: kích thước trung bình $576,9\times481,8$ px, $73,60\%$ ảnh ngang, $22,80\%$ ảnh dọc và $3,60\%$ ảnh vuông. Ảnh chụp bảng: [`table2_coco500_resolution.png`](eda_results/coco500/table2_coco500_resolution.png).
 
-| Chỉ số hình ảnh | MS-COCO 2014 Val ($N=40,504$) | VizWiz Val ($N=7,750$) | Ý nghĩa trong Khóa luận |
+| Chỉ số hình ảnh | MS-COCO 2014 ($N=40.504$) | VizWiz-Captions ($N=7.750$) | Ý nghĩa trong Khóa luận |
 | :--- | :---: | :---: | :--- |
 | **Chiều rộng trung bình (Mean Width)** | $576.5 \pm 91.9\text{ px}$ | **$1067.7 \pm 429.5\text{ px}$** | VizWiz có phương sai kích thước rất lớn |
 | **Trung vị Chiều rộng (Median Width)** | $640.0\text{ px}$ | $968.0\text{ px}$ | COCO bị giới hạn cận trên cố định |
@@ -101,11 +101,11 @@ VizWiz có 5.167/38.750 caption ($13,33\%$) là cùng một câu placeholder bá
 
 ## PHẦN 4: PHÂN BỐ DANH MỤC ĐỐI TƯỢNG COCO (OBJECT CATEGORY BIAS)
 
-Tập dữ liệu COCO được xây dựng dựa trên hệ thống phân cấp 80 danh mục đối tượng thuộc 12 siêu danh mục (Supercategories). Phân tích $291,875$ đối tượng được gán nhãn trong tập Val cho thấy:
+Tập dữ liệu COCO được xây dựng dựa trên hệ thống phân cấp 80 danh mục đối tượng thuộc 12 siêu danh mục (Supercategories). Phân tích $291.875$ đối tượng được gán nhãn trong phạm vi khảo sát cho thấy:
 
 Trên đúng mẫu COCO-500 ở Phần 1 có 3.719 object instance. Ba siêu danh mục lớn nhất vẫn là `person` (29,52%), `vehicle` (12,34%) và `kitchen` (10,24%), gần sát phân bố toàn tập. Ảnh chụp bảng: [`table4_coco500_supercategories.png`](eda_results/coco500/table4_coco500_supercategories.png).
 
-### 12 Siêu danh mục (Supercategories) trong COCO Val:
+### 12 Siêu danh mục (Supercategories) trong MS-COCO 2014:
 1. **`person` (Con người)**: **$88,153$ đối tượng ($30.20\%$)** — chiếm gần $1/3$ toàn bộ đối tượng trong tập dữ liệu!
 2. **`vehicle` (Phương tiện giao thông)**: $32,574$ ($11.16\%$)
 3. **`kitchen` (Đồ dùng nhà bếp)**: $29,445$ ($10.09\%$)
@@ -147,7 +147,7 @@ POPE giảm phụ thuộc vào phong cách caption bằng câu hỏi yes/no về
 Trong VizWiz, khi một hình ảnh bị mờ, tối hoặc sai góc độ nghiêm trọng đến mức không thể nhận biết nội dung, người gán nhãn sẽ chọn câu trả lời mẫu chuẩn (precanned caption):
 > *"Quality issues are too severe to recognize visual content."*
 
-Khảo sát mức độ đồng thuận của 5 annotators trên 7,750 ảnh VizWiz Val:
+Khảo sát mức độ đồng thuận của 5 annotators trên 7.750 ảnh VizWiz-Captions:
 
 | Mức độ chất lượng | Số lượng ảnh | Tỷ lệ (%) | Ý nghĩa thực tế |
 | :--- | :---: | :---: | :--- |
@@ -171,8 +171,8 @@ $\rightarrow$ **Gần 3/4 số ảnh VizWiz đòi hỏi khả năng đọc và h
 ### 3. Đo lường Khách quan bằng Thuật toán Xử lý Ảnh (Image Processing Metrics):
 - **Độ nét (Laplacian Variance)**:
   $$\text{Var}(\nabla^2 I) = \frac{1}{HW}\sum_{x,y} \left( L(x,y) - \mu_L \right)^2$$
-  - **COCO Val**: Đạt trung bình **$1082.07$**, phân bố lệch mạnh về phía sắc nét, ảnh tĩnh, độ tương phản biên cạnh cao.
-  - **VizWiz Val**: Chỉ đạt **$399.99$** (thấp hơn $63\%$). Đồ thị mật độ (KDE) cho thấy một đỉnh lớn nằm ở vùng giá trị cực thấp ($\log_{10} < 1.5$), minh chứng cho hiện tượng mất nét nặng do rung tay hoặc khoảng cách lấy nét (macro focus) quá gần.
+  - **MS-COCO 2014**: Đạt trung bình **$1082.07$**, phân bố lệch mạnh về phía sắc nét, ảnh tĩnh, độ tương phản biên cạnh cao.
+  - **VizWiz-Captions**: Chỉ đạt **$399.99$** (thấp hơn $63\%$). Đồ thị mật độ (KDE) cho thấy một đỉnh lớn nằm ở vùng giá trị cực thấp ($\log_{10} < 1.5$), minh chứng cho hiện tượng mất nét nặng do rung tay hoặc khoảng cách lấy nét (macro focus) quá gần.
 - **Độ sáng & Phơi sáng (Mean Luminance)**:
   - COCO có phân bố chuẩn đối xứng quanh mức sáng trung bình lý tưởng ($114.7 \pm 42$).
   - VizWiz có phân bố phân tán mạnh ($104.5$), xuất hiện nhiều ảnh ở 2 cực đoan: cực tối (underexposed do chụp trong góc tủ, phòng tối không bật đèn) hoặc lóa trắng (overexposed do đèn flash điện thoại phản chiếu trực tiếp vào bề mặt nhẵn).
@@ -216,37 +216,37 @@ Nếu một người khiếm thị chụp ảnh một lọ thuốc bị nhòe m�
 Để phục vụ thuyết trình và trình bày trực quan trong khóa luận, 8 mẫu ảnh tiêu biểu đã được trích xuất và lưu tại biểu đồ `07_qualitative_samples_grid.png`:
 
 ### Nhóm 1: Chuẩn mực Benchmark COCO (Curated Photography)
-1. **`COCO_val2014_000000391895.jpg`**:
+1. **Ảnh COCO mẫu #391895**:
    - *Hình ảnh*: Người đàn ông đội mũ bảo hiểm đỏ lái xe máy trên đường đất, nền núi mây hùng vĩ.
    - *Đặc điểm*: Ánh sáng hoàn hảo, vật thể cân đối giữa khung hình, độ sâu trường ảnh tốt.
    - *Caption mẫu*: *"A man with a red helmet on a moped on a dirt road."*
-2. **`COCO_val2014_000000522418.jpg`**:
+2. **Ảnh COCO mẫu #522418**:
    - *Hình ảnh*: Người phụ nữ đeo lưới trùm tóc đang cắt chiếc bánh kem trắng lớn.
    - *Đặc điểm*: Rõ nét từng chi tiết dao cắt, bố cục trong bếp chuẩn mực.
    - *Caption mẫu*: *"A woman wearing a hair net cutting a large sheet cake."*
-3. **`COCO_val2014_000000184613.jpg`**:
+3. **Ảnh COCO mẫu #184613**:
    - *Hình ảnh*: Cậu bé cầm ô hoa đứng vuốt ve sừng con bò Tây Tạng (yak).
    - *Đặc điểm*: Đầy đủ bối cảnh văn hóa, màu sắc sống động, độ tương phản sắc nét.
    - *Caption mẫu*: *"A young boy with an umbrella touching the horn of a yak."*
-4. **`COCO_val2014_000000581357.jpg`**:
+4. **Ảnh COCO mẫu #581357**:
    - *Hình ảnh*: Bàn ăn với các đĩa thức ăn và ly rượu vang được sắp xếp ngăn nắp.
    - *Đặc điểm*: Ảnh chụp tĩnh vật trong nhà hàng, ánh sáng ấm, cân bằng trắng chuẩn.
    - *Caption mẫu*: *"A table with plates of food and wine glasses."*
 
 ### Nhóm 2: Thực tế Đời thực VizWiz (In-The-Wild Assistive Reality)
-1. **`VizWiz_val_00000001.jpg` (Handheld Medicine & OCR)**:
+1. **Ảnh VizWiz mẫu #00000001 (Handheld Medicine & OCR)**:
    - *Hình ảnh*: Bàn tay người khiếm thị đang cầm một chai thuốc nhỏ màu đen, nhãn chữ *"NIGHT TIME"*.
    - *Đặc điểm*: Ngón tay che một phần thân chai, góc chụp thẳng đứng, người dùng cần biết đây là thuốc gì.
    - *Caption mẫu*: *"A person is holding a small black bottle of NIGHT TIME medicine."*
-2. **`VizWiz_val_00000000.jpg` (Digital Screen & Assistive Prompt)**:
+2. **Ảnh VizWiz mẫu #00000000 (Digital Screen & Assistive Prompt)**:
    - *Hình ảnh*: Màn hình laptop chụp nghiêng, hiển thị hộp thoại thông báo sửa lỗi hệ thống máy tính.
    - *Đặc điểm*: Phản chiếu bóng đèn trên màn hình LCD, chữ nhỏ, góc chụp chéo từ trên xuống.
    - *Caption mẫu*: *"A partial computer screen showing a repair prompt popup."*
-3. **`VizWiz_val_00000013.jpg` (Severe Motion Blur & Hand Shake)**:
+3. **Ảnh VizWiz mẫu #00000013 (Severe Motion Blur & Hand Shake)**:
    - *Hình ảnh*: Một vật thể không thể xác định trên mặt bàn, vệt mờ chuyển động kéo dài khắp khung hình.
    - *Đặc điểm*: Camera di chuyển khi bấm chụp, mất hoàn toàn biên cạnh nhận dạng vật thể.
    - *Caption mẫu*: *"A blurry photo of an unrecognizable object on a table."*
-4. **`VizWiz_val_00000006.jpg` (Complete Quality Failure - 100% Precanned)**:
+4. **Ảnh VizWiz mẫu #00000006 (Complete Quality Failure - 100% Precanned)**:
    - *Hình ảnh*: Hình ảnh bị đen kịt, cảm biến bị che kín hoàn toàn hoặc chụp trong buồng tối không có ánh sáng.
    - *Đặc điểm*: Cả 5 người gán nhãn độc lập đều đồng thuận tuyệt đối là không thể nhìn thấy bất kỳ nội dung nào.
    - *Caption mẫu*: *"Quality issues are too severe to recognize visual content."* (Lặp lại 5/5 lần).
@@ -280,13 +280,12 @@ Từ các kết quả EDA trên, khóa luận tốt nghiệp nên đề xuất c
 
 Toàn bộ biểu đồ độ phân giải cao (300 DPI) và dữ liệu bảng biểu đã được lưu trữ hoàn chỉnh tại:
 - **Thư mục Đồ thị**: `c:\Users\Admin\Downloads\HGAI_data\eda_results\figures/`
-  1. `01_dataset_splits_comparison.png`: So sánh phân chia tập dữ liệu.
-  2. `02_resolution_aspect_ratio.png`: Phân bố độ phân giải và tỷ lệ khung hình.
-  3. `03_caption_length_and_tokens.png`: Phân bố độ dài từ và từ vựng đặc trưng.
-  4. `04_coco_category_distribution.png`: Phân bố đối tượng COCO và sự áp đảo của con người.
-  5. `05_vizwiz_quality_and_text_issues.png`: Tỷ lệ ảnh suy giảm chất lượng, chữ viết và độ sắc nét quang học.
-  6. `06_domain_gap_characteristics.png`: Biểu đồ radar 7 chiều đối sánh Domain Gap.
-  7. `07_qualitative_samples_grid.png`: Lưới ảnh đối sánh trực quan các trường hợp tiêu biểu.
+  1. `02_resolution_aspect_ratio.png`: Phân bố độ phân giải và tỷ lệ khung hình.
+  2. `03_caption_length_and_tokens.png`: Phân bố độ dài từ và từ vựng đặc trưng.
+  3. `04_coco_category_distribution.png`: Phân bố đối tượng COCO và sự áp đảo của con người.
+  4. `05_vizwiz_quality_and_text_issues.png`: Tỷ lệ ảnh suy giảm chất lượng, chữ viết và độ sắc nét quang học.
+  5. `06_domain_gap_characteristics.png`: Biểu đồ radar 7 chiều đối sánh Domain Gap.
+  6. `07_qualitative_samples_grid.png`: Lưới ảnh đối sánh trực quan các trường hợp tiêu biểu.
 - **Thư mục Bảng số liệu CSV**: `c:\Users\Admin\Downloads\HGAI_data\eda_results\tables/`
 - **File Dữ liệu Thống kê Đầy đủ (JSON)**: `c:\Users\Admin\Downloads\HGAI_data\eda_results\eda_summary_metrics.json`
 - **Script Thực thi Tái lập (Reproducible Python Script)**: `c:\Users\Admin\Downloads\HGAI_data\eda_coco_vs_vizwiz.py`

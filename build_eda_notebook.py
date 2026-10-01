@@ -93,9 +93,9 @@ cell1_md = """# 🔬 BÁO CÁO PHÂN TÍCH KHÁM PHÁ DỮ LIỆU (EDA)
 <div style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
     <h3 style="margin-top: 0; color: #ffeb3b;">📋 THÔNG TIN BÁO CÁO</h3>
     <ul style="margin-bottom: 0; line-height: 1.8;">
-        <li><b>Tập dữ liệu khảo sát:</b> Hai miền ảnh MS-COCO 2014 và VizWiz-Captions; không trình bày theo train/val/test</li>
-        <li><b>Quy mô mẫu phân tích:</b> 123,287 ảnh COCO (616,767 captions) | 39,181 ảnh VizWiz (155,905 captions)</li>
-        <li><b>Tập trung phân tích sâu:</b> 40,504 ảnh COCO Val2014 vs 7,750 ảnh VizWiz Val (đánh giá chi tiết điểm ảnh & chú thích)</li>
+        <li><b>Tập dữ liệu khảo sát:</b> Hai miền ảnh MS-COCO 2014 và VizWiz-Captions</li>
+        <li><b>Phạm vi phân tích:</b> 40.504 ảnh COCO có annotation | 7.750 ảnh VizWiz có ảnh gốc và caption</li>
+        <li><b>Mẫu kiểm tra tái lập:</b> 500 ảnh COCO lấy ngẫu nhiên với seed=42 cho Bảng 2 và Bảng 4</li>
         <li><b>Mục tiêu chính:</b> Định lượng hóa khoảng cách miền dữ liệu (Domain Gap) nhằm đề xuất giải pháp kỹ thuật, chiến lược tiền xử lý và kiến trúc mô hình Image Captioning tối ưu cho người khiếm thị.</li>
     </ul>
 </div>
@@ -115,7 +115,7 @@ Trong các bài toán Thị giác - Ngôn ngữ (Vision-Language), **MS-COCO** �
 3. **🌫️ Độ sắc nét Quang học & Rung mờ (Blur):**
    - Phương sai Laplacian ($\text{Var}(\nabla^2 I)$) của COCO đạt **1082.07**, trong khi VizWiz chỉ đạt **399.99** (kém gần 3 lần), phản ánh hiện tượng rung tay (motion blur) và sai tiêu cự (defocus blur).
 4. **⚠️ Tỷ lệ Suy giảm Chất lượng Nặng (Quality Degradation):**
-   - **32.62%** số ảnh trong VizWiz Val có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều xác nhận không thể nhận diện).
+   - **32.62%** số ảnh VizWiz được khảo sát có ít nhất một annotator báo lỗi không thể nhận diện được; **2.48%** số ảnh bị hỏng hoàn toàn (100% annotators đều xác nhận không thể nhận diện).
 5. **🔤 Nhu cầu Đọc Chữ viết (Scene Text / OCR Relevance):**
    - **73.72%** số ảnh VizWiz có sự hiện diện của chữ viết (text detected), trong đó **47.10%** đạt đồng thuận tuyệt đối (5/5 annotators). Người khiếm thị chụp ảnh chủ yếu để đọc nhãn thuốc, hạn dùng, màn hình vi tính.
 6. **👥 Lệch pha Ngữ nghĩa (Semantic Shift):**
@@ -190,13 +190,13 @@ exec_counter += 1
 cell3_md = """---
 ## 1. PHẠM VI ĐỐI SÁNH DỮ LIỆU
 
-Phần mở đầu mô tả hai miền dữ liệu thay vì chia theo train/validation/test. Phân tích dùng ảnh COCO có đủ caption và instance annotation, ảnh VizWiz có đủ ảnh gốc và caption, cùng một mẫu COCO-500 (`seed=42`) để kiểm tra độ ổn định của Bảng 2 và Bảng 4."""
+Phần mở đầu mô tả hai miền dữ liệu theo đúng phạm vi ảnh và chú thích thực tế được khảo sát. Một mẫu COCO-500 (`seed=42`) được dùng để kiểm tra độ ổn định của Bảng 2 và Bảng 4."""
 cells.append(create_markdown_cell(cell3_md))
 
 # ==============================================================================
 # CELL 4: Section 1 - Code & Display Table & Figure (Code)
 # ==============================================================================
-cell4_code = """# Phạm vi phân tích theo miền dữ liệu (không chia train/val/test)
+cell4_code = """# Phạm vi phân tích theo hai miền dữ liệu
 df_scope = pd.DataFrame([
     {"Miền dữ liệu": "MS-COCO 2014", "Phạm vi": "40.504 ảnh", "Vai trò": "Miền ảnh chuẩn/curated"},
     {"Miền dữ liệu": "VizWiz-Captions", "Phạm vi": "7.750 ảnh", "Vai trò": "Miền hỗ trợ thị giác đời thực"},
@@ -236,7 +236,7 @@ $$\\text{Aspect Ratio (AR)} = \\frac{\\text{Width}}{\\text{Height}}$$
 - Ảnh dọc (Portrait): $\\text{AR} < 0.95$
 - Ảnh vuông (Square): $0.95 \\le \\text{AR} \\le 1.05$
 
-Khảo sát được thực hiện trên toàn bộ $40,504$ ảnh `COCO val2014` và $7,750$ ảnh `VizWiz val`:"""
+Khảo sát được thực hiện trên $40.504$ ảnh MS-COCO 2014 và $7.750$ ảnh VizWiz-Captions trong phạm vi dữ liệu hiện tại:"""
 cells.append(create_markdown_cell(cell6_md))
 
 # ==============================================================================
@@ -302,7 +302,7 @@ cell10_code = """# Đọc bảng thống kê chú thích
 df_captions = pd.read_csv(os.path.join(TAB_DIR, "caption_stats.csv"))
 
 # Hiển thị bảng
-render_table(df_captions, "Bảng 3: So sánh Thống kê Ngôn ngữ Chú thích COCO Val vs VizWiz Val")
+render_table(df_captions, "Bảng 3: So sánh Thống kê Ngôn ngữ Chú thích COCO vs VizWiz")
 
 # Hiển thị Biểu đồ 3
 show_figure(
@@ -313,7 +313,7 @@ show_figure(
 
 df_captions_html = pd.read_csv(os.path.join(TAB_DIR, "caption_stats.csv")).to_html(classes='table table-hover table-striped', index=False)
 out10 = [
-    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 3: So sánh Thống kê Ngôn ngữ Chú thích COCO Val vs VizWiz Val</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_captions_html}</div></div>"""),
+    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 3: So sánh Thống kê Ngôn ngữ Chú thích COCO vs VizWiz</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_captions_html}</div></div>"""),
     make_display_output(png_b64=get_image_b64("03_caption_length_and_tokens.png"), plain_text="<Figure 3: Caption Length and Tokens>")
 ]
 cells.append(create_code_cell(cell10_code, out10, exec_counter))
@@ -427,7 +427,7 @@ cells.append(create_markdown_cell(cell12_md))
 cell13_md = """---
 ## 4. PHÂN BỐ DANH MỤC ĐỐI TƯỢNG COCO & THIÊN LỆCH THẨM MỸ (OBJECT CATEGORY BIAS)
 
-Tập dữ liệu MS-COCO được xây dựng dựa trên 80 danh mục đối tượng (categories) thuộc 12 siêu danh mục (supercategories). Khảo sát $291,875$ đối tượng được gán nhãn trong tập Val:"""
+Tập dữ liệu MS-COCO được xây dựng dựa trên 80 danh mục đối tượng (categories) thuộc 12 siêu danh mục (supercategories). Khảo sát $291.875$ đối tượng được gán nhãn trong phạm vi dữ liệu hiện tại:"""
 cells.append(create_markdown_cell(cell13_md))
 
 # ==============================================================================
@@ -437,18 +437,18 @@ cell14_code = """# Đọc bảng phân bố 12 siêu danh mục của COCO
 df_coco_super = pd.read_csv(os.path.join(TAB_DIR, "coco_supercategories.csv"))
 
 # Hiển thị bảng
-render_table(df_coco_super, "Bảng 4: Phân bố 12 Siêu danh mục (Supercategories) trong COCO Val")
+render_table(df_coco_super, "Bảng 4: Phân bố 12 Siêu danh mục trong MS-COCO 2014")
 
 # Hiển thị Biểu đồ 4
 show_figure(
     filename="04_coco_category_distribution.png",
     title="Biểu đồ 4: Phân bố Danh mục Đối tượng COCO và Sự Áp đảo của Con người",
-    caption="Tỷ lệ đối tượng theo 12 siêu danh mục và Top 20 đối tượng chi tiết trong tập dữ liệu MS-COCO Val."
+    caption="Tỷ lệ đối tượng theo 12 siêu danh mục và Top 20 đối tượng chi tiết trong phạm vi MS-COCO được khảo sát."
 )"""
 
 df_coco_super_html = pd.read_csv(os.path.join(TAB_DIR, "coco_supercategories.csv")).to_html(classes='table table-hover table-striped', index=False)
 out14 = [
-    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 4: Phân bố 12 Siêu danh mục (Supercategories) trong COCO Val</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_coco_super_html}</div></div>"""),
+    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 4: Phân bố 12 Siêu danh mục trong MS-COCO 2014</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_coco_super_html}</div></div>"""),
     make_display_output(png_b64=get_image_b64("04_coco_category_distribution.png"), plain_text="<Figure 4: COCO Category Distribution>")
 ]
 cells.append(create_code_cell(cell14_code, out14, exec_counter))
@@ -498,7 +498,7 @@ cell17_code = """# Đọc bảng phân bố mức độ suy giảm chất lượ
 df_quality = pd.read_csv(os.path.join(TAB_DIR, "vizwiz_quality_breakdown.csv"))
 
 # Hiển thị bảng
-render_table(df_quality, "Bảng 5: Phân bố Mức độ Suy giảm Chất lượng trên 7,750 ảnh VizWiz Val")
+render_table(df_quality, "Bảng 5: Phân bố Mức độ Suy giảm Chất lượng trên 7.750 ảnh VizWiz")
 
 # Đọc thông số đo lường quang học khách quan
 with open(os.path.join(RESULTS_DIR, "eda_summary_metrics.json"), "r", encoding="utf-8") as f:
@@ -506,10 +506,10 @@ with open(os.path.join(RESULTS_DIR, "eda_summary_metrics.json"), "r", encoding="
 blur_lum = metrics["blur_luminance"]
 
 print("THONG SO DO LUONG QUANG HOC KHACH QUAN (IMAGE PROCESSING METRICS):")
-print(f" - Do net Laplacian trung binh COCO Val:   {blur_lum['coco_mean_blur']:.2f}")
-print(f" - Do net Laplacian trung binh VizWiz Val: {blur_lum['vizwiz_mean_blur']:.2f} (Thap hon {(1 - blur_lum['vizwiz_mean_blur']/blur_lum['coco_mean_blur'])*100:.1f}%)")
-print(f" - Do sang trung binh COCO Val:           {blur_lum['coco_mean_luminance']:.2f}")
-print(f" - Do sang trung binh VizWiz Val:         {blur_lum['vizwiz_mean_luminance']:.2f}")
+print(f" - Do net Laplacian trung binh COCO:   {blur_lum['coco_mean_blur']:.2f}")
+print(f" - Do net Laplacian trung binh VizWiz: {blur_lum['vizwiz_mean_blur']:.2f} (Thap hon {(1 - blur_lum['vizwiz_mean_blur']/blur_lum['coco_mean_blur'])*100:.1f}%)")
+print(f" - Do sang trung binh COCO:           {blur_lum['coco_mean_luminance']:.2f}")
+print(f" - Do sang trung binh VizWiz:         {blur_lum['vizwiz_mean_luminance']:.2f}")
 
 # Hiển thị Biểu đồ 5
 show_figure(
@@ -520,13 +520,13 @@ show_figure(
 
 df_quality_html = pd.read_csv(os.path.join(TAB_DIR, "vizwiz_quality_breakdown.csv")).to_html(classes='table table-hover table-striped', index=False)
 out17_text = """THONG SO DO LUONG QUANG HOC KHACH QUAN (IMAGE PROCESSING METRICS):
- - Do net Laplacian trung binh COCO Val:   1082.07
- - Do net Laplacian trung binh VizWiz Val: 400.00 (Thap hon 63.0%)
- - Do sang trung binh COCO Val:           114.67
- - Do sang trung binh VizWiz Val:         104.51"""
+ - Do net Laplacian trung binh COCO:   1082.07
+ - Do net Laplacian trung binh VizWiz: 400.00 (Thap hon 63.0%)
+ - Do sang trung binh COCO:           114.67
+ - Do sang trung binh VizWiz:         104.51"""
 
 out17 = [
-    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 5: Phân bố Mức độ Suy giảm Chất lượng trên 7,750 ảnh VizWiz Val</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_quality_html}</div></div>"""),
+    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 5: Phân bố Mức độ Suy giảm Chất lượng trên 7.750 ảnh VizWiz</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_quality_html}</div></div>"""),
     make_stream_output(out17_text),
     make_display_output(png_b64=get_image_b64("05_vizwiz_quality_and_text_issues.png"), plain_text="<Figure 5: Quality, Text & Blur>")
 ]
@@ -554,46 +554,34 @@ cell18_md = """### 💡 Nhận Định Định Lượng Về Độ Suy Giảm & 
 cells.append(create_markdown_cell(cell18_md))
 
 # ==============================================================================
-# CELL 19: Section 6 - 7-Dimensional Domain Gap Matrix & Radar (Markdown)
+# CELL 19: Section 6 - Domain Gap Summary (Markdown)
 # ==============================================================================
 cell19_md = """---
-## 6. PHÂN TÍCH ĐỐI SÁNH DOMAIN GAP TOÀN DIỆN (7-DIMENSIONAL DOMGAP & HALLUCINATION RISKS)
+## 6. DOMAIN GAP ẢNH HƯỞNG ĐẾN HALLUCINATION NHƯ THẾ NÀO?
 
-Bảng ma trận đối sánh 7 chiều không gian giữa Chuẩn mực Benchmark (MS-COCO) và Thực tế Đời thực (VizWiz):
+Phần này chỉ tổng hợp các khác biệt **đã có số liệu trong EDA**. Biểu đồ radar cũ được bỏ vì các điểm 0–100 là điểm minh họa, không phải kết quả đo trực tiếp.
 
-| Chiều không gian | MS-COCO Benchmark | VizWiz Real-World | Tác động Kỹ thuật đến Mô hình AI |
-| :--- | :--- | :--- | :--- |
-| **1. Tác nhân chụp (Operator)** | Người sáng mắt; nhìn màn hình, chủ động căn chỉnh bố cục thẩm mỹ. | **Người khiếm thị hoàn toàn hoặc suy giảm thị lực nặng**; chụp ngẫu nhiên không nhìn thấy màn hình. | Ảnh có góc nghiêng, bất đối xứng, mất cân đối hình học. |
-| **2. Bố cục vật thể (Framing)** | **Centered / Rule of Thirds**: Vật thể chính nằm trang trọng ở giữa khung hình. | **Severe Truncation / Off-center**: Vật thể bị cắt cụt một nửa, dính vào mép ảnh, góc cực gần (extreme macro). | Mô hình COCO bị phụ thuộc vào trọng tâm ảnh; mất khả năng nhận diện vật thể ở mép ảnh. |
-| **3. Môi trường ánh sáng (Lighting)** | Đủ sáng, ánh sáng tự nhiên hoặc studio được chọn lọc kỹ càng trên Flickr. | Thiếu sáng nghiêm trọng, ngược sáng cửa sổ, bóng đổ bàn tay, lóa phản chiếu flash điện thoại. | Phân bố phơi sáng phân tán ở hai cực đoan; cần cơ chế chống chịu nhiễu ánh sáng. |
-| **4. Độ ổn định quang học (Optics)** | Tay giữ yên, chân máy, cảm biến tốt, ảnh tĩnh có độ tương phản biên cạnh cao. | **Motion blur** do tay run; **defocus blur** do camera không lấy nét được vật thể đặt quá gần. | Phương sai Laplacian thấp gấp gần 3 lần; cần biểu diễn đặc trưng bất biến với độ mờ. |
-| **5. Che khuất góc nhìn thứ nhất (Occlusion)** | Góc nhìn thứ ba (Third-person view), cảnh quan tách biệt với người chụp. | **Egocentric view**: Bàn tay và ngón tay người chụp cầm nắm che khuất $30-50\%$ bề mặt vật thể. | Mô hình COCO dễ nhận nhầm "bàn tay" là chủ thể chính thay vì nhận biết vật thể đang cầm. |
-| **6. Ý đồ sử dụng (Intent)** | Miêu tả tổng thể bức tranh nghệ thuật ("Một người đang cưỡi ngựa trên bãi biển"). | **Giải quyết câu hỏi cụ thể trong sinh hoạt**: "Đây là lon nước ngọt hay bia?", "Hộp thuốc này uống mấy viên?". | Đòi hỏi mô hình phải kết hợp OCR đọc chữ và suy luận tri thức thông thường (Commonsense Reasoning). |
-| **7. Xử lý ảnh hỏng (Failure Mode)** | **Bắt buộc phải sinh câu miêu tả**; giả định mọi ảnh đều có nghĩa. | **Cần khả năng từ chối trả lời (Refusal Mechanism)** khi ảnh quá hỏng để tránh hậu quả nguy hiểm. | Mô hình chỉ học trên COCO sẽ mắc lỗi **ảo tưởng nghiêm trọng (Severe Hallucination)** khi gặp ảnh mờ trong thực tế. |
+| Khác biệt đã đo | MS-COCO 2014 | VizWiz-Captions | Ý nghĩa đối với mô hình |
+| :--- | :---: | :---: | :--- |
+| **Hướng ảnh** | 71,71% ảnh ngang | 92,86% ảnh dọc | Resize/crop vuông có thể làm mất thông tin ở ảnh VizWiz. |
+| **Độ nét Laplacian** | 1.082,07 | 399,99 | Ảnh VizWiz cung cấp ít biên và chi tiết rõ hơn cho visual encoder. |
+| **Ảnh có chữ** | Không có nhãn OCR tương ứng | 73,72% | Mô hình chỉ nhận dạng vật thể có thể bỏ sót nội dung chính trên nhãn và màn hình. |
+| **Không thể nhận diện** | Không có nhãn tương ứng | 32,62% có ít nhất 1/5 người báo lỗi; 2,48% có 5/5 người báo lỗi | Hệ thống cần biết từ chối thay vì luôn sinh một mô tả chắc chắn. |
 
----
+### Chuỗi rủi ro cần kiểm chứng
 
-### 🚨 Hiểm Họa Ảo Tưởng (The Danger of Hallucination in Assistive Tech):
-Nếu một người khiếm thị chụp ảnh một lọ thuốc bị rung mờ:
-- **Hành vi đúng đắn (VizWiz paradigm):** Mô hình nhận diện chất lượng ảnh kém và trả lời: *"Ảnh quá mờ để nhận biết chính xác loại thuốc, vui lòng bật đèn flash và chụp lại ở khoảng cách xa hơn."*
-- **Hành vi tai hại (COCO paradigm):** Do được huấn luyện luôn luôn sinh caption trên ảnh rõ nét, mô hình COCO sẽ bịa ra một câu miêu tả giả định: *"A bottle of vitamin pills on a counter"*. Nếu thực tế đó là lọ thuốc trị bệnh tim mạch liều cao hoặc chai hóa chất tẩy rửa, **sự ảo tưởng này sẽ đe dọa trực tiếp đến tính mạng người dùng!**"""
+**Ảnh mờ, bị crop hoặc chứa chữ quá nhỏ** → **visual encoder thu được ít bằng chứng** → **language model dựa nhiều hơn vào mẫu ngôn ngữ đã học** → **có thể sinh vật thể hoặc thuộc tính không được ảnh hỗ trợ**.
+
+Ví dụ: nếu tên thuốc không đọc được, câu trả lời an toàn là *“Ảnh chưa đủ rõ để xác định tên thuốc; vui lòng chụp lại.”* Không nên đoán tên hay công dụng của thuốc.
+
+> **Giới hạn kết luận:** EDA mới chỉ chứng minh COCO và VizWiz khác nhau về dữ liệu đầu vào. Chưa có kết quả cấp ảnh để khẳng định blur hoặc lệch tâm làm CHAIR/POPE tăng. Muốn trả lời cần chạy cùng một mô hình trên từng ảnh rồi ghép điểm chất lượng ảnh với CHAIR/POPE."""
 cells.append(create_markdown_cell(cell19_md))
 
 # ==============================================================================
-# CELL 20: Section 6 - Code & Display Radar Chart (Code)
+# CELL 20: Radar chart removed
 # ==============================================================================
-cell20_code = """# Hiển thị Biểu đồ Radar 7 Chiều Đối sánh Domain Gap
-show_figure(
-    filename="06_domain_gap_characteristics.png",
-    title="Biểu đồ 6: Radar 7 Chiều Đặc trưng Domain Gap COCO vs VizWiz",
-    caption="Định lượng hóa 7 chiều không gian thể hiện sự đối lập giữa ảnh thẩm mỹ benchmark (COCO) và ảnh trợ lý thực tế (VizWiz)."
-)"""
-
-out20 = [
-    make_display_output(png_b64=get_image_b64("06_domain_gap_characteristics.png"), plain_text="<Figure 6: Domain Gap Radar>")
-]
-cells.append(create_code_cell(cell20_code, out20, exec_counter))
-exec_counter += 1
+# No chart is inserted here: the former radar used illustrative scores rather
+# than measurements and could be mistaken for an experimental result.
 
 # ==============================================================================
 # CELL 21: Section 7 - Qualitative Comparison & Case Studies (Markdown)
@@ -604,16 +592,16 @@ cell21_md = """---
 Để phục vụ thuyết trình và trình bày trực quan trong khóa luận tốt nghiệp, 8 trường hợp mẫu đối sánh tiêu biểu được phân tích chi tiết:
 
 ### 🌟 Nhóm MS-COCO: Nhiếp ảnh Chuẩn mực (Curated Photography)
-1. **`COCO_val2014_000000391895.jpg`**: Người đàn ông đội mũ bảo hiểm đỏ lái xe máy trên đường đất, nền núi hùng vĩ. Ánh sáng hoàn hảo, độ sâu trường ảnh tốt.
-2. **`COCO_val2014_000000522418.jpg`**: Người phụ nữ đeo lưới trùm tóc cắt bánh kem trong nhà bếp. Bố cục chuẩn mực, chi tiết dao cắt rõ nét.
-3. **`COCO_val2014_000000184613.jpg`**: Cậu bé cầm ô hoa vuốt ve sừng bò Tây Tạng. Độ tương phản cao, màu sắc sống động.
-4. **`COCO_val2014_000000581357.jpg`**: Bàn tiệc trong nhà hàng với đĩa thức ăn và ly rượu vang. Cân bằng trắng chuẩn.
+1. **Ảnh COCO mẫu #391895**: Người đàn ông đội mũ bảo hiểm đỏ lái xe máy trên đường đất, nền núi hùng vĩ. Ánh sáng hoàn hảo, độ sâu trường ảnh tốt.
+2. **Ảnh COCO mẫu #522418**: Người phụ nữ đeo lưới trùm tóc cắt bánh kem trong nhà bếp. Bố cục chuẩn mực, chi tiết dao cắt rõ nét.
+3. **Ảnh COCO mẫu #184613**: Cậu bé cầm ô hoa vuốt ve sừng bò Tây Tạng. Độ tương phản cao, màu sắc sống động.
+4. **Ảnh COCO mẫu #581357**: Bàn tiệc trong nhà hàng với đĩa thức ăn và ly rượu vang. Cân bằng trắng chuẩn.
 
 ### 📱 Nhóm VizWiz: Thực tế Trợ lý Đời thực (In-the-Wild Assistive Reality)
-1. **`VizWiz_val_00000001.jpg` (Handheld Medicine & OCR):** Bàn tay người khiếm thị cầm chai thuốc màu đen có chữ *"NIGHT TIME"*. Ngón tay che một phần nhãn, góc chụp dọc.
-2. **`VizWiz_val_00000000.jpg` (Digital Screen & Assistive Prompt):** Màn hình laptop chụp nghiêng hiển thị popup sửa lỗi hệ thống. Chữ nhỏ, bóng đèn phản chiếu trên màn hình.
-3. **`VizWiz_val_00000013.jpg` (Severe Motion Blur & Hand Shake):** Vật thể trên bàn bị nhòe mờ hoàn toàn do rung tay, mất hoàn toàn biên cạnh nhận dạng.
-4. **`VizWiz_val_00000006.jpg` (Complete Quality Failure - 100% Precanned):** Cảm biến camera bị che kín hoàn toàn, ảnh đen kịt. 5/5 annotators đồng thuận không thể nhận diện."""
+1. **Ảnh VizWiz mẫu #00000001 (Handheld Medicine & OCR):** Bàn tay người khiếm thị cầm chai thuốc màu đen có chữ *"NIGHT TIME"*. Ngón tay che một phần nhãn, góc chụp dọc.
+2. **Ảnh VizWiz mẫu #00000000 (Digital Screen & Assistive Prompt):** Màn hình laptop chụp nghiêng hiển thị popup sửa lỗi hệ thống. Chữ nhỏ, bóng đèn phản chiếu trên màn hình.
+3. **Ảnh VizWiz mẫu #00000013 (Severe Motion Blur & Hand Shake):** Vật thể trên bàn bị nhòe mờ hoàn toàn do rung tay, mất hoàn toàn biên cạnh nhận dạng.
+4. **Ảnh VizWiz mẫu #00000006 (Complete Quality Failure - 100% Precanned):** Cảm biến camera bị che kín hoàn toàn, ảnh đen kịt. 5/5 annotators đồng thuận không thể nhận diện."""
 cells.append(create_markdown_cell(cell21_md))
 
 # ==============================================================================
@@ -700,11 +688,8 @@ out23_text = """5 CAU CHU THICH GOC TU CROWDSOURCING:
   [4] a person holding a small black bottle of NIGHT TIME (Precanned=False, Text=True)
   [5] A bottle of what appears to be cough syrup held in hand. (Precanned=False, Text=True)"""
 
-out23 = [
-    make_stream_output(out23_text)
-]
-cells.append(create_code_cell(cell23_code, out23, exec_counter))
-exec_counter += 1
+# Interactive file-path explorer is intentionally omitted from the report.
+# It exposes storage-specific directory names that are not part of the EDA scope.
 
 # ==============================================================================
 # CELL 24: Section 8 - Architectural Recommendations for Thesis (Markdown)
@@ -745,7 +730,7 @@ graph TD
   - **Random Egocentric Cropping & Perspective Tilt:** Mô phỏng góc chụp nghiêng và lệch tâm.
   - **Synthetic Hand Occlusion Masks:** Dán ngẫu nhiên mặt nạ bàn tay che khuất bề mặt vật thể.
   - **Letterbox Padding:** Giữ nguyên tỷ lệ ảnh dọc $3:4$, chống méo ký tự."""
-cells.append(create_markdown_cell(cell24_md))
+# Section 8 intentionally omitted: this notebook is limited to EDA.
 
 # ==============================================================================
 # CELL 25: Section 9 - Exported Artifacts Verification (Code)
@@ -753,15 +738,12 @@ cells.append(create_markdown_cell(cell24_md))
 cell25_code = """# Kiểm tra toàn bộ tài nguyên đã xuất xưởng phục vụ khóa luận
 artifacts = [
     # Figures
-    ("Biểu đồ Phân chia Tập dữ liệu", os.path.join(FIG_DIR, "01_dataset_splits_comparison.png")),
     ("Biểu đồ Độ phân giải & Khung hình", os.path.join(FIG_DIR, "02_resolution_aspect_ratio.png")),
     ("Biểu đồ Độ dài & Từ vựng Chú thích", os.path.join(FIG_DIR, "03_caption_length_and_tokens.png")),
     ("Biểu đồ Phân bố Danh mục COCO", os.path.join(FIG_DIR, "04_coco_category_distribution.png")),
     ("Biểu đồ Chất lượng, Chữ viết & Mờ", os.path.join(FIG_DIR, "05_vizwiz_quality_and_text_issues.png")),
-    ("Biểu đồ Radar Đối sánh Domain Gap", os.path.join(FIG_DIR, "06_domain_gap_characteristics.png")),
     ("Biểu đồ Lưới Ảnh Đối sánh Định tính", os.path.join(FIG_DIR, "07_qualitative_samples_grid.png")),
     # Tables
-    ("Bảng Quy mô Tập dữ liệu (CSV)", os.path.join(TAB_DIR, "dataset_overview.csv")),
     ("Bảng Độ phân giải & AR (CSV)", os.path.join(TAB_DIR, "resolution_aspect_ratio.csv")),
     ("Bảng Thống kê Chú thích (CSV)", os.path.join(TAB_DIR, "caption_stats.csv")),
     ("Bảng Siêu danh mục COCO (CSV)", os.path.join(TAB_DIR, "coco_supercategories.csv")),
@@ -787,14 +769,11 @@ render_table(df_art, "Bảng 6: Danh mục Toàn bộ Tài nguyên Báo cáo Đ�
 
 df_art_rows = []
 for name, p in [
-    ("Biểu đồ Phân chia Tập dữ liệu", os.path.join(FIG_DIR, "01_dataset_splits_comparison.png")),
     ("Biểu đồ Độ phân giải & Khung hình", os.path.join(FIG_DIR, "02_resolution_aspect_ratio.png")),
     ("Biểu đồ Độ dài & Từ vựng Chú thích", os.path.join(FIG_DIR, "03_caption_length_and_tokens.png")),
     ("Biểu đồ Phân bố Danh mục COCO", os.path.join(FIG_DIR, "04_coco_category_distribution.png")),
     ("Biểu đồ Chất lượng, Chữ viết & Mờ", os.path.join(FIG_DIR, "05_vizwiz_quality_and_text_issues.png")),
-    ("Biểu đồ Radar Đối sánh Domain Gap", os.path.join(FIG_DIR, "06_domain_gap_characteristics.png")),
     ("Biểu đồ Lưới Ảnh Đối sánh Định tính", os.path.join(FIG_DIR, "07_qualitative_samples_grid.png")),
-    ("Bảng Quy mô Tập dữ liệu (CSV)", os.path.join(TAB_DIR, "dataset_overview.csv")),
     ("Bảng Độ phân giải & AR (CSV)", os.path.join(TAB_DIR, "resolution_aspect_ratio.csv")),
     ("Bảng Thống kê Chú thích (CSV)", os.path.join(TAB_DIR, "caption_stats.csv")),
     ("Bảng Siêu danh mục COCO (CSV)", os.path.join(TAB_DIR, "coco_supercategories.csv")),
@@ -814,8 +793,7 @@ df_art_test = pd.DataFrame(df_art_rows)
 out25 = [
     make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 6: Danh mục Toàn bộ Tài nguyên Báo cáo Đã Xuất xưởng</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_art_test.to_html(classes='table table-hover table-striped', index=False)}</div></div>""")
 ]
-cells.append(create_code_cell(cell25_code, out25, exec_counter))
-exec_counter += 1
+# Section 9 artifact inventory intentionally omitted from the EDA report.
 
 # ==============================================================================
 # CELL 26: Conclusion & Academic Summary (Markdown)
@@ -832,7 +810,7 @@ Báo cáo Khám phá Dữ liệu (EDA) này đã chứng minh một cách toàn 
 
 ---
 *Báo cáo được tổng hợp tự động và hoàn chỉnh dưới dạng Jupyter Notebook phục vụ Khóa luận Tốt nghiệp.*"""
-cells.append(create_markdown_cell(cell26_md))
+# Thesis conclusion/proposal section intentionally omitted from the EDA report.
 
 # Construct final notebook dict
 notebook = {
