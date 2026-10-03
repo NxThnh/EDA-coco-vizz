@@ -18,12 +18,15 @@ env/
 
 # Jupyter & IDE
 .ipynb_checkpoints/
+.ipython_runtime/
+.jupyter_runtime/
 .vscode/
 .idea/
 
 # Scratch & temporary files
 scratch/
 *.tmp
+eda_results/eda_run.log
 
 # Web & Node dependencies/build outputs
 node_modules/
@@ -32,4 +35,3 @@ node_modules/
 dist/
 work/
 .openai/
-

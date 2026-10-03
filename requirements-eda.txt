@@ -5,3 +5,5 @@ seaborn
 Pillow
 nltk
 IPython
+jupyter_client
+ipykernel

@@ -1,3 +1,3 @@
 Subset,Total Captions,Word Mean,Word Median,Word Std,Word Min,Word Max,Char Mean,Char Median,Total Tokens,Vocab Size,TTR (corpus-size dependent),MATTR (window=1000)
-MS-COCO 2014,202654,10.45,10.0,2.38,6,50,52.29,50.0,2122711,17348,0.0082,0.3209
+MS-COCO val2014,202654,10.45,10.0,2.38,6,50,52.29,50.0,2122711,17348,0.0082,0.3209
 VizWiz-Captions (placeholder removed),33583,12.04,11.0,4.34,6,155,62.48,57.0,407796,10876,0.0267,0.3223

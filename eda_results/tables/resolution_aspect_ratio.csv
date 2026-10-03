@@ -1,3 +1,3 @@
 Dataset,N,Width Mean,Width Median,Width Std,Width Min,Width Max,Height Mean,Height Median,Height Std,Height Min,Height Max,AR Mean,AR Median,Landscape (%),Portrait (%),Square (%),MP Mean
-MS-COCO 2014,40504,576.5,640.0,91.9,120,640,485.1,480.0,97.8,111,640,1.25,1.33,71.71,23.7,4.59,0.276
-VizWiz-Captions,7750,1067.7,968.0,429.5,23,3264,1339.2,1296.0,383.7,25,2448,0.79,0.75,6.98,92.86,0.15,1.566
+MS-COCO val2014,40504,576.5,640.0,91.9,120,640,485.1,480.0,97.8,111,640,1.25,1.33,71.71,23.7,4.59,0.276
+VizWiz-Captions,7750,1032.1,968.0,334.1,23,2448,1374.7,1296.0,445.2,25,3264,0.75,0.75,0.62,99.23,0.15,1.566

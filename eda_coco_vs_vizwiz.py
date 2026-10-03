@@ -214,7 +214,7 @@ viz_w_list, viz_h_list = [], []
 for fname in viz_files:
     fpath = os.path.join(viz_val_dir, fname)
     with Image.open(fpath) as img:
-        w, h = img.size
+        w, h = ImageOps.exif_transpose(img).size
         viz_w_list.append(w)
         viz_h_list.append(h)
 
@@ -234,7 +234,7 @@ viz_land, viz_port, viz_sq = classify_orientation(viz_ar)
 
 res_stats = [
     {
-        "Dataset": "MS-COCO 2014",
+        "Dataset": "MS-COCO val2014",
         "N": len(coco_w),
         "Width Mean": round(float(np.mean(coco_w)), 1),
         "Width Median": float(np.median(coco_w)),
@@ -303,16 +303,15 @@ pie_colors = ['#3498db', '#e67e22', '#95a5a6']
 coco_pcts = [coco_land/len(coco_ar), coco_port/len(coco_ar), coco_sq/len(coco_ar)]
 viz_pcts = [viz_land/len(viz_ar), viz_port/len(viz_ar), viz_sq/len(viz_ar)]
 
-# Nested donut chart
+# Nested donut chart: label the large sectors in a legend to avoid collisions.
 ax_pie.pie(coco_pcts, radius=1.0, colors=pie_colors,
-           autopct='%1.1f%%', pctdistance=0.82,
            wedgeprops=dict(width=0.3, edgecolor='white', linewidth=1.5))
 ax_pie.pie(viz_pcts, radius=0.68, colors=pie_colors,
-           autopct='%1.1f%%', pctdistance=0.65,
            wedgeprops=dict(width=0.3, edgecolor='white', linewidth=1.5))
 ax_pie.set_title('(B) Orientation: Outer Ring = COCO | Inner Ring = VizWiz', fontsize=12, fontweight='bold')
-legend_patches = [mpatches.Patch(color=c, label=l) for c, l in zip(pie_colors, ['Landscape', 'Portrait', 'Square'])]
-ax_pie.legend(handles=legend_patches, loc='upper right', frameon=True, facecolor='white')
+legend_patches = [mpatches.Patch(color=c, label=f'{l}: COCO {cp:.1%}; VizWiz {vp:.1%}')
+                  for c, l, cp, vp in zip(pie_colors, ['Landscape', 'Portrait', 'Square'], coco_pcts, viz_pcts)]
+ax_pie.legend(handles=legend_patches, loc='lower center', bbox_to_anchor=(0.5, -0.22), frameon=True, fontsize=8)
 
 # (C) Width vs Height Scatter / Hexbin
 ax_sc1 = fig.add_subplot(gs[1, 0])
@@ -325,13 +324,17 @@ ax_sc1.set_xlim(0, 700)
 ax_sc1.set_ylim(0, 700)
 
 ax_sc2 = fig.add_subplot(gs[1, 1])
-idx_viz = np.random.choice(len(viz_w), size=min(4000, len(viz_w)), replace=False)
-ax_sc2.scatter(viz_w[idx_viz], viz_h[idx_viz], alpha=0.25, s=12, color='#e67e22', edgecolors='none')
+unique_res, res_counts = np.unique(np.column_stack((viz_w, viz_h)), axis=0, return_counts=True)
+points = ax_sc2.scatter(unique_res[:, 0], unique_res[:, 1],
+                        s=12 + 9 * np.sqrt(res_counts), c=np.log10(res_counts),
+                        cmap='YlOrRd', alpha=0.8, edgecolors='#a04000', linewidths=0.3)
 ax_sc2.set_xlabel('Width (pixels)', fontsize=11, fontweight='bold')
 ax_sc2.set_ylabel('Height (pixels)', fontsize=11, fontweight='bold')
-ax_sc2.set_title(f'(C2) VizWiz Val Resolutions (Raw Smartphone Sensors)', fontsize=12, fontweight='bold')
+ax_sc2.set_title('(C2) VizWiz Val Resolutions (EXIF Corrected)', fontsize=12, fontweight='bold')
 ax_sc2.set_xlim(0, 3500)
 ax_sc2.set_ylim(0, 3500)
+ax_sc2.text(0.02, 0.98, f'n={len(viz_w):,}; {len(unique_res):,} distinct sizes; bubble area ∝ count', transform=ax_sc2.transAxes,
+            va='top', fontsize=9, bbox=dict(facecolor='white', alpha=0.85, edgecolor='none'))
 
 plt.tight_layout()
 fig_path2 = os.path.join(FIG_DIR, "02_resolution_aspect_ratio.png")
@@ -399,7 +402,7 @@ def compute_caption_stats(name, caps):
     }
 
 cap_stats = [
-    compute_caption_stats("MS-COCO 2014", coco_captions),
+    compute_caption_stats("MS-COCO val2014", coco_captions),
     compute_caption_stats("VizWiz-Captions (placeholder removed)", viz_captions_norm),
 ]
 
@@ -608,12 +611,12 @@ df_quality = pd.DataFrame([
         "Num Images": precanned_hist[k],
         "Percentage": round(precanned_hist[k] / total_viz_imgs * 100, 2),
         "Interpretation": {
-            0: "High quality (5/5 described content)",
-            1: "Minor ambiguity (1/5 reported severe quality issue)",
-            2: "Substantial degradation (2/5 reported severe quality issue)",
-            3: "Majority degraded (3/5 could not recognize)",
-            4: "Severe degradation (4/5 could not recognize)",
-            5: "Completely unanswerable (5/5 confirmed impossible to recognize)"
+            0: "Five descriptive captions",
+            1: "One refusal; four descriptive captions",
+            2: "Two refusals; three descriptive captions",
+            3: "Three refusals; two descriptive captions",
+            4: "Four refusals; one descriptive caption",
+            5: "Five refusal captions"
         }.get(k, "")
     }
     for k in range(6)
@@ -661,6 +664,30 @@ for fn in viz_sample_files:
     viz_blurs.append(b)
     viz_brights.append(br)
 
+def bootstrap_median_ci(values, seed=42, repeats=3000):
+    values = np.asarray(values, dtype=float)
+    rng_ci = np.random.default_rng(seed)
+    medians = np.array([np.median(values[rng_ci.integers(0, len(values), len(values))])
+                        for _ in range(repeats)])
+    return np.quantile(medians, [0.025, 0.975]).tolist()
+
+coco_lap_ci = bootstrap_median_ci(coco_blurs)
+viz_lap_ci = bootstrap_median_ci(viz_blurs)
+viz_file_ids = {img['file_name']: img['id'] for img in viz_val['images']}
+sample_group_values = {k: [] for k in range(6)}
+for filename, lap_value in zip(viz_sample_files, viz_blurs):
+    sample_group_values[img_precanned[viz_file_ids[filename]]].append(lap_value)
+lap_by_precanned = [
+    {'Precanned Count (/5)': k, 'Sample Images': len(sample_group_values[k]),
+     'Median Laplacian Variance': float(np.median(sample_group_values[k])) if sample_group_values[k] else None,
+     'CI 95% Low': bootstrap_median_ci(sample_group_values[k], seed=42+k)[0] if sample_group_values[k] else None,
+     'CI 95% High': bootstrap_median_ci(sample_group_values[k], seed=42+k)[1] if sample_group_values[k] else None}
+    for k in range(6)
+]
+pd.DataFrame(lap_by_precanned).to_csv(os.path.join(TAB_DIR, 'laplacian_by_precanned.csv'), index=False)
+print('Laplacian by precanned consensus (descriptive validation):')
+print(pd.DataFrame(lap_by_precanned).to_string(index=False))
+
 # FIGURE 5: VizWiz Quality Issues & Text Detection
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
 
@@ -704,9 +731,9 @@ log_viz_blurs = np.log10(np.array(viz_blurs) + 1e-3)
 
 sns.kdeplot(log_coco_blurs, ax=ax3, color='#2980b9', label=f'COCO Val (median={np.median(coco_blurs):.1f})', fill=True, alpha=0.35, linewidth=2)
 sns.kdeplot(log_viz_blurs, ax=ax3, color='#e74c3c', label=f'VizWiz Val (median={np.median(viz_blurs):.1f})', fill=True, alpha=0.35, linewidth=2)
-ax3.set_xlabel('Log10(Laplacian Variance) [Higher = Sharper]', fontsize=11, fontweight='bold')
+ax3.set_xlabel('Log10(Laplacian variance): edge/texture signal', fontsize=11, fontweight='bold')
 ax3.set_ylabel('Density', fontsize=11, fontweight='bold')
-ax3.set_title('(C) Image Sharpness Distribution (Laplacian Blur Metric)', fontsize=12, fontweight='bold')
+ax3.set_title('(C) High-frequency detail indicator', fontsize=12, fontweight='bold')
 ax3.legend(frameon=True, facecolor='white', framealpha=0.9)
 
 # (D) Brightness / Luminance Distribution
@@ -714,7 +741,7 @@ sns.kdeplot(coco_brights, ax=ax4, color='#2980b9', label=f'COCO Val (median={np.
 sns.kdeplot(viz_brights, ax=ax4, color='#e67e22', label=f'VizWiz Val (median={np.median(viz_brights):.1f})', fill=True, alpha=0.35, linewidth=2)
 ax4.set_xlabel('Mean Pixel Luminance (0=Black, 255=White)', fontsize=11, fontweight='bold')
 ax4.set_ylabel('Density', fontsize=11, fontweight='bold')
-ax4.set_title('(D) Image Brightness & Exposure Variance', fontsize=12, fontweight='bold')
+ax4.set_title('(D) Mean image luminance', fontsize=12, fontweight='bold')
 ax4.legend(frameon=True, facecolor='white', framealpha=0.9)
 
 plt.tight_layout()
@@ -724,53 +751,11 @@ plt.close()
 print(f"Saved: {fig_path5}")
 
 # ==============================================================================
-# 6. DOMAIN GAP: MULTI-DIMENSIONAL RADAR & FEATURE COMPARISON
+# 6. DOMAIN GAP: measured features are summarized in the report tables.
 # ==============================================================================
 print("\n[6/7] Synthesizing Multi-dimensional Domain Gap Analysis...")
 
-categories_radar = [
-    'Object-Centric Framing\n(Bố cục vật thể trung tâm)',
-    'Stable Sharpness\n(Độ nét & Chống rung)',
-    'Standard Lighting\n(Ánh sáng chuẩn)',
-    'Landscape Photography\n(Tỷ lệ ảnh ngang chuẩn)',
-    'Assistive Text Need\n(Nhu cầu đọc chữ/OCR)',
-    'Severe Degradation\n(Tỷ lệ suy giảm chất lượng)',
-    'Egocentric Handheld\n(Góc chụp cầm tay thứ nhất)'
-]
-
-# Normalized scale (0 to 100)
-coco_scores = [90, 88, 85, 72, 12, 1, 8]
-vizwiz_scores = [35, 42, 48, 7, 74, 33, 85]
-
-N = len(categories_radar)
-angles = [n / float(N) * 2 * np.pi for n in range(N)]
-angles += angles[:1]
-coco_scores_cycle = coco_scores + coco_scores[:1]
-vizwiz_scores_cycle = vizwiz_scores + vizwiz_scores[:1]
-
-fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
-plt.xticks(angles[:-1], categories_radar, color='#2c3e50', size=10, fontweight='bold')
-ax.set_rlabel_position(0)
-plt.yticks([20, 40, 60, 80, 100], ["20%", "40%", "60%", "80%", "100%"], color="grey", size=8)
-plt.ylim(0, 105)
-
-# Plot COCO
-ax.plot(angles, coco_scores_cycle, linewidth=2.5, linestyle='solid', color='#2980b9', label='MS-COCO (Curated / Photographer)')
-ax.fill(angles, coco_scores_cycle, color='#3498db', alpha=0.25)
-
-# Plot VizWiz
-ax.plot(angles, vizwiz_scores_cycle, linewidth=2.5, linestyle='solid', color='#d35400', label='VizWiz-Captions (Real-World Assistive)')
-ax.fill(angles, vizwiz_scores_cycle, color='#e67e22', alpha=0.25)
-
-plt.title('Multi-Dimensional Domain Gap: COCO 2014 vs. VizWiz-Captions\n(Thách thức cốt lõi của Mô hình Thị giác Đa phương thức)',
-          size=13, fontweight='bold', pad=25)
-plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1), frameon=True, facecolor='white', framealpha=0.95, fontsize=10)
-
-plt.tight_layout()
-fig_path6 = os.path.join(FIG_DIR, "06_domain_gap_characteristics.png")
-plt.savefig(fig_path6, dpi=300)
-plt.close()
-print(f"Saved: {fig_path6}")
+print('Domain gap summary uses measured tables; no illustrative scores are generated.')
 
 # ==============================================================================
 # 7. QUALITATIVE IMAGE SAMPLES COMPARISON GRID
@@ -866,17 +851,15 @@ summary_metrics = {
         "sample_seed": 42,
         "coco_mean_blur": float(np.mean(coco_blurs)),
         "coco_median_blur": float(np.median(coco_blurs)),
+        "coco_median_blur_ci95": coco_lap_ci,
         "coco_mean_luminance": float(np.mean(coco_brights)),
         "coco_median_luminance": float(np.median(coco_brights)),
         "vizwiz_mean_blur": float(np.mean(viz_blurs)),
         "vizwiz_median_blur": float(np.median(viz_blurs)),
+        "vizwiz_median_blur_ci95": viz_lap_ci,
+        "vizwiz_laplacian_by_precanned": lap_by_precanned,
         "vizwiz_mean_luminance": float(np.mean(viz_brights)),
         "vizwiz_median_luminance": float(np.median(viz_brights))
-    },
-    "radar_metrics": {
-        "categories": categories_radar,
-        "coco": coco_scores,
-        "vizwiz": vizwiz_scores
     }
 }
 
