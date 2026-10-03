@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+seaborn
+Pillow
+nltk
+IPython
+jupyter_client
+ipykernel
