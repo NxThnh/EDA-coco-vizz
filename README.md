@@ -17,9 +17,9 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 1. **Đảo ngược Tỷ lệ Khung hình (Aspect Ratio Inversion):**
    - COCO chiếm **71.71% ảnh ngang (Landscape)**.
    - VizWiz có **99.23% ảnh dọc** sau EXIF transpose.
-2. **Độ phân giải & Cảm biến:**
+2. **Kích thước file ảnh:**
    - Kích thước file COCO trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
-   - Kích thước file VizWiz sau EXIF trung bình $1032.1 \times 1374.7\text{px}$ (1.57 MP), có ngoại lai rộng 23 px.
+   - Kích thước file VizWiz sau EXIF trung bình $1032.1 \times 1374.7\text{px}$ (1.57 MP), có ngoại lai rộng 23 px. Đây là kích thước file được khảo sát; COCO trong bộ này có cạnh tối đa 640 px, nên không dùng chênh lệch pixel để suy ra độ phân giải cảm biến hoặc chất lượng ảnh gốc.
 3. **Chỉ báo chi tiết tần số cao:**
    - Trên 1.000 ảnh mỗi tập, sau EXIF transpose và resize cạnh ngắn 480 px, median Laplacian là **1197.90** (COCO) và **149.19** (VizWiz). Đây là chỉ báo biên/texture; có phân tích độ nhạy theo ảnh bị phóng lớn.
 4. **Tín hiệu ảnh không thể nhận diện:**
@@ -28,7 +28,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
    - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; tỷ lệ đồng thuận đa số **≥3/5 là 64.75%**.
 6. **Lệch pha Ngữ nghĩa (Semantic Shift):**
     - Trong annotation instance COCO, `person` chiếm **30.20%** số object; đây là đơn vị khác với tần suất từ trong caption.
-    - Trên 1.000 caption hợp lệ, VizWiz nhắc `computer` 95,58 lần và `screen` 92,96 lần; COCO nhắc `man` 122,31 lần và `people` 69,46 lần. Caption VizWiz mang cờ `is_precanned` hoặc `is_rejected` được loại khỏi thống kê ngôn ngữ. Bảng `person_reference_summary.csv` gộp các dạng chỉ người và báo tỷ lệ theo caption/ảnh.
+    - Trên 1.000 caption hợp lệ, VizWiz nhắc `computer` 95,58 lần và `screen` 92,96 lần; COCO nhắc `man` 122,31 lần và `people` 69,46 lần. Caption VizWiz mang cờ `is_precanned` hoặc `is_rejected` được loại khỏi thống kê ngôn ngữ; 208 ảnh vì thế không còn caption hợp lệ. Bảng `person_reference_summary.csv` gộp các dạng chỉ người, còn `person_reference_one_caption_per_image.csv` kiểm tra độ nhạy với một caption mỗi ảnh.
 
 ---
 
@@ -38,6 +38,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 ├── EDA_COCO_vs_VizWiz_Report.ipynb    # Báo cáo Jupyter Notebook hoàn chỉnh (nhúng sẵn hình ảnh & bảng biểu)
 ├── EDA_COCO_vs_VizWiz_Report.md       # Báo cáo Markdown chi tiết phục vụ khóa luận tốt nghiệp
 ├── eda_coco_vs_vizwiz.py             # Script Python tính toán và kết xuất toàn bộ số liệu & biểu đồ
+├── caption_sampling_sensitivity.py    # Kiểm tra một caption hợp lệ mỗi ảnh, seed=42
 ├── build_eda_notebook.py              # Script tự động đóng gói toàn bộ dữ liệu vào file Notebook
 ├── run_eda_notebook.py                # Chạy lại mọi code cell trong kernel mới và lưu output thật
 ├── eda_results/
@@ -59,6 +60,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 │   │   ├── laplacian_by_precanned.csv
 │   │   ├── laplacian_resize_sensitivity.csv
 │   │   ├── person_reference_summary.csv
+│   │   ├── person_reference_one_caption_per_image.csv
 │   │   └── qualitative_samples_manifest.csv
 │   ├── coco500/                      # Bảng seed 42 và độ nhạy qua 200 seed
 │   └── eda_summary_metrics.json       # Tổng hợp toàn bộ chỉ số định lượng dưới dạng JSON
@@ -78,6 +80,7 @@ pip install -r requirements-eda.txt
 ```bash
 python eda_coco_vs_vizwiz.py
 python rerun_coco500_tables.py
+python caption_sampling_sensitivity.py
 ```
 
 ### 3. Đóng Gói Lại File Báo Cáo Notebook

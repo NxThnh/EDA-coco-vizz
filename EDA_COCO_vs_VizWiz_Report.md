@@ -20,7 +20,7 @@ Báo cáo so sánh MS-COCO val2014 (40.504 ảnh) và VizWiz-Captions val (7.750
 
 ## PHẦN 1: PHẠM VI ĐỐI SÁNH DỮ LIỆU
 
-Phần mở đầu mô tả **hai miền dữ liệu** theo đúng phạm vi ảnh và chú thích thực tế được khảo sát:
+Phần mở đầu mô tả **hai miền dữ liệu** theo đúng phạm vi ảnh và chú thích thực tế được khảo sát. Nguồn gốc và mục tiêu xây dựng hai tập được mô tả trong công trình [MS-COCO](https://doi.org/10.1007/978-3-319-10602-1_48) và [VizWiz-Captions](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php):
 
 | Miền dữ liệu | Phạm vi dùng trong EDA | Vai trò trong đối sánh | Đặc trưng thu nhận |
 | :--- | :---: | :--- | :--- |
@@ -36,6 +36,8 @@ Phần mở đầu mô tả **hai miền dữ liệu** theo đúng phạm vi ả
 
 Khảo sát gồm 40.504 ảnh MS-COCO val2014 và 7.750 ảnh VizWiz-Captions val. Kích thước VizWiz được đo từ file sau EXIF transpose (493 ảnh có thẻ xoay 90°); kích thước COCO lấy từ annotation. Trước EXIF, tỷ lệ ảnh dọc VizWiz là 92,86%; sau EXIF là 99,23%.
 
+Các số pixel dưới đây mô tả **phiên bản file/annotation được dùng trong EDA**. COCO val2014 trong bộ khảo sát bị giới hạn cạnh tối đa ở 640 px, còn VizWiz được đo từ file ảnh phân phối. Vì vậy chênh lệch số pixel có thể chịu ảnh hưởng của cách chuẩn bị/phát hành dữ liệu; không suy ra độ phân giải cảm biến, độ chi tiết ảnh gốc hay chất lượng thu nhận chỉ từ bảng này.
+
 Để đối chiếu theo yêu cầu với đúng 500 ảnh COCO, một mẫu ngẫu nhiên cố định (`seed=42`) cũng được chạy lại riêng. Mẫu cho kết quả: kích thước trung bình $576,9\times481,8$ px, $73,60\%$ ảnh ngang, $22,80\%$ ảnh dọc và $3,60\%$ ảnh vuông. Ảnh chụp bảng: [`table2_coco500_resolution.png`](eda_results/coco500/table2_coco500_resolution.png).
 
 Trong 200 mẫu ngẫu nhiên độc lập, mỗi mẫu 500 ảnh, tỷ lệ ảnh ngang có trung vị 71,90% và khoảng phân vị 2,5–97,5% là 67,80–75,81%. Seed 42 nằm trong khoảng này. Đây là phân tích độ nhạy theo cách chọn mẫu, không tạo ra một tập COCO có cùng quy mô với VizWiz.
@@ -47,7 +49,7 @@ Trong 200 mẫu ngẫu nhiên độc lập, mỗi mẫu 500 ảnh, tỷ lệ ả
 | **Chiều rộng [Min, Max]** | $[120, 640]\text{ px}$ | **$[23, 2448]\text{ px}$** | VizWiz có ảnh siêu nhỏ ($23\text{px}$) và siêu lớn |
 | **Chiều cao trung bình (Mean Height)** | $485.1 \pm 97.8\text{ px}$ | **$1374.7 \pm 445.2\text{ px}$** | Chiều dọc VizWiz vượt trội chiều ngang |
 | **Trung vị Chiều cao (Median Height)** | $480.0\text{ px}$ | $1296.0\text{ px}$ | File VizWiz có trung vị chiều cao lớn hơn |
-| **Chiều cao [Min, Max]** | $[111, 640]\text{ px}$ | $[25, 3264]\text{ px}$ | Chênh lệch độ phân giải cực đoan |
+| **Chiều cao [Min, Max]** | $[111, 640]\text{ px}$ | $[25, 3264]\text{ px}$ | Chênh lệch kích thước file ở hai bộ khảo sát |
 | **Tỷ lệ khung hình trung bình (AR Mean)** | **$1.25$** (Ngang) | **$0.75$** (Dọc) | Phân bố hướng ảnh khác nhau |
 | **Trung vị AR (Median AR)** | $1.33$ ($4:3$) | $0.75$ ($3:4$) | Tỷ lệ khung hình trung vị của file ảnh |
 | **Tỷ lệ ảnh Ngang (Landscape: $AR > 1.05$)** | **$71.71\%$** ($29,044$ ảnh) | **$0.62\%$** ($48$ ảnh) | Ảnh ngang phổ biến hơn trong COCO |
@@ -57,7 +59,7 @@ Trong 200 mẫu ngẫu nhiên độc lập, mỗi mẫu 500 ảnh, tỷ lệ ả
 
 Ngoại lai 23 px là chiều rộng của ảnh VizWiz_val_00001384.jpg (23 × 30 px sau EXIF). Đây là ảnh cực nhỏ trong file nguồn, không đại diện cho độ phân giải thông thường của VizWiz. Các giá trị min/max được giữ để mô tả toàn bộ phân bố.
 
-Trong Hình 2C2, nhiều ảnh có cùng kích thước cảm biến và chồng lên một tọa độ. Mỗi bong bóng biểu diễn một kích thước khác nhau; diện tích bong bóng tăng theo số ảnh có kích thước đó. Toàn bộ 7.750 ảnh VizWiz được tính.
+Trong Hình 2C2, nhiều ảnh có cùng kích thước file và chồng lên một tọa độ. Mỗi bong bóng biểu diễn một kích thước khác nhau; diện tích bong bóng tăng theo số ảnh có kích thước đó. Toàn bộ 7.750 ảnh VizWiz được tính.
 
 ### Hàm ý cho tiền xử lý ảnh
 
@@ -78,6 +80,8 @@ trong đó $H',W'$ là kích thước **sau tiền xử lý**. Vì vậy cần t
 ## PHẦN 3: PHÂN TÍCH CHÚ THÍCH & ĐẶC TRƯNG NGÔN NGỮ
 
 VizWiz có 5.167/38.750 caption ($13,33\%$) là cùng một câu placeholder báo ảnh không nhận diện được. Ngoài ra, 964 caption có cờ `is_rejected`, trong đó 526 caption đồng thời là placeholder; vì vậy có thêm 438 caption cần loại. Toàn bộ thống kê ngôn ngữ, token và thực thể chỉ dùng caption không mang cờ `is_precanned` hoặc `is_rejected`: $202.654$ caption COCO và $33.145$ caption VizWiz.
+
+Sau lọc, **208/7.750 ảnh VizWiz không còn caption hợp lệ**; 7.542 ảnh còn lại có từ 1 đến 5 caption hợp lệ, trong khi toàn bộ 40.504 ảnh COCO vẫn có caption. Vì thế thống kê theo caption chịu ảnh hưởng của cách lọc, còn tỷ lệ theo ảnh có ít nhất một lần nhắc từ chỉ người chịu ảnh hưởng của số caption được quan sát trên từng ảnh. Đây là so sánh nội dung annotation còn lại, chưa phải ước lượng không chệch về sự hiện diện vật thể trong ảnh.
 
 | Chỉ số Ngôn ngữ | COCO | VizWiz (đã bỏ placeholder và caption bị từ chối) |
 | :--- | :---: | :---: |
@@ -105,6 +109,8 @@ Hình 3A phóng to vùng 3–30 từ để thấy phân bố chính; Hình 3B d�
    - NLTK POS tagger chỉ giữ danh từ và WordNet lemmatizer chuẩn hóa số ít. Bảng báo cả count lẫn số lượt nhắc trên 1.000 caption.
    - VizWiz nhắc nhiều đến `computer`, `screen`, `bottle`, `box` và `label`; COCO nổi bật với `man`, `people` và `woman`. `person` riêng lẻ đạt 50,87/1.000 caption ở VizWiz và 41,75 ở COCO. CSV nguồn: [`caption_noun_entities_top15.csv`](eda_results/tables/caption_noun_entities_top15.csv).
    - Gộp `man/men/woman/people/person` sau POS tagging và lemmatization, COCO có **314,92 lượt nhắc/1.000 caption**, VizWiz **73,98**. Tỷ lệ caption có ít nhất một từ trong nhóm là **29,72%** so với **7,19%**; tỷ lệ ảnh có ít nhất một caption hợp lệ nhắc nhóm là **43,77%** so với **17,42%**. Đây là tần suất trong văn bản, không phải số người hiện diện thực tế trong ảnh. [Bảng nhóm từ chỉ người](eda_results/tables/person_reference_summary.csv).
+
+**Kiểm tra độ nhạy theo số caption:** Chọn ngẫu nhiên đúng một caption hợp lệ cho mỗi ảnh có thể dùng được (`seed=42`), áp dụng cùng POS tagging và lemmatization. COCO còn 40.504 ảnh, VizWiz còn 7.542 ảnh; 208 ảnh VizWiz không có caption hợp lệ được loại khỏi phép kiểm tra này. Tỷ lệ caption được chọn có ít nhất một từ trong nhóm chỉ người là **29,47% ở COCO** và **7,24% ở VizWiz**; số lượt nhắc tương ứng là **311,99** và **73,99 trên 1.000 caption**. Khác biệt vẫn xuất hiện khi số caption trên mỗi ảnh bằng nhau, nhưng đây là một lần chọn cố định và vẫn chỉ đo lời mô tả. [Bảng kết quả](eda_results/tables/person_reference_one_caption_per_image.csv); tái lập bằng `python caption_sampling_sensitivity.py`.
 
 ---
 
@@ -136,9 +142,9 @@ Ontology 80 danh mục COCO không có nhãn riêng cho nội dung chữ, nhãn 
 
 ### Giới hạn của CHAIR/POPE khi so sánh COCO với VizWiz:
 
-Không nên đọc điểm CHAIR trên COCO và VizWiz như hai đại lượng hoàn toàn tương đương. CHAIR gốc chủ động giới hạn đối tượng vào **80 category của MS-COCO segmentation**. Nhiều danh từ phổ biến trong caption VizWiz như `screen`, `box`, `package`, `hand` và `label` không phải category COCO; chỉ một phần như `bottle`, `laptop/computer` hoặc `table` có thể ánh xạ gần đúng. Vì vậy CHAIR có thể **không đếm** hallucination ngoài ontology và làm điểm VizWiz trông tốt giả tạo.
+Không nên đọc điểm CHAIR trên COCO và VizWiz như hai đại lượng hoàn toàn tương đương. [CHAIR gốc](https://aclanthology.org/D18-1437/) chủ động giới hạn đối tượng vào **80 category của MS-COCO segmentation**. Nhiều danh từ phổ biến trong caption VizWiz như `screen`, `box`, `package`, `hand` và `label` không phải category COCO; chỉ một phần như `bottle`, `laptop/computer` hoặc `table` có thể ánh xạ gần đúng. Vì vậy CHAIR có thể **không đếm** hallucination ngoài ontology và làm điểm VizWiz trông tốt giả tạo.
 
-POPE giảm phụ thuộc vào phong cách caption bằng câu hỏi yes/no về sự tồn tại của vật thể, nhưng vẫn chỉ hợp lệ khi tập positive object và negative probe được xây dựng từ annotation phù hợp với VizWiz. Tái sử dụng nguyên object pool COCO cho VizWiz vẫn kế thừa ontology bias. Báo cáo chính nên:
+[POPE](https://aclanthology.org/2023.emnlp-main.20/) giảm phụ thuộc vào phong cách caption bằng câu hỏi yes/no về sự tồn tại của vật thể, nhưng vẫn chỉ hợp lệ khi tập positive object và negative probe được xây dựng từ annotation phù hợp với VizWiz. Tái sử dụng nguyên object pool COCO cho VizWiz vẫn kế thừa ontology bias. Báo cáo chính nên:
 
 1. Giữ CHAIR/POPE-COCO để so sánh với literature, nhưng gắn nhãn rõ là **COCO-ontology score**.
 2. Báo cáo thêm metric open-vocabulary/domain-specific cho VizWiz, với ontology mở rộng gồm scene text, bao bì, nhãn, thuốc, màn hình và bộ phận cơ thể.
@@ -182,7 +188,7 @@ Scene text phổ biến trong VizWiz, vì vậy OCR là năng lực quan trọng
   - **MS-COCO val2014**: median **1197.90**.
   - **VizWiz val**: median **149.19**.
   - Chênh lệch phản ánh năng lượng biên/texture thấp hơn, nhưng không xác định riêng motion blur; defocus, JPEG và cảnh ít texture cũng ảnh hưởng chỉ số.
-- **Độ sáng**: median COCO **113.15**, median VizWiz **107.95**; hai trung vị gần nhau, nên độ sáng trung bình không phải yếu tố phân biệt rõ trong mẫu này.
+- **Độ sáng**: median COCO **113.15**, median VizWiz **107.95**; hai trung vị gần nhau, nên trung vị độ sáng không phải yếu tố phân biệt rõ trong mẫu này.
 
 Trung vị Laplacian trên mỗi mẫu 1.000 ảnh có bootstrap percentile 95% CI: COCO [1084.24, 1298.65] và VizWiz [141.69, 162.38] (3.000 lần lấy mẫu lại, seed=42).
 
@@ -269,8 +275,18 @@ Toàn bộ biểu đồ độ phân giải cao (300 DPI) và dữ liệu bảng 
   5. `07_qualitative_samples_grid.png`: Lưới ảnh đối sánh trực quan các trường hợp tiêu biểu.
 - **Thư mục Bảng số liệu CSV**: `eda_results/tables/`
 - **Kiểm tra Laplacian theo đồng thuận precanned**: `eda_results/tables/laplacian_by_precanned.csv`.
-- **Độ nhạy theo resize và từ chỉ người**: `eda_results/tables/laplacian_resize_sensitivity.csv`, `eda_results/tables/person_reference_summary.csv`.
+- **Độ nhạy theo resize và từ chỉ người**: `eda_results/tables/laplacian_resize_sensitivity.csv`, `eda_results/tables/person_reference_summary.csv`, `eda_results/tables/person_reference_one_caption_per_image.csv`.
 - **Chỉ số từng ảnh trong mẫu đo**: `eda_results/tables/image_metrics_sample.csv`.
 - **Manifest ví dụ định tính và độ nhạy COCO-500**: `eda_results/tables/qualitative_samples_manifest.csv`, `eda_results/coco500/coco500_robustness_summary.csv`.
 - **File Dữ liệu Thống kê Đầy đủ (JSON)**: `eda_results/eda_summary_metrics.json`
 - **Script Thực thi Tái lập (Reproducible Python Script)**: `eda_coco_vs_vizwiz.py`
+- **Script kiểm tra một caption mỗi ảnh**: `caption_sampling_sensitivity.py`.
+
+---
+
+## TÀI LIỆU THAM KHẢO
+
+1. Lin, T.-Y. và cộng sự (2014). *Microsoft COCO: Common Objects in Context*. ECCV. [DOI: 10.1007/978-3-319-10602-1_48](https://doi.org/10.1007/978-3-319-10602-1_48).
+2. Gurari, D. và cộng sự (2020). *Captioning Images Taken by People Who Are Blind*. ECCV. [Trang bài báo ECVA](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php).
+3. Rohrbach, A. và cộng sự (2018). *Object Hallucination in Image Captioning*. EMNLP. [ACL Anthology](https://aclanthology.org/D18-1437/).
+4. Li, Y. và cộng sự (2023). *Evaluating Object Hallucination in Large Vision-Language Models*. EMNLP. [ACL Anthology](https://aclanthology.org/2023.emnlp-main.20/).

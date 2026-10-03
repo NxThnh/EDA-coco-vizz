@@ -1,0 +1,3 @@
+Dataset,All Images,Images with Eligible Caption,Images with No Eligible Caption,Selected Captions,Person-family Mentions,"Mentions per 1,000 Selected Captions",Selected Captions with Person Family (%),Selection Seed
+MS-COCO val2014,40504,40504,0,40504,12637,311.99,29.47,42
+VizWiz val,7750,7542,208,7542,558,73.99,7.24,42

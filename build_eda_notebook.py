@@ -109,7 +109,7 @@ EDA đối chiếu ảnh và annotation của **MS-COCO val2014** với **VizWiz
 1. **🔄 Đảo ngược Tỷ lệ Khung hình (Aspect Ratio Inversion):**
    - COCO có **71.71% ảnh ngang** trong tập khảo sát.
    - VizWiz có **99.23% ảnh dọc** sau khi áp dụng EXIF orientation.
-2. **📐 Chênh lệch Cảm biến & Kích thước Hình ảnh:**
+2. **📐 Chênh lệch Kích thước File Hình ảnh:**
    - Kích thước file COCO trung bình là $576.5 \times 485.1\text{px}$ (0.28 MP).
    - Kích thước file VizWiz sau EXIF trung bình là $1032.1 \times 1374.7\text{px}$ (1.57 MP), với chiều rộng nhỏ nhất 23 px và chiều cao lớn nhất 3264 px.
 3. **🌫️ Chỉ báo chi tiết tần số cao của ảnh:**
@@ -232,7 +232,7 @@ exec_counter += 1
 # CELL 5: Section 1 - Analytical Commentary (Markdown)
 # ==============================================================================
 cell5_md = r"""### Quy ước đơn vị phân tích
-Thống kê ảnh dùng số ảnh; phân tích ngôn ngữ chỉ dùng caption không mang cờ `is_precanned` hoặc `is_rejected`; phân bố đối tượng dùng số object instance. Có **5.167 caption VizWiz (13,33%)** là placeholder báo lỗi chất lượng và thêm **438 caption chỉ mang cờ `is_rejected`**. Chúng bị loại khỏi thống kê ngôn ngữ/token/thực thể."""
+Thống kê ảnh dùng số ảnh; phân tích ngôn ngữ chỉ dùng caption không mang cờ `is_precanned` hoặc `is_rejected`; phân bố đối tượng dùng số object instance. Có **5.167 caption VizWiz (13,33%)** là placeholder báo lỗi chất lượng và thêm **438 caption chỉ mang cờ `is_rejected`**. Chúng bị loại khỏi thống kê ngôn ngữ/token/thực thể. Nguồn mô tả bộ dữ liệu: [MS-COCO](https://doi.org/10.1007/978-3-319-10602-1_48), [VizWiz-Captions](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php)."""
 cells.append(create_markdown_cell(cell5_md))
 
 # ==============================================================================
@@ -248,7 +248,7 @@ $$\\text{Aspect Ratio (AR)} = \\frac{\\text{Width}}{\\text{Height}}$$
 - Ảnh dọc (Portrait): $\\text{AR} < 0.95$
 - Ảnh vuông (Square): $0.95 \\le \\text{AR} \\le 1.05$
 
-Kích thước ảnh được lấy từ annotation sau khi áp dụng EXIF orientation cho VizWiz; số đo hiển thị là chiều rộng và chiều cao theo hướng xem ảnh. Khảo sát gồm $40.504$ ảnh MS-COCO val2014 và $7.750$ ảnh VizWiz-Captions val."""
+Kích thước COCO lấy từ annotation; kích thước VizWiz đo trên file ảnh sau EXIF transpose. Khảo sát gồm $40.504$ ảnh MS-COCO val2014 và $7.750$ ảnh VizWiz-Captions val. Các số pixel chỉ mô tả phiên bản file/annotation dùng ở đây: COCO trong bộ khảo sát có cạnh tối đa 640 px, còn VizWiz được đo từ file phân phối. Chênh lệch này chưa chứng minh sự khác nhau về độ phân giải cảm biến, độ chi tiết ảnh gốc hoặc chất lượng thu nhận."""
 cells.append(create_markdown_cell(cell6_md))
 
 # ==============================================================================
@@ -300,6 +300,8 @@ cell9_md = r"""---
 ## 3. PHÂN TÍCH CHÚ THÍCH & ĐẶC TRƯNG NGÔN NGỮ (CAPTION LINGUISTICS & VOCABULARY SHIFT)
 
 Khảo sát dùng $202,654$ caption COCO và **33,145 caption VizWiz hợp lệ**. Có 5,167 placeholder báo lỗi chất lượng và 964 caption gắn cờ `is_rejected`; 526 caption thuộc cả hai nhóm. Sau khi loại hợp của hai nhóm, còn 33,145 caption dùng cho thống kê ngôn ngữ, token và thực thể.
+
+Sau lọc, **208/7.750 ảnh VizWiz không còn caption hợp lệ**. Số caption quan sát được trên mỗi ảnh không bằng nhau, nên tỷ lệ ảnh có ít nhất một caption nhắc một nhóm từ chịu ảnh hưởng của việc lọc. Đây là so sánh annotation còn lại, không phải số vật thể hiện diện trong ảnh.
 
 TTR toàn kho được giữ lại chỉ như thống kê mô tả vì phụ thuộc mạnh vào kích thước corpus. So sánh chính dùng **Moving-Average Type-Token Ratio (MATTR)** với cửa sổ cố định 1.000 token, nhờ đó hai tập được đánh giá trên cùng quy mô ngữ liệu.
 
@@ -368,7 +370,9 @@ cell12_md = r"""### 💡 Phát Hiện Ngôn Ngữ Học Cốt Lõi:
     - TTR toàn kho là 0.0082 (COCO) và 0.0269 (VizWiz), nhưng không dùng để xếp hạng vì hai corpus có 2.12 triệu và 0.40 triệu token.
      - MATTR cửa sổ 1.000 token gần nhau: **0.3209 (COCO)** và **0.3196 (VizWiz)**.
 3. **Danh từ trong caption:**
-      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `computer`, `screen`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Khi gộp `man/men/woman/people/person`, COCO có 314,92 lượt nhắc/1.000 caption, VizWiz 73,98. Tỷ lệ ảnh có ít nhất một caption hợp lệ nhắc nhóm này là 43,77% và 17,42%; đây là tần suất văn bản, không phải số người thực sự trong ảnh."""
+      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `computer`, `screen`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Khi gộp `man/men/woman/people/person`, COCO có 314,92 lượt nhắc/1.000 caption, VizWiz 73,98. Tỷ lệ ảnh có ít nhất một caption hợp lệ nhắc nhóm này là 43,77% và 17,42%; đây là tần suất văn bản, không phải số người thực sự trong ảnh.
+
+**Kiểm tra một caption mỗi ảnh (`seed=42`):** COCO có 40.504 ảnh đủ điều kiện; VizWiz có 7.542 ảnh đủ điều kiện, còn 208 ảnh không có caption hợp lệ. Với đúng một caption hợp lệ được chọn ngẫu nhiên cho mỗi ảnh, tỷ lệ có từ chỉ người là **29,47%** và **7,24%**; số lượt nhắc trên 1.000 caption là **311,99** và **73,99**. Khác biệt vẫn còn khi số caption trên mỗi ảnh bằng nhau. Kết quả ở `eda_results/tables/person_reference_one_caption_per_image.csv`; tái lập bằng `caption_sampling_sensitivity.py`."""
 cells.append(create_markdown_cell(cell12_md))
 
 # ==============================================================================
@@ -413,7 +417,7 @@ cell15_md = r"""### 🎓 Luận Điểm Phê Phán Cho Khóa Luận (Critical Th
 2. **Độ phủ ontology:** COCO có `bottle`, `laptop`, `tv`, `keyboard`, `cell phone` và `book`; ontology 80 danh mục không gán nhãn riêng cho nội dung chữ, nhãn sản phẩm hoặc tên thuốc. Trong caption VizWiz, các danh từ nổi bật gồm `screen`, `box`, `package`, `hand` và `label`.
 
 ### Giới hạn của CHAIR/POPE
-CHAIR gốc chỉ đánh giá 80 category MS-COCO. Nhiều danh từ phổ biến trong caption VizWiz như `screen`, `box`, `package`, `hand` và `label` nằm ngoài ontology đó, nên CHAIR có thể bỏ sót hallucination trên VizWiz. POPE cũng chỉ so sánh công bằng khi positive objects và negative probes được xây dựng từ ground truth phù hợp với VizWiz; dùng nguyên object pool COCO vẫn mang ontology bias. Vì vậy phải gắn nhãn kết quả hiện tại là **COCO-ontology score** và không kết luận VizWiz ít hallucination hơn chỉ từ CHAIR thấp hơn."""
+[CHAIR gốc](https://aclanthology.org/D18-1437/) chỉ đánh giá 80 category MS-COCO. Nhiều danh từ phổ biến trong caption VizWiz như `screen`, `box`, `package`, `hand` và `label` nằm ngoài ontology đó, nên CHAIR có thể bỏ sót hallucination trên VizWiz. [POPE](https://aclanthology.org/2023.emnlp-main.20/) cũng chỉ so sánh công bằng khi positive objects và negative probes được xây dựng từ ground truth phù hợp với VizWiz; dùng nguyên object pool COCO vẫn mang ontology bias. Vì vậy phải gắn nhãn kết quả hiện tại là **COCO-ontology score** và không kết luận VizWiz ít hallucination hơn chỉ từ CHAIR thấp hơn."""
 cells.append(create_markdown_cell(cell15_md))
 
 # ==============================================================================
@@ -717,6 +721,14 @@ Báo cáo Khám phá Dữ liệu (EDA) này đã chứng minh một cách toàn 
 ---
 *Báo cáo được tổng hợp tự động và hoàn chỉnh dưới dạng Jupyter Notebook phục vụ Khóa luận Tốt nghiệp.*"""
 # Thesis conclusion/proposal section intentionally omitted from the EDA report.
+
+references_md = """## TÀI LIỆU THAM KHẢO
+
+1. Lin, T.-Y. và cộng sự (2014). *Microsoft COCO: Common Objects in Context*. ECCV. [DOI](https://doi.org/10.1007/978-3-319-10602-1_48).
+2. Gurari, D. và cộng sự (2020). *Captioning Images Taken by People Who Are Blind*. ECCV. [ECVA](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php).
+3. Rohrbach, A. và cộng sự (2018). *Object Hallucination in Image Captioning*. EMNLP. [ACL Anthology](https://aclanthology.org/D18-1437/).
+4. Li, Y. và cộng sự (2023). *Evaluating Object Hallucination in Large Vision-Language Models*. EMNLP. [ACL Anthology](https://aclanthology.org/2023.emnlp-main.20/)."""
+cells.append(create_markdown_cell(references_md))
 
 # Construct final notebook dict
 notebook = {
