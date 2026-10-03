@@ -115,19 +115,20 @@ split_stats = [
         "Dataset": "VizWiz",
         "Split": "Test",
         "Images": len(viz_test["images"]),
-        "Captions": 0,  # Blind test split
-        "Captions/Img": 0.0
+        "Captions": None,  # Blind test split: annotations are unavailable.
+        "Captions/Img": None
     },
     {
         "Dataset": "VizWiz",
         "Split": "Total",
         "Images": len(viz_train["images"]) + len(viz_val["images"]) + len(viz_test["images"]),
         "Captions": len(viz_train["annotations"]) + len(viz_val["annotations"]),
-        "Captions/Img": round((len(viz_train["annotations"]) + len(viz_val["annotations"])) / (len(viz_train["images"]) + len(viz_val["images"])), 2)
+        "Captions/Img": None  # Total images include the unannotated test split.
     }
 ]
 
 df_splits = pd.DataFrame(split_stats)
+df_splits["Captions"] = df_splits["Captions"].astype("Int64")
 df_splits.to_csv(os.path.join(TAB_DIR, "dataset_overview.csv"), index=False)
 print("Splits table:")
 print(df_splits)
@@ -348,9 +349,15 @@ print(f"Saved: {fig_path2}")
 print("\n[3/7] Analyzing Captions, Vocabulary & Lexical Diversity...")
 
 coco_captions = [a["caption"].strip() for a in coco_val_cap["annotations"]]
-# Placeholder captions are quality labels, not natural-language descriptions.
-# Exclude them from every linguistic/token/entity statistic below.
-viz_captions_norm = [a["caption"].strip() for a in viz_val["annotations"] if not a.get("is_precanned")]
+coco_caption_image_ids = [a["image_id"] for a in coco_val_cap["annotations"]]
+# Exclude both the quality placeholder and annotations rejected by the dataset.
+# Keep the same eligible rows for all linguistic/token/entity statistics.
+viz_descriptive_annotations = [
+    a for a in viz_val["annotations"]
+    if not a.get("is_precanned") and not a.get("is_rejected")
+]
+viz_captions_norm = [a["caption"].strip() for a in viz_descriptive_annotations]
+viz_caption_image_ids_norm = [a["image_id"] for a in viz_descriptive_annotations]
 
 def tokenize_caption(caption):
     return re.findall(r'\b[a-z0-9]+\b', caption.lower())
@@ -403,7 +410,7 @@ def compute_caption_stats(name, caps):
 
 cap_stats = [
     compute_caption_stats("MS-COCO val2014", coco_captions),
-    compute_caption_stats("VizWiz-Captions (placeholder removed)", viz_captions_norm),
+    compute_caption_stats("VizWiz-Captions (precanned/rejected removed)", viz_captions_norm),
 ]
 
 df_caps = pd.DataFrame(cap_stats)
@@ -423,23 +430,49 @@ generic_image_nouns = {
 }
 lemmatizer = WordNetLemmatizer()
 
-def get_noun_entities(caps, batch_size=2000):
+human_noun_family = {'man', 'men', 'woman', 'people', 'person'}
+
+def get_noun_entities(caps, image_ids, batch_size=2000):
     counts = Counter()
+    human_mentions = 0
+    human_caption_count = 0
+    human_image_ids = set()
     for start in range(0, len(caps), batch_size):
         tokenized = [re.findall(r'\b[a-z]+\b', c.lower()) for c in caps[start:start + batch_size]]
-        for tagged in pos_tag_sents(tokenized, lang='eng'):
+        for tagged, image_id in zip(pos_tag_sents(tokenized, lang='eng'), image_ids[start:start + batch_size]):
+            caption_has_human_noun = False
             for token, tag in tagged:
                 if tag in {'NN', 'NNS', 'NNP', 'NNPS'}:
                     lemma = lemmatizer.lemmatize(token, pos='n')
                     if len(lemma) >= 2 and lemma not in generic_image_nouns:
                         counts[lemma] += 1
-    return counts
+                        if lemma in human_noun_family:
+                            human_mentions += 1
+                            caption_has_human_noun = True
+            if caption_has_human_noun:
+                human_caption_count += 1
+                human_image_ids.add(image_id)
+    return counts, human_mentions, human_caption_count, human_image_ids
 
 print("Extracting caption nouns with NLTK POS tagging...")
-coco_noun_counts = get_noun_entities(coco_captions)
-viz_noun_counts = get_noun_entities(viz_captions_norm)
+coco_noun_counts, coco_human_mentions, coco_human_caps, coco_human_imgs = get_noun_entities(coco_captions, coco_caption_image_ids)
+viz_noun_counts, viz_human_mentions, viz_human_caps, viz_human_imgs = get_noun_entities(viz_captions_norm, viz_caption_image_ids_norm)
 top_coco = coco_noun_counts.most_common(15)
 top_viz_norm = viz_noun_counts.most_common(15)
+
+df_human_reference = pd.DataFrame([
+    {'Dataset': 'MS-COCO val2014', 'Caption Count': len(coco_captions), 'Image Count': len(coco_val_cap['images']),
+     'Noun Family': 'man/men/woman/people/person', 'Mentions': coco_human_mentions,
+     'Mentions per 1,000 captions': round(coco_human_mentions / len(coco_captions) * 1000, 2),
+     'Captions with family (%)': round(coco_human_caps / len(coco_captions) * 100, 2),
+     'Images with family in any descriptive caption (%)': round(len(coco_human_imgs) / len(coco_val_cap['images']) * 100, 2)},
+    {'Dataset': 'VizWiz val', 'Caption Count': len(viz_captions_norm), 'Image Count': len(viz_val['images']),
+     'Noun Family': 'man/men/woman/people/person', 'Mentions': viz_human_mentions,
+     'Mentions per 1,000 captions': round(viz_human_mentions / len(viz_captions_norm) * 1000, 2),
+     'Captions with family (%)': round(viz_human_caps / len(viz_captions_norm) * 100, 2),
+     'Images with family in any descriptive caption (%)': round(len(viz_human_imgs) / len(viz_val['images']) * 100, 2)},
+])
+df_human_reference.to_csv(os.path.join(TAB_DIR, 'person_reference_summary.csv'), index=False)
 
 entity_rows = []
 for dataset, counts, n_caps in [
@@ -467,19 +500,17 @@ sns.histplot(viz_wlens_norm, ax=ax1, color='#e67e22', stat='density', binwidth=1
 ax1.set_xlim(3, 30)
 ax1.set_xlabel('Caption Word Count', fontsize=11, fontweight='bold')
 ax1.set_ylabel('Density', fontsize=11, fontweight='bold')
-ax1.set_title('(A) Caption Word-count Distribution', fontsize=12, fontweight='bold')
+ax1.set_title('(A) Main word-count range (3–30 words)', fontsize=12, fontweight='bold')
 ax1.legend(frameon=True, facecolor='white', framealpha=0.9)
 
-# (B) Boxplot Comparison
-data_box = [coco_wlens, viz_wlens_norm]
-labels_box = ['COCO Val', 'VizWiz (placeholder removed)']
-colors_box = ['#3498db', '#d35400']
-bplot = ax2.boxplot(data_box, patch_artist=True, labels=labels_box, showfliers=False, medianprops=dict(color='black', linewidth=1.5))
-for patch, color in zip(bplot['boxes'], colors_box):
-    patch.set_facecolor(color)
-    patch.set_alpha(0.6)
-ax2.set_ylabel('Caption Word Count (outlier markers hidden)', fontsize=11, fontweight='bold')
-ax2.set_title('(B) Word Count Summary Quartiles', fontsize=12, fontweight='bold')
+# (B) Full-range empirical CDF retains the 155-word tail.
+sns.ecdfplot(coco_wlens, ax=ax2, color='#2980b9', label='COCO Val', linewidth=2)
+sns.ecdfplot(viz_wlens_norm, ax=ax2, color='#e67e22', label='VizWiz descriptive', linewidth=2)
+ax2.set_xlim(0, max(max(coco_wlens), max(viz_wlens_norm)) + 5)
+ax2.set_xlabel('Caption Word Count (full range)', fontsize=11, fontweight='bold')
+ax2.set_ylabel('Cumulative fraction', fontsize=11, fontweight='bold')
+ax2.set_title('(B) Full-range caption length ECDF', fontsize=12, fontweight='bold')
+ax2.legend(frameon=True, facecolor='white', framealpha=0.9)
 
 # (C) Top Keywords COCO
 words_c, counts_c = zip(*top_coco[::-1])
@@ -611,11 +642,11 @@ df_quality = pd.DataFrame([
         "Num Images": precanned_hist[k],
         "Percentage": round(precanned_hist[k] / total_viz_imgs * 100, 2),
         "Interpretation": {
-            0: "Five descriptive captions",
-            1: "One refusal; four descriptive captions",
-            2: "Two refusals; three descriptive captions",
-            3: "Three refusals; two descriptive captions",
-            4: "Four refusals; one descriptive caption",
+            0: "Five non-precanned captions",
+            1: "One refusal; four non-precanned captions",
+            2: "Two refusals; three non-precanned captions",
+            3: "Three refusals; two non-precanned captions",
+            4: "Four refusals; one non-precanned caption",
             5: "Five refusal captions"
         }.get(k, "")
     }
@@ -625,11 +656,12 @@ df_quality.to_csv(os.path.join(TAB_DIR, "vizwiz_quality_breakdown.csv"), index=F
 print("VizWiz Quality breakdown:")
 print(df_quality)
 
-# Measure physical blur and brightness on VizWiz Val vs COCO Val sample
-print("Computing Laplacian variance (blur) and luminance on representative samples...")
+# Measure edge/texture signal and luminance on fixed random samples.
+print("Computing Laplacian variance and luminance on fixed random samples...")
 def get_image_metrics(img_path, short_edge=480):
     with Image.open(img_path) as raw_img:
         img = ImageOps.exif_transpose(raw_img).convert('L')
+        original_short_edge = min(img.size)
         # Preserve aspect ratio and normalize spatial scale before comparison.
         scale = short_edge / min(img.size)
         new_size = tuple(max(1, int(round(v * scale))) for v in img.size)
@@ -640,7 +672,7 @@ def get_image_metrics(img_path, short_edge=480):
         blur = float(lap.var())
         brightness = float(arr.mean())
         contrast = float(arr.std())
-        return blur, brightness, contrast
+        return blur, brightness, contrast, original_short_edge
 
 # Deterministic random sample of 1000 images from each validation split.
 coco_val_dir = os.path.join(COCO_DIR, "val2014")
@@ -650,19 +682,35 @@ viz_files_all = [img["file_name"] for img in viz_val["images"]]
 coco_sample_files = list(rng.choice(coco_files_all, size=1000, replace=False))
 viz_sample_files = list(rng.choice(viz_files_all, size=1000, replace=False))
 
-coco_blurs, coco_brights = [], []
+coco_blurs, coco_brights, coco_short_edges = [], [], []
 for fn in coco_sample_files:
     fp = os.path.join(coco_val_dir, fn)
-    b, br, _ = get_image_metrics(fp)
+    b, br, _, original_short_edge = get_image_metrics(fp)
     coco_blurs.append(b)
     coco_brights.append(br)
+    coco_short_edges.append(original_short_edge)
 
-viz_blurs, viz_brights = [], []
+viz_blurs, viz_brights, viz_short_edges = [], [], []
 for fn in viz_sample_files:
     fp = os.path.join(viz_val_dir, fn)
-    b, br, _ = get_image_metrics(fp)
+    b, br, _, original_short_edge = get_image_metrics(fp)
     viz_blurs.append(b)
     viz_brights.append(br)
+    viz_short_edges.append(original_short_edge)
+
+coco_file_ids = {img['file_name']: img['id'] for img in coco_val_cap['images']}
+viz_file_ids = {img['file_name']: img['id'] for img in viz_val['images']}
+sample_metric_rows = [
+    {'Dataset': dataset, 'File Name': fn, 'Image ID': file_ids[fn],
+     'Original Short Edge (px)': edge, 'Laplacian Variance at 480px': blur,
+     'Mean Luminance at 480px': luminance}
+    for dataset, files, file_ids, edges, blurs, luminances in [
+        ('MS-COCO val2014', coco_sample_files, coco_file_ids, coco_short_edges, coco_blurs, coco_brights),
+        ('VizWiz val', viz_sample_files, viz_file_ids, viz_short_edges, viz_blurs, viz_brights),
+    ]
+    for fn, edge, blur, luminance in zip(files, edges, blurs, luminances)
+]
+pd.DataFrame(sample_metric_rows).to_csv(os.path.join(TAB_DIR, 'image_metrics_sample.csv'), index=False)
 
 def bootstrap_median_ci(values, seed=42, repeats=3000):
     values = np.asarray(values, dtype=float)
@@ -673,7 +721,25 @@ def bootstrap_median_ci(values, seed=42, repeats=3000):
 
 coco_lap_ci = bootstrap_median_ci(coco_blurs)
 viz_lap_ci = bootstrap_median_ci(viz_blurs)
-viz_file_ids = {img['file_name']: img['id'] for img in viz_val['images']}
+lap_sensitivity_rows = []
+for dataset, blurs, edges in [
+    ('MS-COCO val2014', coco_blurs, coco_short_edges),
+    ('VizWiz val', viz_blurs, viz_short_edges),
+]:
+    for subset_name, values in [
+        ('All sampled images; resize short edge to 480px', blurs),
+        ('Original short edge >=480px; downsample only', [b for b, e in zip(blurs, edges) if e >= 480]),
+    ]:
+        ci_low, ci_high = bootstrap_median_ci(values)
+        lap_sensitivity_rows.append({
+            'Dataset': dataset, 'Subset / Resize Rule': subset_name, 'Sample Images': len(values),
+            'Median Laplacian Variance': float(np.median(values)),
+            'CI 95% Low': ci_low, 'CI 95% High': ci_high,
+        })
+df_lap_sensitivity = pd.DataFrame(lap_sensitivity_rows)
+df_lap_sensitivity.to_csv(os.path.join(TAB_DIR, 'laplacian_resize_sensitivity.csv'), index=False)
+print('Laplacian resize sensitivity:')
+print(df_lap_sensitivity.to_string(index=False))
 sample_group_values = {k: [] for k in range(6)}
 for filename, lap_value in zip(viz_sample_files, viz_blurs):
     sample_group_values[img_precanned[viz_file_ids[filename]]].append(lap_value)
@@ -762,36 +828,53 @@ print('Domain gap summary uses measured tables; no illustrative scores are gener
 # ==============================================================================
 print("\n[7/7] Generating Qualitative Sample Comparison Grid...")
 
-# Curated Representative Samples
+# Fixed illustrative examples; captions below are read verbatim from annotations.
 coco_candidates = [
-    ("COCO_val2014_000000391895.jpg", "Curated Outdoor Scene", "A man with a red helmet on a moped on a dirt road."),
-    ("COCO_val2014_000000522418.jpg", "Clear Object / Action", "A woman wearing a hair net cutting a large sheet cake."),
-    ("COCO_val2014_000000184613.jpg", "Animals & Composition", "A young boy with an umbrella touching the horn of a yak."),
-    ("COCO_val2014_000000161222.jpg", "Everyday Food / Table", "A table topped with plates of food and wine glasses.")
+    ("COCO_val2014_000000391895.jpg", "Outdoor scene", 0),
+    ("COCO_val2014_000000522418.jpg", "Cake preparation", 2),
+    ("COCO_val2014_000000184613.jpg", "Person and livestock", 0),
+    ("COCO_val2014_000000161222.jpg", "Meal on table", 1),
 ]
 
 viz_candidates = [
-    ("VizWiz_val_00000001.jpg", "Handheld / Medicine OCR", "A person is holding a small black bottle of NIGHT TIME medicine."),
-    ("VizWiz_val_00000000.jpg", "Screen / Digital Display", "A partial computer screen showing a repair prompt popup."),
-    ("VizWiz_val_00000013.jpg", "Severe Blur / Movement", "A blurry photo of an unrecognizable object on a table."),
-    ("VizWiz_val_00000006.jpg", "Severe Glare / Obscured Scene", "Quality issues are too severe to recognize visual content.")
+    ("VizWiz_val_00000001.jpg", "Bottle label", 3),
+    ("VizWiz_val_00000000.jpg", "Computer screen", 0),
+    ("VizWiz_val_00000013.jpg", "4/5 refusal captions", 1),
+    ("VizWiz_val_00000006.jpg", "5/5 refusal captions", 0),
 ]
 
-def get_valid_path(base_folder, fname, default_idx=0):
+def require_image_path(base_folder, fname):
     p = os.path.join(base_folder, fname)
-    if os.path.exists(p):
-        return p
-    all_f = [f for f in os.listdir(base_folder) if f.endswith('.jpg')]
-    return os.path.join(base_folder, all_f[default_idx])
+    if not os.path.exists(p):
+        raise FileNotFoundError(f'Illustrative image is missing: {p}')
+    return p
+
+def caption_index_by_image(dataset):
+    captions = defaultdict(list)
+    for annotation in dataset['annotations']:
+        captions[annotation['image_id']].append(annotation)
+    return captions
+
+coco_qual_captions = caption_index_by_image(coco_val_cap)
+viz_qual_captions = caption_index_by_image(viz_val)
+coco_qual_ids = {img['file_name']: img['id'] for img in coco_val_cap['images']}
+viz_qual_ids = {img['file_name']: img['id'] for img in viz_val['images']}
+qualitative_manifest = []
 
 fig, axes = plt.subplots(2, 4, figsize=(16, 10))
 
 # Top row: COCO
-for col, (fn, title, cap) in enumerate(coco_candidates):
+for col, (fn, title, caption_index) in enumerate(coco_candidates):
     ax = axes[0, col]
-    img_p = get_valid_path(coco_val_dir, fn, col)
-    img = Image.open(img_p)
-    ax.imshow(img)
+    img_p = require_image_path(coco_val_dir, fn)
+    image_id = coco_qual_ids[fn]
+    annotation = coco_qual_captions[image_id][caption_index]
+    cap = annotation['caption'].strip()
+    with Image.open(img_p) as img:
+        ax.imshow(ImageOps.exif_transpose(img))
+    qualitative_manifest.append({'Dataset': 'MS-COCO val2014', 'File Name': fn, 'Image ID': image_id,
+                                 'Annotation ID': annotation['id'], 'Exact Caption': cap,
+                                 'Refusal Captions on Image': 0, 'Selection': 'Fixed illustrative example'})
     ax.set_title(f"[COCO] {title}", fontsize=10, fontweight='bold', color='#1a5276', pad=6)
     wrapped_cap = textwrap.fill(cap, width=38)
     ax.set_xlabel(f'"{wrapped_cap}"', fontsize=9, style='italic', color='#2c3e50')
@@ -802,12 +885,19 @@ for col, (fn, title, cap) in enumerate(coco_candidates):
         spine.set_linewidth(2)
 
 # Bottom row: VizWiz
-for col, (fn, title, cap) in enumerate(viz_candidates):
+for col, (fn, title, caption_index) in enumerate(viz_candidates):
     ax = axes[1, col]
-    img_p = get_valid_path(viz_val_dir, fn, col)
-    img = Image.open(img_p)
-    ax.imshow(img)
-    is_failed = "Glare" in title or "Blur" in title
+    img_p = require_image_path(viz_val_dir, fn)
+    image_id = viz_qual_ids[fn]
+    annotation = viz_qual_captions[image_id][caption_index]
+    cap = annotation['caption'].strip()
+    with Image.open(img_p) as img:
+        ax.imshow(ImageOps.exif_transpose(img))
+    qualitative_manifest.append({'Dataset': 'VizWiz val', 'File Name': fn, 'Image ID': image_id,
+                                 'Annotation ID': annotation['id'], 'Exact Caption': cap,
+                                 'Refusal Captions on Image': img_precanned[image_id],
+                                 'Selection': 'Fixed illustrative example'})
+    is_failed = img_precanned[image_id] >= 3
     border_color = '#c0392b' if is_failed else '#d35400'
     ax.set_title(f"[VizWiz] {title}", fontsize=10, fontweight='bold', color=border_color, pad=6)
     wrapped_cap = textwrap.fill(cap, width=38)
@@ -818,8 +908,8 @@ for col, (fn, title, cap) in enumerate(viz_candidates):
         spine.set_color(border_color)
         spine.set_linewidth(2)
 
-fig.suptitle('Qualitative Comparison: Benchmark Paradigm (MS-COCO) vs. In-The-Wild Reality (VizWiz-Captions)\n'
-             'Minh họa trực quan: Bố cục chuẩn mực/đủ sáng (COCO) đối lập với Rung mờ, Nhãn chữ, Tay cầm & Lóa sáng (VizWiz)',
+fig.suptitle('Eight fixed illustrative images from MS-COCO val2014 and VizWiz val\n'
+             'Captions quoted verbatim from annotations; examples are not a representative sample',
              fontsize=13, fontweight='bold', y=0.98)
 
 plt.tight_layout(rect=[0, 0.02, 1, 0.92], h_pad=4.5, w_pad=1.0)
@@ -827,6 +917,7 @@ fig_path7 = os.path.join(FIG_DIR, "07_qualitative_samples_grid.png")
 plt.savefig(fig_path7, dpi=300)
 plt.close()
 print(f"Saved: {fig_path7}")
+pd.DataFrame(qualitative_manifest).to_csv(os.path.join(TAB_DIR, 'qualitative_samples_manifest.csv'), index=False)
 
 # ==============================================================================
 # SAVE FULL METRICS JSON
@@ -835,6 +926,7 @@ summary_metrics = {
     "splits": split_stats,
     "resolution": res_stats,
     "caption_stats": cap_stats,
+    "person_reference_summary": df_human_reference.to_dict(orient="records"),
     "coco_top_supercategories": df_coco_super.to_dict(orient="records"),
     "vizwiz_quality_distribution": df_quality.to_dict(orient="records"),
     "vizwiz_thresholds": {
@@ -858,6 +950,9 @@ summary_metrics = {
         "vizwiz_median_blur": float(np.median(viz_blurs)),
         "vizwiz_median_blur_ci95": viz_lap_ci,
         "vizwiz_laplacian_by_precanned": lap_by_precanned,
+        "resize_sensitivity": lap_sensitivity_rows,
+        "coco_upsampled_count": int(sum(edge < 480 for edge in coco_short_edges)),
+        "vizwiz_upsampled_count": int(sum(edge < 480 for edge in viz_short_edges)),
         "vizwiz_mean_luminance": float(np.mean(viz_brights)),
         "vizwiz_median_luminance": float(np.median(viz_brights))
     }

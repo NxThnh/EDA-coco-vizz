@@ -59,10 +59,12 @@ try:
                     "evalue": body["evalue"],
                     "traceback": body["traceback"],
                 })
-                path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
+                with path.open("w", encoding="utf-8", newline="\n") as f:
+                    f.write(json.dumps(notebook, ensure_ascii=False, indent=1))
                 raise RuntimeError(f"Cell {index} failed: {body['ename']}: {body['evalue']}")
         print(f"Executed cell {index}: {len(cell['outputs'])} output(s)", flush=True)
-    path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(notebook, ensure_ascii=False, indent=1))
 finally:
     client.stop_channels()
     kernel.shutdown_kernel(now=True)

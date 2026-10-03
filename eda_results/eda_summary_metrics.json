@@ -39,15 +39,15 @@
       "Dataset": "VizWiz",
       "Split": "Test",
       "Images": 8000,
-      "Captions": 0,
-      "Captions/Img": 0.0
+      "Captions": null,
+      "Captions/Img": null
     },
     {
       "Dataset": "VizWiz",
       "Split": "Total",
       "Images": 39181,
       "Captions": 155905,
-      "Captions/Img": 5.0
+      "Captions/Img": null
     }
   ],
   "resolution": [
@@ -109,19 +109,41 @@
       "MATTR (window=1000)": 0.3209
     },
     {
-      "Subset": "VizWiz-Captions (placeholder removed)",
-      "Total Captions": 33583,
-      "Word Mean": 12.04,
+      "Subset": "VizWiz-Captions (precanned/rejected removed)",
+      "Total Captions": 33145,
+      "Word Mean": 12.05,
       "Word Median": 11.0,
-      "Word Std": 4.34,
+      "Word Std": 4.36,
       "Word Min": 6,
       "Word Max": 155,
-      "Char Mean": 62.48,
+      "Char Mean": 62.52,
       "Char Median": 57.0,
-      "Total Tokens": 407796,
-      "Vocab Size": 10876,
-      "TTR (corpus-size dependent)": 0.0267,
-      "MATTR (window=1000)": 0.3223
+      "Total Tokens": 402826,
+      "Vocab Size": 10851,
+      "TTR (corpus-size dependent)": 0.0269,
+      "MATTR (window=1000)": 0.3196
+    }
+  ],
+  "person_reference_summary": [
+    {
+      "Dataset": "MS-COCO val2014",
+      "Caption Count": 202654,
+      "Image Count": 40504,
+      "Noun Family": "man/men/woman/people/person",
+      "Mentions": 63820,
+      "Mentions per 1,000 captions": 314.92,
+      "Captions with family (%)": 29.72,
+      "Images with family in any descriptive caption (%)": 43.77
+    },
+    {
+      "Dataset": "VizWiz val",
+      "Caption Count": 33145,
+      "Image Count": 7750,
+      "Noun Family": "man/men/woman/people/person",
+      "Mentions": 2452,
+      "Mentions per 1,000 captions": 73.98,
+      "Captions with family (%)": 7.19,
+      "Images with family in any descriptive caption (%)": 17.42
     }
   ],
   "coco_top_supercategories": [
@@ -294,6 +316,42 @@
         "CI 95% High": 61.593292236328125
       }
     ],
+    "resize_sensitivity": [
+      {
+        "Dataset": "MS-COCO val2014",
+        "Subset / Resize Rule": "All sampled images; resize short edge to 480px",
+        "Sample Images": 1000,
+        "Median Laplacian Variance": 1197.9013671875,
+        "CI 95% Low": 1084.2382766723633,
+        "CI 95% High": 1298.6533203125
+      },
+      {
+        "Dataset": "MS-COCO val2014",
+        "Subset / Resize Rule": "Original short edge >=480px; downsample only",
+        "Sample Images": 390,
+        "Median Laplacian Variance": 1605.9617309570312,
+        "CI 95% Low": 1441.7507934570312,
+        "CI 95% High": 1894.748291015625
+      },
+      {
+        "Dataset": "VizWiz val",
+        "Subset / Resize Rule": "All sampled images; resize short edge to 480px",
+        "Sample Images": 1000,
+        "Median Laplacian Variance": 149.19358825683594,
+        "CI 95% Low": 141.68692016601562,
+        "CI 95% High": 162.378662109375
+      },
+      {
+        "Dataset": "VizWiz val",
+        "Subset / Resize Rule": "Original short edge >=480px; downsample only",
+        "Sample Images": 910,
+        "Median Laplacian Variance": 158.33409118652344,
+        "CI 95% Low": 147.11624488830566,
+        "CI 95% High": 176.19488372802735
+      }
+    ],
+    "coco_upsampled_count": 610,
+    "vizwiz_upsampled_count": 90,
     "vizwiz_mean_luminance": 109.63701720833778,
     "vizwiz_median_luminance": 107.94696426391602
   }

@@ -1,0 +1,9 @@
+Dataset,File Name,Image ID,Annotation ID,Exact Caption,Refusal Captions on Image,Selection
+MS-COCO val2014,COCO_val2014_000000391895.jpg,391895,770337,A man with a red helmet on a small moped on a dirt road.,0,Fixed illustrative example
+MS-COCO val2014,COCO_val2014_000000522418.jpg,522418,688839,A woman wearing a hair net cutting a large sheet cake.,0,Fixed illustrative example
+MS-COCO val2014,COCO_val2014_000000184613.jpg,184613,474921,A child holding a flowered umbrella and petting a yak.,0,Fixed illustrative example
+MS-COCO val2014,COCO_val2014_000000161222.jpg,161222,552769,A dinner table with three plates of gourmet hamburgers.,0,Fixed illustrative example
+VizWiz val,VizWiz_val_00000001.jpg,23432,117163,a person holding a small black bottle of NIGHT TIME,0,Fixed illustrative example
+VizWiz val,VizWiz_val_00000000.jpg,23431,117155,A computer screen shows a repair prompt on the screen.,0,Fixed illustrative example
+VizWiz val,VizWiz_val_00000013.jpg,23444,117221,Quality issues are too severe to recognize visual content.,4,Fixed illustrative example
+VizWiz val,VizWiz_val_00000006.jpg,23437,117185,Quality issues are too severe to recognize visual content.,5,Fixed illustrative example

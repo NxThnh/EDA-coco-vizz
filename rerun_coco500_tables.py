@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import random
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -95,6 +95,35 @@ def main() -> None:
         for a in sampled_annotations
     )
     total_objects = sum(super_counts.values())
+    # Repeated image-level samples quantify how much a single COCO-500 draw varies.
+    image_supercounts = defaultdict(Counter)
+    for ann in coco["annotations"]:
+        image_supercounts[ann["image_id"]][category_by_id[ann["category_id"]]["supercategory"]] += 1
+    repeated_rows = []
+    for seed in range(200):
+        selected = random.Random(seed).sample(coco["images"], N)
+        selected_counts = Counter()
+        for img in selected:
+            selected_counts.update(image_supercounts[img["id"]])
+        selected_total = sum(selected_counts.values())
+        selected_ar = np.asarray([img["width"] / img["height"] for img in selected])
+        repeated_rows.append({
+            "Seed": seed,
+            "Images": N,
+            "Object Instances": selected_total,
+            "Landscape %": 100 * np.mean(selected_ar > 1.05),
+            "Portrait %": 100 * np.mean(selected_ar < 0.95),
+            "Person Instance %": 100 * selected_counts["person"] / selected_total,
+            "Vehicle Instance %": 100 * selected_counts["vehicle"] / selected_total,
+            "Kitchen Instance %": 100 * selected_counts["kitchen"] / selected_total,
+        })
+    repeated = pd.DataFrame(repeated_rows)
+    robustness = pd.DataFrame([
+        {"Metric": column, "Runs": len(repeated), "Median": repeated[column].median(),
+         "P2.5": repeated[column].quantile(.025), "P97.5": repeated[column].quantile(.975),
+         "Seed 42": repeated.loc[repeated["Seed"] == SEED, column].iloc[0]}
+        for column in repeated.columns if column not in {"Seed", "Images"}
+    ])
     table4 = pd.DataFrame(
         [
             [rank, name, count, f"{count / total_objects * 100:.2f}%"]
@@ -104,6 +133,8 @@ def main() -> None:
     )
 
     OUT.mkdir(parents=True, exist_ok=True)
+    repeated.to_csv(OUT / "coco500_robustness_runs.csv", index=False, encoding="utf-8-sig")
+    robustness.to_csv(OUT / "coco500_robustness_summary.csv", index=False, encoding="utf-8-sig")
     table2.to_csv(OUT / "table2_coco500_resolution.csv", index=False, encoding="utf-8-sig")
     table4.to_csv(OUT / "table4_coco500_supercategories.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(

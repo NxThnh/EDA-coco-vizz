@@ -104,14 +104,14 @@ cell1_md = r"""# 🔬 BÁO CÁO PHÂN TÍCH KHÁM PHÁ DỮ LIỆU (EDA)
 
 ## 📌 TÓM TẮT ĐIỀU HÀNH (EXECUTIVE SUMMARY)
 
-Trong các bài toán Thị giác - Ngôn ngữ (Vision-Language), **MS-COCO** được xem là tiêu chuẩn vàng (gold-standard benchmark). Tuy nhiên, các mô hình huấn luyện thuần túy trên COCO thường thất bại nghiêm trọng khi ứng dụng vào đời thực hỗ trợ người khiếm thị. Báo cáo EDA này chỉ ra **6 phát hiện định lượng cốt lõi**:
+EDA đối chiếu ảnh và annotation của **MS-COCO val2014** với **VizWiz-Captions val**. Sáu phát hiện định lượng về dữ liệu đầu vào là:
 
 1. **🔄 Đảo ngược Tỷ lệ Khung hình (Aspect Ratio Inversion):**
-   - COCO chiếm **71.71% ảnh ngang (Landscape)** do chụp từ máy ảnh kỹ thuật số Flickr chuẩn hóa $\le 640\text{px}$.
-   - VizWiz có tới **99.23% ảnh dọc (Portrait)** do người khiếm thị cầm smartphone thẳng đứng khi chụp.
+   - COCO có **71.71% ảnh ngang** trong tập khảo sát.
+   - VizWiz có **99.23% ảnh dọc** sau khi áp dụng EXIF orientation.
 2. **📐 Chênh lệch Cảm biến & Kích thước Hình ảnh:**
-   - COCO có độ phân giải cố định trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
-   - VizWiz giữ nguyên độ phân giải cảm biến camera di động với trung bình $1032.1 \times 1374.7\text{px}$ (1.57 MP), dao động cực đoan từ $23\text{px}$ đến $3264\text{px}$.
+   - Kích thước file COCO trung bình là $576.5 \times 485.1\text{px}$ (0.28 MP).
+   - Kích thước file VizWiz sau EXIF trung bình là $1032.1 \times 1374.7\text{px}$ (1.57 MP), với chiều rộng nhỏ nhất 23 px và chiều cao lớn nhất 3264 px.
 3. **🌫️ Chỉ báo chi tiết tần số cao của ảnh:**
    - Sau EXIF transpose và resize giữ tỷ lệ về cạnh ngắn 480 px, median phương sai Laplacian là **1197.90** ở COCO và **149.19** ở VizWiz. Đây là chỉ báo độ mạnh biên/texture, không tự phân biệt motion blur, defocus và cảnh ít texture.
 4. **⚠️ Tín hiệu ảnh không thể nhận diện:**
@@ -119,8 +119,8 @@ Trong các bài toán Thị giác - Ngôn ngữ (Vision-Language), **MS-COCO** �
 5. **🔤 Nhu cầu Đọc Chữ viết (Scene Text / OCR Relevance):**
    - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; theo đồng thuận đa số **≥3/5 là 64.75%**, và 47.10% đạt 5/5. Dữ liệu cho thấy scene text phổ biến, nhưng không đủ để kết luận mục đích chụp chủ yếu là đọc nhãn thuốc.
 6. **👥 Lệch pha Ngữ nghĩa (Semantic Shift):**
-   - COCO tập trung vào con người (`person` chiếm **30.20%**) và hoạt động ngoài trời/thể thao.
-   - Trong caption VizWiz, `computer` (94,42), `screen` (91,80), `bottle` (81,53), `box` (74,80) và `label` (39,57) được nhắc nhiều lần trên 1.000 caption; COCO nổi bật với `man` (122,31), `people` (69,46) và `woman` (64,32). `person` riêng lẻ là 50,20 ở VizWiz và 41,75 ở COCO."""
+    - Trong annotation instance COCO, `person` chiếm **30.20%** số object; tỷ lệ này có đơn vị khác với tần suất từ trong caption.
+    - Caption VizWiz thường nhắc `computer`, `screen`, `bottle`, `box` và `label`; caption COCO thường nhắc `man`, `people` và `woman`. Nhóm từ chỉ người được tổng hợp riêng theo caption và ảnh trong `person_reference_summary.csv`."""
 cells.append(create_markdown_cell(cell1_md))
 
 # ==============================================================================
@@ -202,7 +202,7 @@ exec_counter += 1
 cell3_md = r"""---
 ## 1. PHẠM VI ĐỐI SÁNH DỮ LIỆU
 
-Phần mở đầu mô tả hai miền dữ liệu theo đúng phạm vi ảnh và chú thích thực tế được khảo sát. Mẫu COCO-500 (`seed=42`) có kích thước trung bình 576,9 × 481,8 px; 73,60% ảnh ngang, 22,80% ảnh dọc và 3,60% ảnh vuông. Mẫu có 3.719 object instance; ba siêu danh mục lớn nhất là `person` (29,52%), `vehicle` (12,34%) và `kitchen` (10,24%). Kết quả chi tiết lưu ở eda_results/coco500/table2_coco500_resolution.csv và eda_results/coco500/table4_coco500_supercategories.csv."""
+Phần mở đầu mô tả hai miền dữ liệu theo đúng phạm vi ảnh và chú thích thực tế được khảo sát. Mẫu COCO-500 (`seed=42`) có kích thước trung bình 576,9 × 481,8 px; 73,60% ảnh ngang, 22,80% ảnh dọc và 3,60% ảnh vuông. Mẫu có 3.719 object instance; ba siêu danh mục lớn nhất là `person` (29,52%), `vehicle` (12,34%) và `kitchen` (10,24%). Trong 200 mẫu 500 ảnh với các seed khác nhau, tỷ lệ `person` có trung vị 30,03% và khoảng phân vị 2,5–97,5% là 27,06–33,49%. Đây là độ nhạy theo cách lấy mẫu, không phải phép cân bằng quy mô với VizWiz. Các kết quả lưu ở `eda_results/coco500/`."""
 cells.append(create_markdown_cell(cell3_md))
 
 # ==============================================================================
@@ -232,7 +232,7 @@ exec_counter += 1
 # CELL 5: Section 1 - Analytical Commentary (Markdown)
 # ==============================================================================
 cell5_md = r"""### Quy ước đơn vị phân tích
-Thống kê ảnh dùng số ảnh; phân tích ngôn ngữ chỉ dùng caption mô tả hợp lệ; phân bố đối tượng dùng số object instance. Có **5.167 caption VizWiz (13,33%)** là placeholder báo lỗi chất lượng. Chúng bị loại khỏi thống kê ngôn ngữ/token/thực thể và chỉ được giữ như nhãn chất lượng ở phần sau."""
+Thống kê ảnh dùng số ảnh; phân tích ngôn ngữ chỉ dùng caption không mang cờ `is_precanned` hoặc `is_rejected`; phân bố đối tượng dùng số object instance. Có **5.167 caption VizWiz (13,33%)** là placeholder báo lỗi chất lượng và thêm **438 caption chỉ mang cờ `is_rejected`**. Chúng bị loại khỏi thống kê ngôn ngữ/token/thực thể."""
 cells.append(create_markdown_cell(cell5_md))
 
 # ==============================================================================
@@ -299,7 +299,7 @@ cells.append(create_markdown_cell(cell8_md))
 cell9_md = r"""---
 ## 3. PHÂN TÍCH CHÚ THÍCH & ĐẶC TRƯNG NGÔN NGỮ (CAPTION LINGUISTICS & VOCABULARY SHIFT)
 
-Khảo sát dùng $202,654$ caption COCO và **33,583 caption VizWiz mô tả hợp lệ**. Toàn bộ 5,167 placeholder báo lỗi chất lượng ($13.33\%$) bị loại khỏi thống kê ngôn ngữ, token và thực thể.
+Khảo sát dùng $202,654$ caption COCO và **33,145 caption VizWiz hợp lệ**. Có 5,167 placeholder báo lỗi chất lượng và 964 caption gắn cờ `is_rejected`; 526 caption thuộc cả hai nhóm. Sau khi loại hợp của hai nhóm, còn 33,145 caption dùng cho thống kê ngôn ngữ, token và thực thể.
 
 TTR toàn kho được giữ lại chỉ như thống kê mô tả vì phụ thuộc mạnh vào kích thước corpus. So sánh chính dùng **Moving-Average Type-Token Ratio (MATTR)** với cửa sổ cố định 1.000 token, nhờ đó hai tập được đánh giá trên cùng quy mô ngữ liệu.
 
@@ -319,7 +319,7 @@ render_table(df_captions, "Bảng 3: So sánh Thống kê Ngôn ngữ Chú thíc
 show_figure(
     filename="03_caption_length_and_tokens.png",
     title="Biểu đồ 3: Phân bố Độ dài Caption và So sánh Từ vựng Đặc trưng",
-    caption="Phân bố độ dài từ (Word Count) và 15 thực thể/danh từ xuất hiện nhiều nhất ở mỗi tập dữ liệu."
+    caption="Độ dài caption gồm cả đuôi phân bố đến 155 từ (ECDF) và Top-15 danh từ theo từng tập."
 )"""
 
 df_captions_html = pd.read_csv(os.path.join(TAB_DIR, "caption_stats.csv")).to_html(classes='table table-hover table-striped', index=False)
@@ -341,7 +341,9 @@ df_coco_ent = df_entities[df_entities["Dataset"] == "COCO val2014 captions"].res
 df_viz_ent = df_entities[df_entities["Dataset"] == "VizWiz val descriptive captions"].reset_index(drop=True)
 
 render_table(df_coco_ent, "Top 15 danh từ trong caption MS-COCO val2014")
-render_table(df_viz_ent, "Top 15 danh từ trong caption VizWiz val")"""
+render_table(df_viz_ent, "Top 15 danh từ trong caption VizWiz val")
+render_table(pd.read_csv(os.path.join(TAB_DIR, "person_reference_summary.csv")),
+             "Nhóm từ chỉ người: số lượt nhắc và tỷ lệ theo caption/ảnh")"""
 
 # Outputs nhúng cũng lấy từ chính CSV tính toán, bảo đảm khớp với code của cell.
 df_entities_build = pd.read_csv(os.path.join(TAB_DIR, "caption_noun_entities_top15.csv"))
@@ -361,12 +363,12 @@ cell12_md = r"""### 💡 Phát Hiện Ngôn Ngữ Học Cốt Lõi:
 
 1. **Phân bố độ dài câu chú thích (Long-tail Distribution):**
    - COCO có độ dài câu tập trung rất chặt chẽ xung quanh mức **10.45 từ** ($\pm 2.38$). Hầu hết là các câu miêu tả khái quát cấu trúc đơn giản (*"A man standing on a street"*).
-    - VizWiz (caption mô tả hợp lệ) có độ dài trung bình **12.04 từ** ($\pm 4.34$), giá trị lớn nhất **155 từ**. Đây là ngoại lai độ dài; cần đọc caption gốc trước khi diễn giải nguyên nhân.
+     - VizWiz (caption hợp lệ) có độ dài trung bình **12.05 từ** ($\pm 4.36$), giá trị lớn nhất **155 từ**. Caption ngoại lai ở image_id 24317 chép một đoạn chữ dài trên màn hình; biểu đồ ECDF vẫn hiển thị toàn bộ đuôi phân bố.
 2. **Độ đa dạng từ vựng trên cùng cửa sổ token:**
-   - TTR toàn kho là 0.0082 (COCO) và 0.0267 (VizWiz), nhưng không dùng để xếp hạng vì hai corpus có 2.12 triệu và 0.41 triệu token.
-    - MATTR cửa sổ 1.000 token gần nhau: **0.3209 (COCO)** và **0.3223 (VizWiz)**.
+    - TTR toàn kho là 0.0082 (COCO) và 0.0269 (VizWiz), nhưng không dùng để xếp hạng vì hai corpus có 2.12 triệu và 0.40 triệu token.
+     - MATTR cửa sổ 1.000 token gần nhau: **0.3209 (COCO)** và **0.3196 (VizWiz)**.
 3. **Danh từ trong caption:**
-    - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `computer`, `screen`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Riêng `person` là 50,20/1.000 caption ở VizWiz và 41,75 ở COCO."""
+      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `computer`, `screen`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Khi gộp `man/men/woman/people/person`, COCO có 314,92 lượt nhắc/1.000 caption, VizWiz 73,98. Tỷ lệ ảnh có ít nhất một caption hợp lệ nhắc nhóm này là 43,77% và 17,42%; đây là tần suất văn bản, không phải số người thực sự trong ảnh."""
 cells.append(create_markdown_cell(cell12_md))
 
 # ==============================================================================
@@ -450,6 +452,8 @@ print(f" - Bootstrap 95% CI VizWiz: {blur_lum['vizwiz_median_blur_ci95']}")
 print(f" - Median luminance COCO:   {blur_lum['coco_median_luminance']:.2f}")
 print(f" - Median luminance VizWiz: {blur_lum['vizwiz_median_luminance']:.2f}")
 print(f" - Chuan hoa: {blur_lum['normalization']}; n={blur_lum['sample_size_per_dataset']}/tap; seed={blur_lum['sample_seed']}")
+render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_resize_sensitivity.csv')),
+             'Độ nhạy Laplacian theo kích thước ảnh gốc')
 render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_by_precanned.csv')),
              'Laplacian theo 6 mức đồng thuận caption từ chối (mẫu VizWiz n=1.000)')
 
@@ -501,6 +505,7 @@ cell18_md += "| Caption từ chối | Số ảnh mẫu VizWiz | Median Laplacian
 for _g in _lap["vizwiz_laplacian_by_precanned"]:
     cell18_md += f"| {_g['Precanned Count (/5)']}/5 | {_g['Sample Images']} | {_g['Median Laplacian Variance']:.2f} | [{_g['CI 95% Low']:.2f}, {_g['CI 95% High']:.2f}] |\n"
 cell18_md += "\nTrung vị giảm theo số caption từ chối trong mẫu; nhóm 4/5 và 5/5 nhỏ, CI rộng. Kết quả hỗ trợ giá trị chỉ báo của Laplacian nhưng không gán nguyên nhân mờ cho từng ảnh. Độ sáng trung vị COCO 113,15 và VizWiz 107,95 gần nhau, không phân biệt rõ hai tập."
+cell18_md += "\n\nResize cạnh ngắn lên 480 px đã phóng lớn 610/1.000 ảnh COCO và 90/1.000 ảnh VizWiz. Trên tập con chỉ giảm kích thước ảnh, median Laplacian COCO là 1.605,96 (n=390; bootstrap 95% CI [1.441,75; 1.894,75]) và VizWiz là 158,33 (n=910; [147,12; 176,19]). Hai tập con có thành phần khác nhau, nên chênh lệch này chưa tách riêng chất lượng ảnh khỏi nội dung và kích thước gốc."
 cells.append(create_markdown_cell(cell18_md))
 
 # ==============================================================================
@@ -539,19 +544,7 @@ cells.append(create_markdown_cell(cell19_md))
 cell21_md = r"""---
 ## 7. ĐỐI SÁNH ĐỊNH TÍNH & NGHIÊN CỨU CA ĐIỂN HÌNH (QUALITATIVE CASE STUDIES)
 
-Để phục vụ thuyết trình và trình bày trực quan trong khóa luận tốt nghiệp, 8 trường hợp mẫu đối sánh tiêu biểu được phân tích chi tiết:
-
-### 🌟 Nhóm MS-COCO: Nhiếp ảnh Chuẩn mực (Curated Photography)
-1. **Ảnh COCO mẫu #391895**: Người đàn ông đội mũ bảo hiểm đỏ lái xe máy trên đường đất, nền núi hùng vĩ. Ánh sáng hoàn hảo, độ sâu trường ảnh tốt.
-2. **Ảnh COCO mẫu #522418**: Người phụ nữ đeo lưới trùm tóc cắt bánh kem trong nhà bếp. Bố cục chuẩn mực, chi tiết dao cắt rõ nét.
-3. **Ảnh COCO mẫu #184613**: Cậu bé cầm ô hoa vuốt ve sừng bò Tây Tạng. Độ tương phản cao, màu sắc sống động.
-4. **Ảnh COCO mẫu #161222**: Bàn ăn nhà hàng với nhiều đĩa burger, khoai chiên, vòng hành và ly rượu vang. Ảnh–caption được đối chiếu trực tiếp với annotation COCO.
-
-### 📱 Nhóm VizWiz: Thực tế Trợ lý Đời thực (In-the-Wild Assistive Reality)
-1. **Ảnh VizWiz mẫu #00000001 (Handheld Medicine & OCR):** Bàn tay người khiếm thị cầm chai thuốc màu đen có chữ *"NIGHT TIME"*. Ngón tay che một phần nhãn, góc chụp dọc.
-2. **Ảnh VizWiz mẫu #00000000 (Digital Screen & Assistive Prompt):** Màn hình laptop chụp nghiêng hiển thị popup sửa lỗi hệ thống. Chữ nhỏ, bóng đèn phản chiếu trên màn hình.
-3. **Ảnh VizWiz mẫu #00000013 (Severe Motion Blur & Hand Shake):** Vật thể trên bàn bị nhòe mờ hoàn toàn do rung tay, mất hoàn toàn biên cạnh nhận dạng.
-4. **Ảnh VizWiz mẫu #00000006 (Severe Glare / Obscured Scene - 100% Precanned):** Ảnh vẫn sáng nhưng mờ sương, tương phản thấp và bị lóa/phản chiếu mạnh ở vùng trung tâm, khiến nội dung không thể nhận diện chắc chắn. 5/5 annotators dùng caption từ chối chuẩn hóa."""
+Tám ảnh được chọn cố định để minh họa, không phải mẫu ngẫu nhiên. Hình 7 dùng nguyên văn một caption từ annotation cho mỗi ảnh. `eda_results/tables/qualitative_samples_manifest.csv` lưu file, annotation ID và số caption từ chối. Ảnh VizWiz #00000013 có 4/5 caption từ chối và #00000006 có 5/5; annotation không xác định riêng nguyên nhân như rung tay hay lóa."""
 cells.append(create_markdown_cell(cell21_md))
 
 # ==============================================================================
@@ -560,8 +553,8 @@ cells.append(create_markdown_cell(cell21_md))
 cell22_code = """# Hiển thị Biểu đồ Lưới Ảnh Đối sánh Định tính 8 Trường hợp
 show_figure(
     filename="07_qualitative_samples_grid.png",
-    title="Biểu đồ 7: Lưới Ảnh Đối sánh Định tính 8 Trường hợp Tiêu biểu",
-    caption="So sánh trực quan 4 trường hợp mẫu COCO (nhiếp ảnh chuẩn) vs 4 trường hợp mẫu VizWiz (cầm tay, màn hình, rung mờ, lóa sáng và che khuất nội dung)."
+    title="Biểu đồ 7: Tám ảnh minh họa được chọn cố định",
+    caption="Mỗi nhãn là nguyên văn một caption trong annotation; số caption từ chối trên ảnh VizWiz ghi trong manifest."
 )"""
 
 out22 = [
@@ -642,45 +635,8 @@ out23_text = """5 CAU CHU THICH GOC TU CROWDSOURCING:
 # It exposes storage-specific directory names that are not part of the EDA scope.
 
 # ==============================================================================
-# CELL 24: Section 8 - Architectural Recommendations for Thesis (Markdown)
-# ==============================================================================
-cell24_md = r"""---
-## 8. ĐỀ XUẤT THIẾT KẾ MÔ HÌNH CHO KHÓA LUẬN (ARCHITECTURAL & ALGORITHMIC PROPOSALS)
-
-Từ những phát hiện định lượng và định tính của báo cáo EDA, khóa luận tốt nghiệp nên đề xuất **3 đóng góp kỹ thuật then chốt** vào kiến trúc mô hình:
-
-```mermaid
-graph TD
-    A["Ảnh Đầu Vào (Egocentric Mobile Image)"] --> B["Smart Letterbox Padding<br/>(Giữ nguyên tỷ lệ 3:4 & Chống méo chữ)"]
-    B --> C["Bộ Phân Loại Chất Lượng Ảnh<br/>(Quality-Aware Classifier / Two-Stage)"]
-    C -- "P(Ảnh Hỏng) > Tau" --> D["Cơ Chế Từ Chối Thông Minh<br/>Sinh thông báo: Ảnh quá mờ/tối & Hướng dẫn chụp lại"]
-    C -- "P(Ảnh Hỏng) <= Tau" --> E["Kiến Trúc Đa Phương Thức OCR-Grounded"]
-    E --> F["Visual Encoder<br/>(CLIP / ViT)"]
-    E --> G["OCR Engine<br/>(PaddleOCR / TrOCR)"]
-    F --> H["Multimodal Fusion & Language Decoder<br/>(LLaVA / BLIP-2)"]
-    G --> H
-    H --> I["Câu Miêu Tả Chính Xác Chi Tiết Nhãn Hàng & Hướng Dẫn"]
-```
-
----
-
-### 1. 🛡️ Cơ Chế Từ Chối Thông Minh (Smart Quality-Aware Refusal Mechanism):
-- **Vấn đề:** Các mô hình truyền thống luôn bị ép buộc sinh caption dù ảnh bị đen kịt hoặc rung mờ hoàn toàn, dẫn đến hiện tượng ảo tưởng (Hallucination) nguy hiểm.
-- **Giải pháp:** Xây dựng cơ chế lọc 2 giai đoạn (Two-Stage Pipeline) hoặc bổ sung token từ chối đặc biệt `<QUALITY_REFUSAL>`:
-  - Nếu chất lượng ảnh quá suy giảm ($\text{P}(\text{Quality Issue}) > \tau$): Mô hình lịch sự từ chối và hướng dẫn người khiếm thị khắc phục (bật đèn flash, giữ yên tay, di chuyển camera xa hơn $20\text{cm}$).
-  - Nếu ảnh đạt yêu cầu: Chuyển sang module sinh văn bản miêu tả chi tiết.
-
-### 2. 🔤 Kiến Trúc Tích Hợp Thị Giác - Chữ Viết (OCR-Grounded Vision Architecture):
-- **Vấn đề:** Hơn **$73.72\%$** số ảnh VizWiz có chứa chữ viết. Các visual encoder thông thường (ResNet, ViT-B) chỉ trích xuất đặc trưng hình thái học chung chung, không đọc được chữ nhỏ trên bao bì thuốc.
-- **Giải pháp:** Tích hợp bộ nhận dạng chữ viết (như PaddleOCR, EasyOCR hoặc TrOCR) chạy song song với Visual Backbone. Các chuỗi text nhận dạng được sẽ được đưa vào làm **Prefix / Context Prompt** cho mô hình sinh ngôn ngữ, giúp mô hình đọc chính xác tên thương hiệu và thông số.
-
-### 3. 🎲 Chiến Lược Tăng Cường Dữ Liệu Đặc Thù (Assistive Data Augmentation):
-- Bổ sung các phép biến đổi mô phỏng thực tế người khiếm thị trong quá trình Fine-tuning:
-  - **Random Motion Blur & Defocus Blur Kernel:** Giúp mô hình học được đặc trưng bất biến với độ rung.
-  - **Random Egocentric Cropping & Perspective Tilt:** Mô phỏng góc chụp nghiêng và lệch tâm.
-  - **Synthetic Hand Occlusion Masks:** Dán ngẫu nhiên mặt nạ bàn tay che khuất bề mặt vật thể.
-  - **Letterbox Padding:** Giữ nguyên tỷ lệ ảnh dọc $3:4$, chống méo ký tự."""
-# Section 8 intentionally omitted: this notebook is limited to EDA.
+# CELL 24: Section 8 is kept in the Markdown report as testable hypotheses.
+# This notebook presents the measured EDA only.
 
 # ==============================================================================
 # CELL 25: Section 9 - Exported Artifacts Verification (Code)
@@ -789,7 +745,7 @@ notebook = {
 }
 
 print(f"Writing notebook to {OUT_NB_PATH}...")
-with open(OUT_NB_PATH, "w", encoding="utf-8") as f:
+with open(OUT_NB_PATH, "w", encoding="utf-8", newline="\n") as f:
     json.dump(notebook, f, ensure_ascii=False, indent=1)
 
 print(f"[OK] Da tao thanh cong file Notebook: {OUT_NB_PATH}")

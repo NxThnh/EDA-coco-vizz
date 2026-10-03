@@ -1,7 +1,7 @@
 Precanned Count (/5),Num Images,Percentage,Interpretation
-0,5222,67.38,Five descriptive captions
-1,1297,16.74,One refusal; four descriptive captions
-2,480,6.19,Two refusals; three descriptive captions
-3,286,3.69,Three refusals; two descriptive captions
-4,273,3.52,Four refusals; one descriptive caption
+0,5222,67.38,Five non-precanned captions
+1,1297,16.74,One refusal; four non-precanned captions
+2,480,6.19,Two refusals; three non-precanned captions
+3,286,3.69,Three refusals; two non-precanned captions
+4,273,3.52,Four refusals; one non-precanned caption
 5,192,2.48,Five refusal captions

@@ -16,19 +16,19 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 
 1. **Đảo ngược Tỷ lệ Khung hình (Aspect Ratio Inversion):**
    - COCO chiếm **71.71% ảnh ngang (Landscape)**.
-   - VizWiz có tới **99.23% ảnh dọc (Portrait)** do người khiếm thị cầm smartphone thẳng đứng khi chụp.
+   - VizWiz có **99.23% ảnh dọc** sau EXIF transpose.
 2. **Độ phân giải & Cảm biến:**
-   - COCO chuẩn hóa cố định trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
-   - VizWiz giữ nguyên cảm biến camera di động với trung bình $1032.1 \times 1374.7\text{px}$ (1.57 MP), dao động từ $23\text{px}$ đến $3264\text{px}$.
+   - Kích thước file COCO trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
+   - Kích thước file VizWiz sau EXIF trung bình $1032.1 \times 1374.7\text{px}$ (1.57 MP), có ngoại lai rộng 23 px.
 3. **Chỉ báo chi tiết tần số cao:**
-   - Sau EXIF transpose và resize cạnh ngắn 480 px, median Laplacian là **1197.90** (COCO) và **149.19** (VizWiz). Đây không phải bộ phân loại riêng cho motion blur.
+   - Trên 1.000 ảnh mỗi tập, sau EXIF transpose và resize cạnh ngắn 480 px, median Laplacian là **1197.90** (COCO) và **149.19** (VizWiz). Đây là chỉ báo biên/texture; có phân tích độ nhạy theo ảnh bị phóng lớn.
 4. **Tín hiệu ảnh không thể nhận diện:**
    - **32.62%** ảnh có ít nhất 1/5 annotator dùng caption từ chối; tỷ lệ đồng thuận đa số **≥3/5 là 9.69%**, và 5/5 là **2.48%**.
 5. **Nhu cầu Nhận diện Chữ viết (Scene Text / OCR Relevance):**
    - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; tỷ lệ đồng thuận đa số **≥3/5 là 64.75%**.
 6. **Lệch pha Ngữ nghĩa (Semantic Shift):**
-   - COCO tập trung vào con người (`person` chiếm **30.20%**) và thể thao ngoài trời.
-   - Trên 1.000 caption, VizWiz nhắc `computer` 94,42 lần và `screen` 91,80 lần; COCO nhắc `man` 122,31 lần và `people` 69,46 lần. Các dạng chỉ người chưa được gộp.
+    - Trong annotation instance COCO, `person` chiếm **30.20%** số object; đây là đơn vị khác với tần suất từ trong caption.
+    - Trên 1.000 caption hợp lệ, VizWiz nhắc `computer` 95,58 lần và `screen` 92,96 lần; COCO nhắc `man` 122,31 lần và `people` 69,46 lần. Caption VizWiz mang cờ `is_precanned` hoặc `is_rejected` được loại khỏi thống kê ngôn ngữ. Bảng `person_reference_summary.csv` gộp các dạng chỉ người và báo tỷ lệ theo caption/ảnh.
 
 ---
 
@@ -48,7 +48,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 │   │   ├── 04_coco_category_distribution.png
 │   │   ├── 05_vizwiz_quality_and_text_issues.png
 │   │   └── 07_qualitative_samples_grid.png
-│   ├── tables/                        # 8 bảng số liệu CSV
+│   ├── tables/                        # Các bảng số liệu CSV
 │   │   ├── dataset_overview.csv
 │   │   ├── resolution_aspect_ratio.csv
 │   │   ├── caption_stats.csv
@@ -56,7 +56,11 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 │   │   ├── coco_categories.csv
 │   │   ├── vizwiz_quality_breakdown.csv
 │   │   ├── caption_noun_entities_top15.csv
-│   │   └── laplacian_by_precanned.csv
+│   │   ├── laplacian_by_precanned.csv
+│   │   ├── laplacian_resize_sensitivity.csv
+│   │   ├── person_reference_summary.csv
+│   │   └── qualitative_samples_manifest.csv
+│   ├── coco500/                      # Bảng seed 42 và độ nhạy qua 200 seed
 │   └── eda_summary_metrics.json       # Tổng hợp toàn bộ chỉ số định lượng dưới dạng JSON
 └── README.md
 ```
@@ -73,6 +77,7 @@ pip install -r requirements-eda.txt
 ### 2. Chạy Phân Tích & Sinh Lại Kết Quả
 ```bash
 python eda_coco_vs_vizwiz.py
+python rerun_coco500_tables.py
 ```
 
 ### 3. Đóng Gói Lại File Báo Cáo Notebook
@@ -93,8 +98,8 @@ python run_eda_notebook.py
 
 ---
 
-## 🎓 Đóng Góp Kỹ Thuật Đề Xuất Cho Mô Hình
+## 🎓 Giả thuyết cho thực nghiệm tiếp theo
 
-1. **Cơ chế Từ chối Thông minh (Smart Refusal Mechanism):** Phân loại ảnh hỏng 2 giai đoạn hoặc token đặc biệt `<QUALITY_REFUSAL>` tránh hiện tượng ảo tưởng (Hallucination) gây nguy hiểm tính mạng khi nhận diện sai thuốc men.
-2. **Kiến trúc Tích hợp OCR (OCR-Grounded Vision):** Đưa đặc trưng văn bản đọc được từ bao bì vào làm prefix prompt cho Language Decoder.
-3. **Chiến lược Tăng Cường Dữ Liệu (Assistive Data Augmentation):** Mô phỏng rung mờ (motion blur), cắt lệch mép (egocentric crop) và bàn tay che khuất (hand occlusion).
+1. So sánh cơ chế từ chối với mô hình gốc trên từng mức đồng thuận caption từ chối.
+2. So sánh bật/tắt OCR trên ảnh có và không có chữ, đo độ chính xác thông tin chữ.
+3. So sánh tiền xử lý ảnh và tăng cường dữ liệu trên cùng mô hình, đo nội dung bị cắt và sai số đầu ra.

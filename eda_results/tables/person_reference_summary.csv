@@ -1,0 +1,3 @@
+Dataset,Caption Count,Image Count,Noun Family,Mentions,"Mentions per 1,000 captions",Captions with family (%),Images with family in any descriptive caption (%)
+MS-COCO val2014,202654,40504,man/men/woman/people/person,63820,314.92,29.72,43.77
+VizWiz val,33145,7750,man/men/woman/people/person,2452,73.98,7.19,17.42
