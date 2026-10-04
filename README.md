@@ -1,5 +1,11 @@
 # 🔬 EDA: MS-COCO vs VizWiz-Captions
 
+## Sau EDA: chuẩn bị dữ liệu cho mô hình
+
+Chạy `python prepare_data.py --verify-images` để tạo manifest train/dev/eval và kiểm tra ảnh val. Xem [hướng dẫn dữ liệu đã chuẩn bị](data_prepared/README.md). Ảnh train hiện chưa có trong thư mục này; cần bổ sung trước khi fine-tune.
+
+**Nhãn object VizWiz chưa hoàn thành:** `data_prepared/vizwiz_object_annotation_worklist.csv` là mẫu trống, hiện cả 1.000 dòng A/B đều là `unlabeled`. Không sử dụng file này như ground truth.
+
 **EDA dành cho LLaVA-1.5-7B đã tích hợp vào [báo cáo chính](EDA_COCO_vs_VizWiz_Report.md#phần-8-kiểm-tra-eda-bổ-sung-cho-llava-15-7b) và notebook.** Chạy `python vlm_eda_extensions.py` để tạo lại bảng giao nhau val2014/train2017, JS với mức nền, Jaccard hai tập, OOV, CHAIR ontology và manifest. File `coco/annotations/instances_train2017.json` từ [gói annotation COCO 2017 chính thức](http://images.cocodataset.org/annotations/annotations_trainval2017.zip) chỉ cần cho kiểm tra ID 2017; ảnh train không cần.
 
 ### Nghiên cứu Chuyên sâu về Domain Gap trong Trợ lý Thị giác Hỗ trợ Người Khiếm thị

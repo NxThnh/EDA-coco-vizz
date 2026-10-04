@@ -27,6 +27,7 @@ env/
 scratch/
 *.tmp
 eda_results/eda_run.log
+data_prepared/*.jsonl
 
 # Web & Node dependencies/build outputs
 node_modules/
