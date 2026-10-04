@@ -1,0 +1,2 @@
+﻿comparison,status,annotation_file,val2014_images,overlap_images,overlap_pct
+COCO val2014 vs train2017,measured,coco\annotations\instances_train2017.json,40504,35504,87.656

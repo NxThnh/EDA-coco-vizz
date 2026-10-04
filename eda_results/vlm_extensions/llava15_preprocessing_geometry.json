@@ -1,0 +1,54 @@
+{
+  "COCO": {
+    "images": 40504,
+    "image_aspect_ratio": "pad",
+    "actual_crop_area_lost_pct": 0,
+    "actual_distortion_factor": 1,
+    "center_crop_area_lost_pct_if_used": {
+      "median": 26.7188,
+      "p90": 33.75,
+      "p95": 40.1563,
+      "max": 82.6562
+    },
+    "square_pad_area_pct": {
+      "median": 26.7188,
+      "p90": 33.75,
+      "p95": 40.1563,
+      "max": 82.6562
+    },
+    "direct_square_distortion_factor_if_used": {
+      "median": 1.3646,
+      "p90": 1.5094,
+      "p95": 1.671,
+      "max": 5.7658
+    },
+    "patch_tokens": 576,
+    "pad_tokens_estimate_median": 153.9
+  },
+  "VizWiz": {
+    "images": 7750,
+    "image_aspect_ratio": "pad",
+    "actual_crop_area_lost_pct": 0,
+    "actual_distortion_factor": 1,
+    "center_crop_area_lost_pct_if_used": {
+      "median": 25.0,
+      "p90": 25.3086,
+      "p95": 25.3086,
+      "max": 81.7734
+    },
+    "square_pad_area_pct": {
+      "median": 25.0,
+      "p90": 25.3086,
+      "p95": 25.3086,
+      "max": 81.7734
+    },
+    "direct_square_distortion_factor_if_used": {
+      "median": 1.3333,
+      "p90": 1.3388,
+      "p95": 1.3388,
+      "max": 5.4865
+    },
+    "patch_tokens": 576,
+    "pad_tokens_estimate_median": 144.0
+  }
+}

@@ -296,23 +296,21 @@ ax_ar.set_ylabel('Density', fontsize=11, fontweight='bold')
 ax_ar.set_title('(A) Aspect Ratio Distribution (Landscape vs Portrait Shift)', fontsize=12, fontweight='bold')
 ax_ar.legend(frameon=True, facecolor='white', framealpha=0.9)
 
-# (B) Orientation Breakdown Pie Charts
+# (B) Orientation percentages on a shared axis
 ax_pie = fig.add_subplot(gs[0, 1])
-pie_labels = ['Landscape\n(W > H)', 'Portrait\n(H > W)', 'Square']
-pie_colors = ['#3498db', '#e67e22', '#95a5a6']
-
 coco_pcts = [coco_land/len(coco_ar), coco_port/len(coco_ar), coco_sq/len(coco_ar)]
 viz_pcts = [viz_land/len(viz_ar), viz_port/len(viz_ar), viz_sq/len(viz_ar)]
-
-# Nested donut chart: label the large sectors in a legend to avoid collisions.
-ax_pie.pie(coco_pcts, radius=1.0, colors=pie_colors,
-           wedgeprops=dict(width=0.3, edgecolor='white', linewidth=1.5))
-ax_pie.pie(viz_pcts, radius=0.68, colors=pie_colors,
-           wedgeprops=dict(width=0.3, edgecolor='white', linewidth=1.5))
-ax_pie.set_title('(B) Orientation: Outer Ring = COCO | Inner Ring = VizWiz', fontsize=12, fontweight='bold')
-legend_patches = [mpatches.Patch(color=c, label=f'{l}: COCO {cp:.1%}; VizWiz {vp:.1%}')
-                  for c, l, cp, vp in zip(pie_colors, ['Landscape', 'Portrait', 'Square'], coco_pcts, viz_pcts)]
-ax_pie.legend(handles=legend_patches, loc='lower center', bbox_to_anchor=(0.5, -0.22), frameon=True, fontsize=8)
+positions = np.arange(3)
+bars_c = ax_pie.bar(positions - .18, np.array(coco_pcts) * 100, width=.34, color='#2980b9', label='COCO')
+bars_v = ax_pie.bar(positions + .18, np.array(viz_pcts) * 100, width=.34, color='#e67e22', label='VizWiz')
+for bar in [*bars_c, *bars_v]:
+    ax_pie.annotate(f'{bar.get_height():.1f}%', (bar.get_x()+bar.get_width()/2, bar.get_height()),
+                    xytext=(0, 4), textcoords='offset points', ha='center', fontsize=9)
+ax_pie.set_xticks(positions, ['Landscape', 'Portrait', 'Square'])
+ax_pie.set_ylim(0, 110)
+ax_pie.set_ylabel('Images (%)', fontsize=11, fontweight='bold')
+ax_pie.set_title('(B) Orientation share by dataset', fontsize=12, fontweight='bold')
+ax_pie.legend(frameon=False)
 
 # (C) Width vs Height Scatter / Hexbin
 ax_sc1 = fig.add_subplot(gs[1, 0])
@@ -348,14 +346,21 @@ print(f"Saved: {fig_path2}")
 # ==============================================================================
 print("\n[3/7] Analyzing Captions, Vocabulary & Lexical Diversity...")
 
-coco_captions = [a["caption"].strip() for a in coco_val_cap["annotations"]]
-coco_caption_image_ids = [a["image_id"] for a in coco_val_cap["annotations"]]
-# Exclude both the quality placeholder and annotations rejected by the dataset.
-# Keep the same eligible rows for all linguistic/token/entity statistics.
-viz_descriptive_annotations = [
-    a for a in viz_val["annotations"]
-    if not a.get("is_precanned") and not a.get("is_rejected")
-]
+def one_valid_caption_per_image(annotations, vizwiz=False):
+    """Lowest annotation ID among valid captions; one observation per image."""
+    chosen = {}
+    for ann in annotations:
+        if not ann["caption"].strip() or (vizwiz and (ann.get("is_precanned") or ann.get("is_rejected"))):
+            continue
+        image_id = ann["image_id"]
+        if image_id not in chosen or ann["id"] < chosen[image_id]["id"]:
+            chosen[image_id] = ann
+    return [chosen[image_id] for image_id in sorted(chosen)]
+
+coco_descriptive_annotations = one_valid_caption_per_image(coco_val_cap["annotations"])
+coco_captions = [a["caption"].strip() for a in coco_descriptive_annotations]
+coco_caption_image_ids = [a["image_id"] for a in coco_descriptive_annotations]
+viz_descriptive_annotations = one_valid_caption_per_image(viz_val["annotations"], vizwiz=True)
 viz_captions_norm = [a["caption"].strip() for a in viz_descriptive_annotations]
 viz_caption_image_ids_norm = [a["image_id"] for a in viz_descriptive_annotations]
 
@@ -495,21 +500,23 @@ df_caption_entities.to_csv(os.path.join(TAB_DIR, 'caption_noun_entities_top15.cs
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
 
 # (A) Caption Word Count Histogram/KDE
-sns.histplot(coco_wlens, ax=ax1, color='#2980b9', stat='density', binwidth=1, label=f'COCO Val (Mean={np.mean(coco_wlens):.1f})', alpha=0.4, kde=True)
-sns.histplot(viz_wlens_norm, ax=ax1, color='#e67e22', stat='density', binwidth=1, label=f'VizWiz Descriptive (Mean={np.mean(viz_wlens_norm):.1f})', alpha=0.4, kde=True)
+sns.histplot(coco_wlens, ax=ax1, color='#2980b9', stat='probability', bins=np.arange(3, 32)-.5, element='step', fill=False, label=f'COCO (n={len(coco_wlens):,})', linewidth=2)
+sns.histplot(viz_wlens_norm, ax=ax1, color='#e67e22', stat='probability', bins=np.arange(3, 32)-.5, element='step', fill=False, label=f'VizWiz (n={len(viz_wlens_norm):,})', linewidth=2)
 ax1.set_xlim(3, 30)
 ax1.set_xlabel('Caption Word Count', fontsize=11, fontweight='bold')
-ax1.set_ylabel('Density', fontsize=11, fontweight='bold')
-ax1.set_title('(A) Main word-count range (3–30 words)', fontsize=12, fontweight='bold')
+ax1.set_ylabel('Fraction of captions', fontsize=11, fontweight='bold')
+ax1.set_title('(A) Word count, one caption per image', fontsize=12, fontweight='bold')
 ax1.legend(frameon=True, facecolor='white', framealpha=0.9)
 
-# (B) Full-range empirical CDF retains the 155-word tail.
+# (B) Full-range empirical CDF retains the tail of the selected captions.
 sns.ecdfplot(coco_wlens, ax=ax2, color='#2980b9', label='COCO Val', linewidth=2)
 sns.ecdfplot(viz_wlens_norm, ax=ax2, color='#e67e22', label='VizWiz descriptive', linewidth=2)
 ax2.set_xlim(0, max(max(coco_wlens), max(viz_wlens_norm)) + 5)
 ax2.set_xlabel('Caption Word Count (full range)', fontsize=11, fontweight='bold')
 ax2.set_ylabel('Cumulative fraction', fontsize=11, fontweight='bold')
 ax2.set_title('(B) Full-range caption length ECDF', fontsize=12, fontweight='bold')
+ax2.axhline(.95, color='gray', linestyle=':', linewidth=1)
+ax2.text(.98, .93, '95th percentile', transform=ax2.transAxes, ha='right', fontsize=9)
 ax2.legend(frameon=True, facecolor='white', framealpha=0.9)
 
 # (C) Top Keywords COCO
@@ -575,14 +582,14 @@ cat_vals = [c[1] for c in top_15][::-1]
 cat_pcts = [c[1] / total_inst * 100 for c in top_15][::-1]
 
 colors_bar = ['#e74c3c' if name == 'person' else '#3498db' for name in cat_names]
-bars = ax1.barh(cat_names, cat_vals, color=colors_bar, edgecolor='black', linewidth=0.7)
-ax1.set_xlabel('Instance Count in Val (Total = 291,875)', fontsize=11, fontweight='bold')
+bars = ax1.barh(cat_names, cat_pcts, color=colors_bar, edgecolor='black', linewidth=0.7)
+ax1.set_xlabel('Share of all COCO val object instances (%)', fontsize=11, fontweight='bold')
 ax1.set_title('(A) Top 15 COCO Object Categories (Person Dominance)', fontsize=12, fontweight='bold')
-for b, pct in zip(bars, cat_pcts):
+for b, pct, count in zip(bars, cat_pcts, cat_vals):
     w = b.get_width()
-    ax1.annotate(f'{pct:.1f}% ({int(w):,})', xy=(w, b.get_y() + b.get_height()/2),
+    ax1.annotate(f'{pct:.1f}% ({count:,})', xy=(w, b.get_y() + b.get_height()/2),
                  xytext=(5, 0), textcoords="offset points", va='center', fontsize=9, fontweight='bold')
-ax1.set_xlim(0, max(cat_vals) * 1.25)
+ax1.set_xlim(0, max(cat_pcts) * 1.25)
 
 # Supercategories
 super_sorted = supercat_counts.most_common()
@@ -590,14 +597,14 @@ s_names = [s[0] for s in super_sorted][::-1]
 s_vals = [s[1] for s in super_sorted][::-1]
 s_pcts = [s[1] / total_inst * 100 for s in super_sorted][::-1]
 
-bars_s = ax2.barh(s_names, s_vals, color='#2ecc71', edgecolor='black', linewidth=0.7)
-ax2.set_xlabel('Instance Count', fontsize=11, fontweight='bold')
+bars_s = ax2.barh(s_names, s_pcts, color='#2ecc71', edgecolor='black', linewidth=0.7)
+ax2.set_xlabel('Share of all COCO val object instances (%)', fontsize=11, fontweight='bold')
 ax2.set_title('(B) COCO 12 Supercategories Distribution', fontsize=12, fontweight='bold')
 for b, pct in zip(bars_s, s_pcts):
     w = b.get_width()
     ax2.annotate(f'{pct:.1f}%', xy=(w, b.get_y() + b.get_height()/2),
                  xytext=(5, 0), textcoords="offset points", va='center', fontsize=9, fontweight='bold')
-ax2.set_xlim(0, max(s_vals) * 1.2)
+ax2.set_xlim(0, max(s_pcts) * 1.2)
 
 plt.tight_layout()
 fig_path4 = os.path.join(FIG_DIR, "04_coco_category_distribution.png")
@@ -756,6 +763,16 @@ print(pd.DataFrame(lap_by_precanned).to_string(index=False))
 
 # FIGURE 5: VizWiz Quality Issues & Text Detection
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
+full_lap_path = os.path.join(TAB_DIR, 'laplacian_full_val.csv')
+if os.path.exists(full_lap_path):
+    full_lap = pd.read_csv(full_lap_path)
+    chart_coco_blurs = full_lap.loc[full_lap['dataset'] == 'COCO', 'laplacian_variance_480px'].to_numpy()
+    chart_viz_blurs = full_lap.loc[full_lap['dataset'] == 'VizWiz', 'laplacian_variance_480px'].to_numpy()
+    chart_coco_brights = full_lap.loc[full_lap['dataset'] == 'COCO', 'mean_luminance_480px'].to_numpy()
+    chart_viz_brights = full_lap.loc[full_lap['dataset'] == 'VizWiz', 'mean_luminance_480px'].to_numpy()
+else:
+    chart_coco_blurs, chart_viz_blurs = coco_blurs, viz_blurs
+    chart_coco_brights, chart_viz_brights = coco_brights, viz_brights
 
 # (A) Quality Degradation Bar
 prec_vals = [precanned_hist[k] for k in range(6)]
@@ -792,22 +809,23 @@ for b, pct in zip(bars_t, text_pcts):
 ax2.set_ylim(0, max(text_vals) * 1.18)
 
 # (C) Physical Blur (Laplacian Variance Log-Scale)
-log_coco_blurs = np.log10(np.array(coco_blurs) + 1e-3)
-log_viz_blurs = np.log10(np.array(viz_blurs) + 1e-3)
+log_coco_blurs = np.log10(np.array(chart_coco_blurs) + 1e-3)
+log_viz_blurs = np.log10(np.array(chart_viz_blurs) + 1e-3)
 
-sns.kdeplot(log_coco_blurs, ax=ax3, color='#2980b9', label=f'COCO Val (median={np.median(coco_blurs):.1f})', fill=True, alpha=0.35, linewidth=2)
-sns.kdeplot(log_viz_blurs, ax=ax3, color='#e74c3c', label=f'VizWiz Val (median={np.median(viz_blurs):.1f})', fill=True, alpha=0.35, linewidth=2)
+sns.kdeplot(log_coco_blurs, ax=ax3, color='#2980b9', label=f'COCO Val (n={len(chart_coco_blurs):,}; median={np.median(chart_coco_blurs):.1f})', fill=True, alpha=0.35, linewidth=2)
+sns.kdeplot(log_viz_blurs, ax=ax3, color='#e74c3c', label=f'VizWiz Val (n={len(chart_viz_blurs):,}; median={np.median(chart_viz_blurs):.1f})', fill=True, alpha=0.35, linewidth=2)
 ax3.set_xlabel('Log10(Laplacian variance): edge/texture signal', fontsize=11, fontweight='bold')
 ax3.set_ylabel('Density', fontsize=11, fontweight='bold')
 ax3.set_title('(C) High-frequency detail indicator', fontsize=12, fontweight='bold')
 ax3.legend(frameon=True, facecolor='white', framealpha=0.9)
 
-# (D) Brightness / Luminance Distribution
-sns.kdeplot(coco_brights, ax=ax4, color='#2980b9', label=f'COCO Val (median={np.median(coco_brights):.1f})', fill=True, alpha=0.35, linewidth=2)
-sns.kdeplot(viz_brights, ax=ax4, color='#e67e22', label=f'VizWiz Val (median={np.median(viz_brights):.1f})', fill=True, alpha=0.35, linewidth=2)
+# (D) Brightness ECDF makes the dark-image tail readable.
+sns.ecdfplot(chart_coco_brights, ax=ax4, color='#2980b9', label=f'COCO (median={np.median(chart_coco_brights):.1f})', linewidth=2)
+sns.ecdfplot(chart_viz_brights, ax=ax4, color='#e67e22', label=f'VizWiz (median={np.median(chart_viz_brights):.1f})', linewidth=2)
+ax4.axvline(50, color='gray', linestyle=':', linewidth=1, label='Mean luminance = 50')
 ax4.set_xlabel('Mean Pixel Luminance (0=Black, 255=White)', fontsize=11, fontweight='bold')
-ax4.set_ylabel('Density', fontsize=11, fontweight='bold')
-ax4.set_title('(D) Mean image luminance', fontsize=12, fontweight='bold')
+ax4.set_ylabel('Fraction of images ≤ luminance', fontsize=11, fontweight='bold')
+ax4.set_title('(D) Mean luminance ECDF (all val images)', fontsize=12, fontweight='bold')
 ax4.legend(frameon=True, facecolor='white', framealpha=0.9)
 
 plt.tight_layout()

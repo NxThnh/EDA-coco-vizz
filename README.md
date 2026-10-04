@@ -1,8 +1,7 @@
 # 🔬 EDA: MS-COCO vs VizWiz-Captions
 
-**EDA dành cho VLM đã tích hợp vào [báo cáo chính](EDA_COCO_vs_VizWiz_Report.md#phần-9-kiểm-tra-eda-bổ-sung-cho-vlm) và notebook.** Chạy
-`python vlm_eda_extensions.py` để tạo lại các bảng kiểm tra toàn vẹn,
-giao nhau train/val, phân kỳ từ vựng, đồng thuận caption và manifest đánh giá.
+**EDA dành cho LLaVA-1.5-7B đã tích hợp vào [báo cáo chính](EDA_COCO_vs_VizWiz_Report.md#phần-8-kiểm-tra-eda-bổ-sung-cho-llava-15-7b) và notebook.** Chạy `python vlm_eda_extensions.py` để tạo lại bảng giao nhau val2014/train2017, JS với mức nền, Jaccard hai tập, OOV, CHAIR ontology và manifest. File `coco/annotations/instances_train2017.json` từ [gói annotation COCO 2017 chính thức](http://images.cocodataset.org/annotations/annotations_trainval2017.zip) chỉ cần cho kiểm tra ID 2017; ảnh train không cần.
+
 ### Nghiên cứu Chuyên sâu về Domain Gap trong Trợ lý Thị giác Hỗ trợ Người Khiếm thị
 *Đề tài Khóa Luận Tốt Nghiệp — Image Captioning & Multimodal Vision-Language Models*
 
@@ -25,14 +24,14 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
    - Kích thước file COCO trung bình $576.5 \times 485.1\text{px}$ (0.28 MP).
    - Kích thước file VizWiz sau EXIF trung bình $1032.1 \times 1374.7\text{px}$ (1.57 MP), có ngoại lai rộng 23 px. Đây là kích thước file được khảo sát; COCO trong bộ này có cạnh tối đa 640 px, nên không dùng chênh lệch pixel để suy ra độ phân giải cảm biến hoặc chất lượng ảnh gốc.
 3. **Chỉ báo chi tiết tần số cao:**
-   - Trên 1.000 ảnh mỗi tập, sau EXIF transpose và resize cạnh ngắn 480 px, median Laplacian là **1197.90** (COCO) và **149.19** (VizWiz). Đây là chỉ báo biên/texture; có phân tích độ nhạy theo ảnh bị phóng lớn.
+   - Trên toàn bộ val, sau EXIF transpose và resize cạnh ngắn 480 px, median Laplacian là **1.140,08** (COCO; 40.504 ảnh) và **152,16** (VizWiz; 7.750 ảnh). Đây là chỉ báo biên/texture; mẫu 1.000 ảnh/tập được giữ riêng cho bảng độ nhạy resize.
 4. **Tín hiệu ảnh không thể nhận diện:**
    - **32.62%** ảnh có ít nhất 1/5 annotator dùng caption từ chối; tỷ lệ đồng thuận đa số **≥3/5 là 9.69%**, và 5/5 là **2.48%**.
 5. **Nhu cầu Nhận diện Chữ viết (Scene Text / OCR Relevance):**
    - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; tỷ lệ đồng thuận đa số **≥3/5 là 64.75%**.
 6. **Lệch pha Ngữ nghĩa (Semantic Shift):**
     - Trong annotation instance COCO, `person` chiếm **30.20%** số object; đây là đơn vị khác với tần suất từ trong caption.
-    - Trên 1.000 caption hợp lệ, VizWiz nhắc `computer` 95,58 lần và `screen` 92,96 lần; COCO nhắc `man` 122,31 lần và `people` 69,46 lần. Caption VizWiz mang cờ `is_precanned` hoặc `is_rejected` được loại khỏi thống kê ngôn ngữ; 208 ảnh vì thế không còn caption hợp lệ. Bảng `person_reference_summary.csv` gộp các dạng chỉ người, còn `person_reference_one_caption_per_image.csv` kiểm tra độ nhạy với một caption mỗi ảnh.
+    - Với một caption hợp lệ có ID thấp nhất mỗi ảnh, VizWiz nhắc `screen` 90,69 và `computer` 89,90 lần/1.000 caption; COCO nhắc `man` 131,35 và `people` 68,59. Có 208 ảnh VizWiz không còn caption hợp lệ sau lọc.
 
 ---
 
@@ -42,8 +41,12 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 ├── EDA_COCO_vs_VizWiz_Report.ipynb    # Báo cáo Jupyter Notebook hoàn chỉnh (nhúng sẵn hình ảnh & bảng biểu)
 ├── EDA_COCO_vs_VizWiz_Report.md       # Báo cáo Markdown chi tiết phục vụ khóa luận tốt nghiệp
 ├── eda_coco_vs_vizwiz.py             # Script Python tính toán và kết xuất toàn bộ số liệu & biểu đồ
-├── vlm_eda_extensions.py             # Kiểm tra EDA VLM của Phần 9 trong báo cáo chính
-├── caption_sampling_sensitivity.py    # Kiểm tra một caption hợp lệ mỗi ảnh, seed=42
+├── vlm_eda_extensions.py             # Kiểm tra EDA VLM của Phần 8 trong báo cáo chính
+├── caption_sampling_sensitivity.py    # Kiểm tra caption hợp lệ có ID thấp nhất mỗi ảnh
+├── clip_embedding_audit.py            # Đo CLIP image embedding và image–caption cosine
+├── llava_preprocessing_audit.py       # Hình học crop/pad/resize cho 336×336
+├── audit_val_images.py                # Giải mã, MD5 và pHash toàn bộ ảnh val
+├── full_laplacian_audit.py            # Laplacian 480 px toàn bộ ảnh val
 ├── build_eda_notebook.py              # Script tự động đóng gói toàn bộ dữ liệu vào file Notebook
 ├── run_eda_notebook.py                # Chạy lại mọi code cell trong kernel mới và lưu output thật
 ├── eda_results/
@@ -87,7 +90,13 @@ python eda_coco_vs_vizwiz.py
 python vlm_eda_extensions.py
 python rerun_coco500_tables.py
 python caption_sampling_sensitivity.py
+python llava_preprocessing_audit.py
+python audit_val_images.py
+python full_laplacian_audit.py
+python clip_embedding_audit.py
 ```
+
+`clip_embedding_audit.py` đọc checkpoint `openai/clip-vit-large-patch14-336` từ `model_assets/clip-vit-large-patch14-336/`. Cần tải `config.json`, `preprocessor_config.json`, `merges.txt`, `vocab.json`, `tokenizer_config.json` và `pytorch_model.bin` từ [model card](https://huggingface.co/openai/clip-vit-large-patch14-336). Phép đếm token dùng `model_assets/llava-v1.5-7b/tokenizer.model` từ [checkpoint LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-7b). Các trọng số tải về được bỏ qua bởi `.gitignore`.
 
 ### 3. Đóng Gói Lại File Báo Cáo Notebook
 ```bash

@@ -1,0 +1,959 @@
+{
+  "summary": {
+    "images": 48254,
+    "decode_failures": 0,
+    "md5_duplicate_groups": 49,
+    "phash_exact_duplicate_groups": 85,
+    "note": "Exact pHash equality only; near matches require a Hamming-distance threshold and manual review."
+  },
+  "duplicates": {
+    "md5": [
+      {
+        "hash": "37e6553b4b0a03dfea0e5b18739d9362",
+        "images": [
+          "VizWiz:23435",
+          "VizWiz:23547"
+        ]
+      },
+      {
+        "hash": "2fb39dc19f5d4e6462e15f2eac75d875",
+        "images": [
+          "VizWiz:23441",
+          "VizWiz:25179"
+        ]
+      },
+      {
+        "hash": "b534888c6fc0a57c9677bec51e17433b",
+        "images": [
+          "VizWiz:23455",
+          "VizWiz:23573"
+        ]
+      },
+      {
+        "hash": "6f9df8c85d3b14aced385f0aaafc7be9",
+        "images": [
+          "VizWiz:23462",
+          "VizWiz:23788"
+        ]
+      },
+      {
+        "hash": "7e2b139c9486aa04cb3433624c0fb57e",
+        "images": [
+          "VizWiz:23486",
+          "VizWiz:31131"
+        ]
+      },
+      {
+        "hash": "314a5bc247c2b0033e2b67f41009cf2e",
+        "images": [
+          "VizWiz:23491",
+          "VizWiz:23548",
+          "VizWiz:23701"
+        ]
+      },
+      {
+        "hash": "602bec9ffb79af43f071eb3afe20016e",
+        "images": [
+          "VizWiz:23500",
+          "VizWiz:27031"
+        ]
+      },
+      {
+        "hash": "a9b1996d20bf8679baccd171292b0570",
+        "images": [
+          "VizWiz:23512",
+          "VizWiz:23538"
+        ]
+      },
+      {
+        "hash": "77d93efe8cd6a25a82a4a8bd28c33d41",
+        "images": [
+          "VizWiz:23550",
+          "VizWiz:23759"
+        ]
+      },
+      {
+        "hash": "3bf83f331c1cd894d81d4385e5f6937a",
+        "images": [
+          "VizWiz:23576",
+          "VizWiz:23790"
+        ]
+      },
+      {
+        "hash": "308dfe4bfe00dd554846555077044514",
+        "images": [
+          "VizWiz:23609",
+          "VizWiz:23793"
+        ]
+      },
+      {
+        "hash": "398d099ab5a9a7f63546651eee90616c",
+        "images": [
+          "VizWiz:23662",
+          "VizWiz:23757"
+        ]
+      },
+      {
+        "hash": "c11275f38346519ad5df69db4262acae",
+        "images": [
+          "VizWiz:23672",
+          "VizWiz:23737"
+        ]
+      },
+      {
+        "hash": "2dac88fde3af927c713bd0bcb87caf55",
+        "images": [
+          "VizWiz:23812",
+          "VizWiz:24397"
+        ]
+      },
+      {
+        "hash": "5b437bbd9a39a0fbf7b822ed57e5e5b1",
+        "images": [
+          "VizWiz:23836",
+          "VizWiz:24402",
+          "VizWiz:24577"
+        ]
+      },
+      {
+        "hash": "f8854d8562533824b7fcc34e74d28103",
+        "images": [
+          "VizWiz:23870",
+          "VizWiz:24533"
+        ]
+      },
+      {
+        "hash": "a86a235041f277ebeab51051303e0b41",
+        "images": [
+          "VizWiz:23878",
+          "VizWiz:23902"
+        ]
+      },
+      {
+        "hash": "5fd8447321f4eb45474be1831b564fd9",
+        "images": [
+          "VizWiz:23928",
+          "VizWiz:29099"
+        ]
+      },
+      {
+        "hash": "fcfeedb0da7ccb6b5462bf8ca01265f8",
+        "images": [
+          "VizWiz:23982",
+          "VizWiz:24486"
+        ]
+      },
+      {
+        "hash": "d77a1f21b05041607875b9aad040c823",
+        "images": [
+          "VizWiz:23999",
+          "VizWiz:26959"
+        ]
+      },
+      {
+        "hash": "85b65a5d4dc32aac11eb8f5e631973fc",
+        "images": [
+          "VizWiz:24044",
+          "VizWiz:24468"
+        ]
+      },
+      {
+        "hash": "a79f20f9e135d69ae30bd9cb18dd7b78",
+        "images": [
+          "VizWiz:24050",
+          "VizWiz:24177"
+        ]
+      },
+      {
+        "hash": "f3c5b3abd78dcb6a9d2820927550a3ea",
+        "images": [
+          "VizWiz:24074",
+          "VizWiz:24088"
+        ]
+      },
+      {
+        "hash": "40a0da0631d0e7ca0a1387b8c3f18cb8",
+        "images": [
+          "VizWiz:24189",
+          "VizWiz:24405"
+        ]
+      },
+      {
+        "hash": "8262b5f9700bc2ec89e9230ffedfdaa2",
+        "images": [
+          "VizWiz:24212",
+          "VizWiz:24489"
+        ]
+      },
+      {
+        "hash": "3dfd17bc1e1a48a1604f92ca86e3e2a4",
+        "images": [
+          "VizWiz:24237",
+          "VizWiz:24250"
+        ]
+      },
+      {
+        "hash": "fec5f5d0bc05eb8d06c2c401ad76495b",
+        "images": [
+          "VizWiz:24404",
+          "VizWiz:29448"
+        ]
+      },
+      {
+        "hash": "4899e4bef03652f4b331c6b1744c176c",
+        "images": [
+          "VizWiz:24592",
+          "VizWiz:24593"
+        ]
+      },
+      {
+        "hash": "564bd3af58f24bc3517876db577da53a",
+        "images": [
+          "VizWiz:24595",
+          "VizWiz:25859"
+        ]
+      },
+      {
+        "hash": "3afe93015102c1b55da22613a635d95b",
+        "images": [
+          "VizWiz:24852",
+          "VizWiz:26830"
+        ]
+      },
+      {
+        "hash": "722d03fece5fad8a81355752adfff34c",
+        "images": [
+          "VizWiz:24987",
+          "VizWiz:28837"
+        ]
+      },
+      {
+        "hash": "27e2aaaf269bdd7de002242d9ee90a40",
+        "images": [
+          "VizWiz:25264",
+          "VizWiz:30790"
+        ]
+      },
+      {
+        "hash": "ad96a128f385e616ce371aaa3f29dfff",
+        "images": [
+          "VizWiz:25409",
+          "VizWiz:27272"
+        ]
+      },
+      {
+        "hash": "5071af7afbd262e1249ad34efeb16cc7",
+        "images": [
+          "VizWiz:25447",
+          "VizWiz:26034"
+        ]
+      },
+      {
+        "hash": "0f654b0691268f6e8ffe0b3768d767a8",
+        "images": [
+          "VizWiz:25455",
+          "VizWiz:28287"
+        ]
+      },
+      {
+        "hash": "8e9b0efaa2bd865c153edffad409444a",
+        "images": [
+          "VizWiz:25481",
+          "VizWiz:26961"
+        ]
+      },
+      {
+        "hash": "fac45ab9b77fc7bc92633ebb4eb84e67",
+        "images": [
+          "VizWiz:25490",
+          "VizWiz:30075"
+        ]
+      },
+      {
+        "hash": "68b6af1a03741da8b421ffd482802637",
+        "images": [
+          "VizWiz:25548",
+          "VizWiz:27053"
+        ]
+      },
+      {
+        "hash": "1fa71315aa179546dbfe302277239d9f",
+        "images": [
+          "VizWiz:25682",
+          "VizWiz:26945"
+        ]
+      },
+      {
+        "hash": "d622751710890aaf3b43308bb784cfc7",
+        "images": [
+          "VizWiz:25780",
+          "VizWiz:29790"
+        ]
+      },
+      {
+        "hash": "575a98898a3a3614b4873597e18f095f",
+        "images": [
+          "VizWiz:25909",
+          "VizWiz:28706"
+        ]
+      },
+      {
+        "hash": "aab007fe6cbb76afe56bea26804263bc",
+        "images": [
+          "VizWiz:26043",
+          "VizWiz:26129"
+        ]
+      },
+      {
+        "hash": "d0a5195c68626bcf26d262b4400606ab",
+        "images": [
+          "VizWiz:26633",
+          "VizWiz:28273"
+        ]
+      },
+      {
+        "hash": "4e11400cf8b6e52b9260fa6771975cc8",
+        "images": [
+          "VizWiz:26734",
+          "VizWiz:28063"
+        ]
+      },
+      {
+        "hash": "936ac0bf4db20745be830f386d6d2429",
+        "images": [
+          "VizWiz:26875",
+          "VizWiz:27743"
+        ]
+      },
+      {
+        "hash": "6aa2b52f1c466204d98e66ef2549ccab",
+        "images": [
+          "VizWiz:27425",
+          "VizWiz:29812"
+        ]
+      },
+      {
+        "hash": "f24e5a7ef60a76174b31374e22e77b4f",
+        "images": [
+          "VizWiz:27641",
+          "VizWiz:30955"
+        ]
+      },
+      {
+        "hash": "c274f94604778c241f35efac463a523d",
+        "images": [
+          "VizWiz:27914",
+          "VizWiz:28169"
+        ]
+      },
+      {
+        "hash": "3756423dbc3f22dfa953b3e4621481c8",
+        "images": [
+          "VizWiz:27945",
+          "VizWiz:28170"
+        ]
+      }
+    ],
+    "phash": [
+      {
+        "hash": "339da421de76a17d",
+        "images": [
+          "COCO:140556",
+          "COCO:80010"
+        ]
+      },
+      {
+        "hash": "67c73838964769b9",
+        "images": [
+          "COCO:308264",
+          "COCO:22168"
+        ]
+      },
+      {
+        "hash": "462d9ba5ec2798d3",
+        "images": [
+          "COCO:467599",
+          "COCO:113159"
+        ]
+      },
+      {
+        "hash": "21d6db6125971de3",
+        "images": [
+          "COCO:465129",
+          "COCO:535889"
+        ]
+      },
+      {
+        "hash": "5699dc18d54cb58f",
+        "images": [
+          "COCO:186226",
+          "COCO:102517"
+        ]
+      },
+      {
+        "hash": "621c71f11e6ee499",
+        "images": [
+          "COCO:372203",
+          "COCO:247609"
+        ]
+      },
+      {
+        "hash": "ede14901932d6f5b",
+        "images": [
+          "COCO:15984",
+          "COCO:343629"
+        ]
+      },
+      {
+        "hash": "356e66a95526cad9",
+        "images": [
+          "VizWiz:23432",
+          "VizWiz:23584",
+          "VizWiz:23787"
+        ]
+      },
+      {
+        "hash": "83cace66e36351ab",
+        "images": [
+          "VizWiz:23433",
+          "VizWiz:23467"
+        ]
+      },
+      {
+        "hash": "b484cbcbca0a3f3d",
+        "images": [
+          "VizWiz:23435",
+          "VizWiz:23547"
+        ]
+      },
+      {
+        "hash": "27339c33a36c5ce9",
+        "images": [
+          "VizWiz:23441",
+          "VizWiz:25179"
+        ]
+      },
+      {
+        "hash": "acbc1e2c0cbe8bc1",
+        "images": [
+          "VizWiz:23455",
+          "VizWiz:23573"
+        ]
+      },
+      {
+        "hash": "1483817e1fa1fe01",
+        "images": [
+          "VizWiz:23462",
+          "VizWiz:23788"
+        ]
+      },
+      {
+        "hash": "b97d740a12a75921",
+        "images": [
+          "VizWiz:23466",
+          "VizWiz:28438"
+        ]
+      },
+      {
+        "hash": "c2468f576c61b65b",
+        "images": [
+          "VizWiz:23469",
+          "VizWiz:23724"
+        ]
+      },
+      {
+        "hash": "464ea9adb9c65271",
+        "images": [
+          "VizWiz:23482",
+          "VizWiz:23719"
+        ]
+      },
+      {
+        "hash": "b6324afc35125b65",
+        "images": [
+          "VizWiz:23486",
+          "VizWiz:31131"
+        ]
+      },
+      {
+        "hash": "1842522bff31d753",
+        "images": [
+          "VizWiz:23491",
+          "VizWiz:23548",
+          "VizWiz:23701"
+        ]
+      },
+      {
+        "hash": "120cb51f4eba3b91",
+        "images": [
+          "VizWiz:23500",
+          "VizWiz:27031"
+        ]
+      },
+      {
+        "hash": "39b3e1c10dc937ff",
+        "images": [
+          "VizWiz:23512",
+          "VizWiz:23538"
+        ]
+      },
+      {
+        "hash": "19c6c13b92cecdc9",
+        "images": [
+          "VizWiz:23514",
+          "VizWiz:23675"
+        ]
+      },
+      {
+        "hash": "c51203b9fefe0101",
+        "images": [
+          "VizWiz:23520",
+          "VizWiz:23539"
+        ]
+      },
+      {
+        "hash": "e32b5ea9585856ab",
+        "images": [
+          "VizWiz:23550",
+          "VizWiz:23759"
+        ]
+      },
+      {
+        "hash": "b954d88ad4d4abab",
+        "images": [
+          "VizWiz:23563",
+          "VizWiz:23570"
+        ]
+      },
+      {
+        "hash": "88e5c95ff13c4827",
+        "images": [
+          "VizWiz:23576",
+          "VizWiz:23790"
+        ]
+      },
+      {
+        "hash": "95a9292a56d6bc41",
+        "images": [
+          "VizWiz:23596",
+          "VizWiz:25450"
+        ]
+      },
+      {
+        "hash": "fc377c5f6050902b",
+        "images": [
+          "VizWiz:23609",
+          "VizWiz:23793"
+        ]
+      },
+      {
+        "hash": "d4d62c6c52aaabd9",
+        "images": [
+          "VizWiz:23633",
+          "VizWiz:23717"
+        ]
+      },
+      {
+        "hash": "db24d0b4bea44b5b",
+        "images": [
+          "VizWiz:23662",
+          "VizWiz:23757"
+        ]
+      },
+      {
+        "hash": "ab8b2b1f7d01a1ab",
+        "images": [
+          "VizWiz:23672",
+          "VizWiz:23737"
+        ]
+      },
+      {
+        "hash": "709a2d43bc72c711",
+        "images": [
+          "VizWiz:23684",
+          "VizWiz:23763"
+        ]
+      },
+      {
+        "hash": "560cf503ad56f409",
+        "images": [
+          "VizWiz:23707",
+          "VizWiz:23727"
+        ]
+      },
+      {
+        "hash": "c556ca1971c71e71",
+        "images": [
+          "VizWiz:23709",
+          "VizWiz:23771"
+        ]
+      },
+      {
+        "hash": "d8ccc6d3b83e2121",
+        "images": [
+          "VizWiz:23781",
+          "VizWiz:23783"
+        ]
+      },
+      {
+        "hash": "4b9633b649cc966b",
+        "images": [
+          "VizWiz:23812",
+          "VizWiz:24397"
+        ]
+      },
+      {
+        "hash": "8cecfc93ac2c4393",
+        "images": [
+          "VizWiz:23836",
+          "VizWiz:24402",
+          "VizWiz:24577"
+        ]
+      },
+      {
+        "hash": "0101fcfc7e7e0301",
+        "images": [
+          "VizWiz:23870",
+          "VizWiz:24533"
+        ]
+      },
+      {
+        "hash": "e24f99944bb4b44b",
+        "images": [
+          "VizWiz:23878",
+          "VizWiz:23902"
+        ]
+      },
+      {
+        "hash": "619c1f63931c7ce3",
+        "images": [
+          "VizWiz:23928",
+          "VizWiz:29099"
+        ]
+      },
+      {
+        "hash": "09ababae5554acab",
+        "images": [
+          "VizWiz:23982",
+          "VizWiz:24486"
+        ]
+      },
+      {
+        "hash": "f00fe81fe118f42b",
+        "images": [
+          "VizWiz:23999",
+          "VizWiz:26959"
+        ]
+      },
+      {
+        "hash": "53918c7a73f48a0b",
+        "images": [
+          "VizWiz:24044",
+          "VizWiz:24468"
+        ]
+      },
+      {
+        "hash": "5603f4c3d1f8a985",
+        "images": [
+          "VizWiz:24050",
+          "VizWiz:24177"
+        ]
+      },
+      {
+        "hash": "b52ca35e58a3535f",
+        "images": [
+          "VizWiz:24074",
+          "VizWiz:24088"
+        ]
+      },
+      {
+        "hash": "9c9ccc6662769989",
+        "images": [
+          "VizWiz:24189",
+          "VizWiz:24405"
+        ]
+      },
+      {
+        "hash": "f25e5256555495b9",
+        "images": [
+          "VizWiz:24212",
+          "VizWiz:24489"
+        ]
+      },
+      {
+        "hash": "9393f3986c6c9293",
+        "images": [
+          "VizWiz:24237",
+          "VizWiz:24250"
+        ]
+      },
+      {
+        "hash": "964b0eb2718cbe63",
+        "images": [
+          "VizWiz:24404",
+          "VizWiz:29448"
+        ]
+      },
+      {
+        "hash": "6eb08fa89d4a7455",
+        "images": [
+          "VizWiz:24592",
+          "VizWiz:24593"
+        ]
+      },
+      {
+        "hash": "ea0aaaaaaaaaab2b",
+        "images": [
+          "VizWiz:24595",
+          "VizWiz:25859"
+        ]
+      },
+      {
+        "hash": "b1e1c1c3c74e4e07",
+        "images": [
+          "VizWiz:24619",
+          "VizWiz:26130",
+          "VizWiz:26638"
+        ]
+      },
+      {
+        "hash": "f00bb5b4bc2563db",
+        "images": [
+          "VizWiz:24666",
+          "VizWiz:25055"
+        ]
+      },
+      {
+        "hash": "215cd5995a762de9",
+        "images": [
+          "VizWiz:24704",
+          "VizWiz:24764"
+        ]
+      },
+      {
+        "hash": "4e648e4fced92121",
+        "images": [
+          "VizWiz:24852",
+          "VizWiz:26830"
+        ]
+      },
+      {
+        "hash": "2d6929151fa72bdb",
+        "images": [
+          "VizWiz:24987",
+          "VizWiz:28837"
+        ]
+      },
+      {
+        "hash": "8e522ebc43ad5321",
+        "images": [
+          "VizWiz:25264",
+          "VizWiz:30790"
+        ]
+      },
+      {
+        "hash": "5296aa3c25cd5b31",
+        "images": [
+          "VizWiz:25409",
+          "VizWiz:27272"
+        ]
+      },
+      {
+        "hash": "296dc686d6c6ac79",
+        "images": [
+          "VizWiz:25447",
+          "VizWiz:26034"
+        ]
+      },
+      {
+        "hash": "2749dcec098bb3b3",
+        "images": [
+          "VizWiz:25455",
+          "VizWiz:28287"
+        ]
+      },
+      {
+        "hash": "939d64865a2bb55b",
+        "images": [
+          "VizWiz:25481",
+          "VizWiz:26961"
+        ]
+      },
+      {
+        "hash": "9566c59117fd06fd",
+        "images": [
+          "VizWiz:25490",
+          "VizWiz:30075"
+        ]
+      },
+      {
+        "hash": "b66286d80cfab5f9",
+        "images": [
+          "VizWiz:25548",
+          "VizWiz:27053"
+        ]
+      },
+      {
+        "hash": "0cb23753974e2bd5",
+        "images": [
+          "VizWiz:25589",
+          "VizWiz:31135"
+        ]
+      },
+      {
+        "hash": "87c0835b2b57ab97",
+        "images": [
+          "VizWiz:25660",
+          "VizWiz:27140"
+        ]
+      },
+      {
+        "hash": "a9693ab697292929",
+        "images": [
+          "VizWiz:25682",
+          "VizWiz:26945"
+        ]
+      },
+      {
+        "hash": "93169f1e03166fab",
+        "images": [
+          "VizWiz:25780",
+          "VizWiz:29790"
+        ]
+      },
+      {
+        "hash": "0fe2fe194702bcff",
+        "images": [
+          "VizWiz:25909",
+          "VizWiz:28706"
+        ]
+      },
+      {
+        "hash": "13c4ef1cc314f53f",
+        "images": [
+          "VizWiz:26043",
+          "VizWiz:26129"
+        ]
+      },
+      {
+        "hash": "9697734bab050df1",
+        "images": [
+          "VizWiz:26276",
+          "VizWiz:27136"
+        ]
+      },
+      {
+        "hash": "2e4cb66a17935551",
+        "images": [
+          "VizWiz:26393",
+          "VizWiz:27132"
+        ]
+      },
+      {
+        "hash": "3c331c1c9bcce363",
+        "images": [
+          "VizWiz:26633",
+          "VizWiz:28273"
+        ]
+      },
+      {
+        "hash": "a42c59d3242efbd3",
+        "images": [
+          "VizWiz:26637",
+          "VizWiz:27739"
+        ]
+      },
+      {
+        "hash": "149de5219ceeb441",
+        "images": [
+          "VizWiz:26734",
+          "VizWiz:28063"
+        ]
+      },
+      {
+        "hash": "06421379fced7883",
+        "images": [
+          "VizWiz:26801",
+          "VizWiz:27003"
+        ]
+      },
+      {
+        "hash": "00ee4da439d6ee79",
+        "images": [
+          "VizWiz:26875",
+          "VizWiz:27743"
+        ]
+      },
+      {
+        "hash": "559dd45455545757",
+        "images": [
+          "VizWiz:27425",
+          "VizWiz:29812"
+        ]
+      },
+      {
+        "hash": "ef1f632057122bc9",
+        "images": [
+          "VizWiz:27641",
+          "VizWiz:30955"
+        ]
+      },
+      {
+        "hash": "c6f1e4535aab0abd",
+        "images": [
+          "VizWiz:27729",
+          "VizWiz:28375"
+        ]
+      },
+      {
+        "hash": "fb640bf8215ad4b5",
+        "images": [
+          "VizWiz:27914",
+          "VizWiz:28169"
+        ]
+      },
+      {
+        "hash": "71962959e11b1fe3",
+        "images": [
+          "VizWiz:27945",
+          "VizWiz:28170"
+        ]
+      },
+      {
+        "hash": "56cefd06ab20d8df",
+        "images": [
+          "VizWiz:28036",
+          "VizWiz:28206"
+        ]
+      },
+      {
+        "hash": "9bb6edd2060936fd",
+        "images": [
+          "VizWiz:28411",
+          "VizWiz:28692"
+        ]
+      },
+      {
+        "hash": "92b45b68a1f6d803",
+        "images": [
+          "VizWiz:28575",
+          "VizWiz:28604"
+        ]
+      },
+      {
+        "hash": "f8f8f0f333030383",
+        "images": [
+          "VizWiz:29887",
+          "VizWiz:30771"
+        ]
+      },
+      {
+        "hash": "d396f9c37c01c2ff",
+        "images": [
+          "VizWiz:30240",
+          "VizWiz:30554"
+        ]
+      }
+    ]
+  }
+}

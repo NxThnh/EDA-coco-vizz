@@ -1,0 +1,101 @@
+﻿image_id,file_name,valid_captions,captions_with_coco80_word,image_has_coco80_word,objects_mentioned_by_at_least_two_captions,confirmed_objects,rejected_suggestions,additional_visible_objects,reviewer_id,review_status
+31057,VizWiz_val_00007626.jpg,5,5,1,dining table;person,,,,,unreviewed
+25261,VizWiz_val_00001830.jpg,5,4,1,bowl,,,,,unreviewed
+26855,VizWiz_val_00003424.jpg,5,5,1,dining table;remote;tv,,,,,unreviewed
+25913,VizWiz_val_00002482.jpg,5,2,1,laptop,,,,,unreviewed
+25121,VizWiz_val_00001690.jpg,5,2,1,bowl,,,,,unreviewed
+28326,VizWiz_val_00004895.jpg,5,4,1,couch,,,,,unreviewed
+29909,VizWiz_val_00006478.jpg,5,3,1,laptop,,,,,unreviewed
+27065,VizWiz_val_00003634.jpg,5,4,1,dining table;person,,,,,unreviewed
+28942,VizWiz_val_00005511.jpg,5,5,1,keyboard;laptop;mouse,,,,,unreviewed
+29961,VizWiz_val_00006530.jpg,5,3,1,dining table,,,,,unreviewed
+24340,VizWiz_val_00000909.jpg,4,4,1,keyboard;laptop,,,,,unreviewed
+26819,VizWiz_val_00003388.jpg,5,3,1,laptop,,,,,unreviewed
+26783,VizWiz_val_00003352.jpg,5,5,1,chair;laptop;person;tv,,,,,unreviewed
+27475,VizWiz_val_00004044.jpg,5,4,1,bottle,,,,,unreviewed
+24984,VizWiz_val_00001553.jpg,5,4,1,orange;zebra,,,,,unreviewed
+24938,VizWiz_val_00001507.jpg,5,4,1,person,,,,,unreviewed
+24852,VizWiz_val_00001421.jpg,5,3,1,person,,,,,unreviewed
+26821,VizWiz_val_00003390.jpg,5,5,1,car;chair,,,,,unreviewed
+30852,VizWiz_val_00007421.jpg,5,5,1,cell phone;orange,,,,,unreviewed
+23433,VizWiz_val_00000002.jpg,5,5,1,book;dog,,,,,unreviewed
+26173,VizWiz_val_00002742.jpg,5,3,1,bowl,,,,,unreviewed
+27721,VizWiz_val_00004290.jpg,5,4,1,dining table,,,,,unreviewed
+24705,VizWiz_val_00001274.jpg,5,5,1,dog,,,,,unreviewed
+27000,VizWiz_val_00003569.jpg,5,2,1,person,,,,,unreviewed
+30270,VizWiz_val_00006839.jpg,5,3,1,dining table;keyboard,,,,,unreviewed
+29629,VizWiz_val_00006198.jpg,5,5,1,clock;microwave;oven,,,,,unreviewed
+28445,VizWiz_val_00005014.jpg,5,4,1,dining table,,,,,unreviewed
+29236,VizWiz_val_00005805.jpg,5,3,1,remote,,,,,unreviewed
+23473,VizWiz_val_00000042.jpg,3,2,1,dining table,,,,,unreviewed
+24877,VizWiz_val_00001446.jpg,5,4,1,cell phone,,,,,unreviewed
+30987,VizWiz_val_00007556.jpg,5,5,1,cup;person,,,,,unreviewed
+28686,VizWiz_val_00005255.jpg,4,4,1,keyboard,,,,,unreviewed
+27428,VizWiz_val_00003997.jpg,5,5,1,remote;tv,,,,,unreviewed
+23856,VizWiz_val_00000425.jpg,5,5,1,laptop,,,,,unreviewed
+31144,VizWiz_val_00007713.jpg,5,3,1,dining table,,,,,unreviewed
+23506,VizWiz_val_00000075.jpg,4,4,1,laptop,,,,,unreviewed
+24195,VizWiz_val_00000764.jpg,5,5,1,dining table;laptop,,,,,unreviewed
+30690,VizWiz_val_00007259.jpg,5,2,1,dining table,,,,,unreviewed
+31143,VizWiz_val_00007712.jpg,5,2,1,person,,,,,unreviewed
+28795,VizWiz_val_00005364.jpg,5,5,1,dining table;knife,,,,,unreviewed
+29157,VizWiz_val_00005726.jpg,5,3,1,car,,,,,unreviewed
+30286,VizWiz_val_00006855.jpg,4,3,1,dining table,,,,,unreviewed
+24214,VizWiz_val_00000783.jpg,5,5,1,laptop,,,,,unreviewed
+23915,VizWiz_val_00000484.jpg,4,4,1,laptop;tv,,,,,unreviewed
+28706,VizWiz_val_00005275.jpg,5,5,1,keyboard;laptop;tv,,,,,unreviewed
+29513,VizWiz_val_00006082.jpg,4,4,1,oven,,,,,unreviewed
+30808,VizWiz_val_00007377.jpg,5,4,1,dining table,,,,,unreviewed
+24199,VizWiz_val_00000768.jpg,5,5,1,cup,,,,,unreviewed
+25530,VizWiz_val_00002099.jpg,4,3,1,clock,,,,,unreviewed
+30133,VizWiz_val_00006702.jpg,4,4,1,bottle;person,,,,,unreviewed
+24527,VizWiz_val_00001096.jpg,5,5,1,laptop;tv,,,,,unreviewed
+26880,VizWiz_val_00003449.jpg,5,5,1,person,,,,,unreviewed
+24347,VizWiz_val_00000916.jpg,5,5,1,laptop,,,,,unreviewed
+24228,VizWiz_val_00000797.jpg,5,5,1,laptop,,,,,unreviewed
+29310,VizWiz_val_00005879.jpg,4,3,1,dining table,,,,,unreviewed
+23817,VizWiz_val_00000386.jpg,5,4,1,laptop;tv,,,,,unreviewed
+25131,VizWiz_val_00001700.jpg,5,4,1,laptop;tv,,,,,unreviewed
+29808,VizWiz_val_00006377.jpg,5,3,1,laptop,,,,,unreviewed
+25260,VizWiz_val_00001829.jpg,5,3,1,dining table,,,,,unreviewed
+26712,VizWiz_val_00003281.jpg,5,2,1,car,,,,,unreviewed
+27935,VizWiz_val_00004504.jpg,5,3,1,person,,,,,unreviewed
+24495,VizWiz_val_00001064.jpg,5,3,1,laptop,,,,,unreviewed
+26108,VizWiz_val_00002677.jpg,5,5,1,dining table;vase,,,,,unreviewed
+26908,VizWiz_val_00003477.jpg,5,2,1,dining table,,,,,unreviewed
+23907,VizWiz_val_00000476.jpg,5,3,1,laptop;tv,,,,,unreviewed
+28145,VizWiz_val_00004714.jpg,5,5,1,book;person,,,,,unreviewed
+27947,VizWiz_val_00004516.jpg,5,5,1,bottle;orange,,,,,unreviewed
+24396,VizWiz_val_00000965.jpg,5,2,1,laptop,,,,,unreviewed
+27268,VizWiz_val_00003837.jpg,5,4,1,bottle,,,,,unreviewed
+30241,VizWiz_val_00006810.jpg,5,3,1,person,,,,,unreviewed
+29508,VizWiz_val_00006077.jpg,5,5,1,bottle,,,,,unreviewed
+25808,VizWiz_val_00002377.jpg,5,2,1,person,,,,,unreviewed
+31048,VizWiz_val_00007617.jpg,5,3,1,oven,,,,,unreviewed
+28655,VizWiz_val_00005224.jpg,5,5,1,apple;keyboard;laptop;tv,,,,,unreviewed
+31179,VizWiz_val_00007748.jpg,5,3,1,person,,,,,unreviewed
+23894,VizWiz_val_00000463.jpg,5,5,1,laptop,,,,,unreviewed
+30910,VizWiz_val_00007479.jpg,5,2,1,book,,,,,unreviewed
+29495,VizWiz_val_00006064.jpg,4,4,1,apple;dining table;keyboard;laptop,,,,,unreviewed
+26886,VizWiz_val_00003455.jpg,5,4,1,bowl,,,,,unreviewed
+24304,VizWiz_val_00000873.jpg,4,3,1,laptop,,,,,unreviewed
+27784,VizWiz_val_00004353.jpg,4,4,1,couch;dining table,,,,,unreviewed
+25202,VizWiz_val_00001771.jpg,5,3,1,cup,,,,,unreviewed
+28254,VizWiz_val_00004823.jpg,5,5,1,keyboard;laptop,,,,,unreviewed
+24402,VizWiz_val_00000971.jpg,5,5,1,laptop,,,,,unreviewed
+28810,VizWiz_val_00005379.jpg,5,4,1,book;dining table;person,,,,,unreviewed
+24405,VizWiz_val_00000974.jpg,5,3,1,laptop,,,,,unreviewed
+24328,VizWiz_val_00000897.jpg,5,4,1,laptop,,,,,unreviewed
+30540,VizWiz_val_00007109.jpg,5,5,1,person,,,,,unreviewed
+28834,VizWiz_val_00005403.jpg,5,3,1,oven,,,,,unreviewed
+23840,VizWiz_val_00000409.jpg,5,5,1,laptop;tv,,,,,unreviewed
+28368,VizWiz_val_00004937.jpg,5,3,1,bowl,,,,,unreviewed
+26006,VizWiz_val_00002575.jpg,5,5,1,dining table;keyboard,,,,,unreviewed
+27782,VizWiz_val_00004351.jpg,5,3,1,dining table,,,,,unreviewed
+29147,VizWiz_val_00005716.jpg,5,2,1,person,,,,,unreviewed
+28978,VizWiz_val_00005547.jpg,5,5,1,car;cell phone;cup,,,,,unreviewed
+26620,VizWiz_val_00003189.jpg,5,3,1,bowl,,,,,unreviewed
+23575,VizWiz_val_00000144.jpg,5,4,1,laptop;tv,,,,,unreviewed
+29077,VizWiz_val_00005646.jpg,5,4,1,person,,,,,unreviewed
+25268,VizWiz_val_00001837.jpg,5,5,1,tv,,,,,unreviewed
+24221,VizWiz_val_00000790.jpg,3,3,1,person,,,,,unreviewed

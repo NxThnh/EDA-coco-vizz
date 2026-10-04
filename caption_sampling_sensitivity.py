@@ -1,8 +1,7 @@
-"""Compare person references using one randomly selected caption per image."""
+"""Compare person references using the lowest-ID valid caption per image."""
 
 import csv
 import json
-import random
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -17,13 +16,12 @@ nltk.data.path.insert(0, str(ROOT / "eda_resources" / "nltk_data"))
 FAMILY = {"man", "men", "woman", "people", "person"}
 
 
-def select_one_per_image(annotations, eligible, seed=42):
+def select_one_per_image(annotations, eligible):
     grouped = defaultdict(list)
     for annotation in annotations:
         if eligible(annotation):
             grouped[annotation["image_id"]].append(annotation)
-    rng = random.Random(seed)
-    return [rng.choice(grouped[image_id]) for image_id in sorted(grouped)]
+    return [min(grouped[image_id], key=lambda a: a["id"]) for image_id in sorted(grouped)]
 
 
 def person_reference_rate(selected):
@@ -62,7 +60,7 @@ def main():
             "Person-family Mentions": mentions,
             "Mentions per 1,000 Selected Captions": round(mentions / len(selected) * 1000, 2),
             "Selected Captions with Person Family (%)": round(matched / len(selected) * 100, 2),
-            "Selection Seed": 42,
+            "Selection Rule": "lowest valid annotation ID",
         })
     output = ROOT / "eda_results/tables/person_reference_one_caption_per_image.csv"
     with output.open("w", newline="", encoding="utf-8") as file:

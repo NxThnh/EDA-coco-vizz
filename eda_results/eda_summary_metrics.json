@@ -95,55 +95,55 @@
   "caption_stats": [
     {
       "Subset": "MS-COCO val2014",
-      "Total Captions": 202654,
-      "Word Mean": 10.45,
+      "Total Captions": 40504,
+      "Word Mean": 10.44,
       "Word Median": 10.0,
-      "Word Std": 2.38,
-      "Word Min": 6,
-      "Word Max": 50,
-      "Char Mean": 52.29,
+      "Word Std": 2.22,
+      "Word Min": 7,
+      "Word Max": 43,
+      "Char Mean": 52.04,
       "Char Median": 50.0,
-      "Total Tokens": 2122711,
-      "Vocab Size": 17348,
-      "TTR (corpus-size dependent)": 0.0082,
-      "MATTR (window=1000)": 0.3209
+      "Total Tokens": 423828,
+      "Vocab Size": 8522,
+      "TTR (corpus-size dependent)": 0.0201,
+      "MATTR (window=1000)": 0.3718
     },
     {
       "Subset": "VizWiz-Captions (precanned/rejected removed)",
-      "Total Captions": 33145,
-      "Word Mean": 12.05,
+      "Total Captions": 7542,
+      "Word Mean": 11.75,
       "Word Median": 11.0,
-      "Word Std": 4.36,
-      "Word Min": 6,
-      "Word Max": 155,
-      "Char Mean": 62.52,
-      "Char Median": 57.0,
-      "Total Tokens": 402826,
-      "Vocab Size": 10851,
-      "TTR (corpus-size dependent)": 0.0269,
-      "MATTR (window=1000)": 0.3196
+      "Word Std": 3.95,
+      "Word Min": 7,
+      "Word Max": 63,
+      "Char Mean": 60.64,
+      "Char Median": 56.0,
+      "Total Tokens": 89433,
+      "Vocab Size": 6069,
+      "TTR (corpus-size dependent)": 0.0679,
+      "MATTR (window=1000)": 0.3944
     }
   ],
   "person_reference_summary": [
     {
       "Dataset": "MS-COCO val2014",
-      "Caption Count": 202654,
+      "Caption Count": 40504,
       "Image Count": 40504,
       "Noun Family": "man/men/woman/people/person",
-      "Mentions": 63820,
-      "Mentions per 1,000 captions": 314.92,
-      "Captions with family (%)": 29.72,
-      "Images with family in any descriptive caption (%)": 43.77
+      "Mentions": 13233,
+      "Mentions per 1,000 captions": 326.71,
+      "Captions with family (%)": 30.92,
+      "Images with family in any descriptive caption (%)": 30.92
     },
     {
       "Dataset": "VizWiz val",
-      "Caption Count": 33145,
+      "Caption Count": 7542,
       "Image Count": 7750,
       "Noun Family": "man/men/woman/people/person",
-      "Mentions": 2452,
-      "Mentions per 1,000 captions": 73.98,
-      "Captions with family (%)": 7.19,
-      "Images with family in any descriptive caption (%)": 17.42
+      "Mentions": 598,
+      "Mentions per 1,000 captions": 79.29,
+      "Captions with family (%)": 7.78,
+      "Images with family in any descriptive caption (%)": 7.57
     }
   ],
   "coco_top_supercategories": [
@@ -213,31 +213,31 @@
       "Precanned Count (/5)": 0,
       "Num Images": 5222,
       "Percentage": 67.38,
-      "Interpretation": "Five descriptive captions"
+      "Interpretation": "Five non-precanned captions"
     },
     {
       "Precanned Count (/5)": 1,
       "Num Images": 1297,
       "Percentage": 16.74,
-      "Interpretation": "One refusal; four descriptive captions"
+      "Interpretation": "One refusal; four non-precanned captions"
     },
     {
       "Precanned Count (/5)": 2,
       "Num Images": 480,
       "Percentage": 6.19,
-      "Interpretation": "Two refusals; three descriptive captions"
+      "Interpretation": "Two refusals; three non-precanned captions"
     },
     {
       "Precanned Count (/5)": 3,
       "Num Images": 286,
       "Percentage": 3.69,
-      "Interpretation": "Three refusals; two descriptive captions"
+      "Interpretation": "Three refusals; two non-precanned captions"
     },
     {
       "Precanned Count (/5)": 4,
       "Num Images": 273,
       "Percentage": 3.52,
-      "Interpretation": "Four refusals; one descriptive caption"
+      "Interpretation": "Four refusals; one non-precanned caption"
     },
     {
       "Precanned Count (/5)": 5,

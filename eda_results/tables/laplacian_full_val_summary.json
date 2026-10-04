@@ -1,0 +1,20 @@
+{
+  "COCO": {
+    "images": 40504,
+    "median": 1140.077,
+    "bootstrap_ci95": [
+      1126.1574,
+      1154.8296
+    ],
+    "upsampled_images": 24799
+  },
+  "VizWiz": {
+    "images": 7750,
+    "median": 152.1573,
+    "bootstrap_ci95": [
+      147.5054,
+      157.3116
+    ],
+    "upsampled_images": 759
+  }
+}

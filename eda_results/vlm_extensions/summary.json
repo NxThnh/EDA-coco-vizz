@@ -1,8 +1,44 @@
 {
   "lexical": {
     "jensen_shannon_divergence_bits": 0.266183,
+    "coco_half_split_js_bits_mean": 0.018418,
+    "coco_half_split_js_bits_p95": 0.01863,
+    "coco_half_split_seed": 42,
+    "coco_half_split_repeats": 100,
+    "vizwiz_oov_vs_coco_train_token_pct": 4.5314,
+    "vizwiz_oov_vs_coco_train_type_pct": 36.4543,
     "tokenization": "lowercase ASCII word regex; one lowest-ID valid caption per image",
     "warning": "Lexical divergence, not a VLM embedding distance."
+  },
+  "vizwiz_chair_ontology": {
+    "valid_caption_images": 7542,
+    "images_with_coco80_word": 5771,
+    "image_coverage_pct": 76.518,
+    "valid_captions": 33145,
+    "captions_with_coco80_word": 17456,
+    "caption_coverage_pct": 52.666,
+    "method": "CHAIR synonyms; lexical mention only, not visual ground truth"
+  },
+  "llava_reference_token_lengths": {
+    "status": "measured",
+    "tokenizer": "LLaVA-1.5-7B tokenizer.model (SentencePiece)",
+    "scope": "one lowest-ID valid reference caption per image; excludes prompt, image tokens and model output",
+    "COCO": {
+      "images": 40504,
+      "p50": 13,
+      "p90": 17,
+      "p95": 19,
+      "p99": 24,
+      "max": 58
+    },
+    "VizWiz": {
+      "images": 7542,
+      "p50": 14,
+      "p90": 21,
+      "p95": 25,
+      "p99": 35,
+      "max": 96
+    }
   },
   "vizwiz_caption_agreement": {
     "images_with_two_or_more_valid_captions": 7268,
@@ -10,5 +46,11 @@
     "images_with_zero_valid_captions": 208,
     "warning": "Word overlap is not semantic agreement or image-caption alignment."
   },
-  "scope": "Only COCO/VizWiz val images are local. No VLM weights, image encoder, model tokenizer or VizWiz object ground truth supplied."
+  "coco_caption_agreement": {
+    "images_with_two_or_more_valid_captions": 40504,
+    "mean_image_level_pairwise_content_jaccard": 0.1989
+  },
+  "scope": "Only COCO/VizWiz val images are local. No selected VLM weights, image encoder, model tokenizer or VizWiz object ground truth supplied.",
+  "manifest_coco500_overlap": 6,
+  "manifest_coco500_file": "eda_results\\coco500\\coco500_image_ids_seed42.csv"
 }

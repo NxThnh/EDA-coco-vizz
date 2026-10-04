@@ -1,31 +1,31 @@
 Dataset,Rank,Entity,Count,"Mentions per 1,000 captions",Extraction
-COCO val2014 captions,1,man,24786,122.31,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,2,people,14077,69.46,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,3,woman,13035,64.32,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,4,street,10490,51.76,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,5,table,9834,48.53,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,6,person,8460,41.75,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,7,dog,7430,36.66,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,8,group,7367,36.35,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,9,plate,7049,34.78,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,10,train,7038,34.73,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,11,field,7029,34.68,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,12,tennis,6856,33.83,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,13,cat,6647,32.8,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,14,sign,6258,30.88,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-COCO val2014 captions,15,room,6146,30.33,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,1,computer,3168,95.58,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,2,screen,3081,92.96,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,3,table,2839,85.65,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,4,bottle,2729,82.34,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,5,box,2503,75.52,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,6,person,1686,50.87,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,7,package,1549,46.73,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,8,hand,1509,45.53,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,9,food,1333,40.22,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,10,label,1329,40.1,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,11,surface,1241,37.44,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,12,counter,1235,37.26,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,13,paper,1116,33.67,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,14,window,1035,31.23,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
-VizWiz val descriptive captions,15,container,1012,30.53,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,1,man,5320,131.35,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,2,people,2778,68.59,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,3,woman,2725,67.28,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,4,street,2137,52.76,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,5,table,2069,51.08,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,6,group,1760,43.45,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,7,person,1667,41.16,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,8,field,1664,41.08,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,9,dog,1502,37.08,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,10,plate,1478,36.49,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,11,train,1438,35.5,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,12,tennis,1416,34.96,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,13,cat,1333,32.91,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,14,room,1255,30.98,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+COCO val2014 captions,15,sign,1208,29.82,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,1,screen,684,90.69,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,2,computer,678,89.9,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,3,table,613,81.28,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,4,bottle,553,73.32,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,5,box,526,69.74,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,6,person,414,54.89,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,7,package,331,43.89,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,8,hand,325,43.09,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,9,food,317,42.03,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,10,label,297,39.38,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,11,paper,285,37.79,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,12,counter,253,33.55,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,13,surface,247,32.75,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,14,window,236,31.29,NLTK noun POS + WordNet lemma; generic image/location nouns excluded
+VizWiz val descriptive captions,15,piece,232,30.76,NLTK noun POS + WordNet lemma; generic image/location nouns excluded

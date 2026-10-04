@@ -1,0 +1,27 @@
+{
+  "checkpoint": "openai/clip-vit-large-patch14-336",
+  "sample": "evaluation_manifest_seed42.csv",
+  "image_preprocessing": "LLaVA-1.5-7B image_aspect_ratio=pad (square pad with CLIP mean), then CLIP 336 resize",
+  "caption_rule": "one lowest-ID valid caption per image",
+  "device": "cuda",
+  "warning": "CLIP cosine is a proxy, not visual grounding or LLaVA answer accuracy",
+  "COCO": {
+    "n": 500,
+    "paired_cosine_mean": 0.2552,
+    "shuffled_cosine_mean": 0.08742,
+    "paired_minus_shuffled": 0.16778
+  },
+  "VizWiz": {
+    "n": 483,
+    "paired_cosine_mean": 0.26027,
+    "shuffled_cosine_mean": 0.13186,
+    "paired_minus_shuffled": 0.12841
+  },
+  "image_domain": {
+    "balanced_n_per_domain": 483,
+    "mean_cross_domain_cosine": 0.49009,
+    "mean_within_coco_cosine": 0.51815,
+    "mean_within_vizwiz_cosine": 0.59947,
+    "centroid_cosine": 0.87791
+  }
+}

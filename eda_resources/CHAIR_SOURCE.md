@@ -1,0 +1,1 @@
+`chair_synonyms.txt` is copied from the [original CHAIR repository](https://github.com/LisaAnne/Hallucination/blob/master/data/synonyms.txt) for reproducible lexical coverage counts. The source repository states a BSD 2-Clause license. The CHAIR authors retain their copyright; see the [source repository](https://github.com/LisaAnne/Hallucination) for its license and attribution.

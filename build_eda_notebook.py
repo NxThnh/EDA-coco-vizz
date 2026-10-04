@@ -97,7 +97,7 @@ cell1_md = r"""# 🔬 BÁO CÁO PHÂN TÍCH KHÁM PHÁ DỮ LIỆU (EDA)
         <li><b>Tập dữ liệu khảo sát:</b> MS-COCO val2014 và VizWiz-Captions val</li>
         <li><b>Phạm vi phân tích:</b> 40.504 ảnh COCO có annotation | 7.750 ảnh VizWiz có ảnh gốc và caption</li>
         <li><b>Mẫu kiểm tra tái lập:</b> 500 ảnh COCO lấy ngẫu nhiên với seed=42 cho Bảng 2 và Bảng 4</li>
-        <li><b>Mục tiêu chính:</b> Định lượng hóa khoảng cách miền dữ liệu (Domain Gap) nhằm đề xuất giải pháp kỹ thuật, chiến lược tiền xử lý và kiến trúc mô hình Image Captioning tối ưu cho người khiếm thị.</li>
+        <li><b>Mục tiêu chính:</b> Định lượng khoảng cách miền COCO–VizWiz và xác định giới hạn đánh giá LLaVA-1.5-7B trên ảnh đời thực.</li>
     </ul>
 </div>
 
@@ -114,14 +114,14 @@ EDA đối chiếu ảnh và annotation của **MS-COCO val2014** với **VizWiz
    - Kích thước file COCO trung bình là $576.5 \times 485.1\text{px}$ (0.28 MP).
    - Kích thước file VizWiz sau EXIF trung bình là $1032.1 \times 1374.7\text{px}$ (1.57 MP), với chiều rộng nhỏ nhất 23 px và chiều cao lớn nhất 3264 px.
 3. **🌫️ Chỉ báo chi tiết tần số cao của ảnh:**
-   - Sau EXIF transpose và resize giữ tỷ lệ về cạnh ngắn 480 px, median phương sai Laplacian là **1197.90** ở COCO và **149.19** ở VizWiz. Đây là chỉ báo độ mạnh biên/texture, không tự phân biệt motion blur, defocus và cảnh ít texture.
+   - Trên toàn bộ ảnh val, sau EXIF transpose và resize giữ tỷ lệ về cạnh ngắn 480 px, median phương sai Laplacian là **1.140,08** ở COCO và **152,16** ở VizWiz. Đây là chỉ báo biên/texture, không tự phân biệt motion blur, defocus và cảnh ít texture.
 4. **⚠️ Tín hiệu ảnh không thể nhận diện:**
    - **32.62%** ảnh có ít nhất 1/5 annotator dùng caption từ chối; tỷ lệ đồng thuận đa số **≥3/5 là 9.69%**, và đồng thuận tuyệt đối 5/5 là **2.48%**.
 5. **🔤 Nhu cầu Đọc Chữ viết (Scene Text / OCR Relevance):**
    - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; theo đồng thuận đa số **≥3/5 là 64.75%**, và 47.10% đạt 5/5. Dữ liệu cho thấy scene text phổ biến, nhưng không đủ để kết luận mục đích chụp chủ yếu là đọc nhãn thuốc.
 6. **👥 Lệch pha Ngữ nghĩa (Semantic Shift):**
     - Trong annotation instance COCO, `person` chiếm **30.20%** số object; tỷ lệ này có đơn vị khác với tần suất từ trong caption.
-    - Caption VizWiz thường nhắc `computer`, `screen`, `bottle`, `box` và `label`; caption COCO thường nhắc `man`, `people` và `woman`. Nhóm từ chỉ người được tổng hợp riêng theo caption và ảnh trong `person_reference_summary.csv`."""
+    - Với một caption hợp lệ có ID thấp nhất mỗi ảnh, VizWiz thường nhắc `screen`, `computer`, `bottle`, `box` và `label`; COCO thường nhắc `man`, `people` và `woman`. Phần 8 đối chiếu JS với nhiễu nền, Jaccard với COCO và kiểm tra giao nhau val2014/train2017."""
 cells.append(create_markdown_cell(cell1_md))
 
 # ==============================================================================
@@ -243,11 +243,11 @@ cell6_md = r"""---
 ## 2. ĐỘ PHÂN GIẢI & ĐẢO NGƯỢC TỶ LỆ KHUNG HÌNH (RESOLUTION & ASPECT RATIO INVERSION)
 
 Tỷ lệ khung hình (Aspect Ratio) được xác định bởi:
-$$\\text{Aspect Ratio (AR)} = \\frac{\\text{Width}}{\\text{Height}}$$
+$$\text{Aspect Ratio (AR)} = \frac{\text{Width}}{\text{Height}}$$
 
-- Ảnh ngang (Landscape): $\\text{AR} > 1.05$
-- Ảnh dọc (Portrait): $\\text{AR} < 0.95$
-- Ảnh vuông (Square): $0.95 \\le \\text{AR} \\le 1.05$
+- Ảnh ngang (Landscape): $\text{AR} > 1.05$
+- Ảnh dọc (Portrait): $\text{AR} < 0.95$
+- Ảnh vuông (Square): $0.95 \le \text{AR} \le 1.05$
 
 Kích thước COCO lấy từ annotation; kích thước VizWiz đo trên file ảnh sau EXIF transpose. Khảo sát gồm $40.504$ ảnh MS-COCO val2014 và $7.750$ ảnh VizWiz-Captions val. Các số pixel chỉ mô tả phiên bản file/annotation dùng ở đây: COCO trong bộ khảo sát có cạnh tối đa 640 px, còn VizWiz được đo từ file phân phối. Chênh lệch này chưa chứng minh sự khác nhau về độ phân giải cảm biến, độ chi tiết ảnh gốc hoặc chất lượng thu nhận."""
 cells.append(create_markdown_cell(cell6_md))
@@ -281,14 +281,14 @@ exec_counter += 1
 # ==============================================================================
 cell8_md = r"""### ⚠️ Ý Nghĩa Kỹ Thuật Đối Với Pipeline Tiền Xử Lý (Preprocessing):
 
-Kích thước đầu vào phụ thuộc bộ xử lý ảnh của từng mô hình. Với crop/resize vuông cố định, cần ghi kích thước và vùng bị cắt; với độ phân giải động hoặc nhiều tile, cần ghi số tile và ngân sách visual-token. Cấu hình tiền xử lý của các mô hình được đánh giá sẽ được báo cáo cùng kết quả thực nghiệm.
+Config LLaVA-1.5-7B được chọn ghi `image_aspect_ratio: pad` trước CLIP ViT-L/14-336. Phần 8 đo diện tích padding trên từng ảnh; số patch là 576. Để đối chiếu các mode khác, báo cáo cũng tính diện tích center crop và độ méo nếu resize thẳng vuông.
 
 1. **Hiểm họa từ phép `Direct Resize` (Bóp méo hình dạng - Squishing):**
-   - Với **99.23% ảnh dọc** trong VizWiz, phép resize trực tiếp về $224 \\times 224$ sẽ nén mạnh chiều dọc (tỷ lệ $3:4$ bị bóp thành $1:1$), làm biến dạng các đối tượng hình học thẳng đứng (như chai thuốc, hộp sữa) và làm nhòe chữ viết trên nhãn sản phẩm.
+    - Với **99.23% ảnh dọc** trong VizWiz, phép resize trực tiếp về $336 \times 336$ sẽ nén chiều dọc (tỷ lệ $3:4$ thành $1:1$). Đây là kịch bản so sánh; LLaVA-1.5-7B được chọn dùng pad.
 2. **Hiểm họa từ phép `Center Crop` (Cắt xén trung tâm):**
     - Center crop có thể loại bỏ nội dung ở rìa ảnh ở cả hai tập; tỷ lệ vật thể lệch tâm và vùng chữ bị cắt chưa được đo trong EDA này.
 3. **Đề xuất Kiến trúc cho Khóa Luận:**
-    - Smart Letterbox Padding là phương án cần kiểm chứng bằng thí nghiệm so sánh với tiền xử lý mặc định của từng mô hình, trên cùng tập ảnh và cùng ngân sách token.
+    - Vì checkpoint đã dùng padding vuông, thí nghiệm cần so với mode pad mặc định và kiểm tra liệu thay đổi tiền xử lý có cải thiện kết quả trên cùng tập ảnh, cùng ngân sách token hay không.
 
 ### Phân tích Visual-token
 Với patch $P\times P$, số visual-token xấp xỉ $\lceil H'/P\rceil\lceil W'/P\rceil$. Fixed square preprocessing cho hai tập cùng số token danh nghĩa, nhưng lượng nội dung còn lại phụ thuộc resize/crop. Dynamic tiling có thể tăng số tile khi cần giữ chi tiết nhỏ; mức tăng thực tế phụ thuộc bộ xử lý ảnh của mô hình. Báo cáo thực nghiệm cần ghi image size, patch size, crop/pad/tile, số visual-token trung bình và tỷ lệ vùng ảnh bị crop."""
@@ -300,7 +300,7 @@ cells.append(create_markdown_cell(cell8_md))
 cell9_md = r"""---
 ## 3. PHÂN TÍCH CHÚ THÍCH & ĐẶC TRƯNG NGÔN NGỮ (CAPTION LINGUISTICS & VOCABULARY SHIFT)
 
-Khảo sát dùng $202,654$ caption COCO và **33,145 caption VizWiz hợp lệ**. Có 5,167 placeholder báo lỗi chất lượng và 964 caption gắn cờ `is_rejected`; 526 caption thuộc cả hai nhóm. Sau khi loại hợp của hai nhóm, còn 33,145 caption dùng cho thống kê ngôn ngữ, token và thực thể.
+Khảo sát ngôn ngữ chính dùng một caption hợp lệ có annotation ID thấp nhất mỗi ảnh: **40.504 caption COCO** và **7.542 caption VizWiz**. Trong kho VizWiz có 5.167 placeholder báo lỗi chất lượng và 964 caption gắn cờ `is_rejected`; 526 caption thuộc cả hai nhóm. Jaccard và đồng thuận object dùng tất cả caption hợp lệ vì cần nhiều chú thích trên một ảnh.
 
 Sau lọc, **208/7.750 ảnh VizWiz không còn caption hợp lệ**. Số caption quan sát được trên mỗi ảnh không bằng nhau, nên tỷ lệ ảnh có ít nhất một caption nhắc một nhóm từ chịu ảnh hưởng của việc lọc. Đây là so sánh annotation còn lại, không phải số vật thể hiện diện trong ảnh.
 
@@ -322,7 +322,7 @@ render_table(df_captions, "Bảng 3: So sánh Thống kê Ngôn ngữ Chú thíc
 show_figure(
     filename="03_caption_length_and_tokens.png",
     title="Biểu đồ 3: Phân bố Độ dài Caption và So sánh Từ vựng Đặc trưng",
-    caption="Độ dài caption gồm cả đuôi phân bố đến 155 từ (ECDF) và Top-15 danh từ theo từng tập."
+    caption="Độ dài của một caption hợp lệ mỗi ảnh, gồm cả đuôi phân bố (ECDF) và Top-15 danh từ theo từng tập."
 )"""
 
 df_captions_html = pd.read_csv(os.path.join(TAB_DIR, "caption_stats.csv")).to_html(classes='table table-hover table-striped', index=False)
@@ -365,15 +365,15 @@ exec_counter += 1
 cell12_md = r"""### 💡 Phát Hiện Ngôn Ngữ Học Cốt Lõi:
 
 1. **Phân bố độ dài câu chú thích (Long-tail Distribution):**
-   - COCO có độ dài câu tập trung rất chặt chẽ xung quanh mức **10.45 từ** ($\pm 2.38$). Hầu hết là các câu miêu tả khái quát cấu trúc đơn giản (*"A man standing on a street"*).
-     - VizWiz (caption hợp lệ) có độ dài trung bình **12.05 từ** ($\pm 4.36$), giá trị lớn nhất **155 từ**. Caption ngoại lai ở image_id 24317 chép một đoạn chữ dài trên màn hình; biểu đồ ECDF vẫn hiển thị toàn bộ đuôi phân bố.
+   - COCO có trung bình **10,44 từ** ($\pm 2,22$) trên caption đã chọn.
+   - VizWiz có trung bình **11,75 từ** ($\pm 3,95$), tối đa **63 từ** trong mẫu một caption mỗi ảnh.
 2. **Độ đa dạng từ vựng trên cùng cửa sổ token:**
     - TTR toàn kho là 0.0082 (COCO) và 0.0269 (VizWiz), nhưng không dùng để xếp hạng vì hai corpus có 2.12 triệu và 0.40 triệu token.
-     - MATTR cửa sổ 1.000 token gần nhau: **0.3209 (COCO)** và **0.3196 (VizWiz)**.
+     - MATTR cửa sổ 1.000 token là **0,3718 (COCO)** và **0,3944 (VizWiz)**.
 3. **Danh từ trong caption:**
-      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `computer`, `screen`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Khi gộp `man/men/woman/people/person`, COCO có 314,92 lượt nhắc/1.000 caption, VizWiz 73,98. Tỷ lệ ảnh có ít nhất một caption hợp lệ nhắc nhóm này là 43,77% và 17,42%; đây là tần suất văn bản, không phải số người thực sự trong ảnh.
+      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `screen`, `computer`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Khi gộp `man/men/woman/people/person`, COCO có 326,71 lượt nhắc/1.000 caption, VizWiz 79,29. Tỷ lệ caption đã chọn nhắc nhóm này là 30,92% và 7,78%; đây là tần suất văn bản.
 
-**Kiểm tra một caption mỗi ảnh (`seed=42`):** COCO có 40.504 ảnh đủ điều kiện; VizWiz có 7.542 ảnh đủ điều kiện, còn 208 ảnh không có caption hợp lệ. Với đúng một caption hợp lệ được chọn ngẫu nhiên cho mỗi ảnh, tỷ lệ có từ chỉ người là **29,47%** và **7,24%**; số lượt nhắc trên 1.000 caption là **311,99** và **73,99**. Khác biệt vẫn còn khi số caption trên mỗi ảnh bằng nhau. Kết quả ở `eda_results/tables/person_reference_one_caption_per_image.csv`; tái lập bằng `caption_sampling_sensitivity.py`."""
+Quy tắc một caption hợp lệ có annotation ID thấp nhất được dùng ở tất cả thống kê ngôn ngữ chính. COCO có 40.504 ảnh đủ điều kiện; VizWiz có 7.542 ảnh, còn 208 ảnh không có caption hợp lệ. Bảng đối chiếu ở `eda_results/tables/person_reference_one_caption_per_image.csv`."""
 cells.append(create_markdown_cell(cell12_md))
 
 # ==============================================================================
@@ -444,6 +444,12 @@ df_quality = pd.read_csv(os.path.join(TAB_DIR, "vizwiz_quality_breakdown.csv"))
 # Hiển thị bảng
 render_table(df_quality, "Bảng 5: Số caption từ chối trên 7.750 ảnh VizWiz")
 
+show_figure(
+    filename="05_vizwiz_quality_and_text_issues.png",
+    title="Biểu đồ 5: Caption từ chối, chữ viết, biên/texture và độ sáng",
+    caption="Caption từ chối, đồng thuận chữ viết, chỉ báo biên/texture Laplacian và độ sáng trung bình. Hai biểu đồ đo ảnh dùng toàn bộ val."
+)
+
 # Đọc thông số đo lường quang học khách quan
 with open(os.path.join(RESULTS_DIR, "eda_summary_metrics.json"), "r", encoding="utf-8") as f:
     metrics = json.load(f)
@@ -457,32 +463,15 @@ print(f" - Bootstrap 95% CI VizWiz: {blur_lum['vizwiz_median_blur_ci95']}")
 print(f" - Median luminance COCO:   {blur_lum['coco_median_luminance']:.2f}")
 print(f" - Median luminance VizWiz: {blur_lum['vizwiz_median_luminance']:.2f}")
 print(f" - Chuan hoa: {blur_lum['normalization']}; n={blur_lum['sample_size_per_dataset']}/tap; seed={blur_lum['sample_seed']}")
+full_lap = json.load(open(os.path.join(TAB_DIR, 'laplacian_full_val_summary.json'), encoding='utf-8'))
+print('LAPLACIAN TOAN BO VAL:')
+for dataset, row in full_lap.items():
+    print(f" - {dataset}: n={row['images']}, median={row['median']:.2f}, CI95={row['bootstrap_ci95']}")
 render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_resize_sensitivity.csv')),
              'Độ nhạy Laplacian theo kích thước ảnh gốc')
-render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_by_precanned.csv')),
-             'Laplacian theo 6 mức đồng thuận caption từ chối (mẫu VizWiz n=1.000)')
+"""
 
-# Hiển thị Biểu đồ 5
-show_figure(
-    filename="05_vizwiz_quality_and_text_issues.png",
-    title="Biểu đồ 5: Caption từ chối, chữ viết, biên/texture và độ sáng",
-    caption="Caption từ chối, đồng thuận chữ viết, chỉ báo biên/texture Laplacian và độ sáng trung bình. Mỗi tập có 1.000 ảnh trong hai biểu đồ đo ảnh."
-)"""
-
-df_quality_html = pd.read_csv(os.path.join(TAB_DIR, "vizwiz_quality_breakdown.csv")).to_html(classes='table table-hover table-striped', index=False)
-out17_text = """IMAGE METRICS SAU CHUAN HOA EXIF + CANH NGAN 480 PX (n=1.000/tap, seed=42):
- - Median Laplacian COCO:   1197.90
- - Median Laplacian VizWiz: 149.19
- - Median luminance COCO:   113.15
- - Median luminance VizWiz: 107.95
- - Laplacian la chi bao bien/texture, khong xac dinh rieng nguyen nhan blur."""
-
-out17 = [
-    make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 5: Phân bố Mức độ Suy giảm Chất lượng trên 7.750 ảnh VizWiz</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_quality_html}</div></div>"""),
-    make_stream_output(out17_text),
-    make_display_output(png_b64=get_image_b64("05_vizwiz_quality_and_text_issues.png"), plain_text="<Figure 5: Quality, Text & Blur>")
-]
-cells.append(create_code_cell(cell17_code, out17, exec_counter))
+cells.append(create_code_cell(cell17_code))
 exec_counter += 1
 
 # ==============================================================================
@@ -497,7 +486,7 @@ cell18_md = r"""### 💡 Nhận Định Định Lượng Về Độ Suy Giảm &
    - **73.72%** ảnh có ít nhất 1/5 annotator đánh dấu có chữ; đồng thuận đa số **≥3/5 là 64.75%**; đồng thuận 5/5 là **47.10%**.
    - Điều này cho thấy OCR là năng lực quan trọng, nhưng không tự chứng minh mục đích chụp chủ yếu là đọc nhãn thuốc.
 3. **Phương sai Laplacian sau chuẩn hóa:**
-   - Median là **1197.90** ở COCO và **149.19** ở VizWiz sau EXIF transpose và resize cạnh ngắn 480 px.
+   - Median toàn bộ val là **1.140,08** ở COCO và **152,16** ở VizWiz sau EXIF transpose và resize cạnh ngắn 480 px.
     - Chênh lệch cho thấy VizWiz có ít năng lượng biên/texture hơn trong mẫu đo, nhưng không cho phép quy toàn bộ nguyên nhân cho rung tay; defocus, nén JPEG và cảnh ít texture cũng có thể làm chỉ số giảm.
 
 ### Mờ/lệch tâm có tương quan với CHAIR/POPE không?
@@ -505,11 +494,11 @@ cell18_md = r"""### 💡 Nhận Định Định Lượng Về Độ Suy Giảm &
 _lap = metrics["blur_luminance"]
 _ci_c = _lap["coco_median_blur_ci95"]
 _ci_v = _lap["vizwiz_median_blur_ci95"]
-cell18_md += f"\n\nBootstrap percentile 95% CI (3.000 lần, n=1.000 ảnh/tập): COCO [{_ci_c[0]:.2f}, {_ci_c[1]:.2f}], VizWiz [{_ci_v[0]:.2f}, {_ci_v[1]:.2f}].\n\n"
+cell18_md += "\n\nTrên toàn bộ val, bootstrap 95% CI (1.000 lần): COCO [1.126,16; 1.154,83], VizWiz [147,51; 157,31]. Bảng độ nhạy bên dưới vẫn dựa trên mẫu 1.000 ảnh/tập.\n\n"
 cell18_md += "| Caption từ chối | Số ảnh mẫu VizWiz | Median Laplacian | Bootstrap 95% CI |\n| :---: | ---: | ---: | :---: |\n"
 for _g in _lap["vizwiz_laplacian_by_precanned"]:
     cell18_md += f"| {_g['Precanned Count (/5)']}/5 | {_g['Sample Images']} | {_g['Median Laplacian Variance']:.2f} | [{_g['CI 95% Low']:.2f}, {_g['CI 95% High']:.2f}] |\n"
-cell18_md += "\nTrung vị giảm theo số caption từ chối trong mẫu; nhóm 4/5 và 5/5 nhỏ, CI rộng. Kết quả hỗ trợ giá trị chỉ báo của Laplacian nhưng không gán nguyên nhân mờ cho từng ảnh. Độ sáng trung vị COCO 113,15 và VizWiz 107,95 gần nhau, không phân biệt rõ hai tập."
+cell18_md += "\nTrung vị giảm theo số caption từ chối trong mẫu; nhóm 4/5 và 5/5 nhỏ, CI rộng. Kết quả hỗ trợ giá trị chỉ báo của Laplacian nhưng không gán nguyên nhân mờ cho từng ảnh. Độ sáng trung vị toàn val COCO 113,86 và VizWiz 108,04 gần nhau."
 cell18_md += "\n\nResize cạnh ngắn lên 480 px đã phóng lớn 610/1.000 ảnh COCO và 90/1.000 ảnh VizWiz. Trên tập con chỉ giảm kích thước ảnh, median Laplacian COCO là 1.605,96 (n=390; bootstrap 95% CI [1.441,75; 1.894,75]) và VizWiz là 158,33 (n=910; [147,12; 176,19]). Hai tập con có thành phần khác nhau, nên chênh lệch này chưa tách riêng chất lượng ảnh khỏi nội dung và kích thước gốc."
 cells.append(create_markdown_cell(cell18_md))
 
@@ -524,7 +513,7 @@ Phần này tổng hợp các khác biệt **đã có số liệu trong EDA**.
 | Khác biệt đã đo | MS-COCO val2014 | VizWiz-Captions | Ý nghĩa đối với mô hình |
 | :--- | :---: | :---: | :--- |
 | **Hướng ảnh** | 71,71% ảnh ngang | 99,23% ảnh dọc | Resize/crop vuông có thể làm mất thông tin ở ảnh VizWiz. |
-| **Median Laplacian đã chuẩn hóa (n=1.000/tập)** | 1.197,90 | 149,19 | Chỉ báo biên/texture thấp hơn; chưa xác định riêng nguyên nhân blur. |
+| **Median Laplacian đã chuẩn hóa (toàn bộ val)** | 1.140,08 | 152,16 | Chỉ báo biên/texture thấp hơn; chưa xác định riêng nguyên nhân blur. |
 | **Ảnh có chữ** | Không có nhãn OCR tương ứng | 73,72% ở ≥1/5; 64,75% ở ≥3/5 | Mô hình chỉ nhận dạng vật thể có thể bỏ sót nội dung chính trên nhãn và màn hình. |
 | **Caption từ chối** | Không có nhãn tương ứng | 32,62% ở ≥1/5; 9,69% ở ≥3/5; 2,48% ở 5/5 | Hệ thống cần biết từ chối thay vì luôn sinh một mô tả chắc chắn. |
 
@@ -714,17 +703,25 @@ vlm_end = "<!-- VLM_EDA_END -->"
 assert report_text.count(vlm_start) == 1 and report_text.count(vlm_end) == 1
 vlm_section = report_text.split(vlm_start, 1)[1].split(vlm_end, 1)[0].strip()
 cells.append(create_markdown_cell(vlm_section))
-cells.append(create_code_cell("""# Tái lập các bảng EDA VLM được trình bày ở Phần 9.
+cells.append(create_code_cell("""# Đọc các bảng EDA VLM. Cell 2 kiểm soát cờ REBUILD.
 import subprocess, sys
 from pathlib import Path
 import pandas as pd
-from IPython.display import display
-subprocess.run([sys.executable, str(Path(BASE_DIR) / 'vlm_eda_extensions.py')],
-               cwd=BASE_DIR, check=True, stdout=subprocess.DEVNULL)
+from IPython.display import display, HTML
 vlm_dir = Path(BASE_DIR) / 'eda_results' / 'vlm_extensions'
-display(pd.read_csv(vlm_dir / 'integrity.csv'))
-display(pd.read_csv(vlm_dir / 'train_val_overlap.csv'))
-display(pd.read_csv(vlm_dir / 'vocabulary.csv'))
+if REBUILD or not (vlm_dir / 'summary.json').exists():
+    subprocess.run([sys.executable, str(Path(BASE_DIR) / 'vlm_eda_extensions.py')],
+                   cwd=BASE_DIR, check=True)
+for title, filename in [('Toàn vẹn annotation', 'integrity.csv'),
+                        ('Giao nhau caption', 'train_val_overlap.csv'),
+                        ('Từ vựng', 'vocabulary.csv'),
+                        ('Phân tầng manifest', 'evaluation_manifest_strata_seed42.csv')]:
+    frame = pd.read_csv(vlm_dir / filename).fillna('—')
+    display(HTML('<h4>' + title + '</h4><div style="overflow-x:auto;max-width:100%">' +
+                 frame.to_html(index=False, escape=True, na_rep='—',
+                               classes='vlm-table') + '</div>' +
+                 '<style>.vlm-table{table-layout:auto;width:max-content;max-width:none}' +
+                 '.vlm-table th,.vlm-table td{white-space:normal;min-width:7em;max-width:22em;word-break:break-word;padding:6px}</style>'))
 """))
 
 # ==============================================================================
