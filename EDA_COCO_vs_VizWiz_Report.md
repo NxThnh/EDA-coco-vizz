@@ -7,6 +7,8 @@
 
 Báo cáo so sánh MS-COCO val2014 (40.504 ảnh) và VizWiz-Captions val (7.750 ảnh). Các kết quả dưới đây mô tả khác biệt dữ liệu đầu vào; báo cáo chưa đo sai số của mô hình hoặc quan hệ nhân quả với hallucination.
 
+Phần 9 mở rộng EDA cho VLM bằng kiểm tra toàn vẹn, giao nhau train/val, phân kỳ từ vựng, đồng thuận caption và thiết kế tập đánh giá. Ba phép đo cần checkpoint VLM và ground truth object VizWiz được ghi rõ là chưa có kết quả.
+
 ### Các phát hiện định lượng cốt lõi
 
 1. COCO có 71,71% ảnh ngang; VizWiz có 99,23% ảnh dọc.
@@ -15,6 +17,7 @@ Báo cáo so sánh MS-COCO val2014 (40.504 ảnh) và VizWiz-Captions val (7.750
 4. Trong VizWiz, 32,62% ảnh có ít nhất một caption từ chối; 9,69% có ít nhất ba và 2,48% có năm caption từ chối.
 5. Có 73,72% ảnh VizWiz được ít nhất một annotator đánh dấu có chữ; 64,75% đạt đồng thuận đa số.
 6. Caption VizWiz nhắc nhiều đến computer (95,58), screen (92,96), bottle (82,34), box (75,52) và label (40,10) trên 1.000 caption hợp lệ. Khi gộp man/men/woman/people/person, COCO có 314,92 lượt nhắc/1.000 caption so với 73,98 ở VizWiz; tỷ lệ ảnh có ít nhất một caption hợp lệ nhắc nhóm này là 43,77% so với 17,42%.
+7. EDA mở rộng đo phân kỳ unigram Jensen–Shannon **0,266183 bit** (mỗi ảnh một caption hợp lệ) và chồng lặp từ trung bình giữa caption VizWiz hợp lệ **0,1633** theo pairwise Jaccard. Đây là phép đo ngôn ngữ, không phải khoảng cách embedding hoặc image–caption alignment.
 
 ---
 
@@ -264,6 +267,48 @@ EDA đo khác biệt của dữ liệu đầu vào; chưa đo chất lượng ca
 
 ---
 
+<!-- VLM_EDA_START -->
+## PHẦN 9: KIỂM TRA EDA BỔ SUNG CHO VLM
+
+Phần này được tính lại bằng `python vlm_eda_extensions.py`; các bảng nằm tại `eda_results/vlm_extensions/`. Phạm vi dữ liệu sẵn có gồm annotation COCO và VizWiz train/val, annotation VizWiz test không có caption, cùng file ảnh **val** của hai tập. Repo chưa có ảnh train, checkpoint VLM, tokenizer tương ứng hoặc nhãn object VizWiz. Vì vậy các ô “chưa đo” dưới đây không được suy diễn từ caption.
+
+### 9.1. Toàn vẹn dữ liệu và rò rỉ train/val
+
+| Kiểm tra | COCO | VizWiz | Cách đọc |
+| :--- | ---: | ---: | :--- |
+| Trùng ID ảnh hoặc filename giữa train/val | 0 | 0 | Chỉ kiểm tra khóa/metadata, chưa kiểm tra nội dung ảnh. |
+| Caption val hợp lệ trùng câu train sau chuẩn hóa | 10.488/202.654 (5,175%) | 463/33.145 (1,397%) | Trùng câu phổ biến không chứng minh trùng ảnh hoặc contamination của VLM. Caption VizWiz từ chối/bị reject đã loại. |
+| Ảnh val thiếu hoặc 0 byte | 0/40.504 | 0/7.750 | Chưa giải mã toàn bộ ảnh. |
+| Annotation mồ côi; trùng ID ảnh, filename, ID annotation trong từng split | 0 | 0 | Xem số theo split trong `integrity.csv`. |
+| Ảnh có số caption khác 5 | Train: 197; val: 131 | Train: 0; val: 0 | Đây là đặc điểm annotation COCO, không tự động là lỗi. |
+
+Kiểm tra leakage tiếp theo cần ảnh train để đối chiếu hash ảnh và gần trùng sau EXIF, cùng nguồn pretraining/fine-tune của đúng VLM. Kiểm tra train/val trong dataset **không** xác nhận VLM chưa từng thấy ảnh hoặc caption ở một nguồn khác. [Bảng toàn vẹn](eda_results/vlm_extensions/integrity.csv) và [bảng giao nhau](eda_results/vlm_extensions/train_val_overlap.csv) giữ denominator để tái lập.
+
+### 9.2. Phân kỳ từ vựng và đồng thuận giữa caption
+
+Một caption hợp lệ có ID thấp nhất được lấy cho mỗi ảnh để tránh ảnh có nhiều caption hợp lệ được tính trọng số lớn hơn. Tách từ bằng regex từ tiếng Anh và chuyển chữ thường cho phân phối unigram. Có 40.504 ảnh COCO và 7.542 ảnh VizWiz đủ điều kiện. Jensen–Shannon divergence là **0,266183 bit**. Chỉ số này đo phân kỳ từ vựng theo cách tách từ trên, **không** đo khoảng cách miền trong không gian embedding. Type/token ratio của hai corpus khác cỡ không nên so trực tiếp như độ phong phú từ vựng. [Bảng từ vựng](eda_results/vlm_extensions/vocabulary.csv), [tóm tắt](eda_results/vlm_extensions/summary.json).
+
+Với VizWiz val, loại caption `is_precanned`, `is_rejected` hoặc rỗng rồi tính Jaccard giữa mọi cặp caption trên cùng ảnh sau bỏ một tập stopword cố định. **7.268** ảnh có ít nhất hai caption hợp lệ; trung bình theo ảnh của pairwise Jaccard là **0,1633**. **208** ảnh không còn caption hợp lệ. Điểm này chỉ đo từ trùng, không chứng minh hai caption đồng nghĩa hoặc bám sát nội dung ảnh. Không gán điểm 0 cho ảnh thiếu hai caption. [Bảng từng ảnh](eda_results/vlm_extensions/vizwiz_caption_agreement.csv).
+
+### 9.3. Phép đo phụ thuộc VLM và nhãn object
+
+| Hạng mục | Thiết kế phép đo | Trạng thái |
+| :--- | :--- | :--- |
+| Khoảng cách miền trong embedding | Dùng cùng vision encoder/checkpoint, cùng tiền xử lý; lấy mẫu cân bằng hai miền, chuẩn hóa vector, báo cáo khoảng cách cosine trong/giữa miền, độ trộn k-NN hoặc MMD kèm bootstrap CI. | Chưa đo: thiếu checkpoint và processor. |
+| Căn khớp ảnh–caption | Dùng image/text encoder tương thích trên caption hợp lệ; so điểm cặp đúng với caption hoán vị trong cùng dataset; phân tầng theo `text_detected` và số caption từ chối. | Chưa đo: thiếu checkpoint. Điểm embedding chỉ là proxy cho grounding. |
+| Độ dài theo tokenizer của mô hình | Đếm token reference, prompt theo chat template và output mẫu bằng đúng tokenizer/processor; báo cáo p50/p90/p95/p99 và tỷ lệ vượt giới hạn. | Chưa đo: thiếu tokenizer, template và output. Biểu đồ độ dài từ hiện có không thay thế phép đo này. |
+| Độ phủ ontology COCO-80 trên VizWiz | Từ object ground truth, báo cáo tỷ lệ ảnh và object instance nằm trong COCO-80, bảng ánh xạ synonym và nhãn ngoài ontology. | Chưa đo: VizWiz-Captions không có object ground truth trong repo. Từ xuất hiện trong caption không xác nhận object có mặt. |
+| Ground truth object VizWiz | Hai annotator gán nhãn độc lập từ ảnh cho object nhìn thấy, object không chắc chắn, scene text và ảnh không thể nhận diện; phân xử bất đồng. | [Mẫu 500 ảnh chưa gán nhãn](eda_results/vlm_extensions/vizwiz_object_annotation_template.csv) đã tạo; không có nhãn giả. |
+
+### 9.4. Thiết kế tập đánh giá
+
+[Manifest seed 42](eda_results/vlm_extensions/evaluation_manifest_seed42.csv) cố định **500 ảnh COCO val và 500 ảnh VizWiz val**. VizWiz được phân tầng theo số caption từ chối (gộp 3+) và cờ `text_detected` cấp ảnh; COCO được chọn ngẫu nhiên. Manifest có 1.000 cặp dataset–ID duy nhất. Giữ tập này ngoài fine-tune và prompt tuning; so các mô hình trên cùng ảnh, prompt và decoding. Báo cáo riêng kết quả theo dataset, cờ chữ, mức từ chối và ontology covered/out-of-ontology. CHAIR/POPE chỉ tính khi nhãn object phù hợp đã sẵn có, kèm denominator và khoảng tin cậy.
+
+Để hoàn tất các phép đo còn thiếu, báo cáo cần tên model/checkpoint, processor/tokenizer, cấu hình resize/crop, nguồn dữ liệu pretraining/fine-tune và bộ nhãn object VizWiz được duyệt. Không thay các thông tin này bằng giá trị mặc định không ghi nguồn.
+<!-- VLM_EDA_END -->
+
+---
+
 ## TÀI NGUYÊN ĐÃ XUẤT XƯỞNG (EXPORTED ARTIFACTS)
 
 Toàn bộ biểu đồ độ phân giải cao (300 DPI) và dữ liệu bảng biểu đã được lưu trữ hoàn chỉnh tại:
@@ -281,6 +326,7 @@ Toàn bộ biểu đồ độ phân giải cao (300 DPI) và dữ liệu bảng 
 - **File Dữ liệu Thống kê Đầy đủ (JSON)**: `eda_results/eda_summary_metrics.json`
 - **Script Thực thi Tái lập (Reproducible Python Script)**: `eda_coco_vs_vizwiz.py`
 - **Script kiểm tra một caption mỗi ảnh**: `caption_sampling_sensitivity.py`.
+- **EDA VLM bổ sung và manifest đánh giá**: `vlm_eda_extensions.py`, `eda_results/vlm_extensions/`.
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "lexical": {
+    "jensen_shannon_divergence_bits": 0.266183,
+    "tokenization": "lowercase ASCII word regex; one lowest-ID valid caption per image",
+    "warning": "Lexical divergence, not a VLM embedding distance."
+  },
+  "vizwiz_caption_agreement": {
+    "images_with_two_or_more_valid_captions": 7268,
+    "mean_image_level_pairwise_content_jaccard": 0.1633,
+    "images_with_zero_valid_captions": 208,
+    "warning": "Word overlap is not semantic agreement or image-caption alignment."
+  },
+  "scope": "Only COCO/VizWiz val images are local. No VLM weights, image encoder, model tokenizer or VizWiz object ground truth supplied."
+}

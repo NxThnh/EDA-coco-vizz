@@ -1,0 +1,3 @@
+﻿dataset,overlap_image_ids,overlap_filenames,eligible_val_captions,val_captions_matching_train_count,val_captions_matching_train_pct,interpretation
+COCO,0,0,202654,10488,5.175,"Valid captions only; matches can be generic wording, not proof of image or model pretraining leakage."
+VizWiz,0,0,33145,463,1.397,"Valid captions only; matches can be generic wording, not proof of image or model pretraining leakage."

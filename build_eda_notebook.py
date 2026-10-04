@@ -9,6 +9,7 @@ import sys
 import json
 import base64
 import pandas as pd
+from pathlib import Path
 
 if sys.stdout.encoding != 'utf-8':
     try:
@@ -704,6 +705,27 @@ out25 = [
     make_display_output(html_text=f"""<div style="margin: 15px 0;"><h4 style="color: #1e3c72; margin-bottom: 8px; font-weight: 600;">📊 Bảng 6: Danh mục Toàn bộ Tài nguyên Báo cáo Đã Xuất xưởng</h4><div style="overflow-x: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">{df_art_test.to_html(classes='table table-hover table-striped', index=False)}</div></div>""")
 ]
 # Section 9 artifact inventory intentionally omitted from the EDA report.
+
+# The VLM EDA text has one source of truth: the main Markdown report. This
+# keeps the notebook synchronized when findings or scope notes are updated.
+report_text = (Path(BASE_DIR) / "EDA_COCO_vs_VizWiz_Report.md").read_text(encoding="utf-8")
+vlm_start = "<!-- VLM_EDA_START -->"
+vlm_end = "<!-- VLM_EDA_END -->"
+assert report_text.count(vlm_start) == 1 and report_text.count(vlm_end) == 1
+vlm_section = report_text.split(vlm_start, 1)[1].split(vlm_end, 1)[0].strip()
+cells.append(create_markdown_cell(vlm_section))
+cells.append(create_code_cell("""# Tái lập các bảng EDA VLM được trình bày ở Phần 9.
+import subprocess, sys
+from pathlib import Path
+import pandas as pd
+from IPython.display import display
+subprocess.run([sys.executable, str(Path(BASE_DIR) / 'vlm_eda_extensions.py')],
+               cwd=BASE_DIR, check=True, stdout=subprocess.DEVNULL)
+vlm_dir = Path(BASE_DIR) / 'eda_results' / 'vlm_extensions'
+display(pd.read_csv(vlm_dir / 'integrity.csv'))
+display(pd.read_csv(vlm_dir / 'train_val_overlap.csv'))
+display(pd.read_csv(vlm_dir / 'vocabulary.csv'))
+"""))
 
 # ==============================================================================
 # CELL 26: Conclusion & Academic Summary (Markdown)

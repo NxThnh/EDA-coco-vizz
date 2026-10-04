@@ -1,0 +1,6 @@
+﻿dataset,split,images,annotations,duplicate_image_ids,duplicate_filenames,duplicate_annotation_ids,orphan_annotations,images_without_annotations,images_not_five_captions,empty_captions,invalid_vizwiz_flags,missing_local_images,zero_byte_local_images
+COCO,train,82783,414113,0,0,0,0,0,197,0,,,
+COCO,val,40504,202654,0,0,0,0,0,131,0,,0,0
+VizWiz,train,23431,117155,0,0,0,0,0,0,0,0,,
+VizWiz,val,7750,38750,0,0,0,0,0,0,0,0,0,0
+VizWiz,test,8000,0,0,0,0,0,,,0,0,,

@@ -1,4 +1,8 @@
 # 🔬 EDA: MS-COCO vs VizWiz-Captions
+
+**EDA dành cho VLM đã tích hợp vào [báo cáo chính](EDA_COCO_vs_VizWiz_Report.md#phần-9-kiểm-tra-eda-bổ-sung-cho-vlm) và notebook.** Chạy
+`python vlm_eda_extensions.py` để tạo lại các bảng kiểm tra toàn vẹn,
+giao nhau train/val, phân kỳ từ vựng, đồng thuận caption và manifest đánh giá.
 ### Nghiên cứu Chuyên sâu về Domain Gap trong Trợ lý Thị giác Hỗ trợ Người Khiếm thị
 *Đề tài Khóa Luận Tốt Nghiệp — Image Captioning & Multimodal Vision-Language Models*
 
@@ -38,6 +42,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 ├── EDA_COCO_vs_VizWiz_Report.ipynb    # Báo cáo Jupyter Notebook hoàn chỉnh (nhúng sẵn hình ảnh & bảng biểu)
 ├── EDA_COCO_vs_VizWiz_Report.md       # Báo cáo Markdown chi tiết phục vụ khóa luận tốt nghiệp
 ├── eda_coco_vs_vizwiz.py             # Script Python tính toán và kết xuất toàn bộ số liệu & biểu đồ
+├── vlm_eda_extensions.py             # Kiểm tra EDA VLM của Phần 9 trong báo cáo chính
 ├── caption_sampling_sensitivity.py    # Kiểm tra một caption hợp lệ mỗi ảnh, seed=42
 ├── build_eda_notebook.py              # Script tự động đóng gói toàn bộ dữ liệu vào file Notebook
 ├── run_eda_notebook.py                # Chạy lại mọi code cell trong kernel mới và lưu output thật
@@ -79,6 +84,7 @@ pip install -r requirements-eda.txt
 ### 2. Chạy Phân Tích & Sinh Lại Kết Quả
 ```bash
 python eda_coco_vs_vizwiz.py
+python vlm_eda_extensions.py
 python rerun_coco500_tables.py
 python caption_sampling_sensitivity.py
 ```

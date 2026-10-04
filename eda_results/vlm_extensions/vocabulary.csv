@@ -1,0 +1,3 @@
+﻿dataset,images_with_valid_caption,word_tokens,word_types,type_token_ratio,singleton_types,top_20_words
+COCO,40504,423163,8541,0.020184,3485,"a:70301, of:15554, on:14827, the:11806, in:11723, with:10452, and:8778, is:5662, to:5465, man:5281, sitting:4557, next:3628, standing:3495, an:3150, two:3065, white:2878, people:2775, at:2544, top:2411, are:2400"
+VizWiz,7542,88515,6013,0.067932,2880,"a:11454, of:4808, on:3231, the:2678, with:2608, and:2128, is:1518, white:1204, in:1196, it:970, black:831, to:827, screen:705, an:681, that:677, computer:669, table:643, top:582, blue:580, bottle:536"
