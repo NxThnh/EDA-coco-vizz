@@ -146,3 +146,7 @@ python run_eda_notebook.py
 1. So sánh cơ chế từ chối với mô hình gốc trên từng mức đồng thuận caption từ chối.
 2. So sánh bật/tắt OCR trên ảnh có và không có chữ, đo độ chính xác thông tin chữ.
 3. So sánh tiền xử lý ảnh và tăng cường dữ liệu trên cùng mô hình, đo nội dung bị cắt và sai số đầu ra.
+
+---
+*Cập nhật: 2026-10-05 — Đã đồng bộ đầy đủ mã nguồn, báo cáo EDA và tài nguyên lên nhánh EDA.*
+
