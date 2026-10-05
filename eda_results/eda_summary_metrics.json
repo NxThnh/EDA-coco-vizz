@@ -133,7 +133,7 @@
       "Mentions": 13233,
       "Mentions per 1,000 captions": 326.71,
       "Captions with family (%)": 30.92,
-      "Images with family in any descriptive caption (%)": 30.92
+      "Images whose selected caption mentions family (%)": 30.92
     },
     {
       "Dataset": "VizWiz val",
@@ -143,7 +143,7 @@
       "Mentions": 598,
       "Mentions per 1,000 captions": 79.29,
       "Captions with family (%)": 7.78,
-      "Images with family in any descriptive caption (%)": 7.57
+      "Images whose selected caption mentions family (%)": 7.57
     }
   ],
   "coco_top_supercategories": [
@@ -354,5 +354,16 @@
     "vizwiz_upsampled_count": 90,
     "vizwiz_mean_luminance": 109.63701720833778,
     "vizwiz_median_luminance": 107.94696426391602
+  },
+  "blur_luminance_full_val": {
+    "scope": "all validation images; EXIF transpose; short edge resized to 480 px",
+    "coco_images": 40504,
+    "vizwiz_images": 7750,
+    "coco_median_laplacian": 1140.08,
+    "vizwiz_median_laplacian": 152.16,
+    "coco_median_luminance": 113.86,
+    "vizwiz_median_luminance": 108.04,
+    "vizwiz_by_refusal_file": "eda_results/tables/laplacian_by_precanned_full.csv",
+    "resize_sensitivity_file": "eda_results/tables/laplacian_resize_sensitivity_full.csv"
   }
 }

@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "data_prepared"
 EVAL = ROOT / "eda_results/vlm_extensions/evaluation_manifest_seed42.csv"
+HASHES = ROOT / "eda_results/vlm_extensions/val_image_hashes.csv"
 SOURCES = (
     ("COCO", "train", "coco/annotations/captions_train2014.json", "coco/train2014"),
     ("COCO", "val", "coco/annotations/captions_val2014.json", "coco/val2014"),
@@ -52,6 +53,28 @@ def load_eval():
     return selected
 
 
+def duplicate_dev_exclusions(selected):
+    """Keep exact-byte siblings of eval images out of the development set."""
+    if not HASHES.is_file():
+        raise FileNotFoundError(f"Exact-byte split check requires {HASHES}")
+    rows = list(csv.DictReader(HASHES.open(newline="", encoding="utf-8-sig")))
+    by_hash = defaultdict(list)
+    for row in rows:
+        if row["decode_ok"] == "1" and row["md5"]:
+            by_hash[(row["dataset"], row["md5"])].append(row)
+    excluded = []
+    for members in by_hash.values():
+        eval_members = [m for m in members if (m["dataset"], int(m["image_id"])) in selected]
+        if eval_members:
+            for member in members:
+                key = (member["dataset"], int(member["image_id"]))
+                if key not in selected:
+                    excluded.append({"dataset": member["dataset"], "image_id": member["image_id"],
+                                     "file_name": member["file_name"], "md5": member["md5"],
+                                     "eval_sibling_ids": "|".join(m["image_id"] for m in eval_members)})
+    return sorted(excluded, key=lambda r: (r["dataset"], int(r["image_id"])))
+
+
 def make_record(dataset, split, image, annotations, folder, eval_row):
     filename = image["file_name"]
     path = safe_image_path(folder, filename)
@@ -85,6 +108,8 @@ def make_record(dataset, split, image, annotations, folder, eval_row):
 def build(verify_images=False):
     OUT.mkdir(exist_ok=True)
     selected = load_eval()
+    duplicate_exclusions = duplicate_dev_exclusions(selected)
+    excluded_keys = {(r["dataset"], int(r["image_id"])) for r in duplicate_exclusions}
     encountered = set()
     counts = Counter()
     missing = Counter()
@@ -103,6 +128,8 @@ def build(verify_images=False):
                 grouped[ann["image_id"]].append(ann)
             for image in sorted(data["images"], key=lambda item: item["id"]):
                 key = (dataset, image["id"])
+                if split == "val" and key in excluded_keys:
+                    continue
                 eval_row = selected.get(key) if split == "val" else None
                 if eval_row:
                     if eval_row["file_name"] != image["file_name"]:
@@ -144,6 +171,9 @@ def build(verify_images=False):
             stream.close()
     if encountered != set(selected):
         raise ValueError(f"Evaluation images missing from annotation: {len(set(selected) - encountered)}")
+    with (OUT / "exact_duplicate_dev_exclusions.csv").open("w", newline="", encoding="utf-8-sig") as stream:
+        fields = ("dataset", "image_id", "file_name", "md5", "eval_sibling_ids")
+        writer = csv.DictWriter(stream, fieldnames=fields); writer.writeheader(); writer.writerows(duplicate_exclusions)
     worklist_path = OUT / "vizwiz_object_annotation_worklist.csv"
     preserve_worklist = False
     if worklist_path.exists():
@@ -172,10 +202,11 @@ def build(verify_images=False):
             for d in ("COCO", "VizWiz") for p in ("train", "dev", "eval")
         ],
         "image_decode_verify_enabled": verify_images,
+        "exact_duplicate_dev_exclusions": len(duplicate_exclusions),
         "image_decode_verify_failures": failed_verify,
         "notes": [
             "Training images are not present locally; train.jsonl contains annotation metadata only.",
-            "Eval images are excluded from dev.jsonl; val is never used for training.",
+            "Eval images and their exact-byte siblings are excluded from dev.jsonl; val is never used for training.",
             "VizWiz refusal/rejected captions are retained with flags but excluded from valid_captions.",
             "majority_refusal_proxy is not a gold label of unanswerability.",
             "Apply EXIF transpose before model preprocessing; no images are rewritten here.",

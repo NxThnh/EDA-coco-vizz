@@ -50,7 +50,5 @@
     "images_with_two_or_more_valid_captions": 40504,
     "mean_image_level_pairwise_content_jaccard": 0.1989
   },
-  "scope": "Only COCO/VizWiz val images are local. No selected VLM weights, image encoder, model tokenizer or VizWiz object ground truth supplied.",
-  "manifest_coco500_overlap": 6,
-  "manifest_coco500_file": "eda_results\\coco500\\coco500_image_ids_seed42.csv"
+  "scope": "COCO/VizWiz val images, LLaVA tokenizer and CLIP vision/text encoder are local. LLaVA generation weights and VizWiz object ground truth are not supplied."
 }

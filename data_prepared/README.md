@@ -7,10 +7,11 @@ Tạo lại bằng lệnh `python prepare_data.py --verify-images` từ thư m�
 ## File đầu ra
 
 - `train.jsonl`: metadata và caption từ annotation train. **Chưa dùng để huấn luyện được** vì máy hiện chưa có file ảnh train.
-- `dev.jsonl`: các ảnh val nằm ngoài bộ đánh giá cố định. Dùng để kiểm tra pipeline, chọn prompt và tinh chỉnh cấu hình.
+- `dev.jsonl`: các ảnh val nằm ngoài bộ đánh giá cố định **và không trùng byte với ảnh eval**. Dùng để kiểm tra pipeline, chọn prompt và tinh chỉnh cấu hình.
 - `eval.jsonl`: đúng 500 ảnh COCO và 500 ảnh VizWiz theo `eda_results/vlm_extensions/evaluation_manifest_seed42.csv`. Giữ tập này cho báo cáo cuối.
 - `summary.json`: số lượng, tình trạng file ảnh và kết quả giải mã pixel + áp dụng EXIF transpose.
 - `vizwiz_object_annotation_worklist.csv`: **phiếu gán nhãn trống** cho hai người trên 500 ảnh VizWiz eval. `A` và `B` là chỗ dành cho hai người gán nhãn, không có nghĩa hai lượt gán nhãn đã được thực hiện.
+- `exact_duplicate_dev_exclusions.csv`: 9 ảnh VizWiz val bị loại khỏi dev vì trùng byte với 8 ảnh eval (49 nhóm trùng byte toàn val). Eval giữ nguyên 500 ảnh và không có hai ảnh trùng byte trong nội bộ manifest.
 
 Mỗi dòng JSONL là một ảnh. `captions` giữ caption gốc đã chuẩn hóa khoảng trắng, ID và các cờ. `valid_captions` chỉ gồm caption có nội dung, không có cờ `is_precanned` hoặc `is_rejected`. `majority_refusal_proxy` là tín hiệu từ annotation, **không phải** nhãn chắc chắn ảnh không thể nhận diện. `image_path` là đường dẫn tương đối từ thư mục gốc; áp dụng EXIF transpose khi mở ảnh bằng Pillow trước khi resize/crop.
 

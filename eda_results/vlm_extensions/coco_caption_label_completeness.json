@@ -1,0 +1,13 @@
+{
+  "images": 40504,
+  "images_with_instance_class": 40137,
+  "captions": 202654,
+  "caption_coco80_word_coverage_pct": 78.58,
+  "annotated_instance_class_occurrences": 116592,
+  "selected_caption_class_recall_pct": 38.07,
+  "all_five_caption_union_class_recall_pct": 55.26,
+  "images_with_any_coco80_word_selected_pct": 79.52,
+  "images_with_any_coco80_word_union_pct": 94.04,
+  "images_with_all_instance_classes_in_union_pct": 41.33,
+  "scope": "Recall of annotated COCO-80 class sets using the repo's lexical CHAIR synonym matcher; instance annotations are not exhaustive visual ground truth."
+}

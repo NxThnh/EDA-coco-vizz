@@ -1,0 +1,9 @@
+{
+  "source": "https://raw.githubusercontent.com/RUCAIBox/POPE/main/output/coco/coco_pope_random.json",
+  "source_sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994",
+  "questions": 3000,
+  "unique_pope_images": 500,
+  "local_coco_manifest_images": 500,
+  "overlap_images": 5,
+  "interpretation": "Published POPE results require the official questions and image list, not the local random COCO sample."
+}

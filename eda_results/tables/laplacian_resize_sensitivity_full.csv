@@ -1,0 +1,5 @@
+﻿dataset,rule,images,median_laplacian,ci95_low,ci95_high
+COCO,all,40504,1140.08,1126.25,1155.01
+COCO,original_short_edge_ge_480,15705,1578.21,1546.88,1610.63
+VizWiz,all,7750,152.16,147.6,157.39
+VizWiz,original_short_edge_ge_480,6991,164.12,158.45,169.85

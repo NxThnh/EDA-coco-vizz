@@ -41,9 +41,9 @@
     {
       "dataset": "VizWiz",
       "partition": "dev",
-      "images": 7250,
-      "valid_captions": 31015,
-      "images_without_valid_caption": 191,
+      "images": 7241,
+      "valid_captions": 30976,
+      "images_without_valid_caption": 190,
       "missing_images": 0,
       "zero_byte_images": 0
     },
@@ -58,10 +58,11 @@
     }
   ],
   "image_decode_verify_enabled": true,
+  "exact_duplicate_dev_exclusions": 9,
   "image_decode_verify_failures": [],
   "notes": [
     "Training images are not present locally; train.jsonl contains annotation metadata only.",
-    "Eval images are excluded from dev.jsonl; val is never used for training.",
+    "Eval images and their exact-byte siblings are excluded from dev.jsonl; val is never used for training.",
     "VizWiz refusal/rejected captions are retained with flags but excluded from valid_captions.",
     "majority_refusal_proxy is not a gold label of unanswerability.",
     "Apply EXIF transpose before model preprocessing; no images are rewritten here."

@@ -470,12 +470,12 @@ df_human_reference = pd.DataFrame([
      'Noun Family': 'man/men/woman/people/person', 'Mentions': coco_human_mentions,
      'Mentions per 1,000 captions': round(coco_human_mentions / len(coco_captions) * 1000, 2),
      'Captions with family (%)': round(coco_human_caps / len(coco_captions) * 100, 2),
-     'Images with family in any descriptive caption (%)': round(len(coco_human_imgs) / len(coco_val_cap['images']) * 100, 2)},
+     'Images whose selected caption mentions family (%)': round(len(coco_human_imgs) / len(coco_val_cap['images']) * 100, 2)},
     {'Dataset': 'VizWiz val', 'Caption Count': len(viz_captions_norm), 'Image Count': len(viz_val['images']),
      'Noun Family': 'man/men/woman/people/person', 'Mentions': viz_human_mentions,
      'Mentions per 1,000 captions': round(viz_human_mentions / len(viz_captions_norm) * 1000, 2),
      'Captions with family (%)': round(viz_human_caps / len(viz_captions_norm) * 100, 2),
-     'Images with family in any descriptive caption (%)': round(len(viz_human_imgs) / len(viz_val['images']) * 100, 2)},
+     'Images whose selected caption mentions family (%)': round(len(viz_human_imgs) / len(viz_val['images']) * 100, 2)},
 ])
 df_human_reference.to_csv(os.path.join(TAB_DIR, 'person_reference_summary.csv'), index=False)
 
@@ -572,45 +572,11 @@ df_coco_super = pd.DataFrame([
 ])
 df_coco_super.to_csv(os.path.join(TAB_DIR, "coco_supercategories.csv"), index=False)
 
-# FIGURE 4: COCO Category Distribution
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6.5))
-
-# Top 15 categories
-top_15 = cat_counts.most_common(15)
-cat_names = [c[0] for c in top_15][::-1]
-cat_vals = [c[1] for c in top_15][::-1]
-cat_pcts = [c[1] / total_inst * 100 for c in top_15][::-1]
-
-colors_bar = ['#e74c3c' if name == 'person' else '#3498db' for name in cat_names]
-bars = ax1.barh(cat_names, cat_pcts, color=colors_bar, edgecolor='black', linewidth=0.7)
-ax1.set_xlabel('Share of all COCO val object instances (%)', fontsize=11, fontweight='bold')
-ax1.set_title('(A) Top 15 COCO Object Categories (Person Dominance)', fontsize=12, fontweight='bold')
-for b, pct, count in zip(bars, cat_pcts, cat_vals):
-    w = b.get_width()
-    ax1.annotate(f'{pct:.1f}% ({count:,})', xy=(w, b.get_y() + b.get_height()/2),
-                 xytext=(5, 0), textcoords="offset points", va='center', fontsize=9, fontweight='bold')
-ax1.set_xlim(0, max(cat_pcts) * 1.25)
-
-# Supercategories
-super_sorted = supercat_counts.most_common()
-s_names = [s[0] for s in super_sorted][::-1]
-s_vals = [s[1] for s in super_sorted][::-1]
-s_pcts = [s[1] / total_inst * 100 for s in super_sorted][::-1]
-
-bars_s = ax2.barh(s_names, s_pcts, color='#2ecc71', edgecolor='black', linewidth=0.7)
-ax2.set_xlabel('Share of all COCO val object instances (%)', fontsize=11, fontweight='bold')
-ax2.set_title('(B) COCO 12 Supercategories Distribution', fontsize=12, fontweight='bold')
-for b, pct in zip(bars_s, s_pcts):
-    w = b.get_width()
-    ax2.annotate(f'{pct:.1f}%', xy=(w, b.get_y() + b.get_height()/2),
-                 xytext=(5, 0), textcoords="offset points", va='center', fontsize=9, fontweight='bold')
-ax2.set_xlim(0, max(s_pcts) * 1.2)
-
-plt.tight_layout()
-fig_path4 = os.path.join(FIG_DIR, "04_coco_category_distribution.png")
-plt.savefig(fig_path4, dpi=300)
-plt.close()
-print(f"Saved: {fig_path4}")
+# Figure 4 compares the same unit (one selected caption per image) in both
+# domains. COCO instance counts remain in the CSV/table above.
+from plot_coco80_mentions import build_figure
+build_figure(coco_val_cap, viz_val, [c["name"] for c in coco_val_inst["categories"]])
+print(f"Saved: {os.path.join(FIG_DIR, '04_coco_category_distribution.png')}")
 
 # ==============================================================================
 # 5. VIZWIZ QUALITY ISSUES & TEXT DETECTION ANALYSIS
@@ -744,7 +710,6 @@ for dataset, blurs, edges in [
             'CI 95% Low': ci_low, 'CI 95% High': ci_high,
         })
 df_lap_sensitivity = pd.DataFrame(lap_sensitivity_rows)
-df_lap_sensitivity.to_csv(os.path.join(TAB_DIR, 'laplacian_resize_sensitivity.csv'), index=False)
 print('Laplacian resize sensitivity:')
 print(df_lap_sensitivity.to_string(index=False))
 sample_group_values = {k: [] for k in range(6)}
@@ -757,7 +722,6 @@ lap_by_precanned = [
      'CI 95% High': bootstrap_median_ci(sample_group_values[k], seed=42+k)[1] if sample_group_values[k] else None}
     for k in range(6)
 ]
-pd.DataFrame(lap_by_precanned).to_csv(os.path.join(TAB_DIR, 'laplacian_by_precanned.csv'), index=False)
 print('Laplacian by precanned consensus (descriptive validation):')
 print(pd.DataFrame(lap_by_precanned).to_string(index=False))
 
@@ -771,8 +735,7 @@ if os.path.exists(full_lap_path):
     chart_coco_brights = full_lap.loc[full_lap['dataset'] == 'COCO', 'mean_luminance_480px'].to_numpy()
     chart_viz_brights = full_lap.loc[full_lap['dataset'] == 'VizWiz', 'mean_luminance_480px'].to_numpy()
 else:
-    chart_coco_blurs, chart_viz_blurs = coco_blurs, viz_blurs
-    chart_coco_brights, chart_viz_brights = coco_brights, viz_brights
+    raise FileNotFoundError('Run full_laplacian_audit.py before eda_coco_vs_vizwiz.py; Figure 5 requires all val images')
 
 # (A) Quality Degradation Bar
 prec_vals = [precanned_hist[k] for k in range(6)]

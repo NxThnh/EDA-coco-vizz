@@ -8,6 +8,6 @@ IPython
 jupyter_client
 ipykernel
 torch
-transformers
+transformers>=4.36,<5
 sentencepiece
 opencv-python

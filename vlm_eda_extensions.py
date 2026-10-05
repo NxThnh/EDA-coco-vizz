@@ -170,7 +170,10 @@ def vocabulary(coco_by_image, viz_by_image, coco_train_by_image):
             continue
         score = math.log((v[word] + 0.5) / (total_v + 0.5 * vocabulary_size)) - math.log((c[word] + 0.5) / (total_c + 0.5 * vocabulary_size))
         log_odds.append({"word": word, "coco_count": c[word], "vizwiz_count": v[word], "log_odds_vizwiz_vs_coco": round(score, 5)})
-    write_csv("distinctive_words_log_odds.csv", sorted(log_odds, key=lambda x: -x["log_odds_vizwiz_vs_coco"])[:50] + sorted(log_odds, key=lambda x: x["log_odds_vizwiz_vs_coco"])[:50], list(log_odds[0]))
+    write_csv("distinctive_words_log_odds.csv",
+              sorted(log_odds, key=lambda x: (-x["log_odds_vizwiz_vs_coco"], x["word"]))[:50]
+              + sorted(log_odds, key=lambda x: (x["log_odds_vizwiz_vs_coco"], x["word"]))[:50],
+              list(log_odds[0]))
     return rows, {"jensen_shannon_divergence_bits": js_divergence(c, v),
                   "coco_half_split_js_bits_mean": round(sum(noise) / len(noise), 6),
                   "coco_half_split_js_bits_p95": sorted(noise)[94],
@@ -314,7 +317,7 @@ def main():
                                              "warning": "Word overlap is not semantic agreement or image-caption alignment."},
                "coco_caption_agreement": {"images_with_two_or_more_valid_captions": len(coco_eligible),
                                           "mean_image_level_pairwise_content_jaccard": round(sum(coco_eligible) / len(coco_eligible), 4)},
-               "scope": "Only COCO/VizWiz val images are local. No selected VLM weights, image encoder, model tokenizer or VizWiz object ground truth supplied."}
+               "scope": "COCO/VizWiz val images, LLaVA tokenizer and CLIP vision/text encoder are local. LLaVA generation weights and VizWiz object ground truth are not supplied."}
     with (OUT / "summary.json").open("w", encoding="utf-8") as stream:
         json.dump(summary, stream, ensure_ascii=False, indent=2)
     manifest, strata = evaluation_manifest(cv, vv, agreement)
@@ -326,16 +329,6 @@ def main():
     review = [dict(row, confirmed_objects="", rejected_suggestions="", additional_visible_objects="",
                    reviewer_id="", review_status="unreviewed") for row in random.Random(42).sample(review_pool, min(100, len(review_pool)))]
     write_csv("vizwiz_object_consensus_review100_seed42.csv", review, list(review[0]))
-    coco500_path = ROOT / "eda_results/coco500/coco500_image_ids_seed42.csv"
-    if coco500_path.exists():
-        with coco500_path.open(encoding="utf-8-sig", newline="") as stream:
-            coco500_rows = list(csv.DictReader(stream))
-        coco500_ids = {str(next(iter(row.values()))) for row in coco500_rows}
-        manifest_ids = {str(row["image_id"]) for row in manifest if row["dataset"] == "COCO"}
-        summary["manifest_coco500_overlap"] = len(manifest_ids & coco500_ids)
-        summary["manifest_coco500_file"] = str(coco500_path.relative_to(ROOT))
-        with (OUT / "summary.json").open("w", encoding="utf-8") as stream:
-            json.dump(summary, stream, ensure_ascii=False, indent=2)
     annotation_template = [
         {"image_id": row["image_id"], "file_name": row["file_name"],
          "objects_visible": "", "objects_uncertain": "", "readable_scene_text": "",

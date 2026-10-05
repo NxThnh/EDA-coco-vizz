@@ -1,0 +1,21 @@
+{
+  "source": "liuhaotian/LLaVA-Instruct-150K/llava_v1_5_mix665k.json",
+  "source_sha256": "ce959ce6e23073ee1cd1a8a2ef1c633768c10d4174327b8b2dc7113b91af6cf8",
+  "entries_with_string_image": 624610,
+  "unique_image_paths": 349034,
+  "image_path_prefix_counts": {
+    "coco": 88524,
+    "vg": 86417,
+    "gqa": 72140,
+    "ocr_vqa": 80000,
+    "textvqa": 21953
+  },
+  "vizwiz_named_image_paths": 0,
+  "coco_val2014_images": 40504,
+  "coco_val2014_in_mix": 5741,
+  "coco_val2014_not_in_mix": 34763,
+  "manifest_coco_images": 500,
+  "manifest_coco_in_mix": 70,
+  "manifest_coco_not_in_mix": 430,
+  "scope": "Image paths in official LLaVA-1.5 instruction-tuning mix only; does not audit pretraining or aliases."
+}

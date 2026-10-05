@@ -1,5 +1,0 @@
-Dataset,Subset / Resize Rule,Sample Images,Median Laplacian Variance,CI 95% Low,CI 95% High
-MS-COCO val2014,All sampled images; resize short edge to 480px,1000,1197.9013671875,1084.2382766723633,1298.6533203125
-MS-COCO val2014,Original short edge >=480px; downsample only,390,1605.9617309570312,1441.7507934570312,1894.748291015625
-VizWiz val,All sampled images; resize short edge to 480px,1000,149.19358825683594,141.68692016601562,162.378662109375
-VizWiz val,Original short edge >=480px; downsample only,910,158.33409118652344,147.11624488830566,176.19488372802735
