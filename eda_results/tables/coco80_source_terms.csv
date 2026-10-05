@@ -1,0 +1,439 @@
+﻿dataset,category,source_term,images_with_term,images_with_category,denominator_images
+COCO,person,man,5242,15196,40504
+COCO,person,people,2760,15196,40504
+COCO,person,woman,2382,15196,40504
+COCO,person,person,1624,15196,40504
+COCO,person,boy,665,15196,40504
+COCO,person,player,615,15196,40504
+COCO,person,girl,600,15196,40504
+COCO,person,child,386,15196,40504
+COCO,person,baby,325,15196,40504
+COCO,person,children,220,15196,40504
+COCO,person,lady,201,15196,40504
+COCO,person,passenger,164,15196,40504
+COCO,person,guy,152,15196,40504
+COCO,person,skier,131,15196,40504
+COCO,person,kid,117,15196,40504
+COCO,person,adult,113,15196,40504
+COCO,person,skateboarder,112,15196,40504
+COCO,person,male,112,15196,40504
+COCO,person,female,86,15196,40504
+COCO,person,pitcher,74,15196,40504
+COCO,person,snowboarder,58,15196,40504
+COCO,person,mother,42,15196,40504
+COCO,person,rider,26,15196,40504
+COCO,person,bride,22,15196,40504
+COCO,person,chef,18,15196,40504
+COCO,person,father,17,15196,40504
+COCO,person,driver,16,15196,40504
+COCO,person,cop,15,15196,40504
+COCO,person,groom,14,15196,40504
+COCO,person,officer,12,15196,40504
+COCO,person,gentleman,12,15196,40504
+COCO,person,worker,12,15196,40504
+COCO,person,teenager,10,15196,40504
+COCO,person,cowboy,9,15196,40504
+COCO,person,skater,8,15196,40504
+COCO,person,soldier,5,15196,40504
+COCO,person,bicyclist,5,15196,40504
+COCO,person,policeman,5,15196,40504
+COCO,person,biker,4,15196,40504
+COCO,person,patient,3,15196,40504
+COCO,person,camper,3,15196,40504
+COCO,person,student,2,15196,40504
+COCO,person,walker,2,15196,40504
+COCO,person,doctor,2,15196,40504
+COCO,person,baker,2,15196,40504
+COCO,person,coworker,1,15196,40504
+COCO,bicycle,bike,247,380,40504
+COCO,bicycle,bicycle,137,380,40504
+COCO,car,car,450,534,40504
+COCO,car,van,44,534,40504
+COCO,car,taxi,18,534,40504
+COCO,car,cab,10,534,40504
+COCO,car,suv,8,534,40504
+COCO,car,jeep,8,534,40504
+COCO,car,sedan,2,534,40504
+COCO,car,coupe,2,534,40504
+COCO,car,automobile,1,534,40504
+COCO,car,minivan,1,534,40504
+COCO,motorcycle,motorcycle,528,626,40504
+COCO,motorcycle,motor bike,34,626,40504
+COCO,motorcycle,scooter,27,626,40504
+COCO,motorcycle,motorbike,15,626,40504
+COCO,motorcycle,motor cycle,14,626,40504
+COCO,motorcycle,moped,8,626,40504
+COCO,airplane,airplane,276,665,40504
+COCO,airplane,plane,205,665,40504
+COCO,airplane,jet,130,665,40504
+COCO,airplane,jetliner,40,665,40504
+COCO,airplane,air plane,29,665,40504
+COCO,airplane,aircraft,11,665,40504
+COCO,airplane,biplane,7,665,40504
+COCO,bus,bus,835,852,40504
+COCO,bus,trolley,17,852,40504
+COCO,train,train,1107,1119,40504
+COCO,train,locomotive,17,1119,40504
+COCO,train,caboose,2,1119,40504
+COCO,truck,truck,483,495,40504
+COCO,truck,pickup,29,495,40504
+COCO,truck,firetruck,6,495,40504
+COCO,boat,boat,380,485,40504
+COCO,boat,ship,42,485,40504
+COCO,boat,sailboat,14,485,40504
+COCO,boat,kayak,12,485,40504
+COCO,boat,canoe,11,485,40504
+COCO,boat,ferry,7,485,40504
+COCO,boat,liner,5,485,40504
+COCO,boat,rowboat,5,485,40504
+COCO,boat,yacht,3,485,40504
+COCO,boat,motorboat,3,485,40504
+COCO,boat,speedboat,2,485,40504
+COCO,boat,barge,2,485,40504
+COCO,boat,vessel,1,485,40504
+COCO,boat,pontoon,1,485,40504
+COCO,boat,tugboat,1,485,40504
+COCO,boat,battleship,1,485,40504
+COCO,traffic light,traffic light,172,264,40504
+COCO,traffic light,street light,38,264,40504
+COCO,traffic light,traffic signal,20,264,40504
+COCO,traffic light,stop light,20,264,40504
+COCO,traffic light,stoplight,17,264,40504
+COCO,traffic light,streetlight,1,264,40504
+COCO,fire hydrant,fire hydrant,336,349,40504
+COCO,fire hydrant,hydrant,13,349,40504
+COCO,stop sign,stop sign,293,293,40504
+COCO,parking meter,parking meter,101,101,40504
+COCO,bench,bench,637,638,40504
+COCO,bench,pew,1,638,40504
+COCO,bird,bird,375,485,40504
+COCO,bird,duck,24,485,40504
+COCO,bird,turkey,16,485,40504
+COCO,bird,seagull,11,485,40504
+COCO,bird,parrot,10,485,40504
+COCO,bird,pigeon,7,485,40504
+COCO,bird,ostrich,6,485,40504
+COCO,bird,swan,5,485,40504
+COCO,bird,crow,4,485,40504
+COCO,bird,peacock,4,485,40504
+COCO,bird,hummingbird,3,485,40504
+COCO,bird,owl,3,485,40504
+COCO,bird,parakeet,2,485,40504
+COCO,bird,goose,2,485,40504
+COCO,bird,flamingo,2,485,40504
+COCO,bird,pelican,2,485,40504
+COCO,bird,rooster,2,485,40504
+COCO,bird,egret,2,485,40504
+COCO,bird,songbird,1,485,40504
+COCO,bird,gull,1,485,40504
+COCO,bird,cockatiel,1,485,40504
+COCO,bird,bluebird,1,485,40504
+COCO,bird,heron,1,485,40504
+COCO,bird,sparrow,1,485,40504
+COCO,cat,cat,1225,1266,40504
+COCO,cat,kitten,43,1266,40504
+COCO,cat,tabby,12,1266,40504
+COCO,dog,dog,1089,1132,40504
+COCO,dog,puppy,21,1132,40504
+COCO,dog,husky,6,1132,40504
+COCO,dog,pug,6,1132,40504
+COCO,dog,bulldog,4,1132,40504
+COCO,dog,chihuahua,4,1132,40504
+COCO,dog,poodle,4,1132,40504
+COCO,dog,labrador,3,1132,40504
+COCO,dog,terrier,2,1132,40504
+COCO,dog,doggy,2,1132,40504
+COCO,dog,spaniel,2,1132,40504
+COCO,dog,cocker,2,1132,40504
+COCO,dog,hound,1,1132,40504
+COCO,dog,retriever,1,1132,40504
+COCO,dog,sheepdog,1,1132,40504
+COCO,dog,dachshund,1,1132,40504
+COCO,dog,corgi,1,1132,40504
+COCO,dog,beagle,1,1132,40504
+COCO,horse,horse,571,592,40504
+COCO,horse,pony,15,592,40504
+COCO,horse,mustang,3,592,40504
+COCO,horse,clydesdale,2,592,40504
+COCO,horse,colt,2,592,40504
+COCO,horse,foal,2,592,40504
+COCO,horse,equine,1,592,40504
+COCO,sheep,sheep,356,389,40504
+COCO,sheep,goat,18,389,40504
+COCO,sheep,lamb,10,389,40504
+COCO,sheep,ram,9,389,40504
+COCO,cow,cow,203,328,40504
+COCO,cow,cattle,78,328,40504
+COCO,cow,bull,23,328,40504
+COCO,cow,calf,13,328,40504
+COCO,cow,buffalo,9,328,40504
+COCO,cow,oxen,5,328,40504
+COCO,cow,ox,2,328,40504
+COCO,cow,bison,1,328,40504
+COCO,elephant,elephant,450,450,40504
+COCO,bear,bear,324,329,40504
+COCO,bear,panda,19,329,40504
+COCO,zebra,zebra,378,378,40504
+COCO,giraffe,giraffe,581,581,40504
+COCO,backpack,backpack,46,46,40504
+COCO,umbrella,umbrella,521,521,40504
+COCO,handbag,purse,24,35,40504
+COCO,handbag,handbag,6,35,40504
+COCO,handbag,briefcase,4,35,40504
+COCO,handbag,wallet,2,35,40504
+COCO,tie,tie,302,331,40504
+COCO,tie,bow tie,18,331,40504
+COCO,tie,bow,12,331,40504
+COCO,suitcase,luggage,279,407,40504
+COCO,suitcase,suitcase,116,407,40504
+COCO,suitcase,suit case,12,407,40504
+COCO,frisbee,frisbee,570,570,40504
+COCO,skis,skis,431,596,40504
+COCO,skis,ski,225,596,40504
+COCO,snowboard,snowboard,193,193,40504
+COCO,sports ball,ball,707,707,40504
+COCO,kite,kite,388,388,40504
+COCO,baseball bat,baseball bat,130,130,40504
+COCO,baseball glove,baseball glove,12,12,40504
+COCO,skateboard,skateboard,702,702,40504
+COCO,surfboard,surfboard,478,478,40504
+COCO,tennis racket,tennis racket,163,265,40504
+COCO,tennis racket,racket,103,265,40504
+COCO,bottle,bottle,127,127,40504
+COCO,wine glass,wine glass,27,27,40504
+COCO,cup,cup,186,186,40504
+COCO,fork,fork,102,102,40504
+COCO,knife,knife,123,124,40504
+COCO,knife,pocketknife,1,124,40504
+COCO,spoon,spoon,49,49,40504
+COCO,bowl,bowl,345,405,40504
+COCO,bowl,container,60,405,40504
+COCO,banana,banana,167,167,40504
+COCO,apple,apple,66,66,40504
+COCO,sandwich,sandwich,329,365,40504
+COCO,sandwich,hamburger,14,365,40504
+COCO,sandwich,burger,14,365,40504
+COCO,sandwich,sub,7,365,40504
+COCO,sandwich,cheeseburger,5,365,40504
+COCO,orange,orange,352,352,40504
+COCO,broccoli,broccoli,227,227,40504
+COCO,carrot,carrot,36,36,40504
+COCO,hot dog,hot dog,144,144,40504
+COCO,pizza,pizza,837,837,40504
+COCO,donut,donut,88,159,40504
+COCO,donut,doughnut,65,159,40504
+COCO,donut,bagel,6,159,40504
+COCO,cake,cake,559,580,40504
+COCO,cake,cupcake,14,580,40504
+COCO,cake,cheesecake,5,580,40504
+COCO,cake,pancake,4,580,40504
+COCO,chair,chair,408,549,40504
+COCO,chair,seat,123,549,40504
+COCO,chair,stool,19,549,40504
+COCO,couch,couch,376,429,40504
+COCO,couch,sofa,45,429,40504
+COCO,couch,futon,4,429,40504
+COCO,couch,loveseat,4,429,40504
+COCO,couch,recliner,2,429,40504
+COCO,couch,settee,1,429,40504
+COCO,potted plant,potted plant,13,13,40504
+COCO,bed,bed,849,849,40504
+COCO,dining table,table,2109,2668,40504
+COCO,dining table,desk,525,2668,40504
+COCO,dining table,dining table,40,2668,40504
+COCO,toilet,toilet,748,779,40504
+COCO,toilet,urinal,23,779,40504
+COCO,toilet,commode,12,779,40504
+COCO,toilet,lavatory,2,779,40504
+COCO,tv,tv,222,514,40504
+COCO,tv,television,177,514,40504
+COCO,tv,monitor,120,514,40504
+COCO,laptop,laptop,433,1017,40504
+COCO,laptop,computer,426,1017,40504
+COCO,laptop,laptop computer,209,1017,40504
+COCO,laptop,notebook,6,1017,40504
+COCO,laptop,macbook,4,1017,40504
+COCO,mouse,mouse,127,127,40504
+COCO,remote,remote,154,154,40504
+COCO,keyboard,keyboard,204,204,40504
+COCO,cell phone,cell phone,295,644,40504
+COCO,cell phone,phone,254,644,40504
+COCO,cell phone,cellphone,62,644,40504
+COCO,cell phone,telephone,15,644,40504
+COCO,cell phone,mobile phone,9,644,40504
+COCO,cell phone,iphone,7,644,40504
+COCO,cell phone,smartphone,6,644,40504
+COCO,cell phone,phon,1,644,40504
+COCO,microwave,microwave,120,120,40504
+COCO,oven,oven,210,416,40504
+COCO,oven,stove,177,416,40504
+COCO,oven,stove top oven,46,416,40504
+COCO,oven,stovetop,2,416,40504
+COCO,toaster,toaster,18,18,40504
+COCO,sink,sink,564,564,40504
+COCO,refrigerator,refrigerator,238,295,40504
+COCO,refrigerator,fridge,54,295,40504
+COCO,refrigerator,freezer,41,295,40504
+COCO,book,book,135,135,40504
+COCO,clock,clock,818,818,40504
+COCO,vase,vase,321,321,40504
+COCO,scissors,scissors,122,122,40504
+COCO,teddy bear,teddy bear,264,267,40504
+COCO,teddy bear,teddybear,3,267,40504
+COCO,hair drier,hairdryer,4,5,40504
+COCO,hair drier,hair drier,1,5,40504
+COCO,toothbrush,toothbrush,65,65,40504
+VizWiz,person,person,403,653,7542
+VizWiz,person,man,95,653,7542
+VizWiz,person,woman,39,653,7542
+VizWiz,person,people,27,653,7542
+VizWiz,person,baby,18,653,7542
+VizWiz,person,children,15,653,7542
+VizWiz,person,player,11,653,7542
+VizWiz,person,girl,8,653,7542
+VizWiz,person,child,7,653,7542
+VizWiz,person,lady,7,653,7542
+VizWiz,person,male,6,653,7542
+VizWiz,person,female,5,653,7542
+VizWiz,person,driver,4,653,7542
+VizWiz,person,boy,4,653,7542
+VizWiz,person,doctor,4,653,7542
+VizWiz,person,passenger,4,653,7542
+VizWiz,person,chef,3,653,7542
+VizWiz,person,pitcher,3,653,7542
+VizWiz,person,guy,2,653,7542
+VizWiz,person,walker,1,653,7542
+VizWiz,person,mother,1,653,7542
+VizWiz,person,adult,1,653,7542
+VizWiz,person,kid,1,653,7542
+VizWiz,person,snowboarder,1,653,7542
+VizWiz,person,officer,1,653,7542
+VizWiz,bicycle,bike,2,2,7542
+VizWiz,car,car,41,48,7542
+VizWiz,car,van,3,48,7542
+VizWiz,car,cab,1,48,7542
+VizWiz,car,sedan,1,48,7542
+VizWiz,car,automobile,1,48,7542
+VizWiz,car,suv,1,48,7542
+VizWiz,motorcycle,scooter,2,3,7542
+VizWiz,motorcycle,motorcycle,1,3,7542
+VizWiz,airplane,jet,3,4,7542
+VizWiz,airplane,plane,1,4,7542
+VizWiz,bus,bus,6,6,7542
+VizWiz,train,train,3,3,7542
+VizWiz,truck,truck,6,6,7542
+VizWiz,boat,boat,1,1,7542
+VizWiz,fire hydrant,fire hydrant,1,1,7542
+VizWiz,stop sign,stop sign,4,4,7542
+VizWiz,bench,bench,7,7,7542
+VizWiz,bird,turkey,16,32,7542
+VizWiz,bird,bird,12,32,7542
+VizWiz,bird,duck,2,32,7542
+VizWiz,bird,blackbird,1,32,7542
+VizWiz,bird,owl,1,32,7542
+VizWiz,bird,falcon,1,32,7542
+VizWiz,cat,cat,29,30,7542
+VizWiz,cat,kitten,1,30,7542
+VizWiz,dog,dog,68,74,7542
+VizWiz,dog,labrador,4,74,7542
+VizWiz,dog,retriever,4,74,7542
+VizWiz,dog,puppy,2,74,7542
+VizWiz,dog,brindle,1,74,7542
+VizWiz,dog,bulldog,1,74,7542
+VizWiz,horse,horse,3,3,7542
+VizWiz,sheep,lamb,2,2,7542
+VizWiz,cow,buffalo,2,8,7542
+VizWiz,cow,bull,2,8,7542
+VizWiz,cow,cattle,1,8,7542
+VizWiz,cow,ox,1,8,7542
+VizWiz,cow,cow,1,8,7542
+VizWiz,cow,calf,1,8,7542
+VizWiz,elephant,elephant,2,2,7542
+VizWiz,bear,bear,5,6,7542
+VizWiz,bear,panda,1,6,7542
+VizWiz,zebra,zebra,3,3,7542
+VizWiz,giraffe,giraffe,1,1,7542
+VizWiz,backpack,backpack,7,7,7542
+VizWiz,umbrella,umbrella,2,2,7542
+VizWiz,handbag,wallet,8,17,7542
+VizWiz,handbag,purse,6,17,7542
+VizWiz,handbag,handbag,2,17,7542
+VizWiz,handbag,briefcase,1,17,7542
+VizWiz,tie,tie,6,10,7542
+VizWiz,tie,bow,3,10,7542
+VizWiz,tie,bow tie,1,10,7542
+VizWiz,suitcase,suitcase,2,3,7542
+VizWiz,suitcase,luggage,1,3,7542
+VizWiz,sports ball,ball,8,8,7542
+VizWiz,skateboard,skateboard,1,1,7542
+VizWiz,bottle,bottle,527,527,7542
+VizWiz,wine glass,wine glass,1,1,7542
+VizWiz,cup,cup,79,79,7542
+VizWiz,fork,fork,6,6,7542
+VizWiz,knife,knife,4,4,7542
+VizWiz,spoon,spoon,9,9,7542
+VizWiz,bowl,container,222,246,7542
+VizWiz,bowl,bowl,25,246,7542
+VizWiz,banana,banana,6,6,7542
+VizWiz,apple,apple,54,54,7542
+VizWiz,sandwich,hamburger,7,12,7542
+VizWiz,sandwich,sandwich,3,12,7542
+VizWiz,sandwich,burger,2,12,7542
+VizWiz,orange,orange,107,107,7542
+VizWiz,broccoli,broccoli,5,5,7542
+VizWiz,carrot,carrot,1,1,7542
+VizWiz,hot dog,hot dog,1,1,7542
+VizWiz,pizza,pizza,24,24,7542
+VizWiz,donut,donut,2,3,7542
+VizWiz,donut,doughnut,1,3,7542
+VizWiz,cake,cake,11,18,7542
+VizWiz,cake,cheesecake,4,18,7542
+VizWiz,cake,pancake,2,18,7542
+VizWiz,cake,shortcake,1,18,7542
+VizWiz,chair,chair,71,83,7542
+VizWiz,chair,seat,11,83,7542
+VizWiz,chair,stool,3,83,7542
+VizWiz,couch,couch,69,85,7542
+VizWiz,couch,sofa,14,85,7542
+VizWiz,couch,futon,1,85,7542
+VizWiz,couch,recliner,1,85,7542
+VizWiz,potted plant,potted plant,3,3,7542
+VizWiz,bed,bed,90,90,7542
+VizWiz,dining table,table,633,794,7542
+VizWiz,dining table,desk,157,794,7542
+VizWiz,dining table,dining table,7,794,7542
+VizWiz,toilet,toilet,8,8,7542
+VizWiz,tv,monitor,220,361,7542
+VizWiz,tv,tv,112,361,7542
+VizWiz,tv,television,39,361,7542
+VizWiz,laptop,computer,588,879,7542
+VizWiz,laptop,laptop,224,879,7542
+VizWiz,laptop,laptop computer,60,879,7542
+VizWiz,laptop,macbook,26,879,7542
+VizWiz,laptop,notebook,7,879,7542
+VizWiz,laptop,lenovo,2,879,7542
+VizWiz,mouse,mouse,30,30,7542
+VizWiz,remote,remote,60,60,7542
+VizWiz,keyboard,keyboard,179,179,7542
+VizWiz,cell phone,phone,76,145,7542
+VizWiz,cell phone,cell phone,25,145,7542
+VizWiz,cell phone,iphone,21,145,7542
+VizWiz,cell phone,smartphone,9,145,7542
+VizWiz,cell phone,telephone,7,145,7542
+VizWiz,cell phone,mobile phone,5,145,7542
+VizWiz,cell phone,cellphone,5,145,7542
+VizWiz,microwave,microwave,36,36,7542
+VizWiz,oven,stove,34,53,7542
+VizWiz,oven,oven,18,53,7542
+VizWiz,oven,stovetop,2,53,7542
+VizWiz,toaster,toaster,8,8,7542
+VizWiz,sink,sink,26,26,7542
+VizWiz,refrigerator,refrigerator,10,16,7542
+VizWiz,refrigerator,freezer,5,16,7542
+VizWiz,refrigerator,fridge,2,16,7542
+VizWiz,book,book,118,118,7542
+VizWiz,clock,clock,28,28,7542
+VizWiz,vase,vase,11,11,7542
+VizWiz,scissors,scissors,2,2,7542
+VizWiz,teddy bear,teddy bear,4,4,7542
+VizWiz,toothbrush,toothbrush,1,1,7542

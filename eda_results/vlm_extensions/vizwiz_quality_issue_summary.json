@@ -51,48 +51,42 @@
       "images": 5222,
       "blur_majority_pct": 21.16,
       "poor_framing_majority_pct": 31.39,
-      "dark_majority_pct": 0.84,
-      "unrecognizable_majority_pct": 0.0
+      "dark_majority_pct": 0.84
     },
     {
       "refusal_captions": 1,
       "images": 1297,
       "blur_majority_pct": 38.7,
       "poor_framing_majority_pct": 49.81,
-      "dark_majority_pct": 1.62,
-      "unrecognizable_majority_pct": 0.0
+      "dark_majority_pct": 1.62
     },
     {
       "refusal_captions": 2,
       "images": 480,
       "blur_majority_pct": 52.92,
       "poor_framing_majority_pct": 51.46,
-      "dark_majority_pct": 3.54,
-      "unrecognizable_majority_pct": 0.0
+      "dark_majority_pct": 3.54
     },
     {
       "refusal_captions": 3,
       "images": 286,
       "blur_majority_pct": 65.38,
       "poor_framing_majority_pct": 51.4,
-      "dark_majority_pct": 5.94,
-      "unrecognizable_majority_pct": 100.0
+      "dark_majority_pct": 5.94
     },
     {
       "refusal_captions": 4,
       "images": 273,
       "blur_majority_pct": 59.71,
       "poor_framing_majority_pct": 35.16,
-      "dark_majority_pct": 20.51,
-      "unrecognizable_majority_pct": 100.0
+      "dark_majority_pct": 20.51
     },
     {
       "refusal_captions": 5,
       "images": 192,
       "blur_majority_pct": 55.73,
       "poor_framing_majority_pct": 26.04,
-      "dark_majority_pct": 33.33,
-      "unrecognizable_majority_pct": 100.0
+      "dark_majority_pct": 33.33
     }
   ]
 }

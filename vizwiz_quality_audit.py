@@ -52,8 +52,7 @@ def main():
         by_refusal.append({"refusal_captions": group, "images": len(selected),
                            "blur_majority_pct": round(100 * sum(row["blur_votes"] >= 3 for row in selected) / len(selected), 2),
                            "poor_framing_majority_pct": round(100 * sum(row["poor_framing_votes"] >= 3 for row in selected) / len(selected), 2),
-                           "dark_majority_pct": round(100 * sum(row["too_dark_votes"] >= 3 for row in selected) / len(selected), 2),
-                           "unrecognizable_majority_pct": round(100 * sum(row["unrecognizable_votes"] >= 3 for row in selected) / len(selected), 2)})
+                           "dark_majority_pct": round(100 * sum(row["too_dark_votes"] >= 3 for row in selected) / len(selected), 2)})
     with (OUT / "vizwiz_quality_by_refusal.csv").open("w", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=list(by_refusal[0])); writer.writeheader(); writer.writerows(by_refusal)
     result = {"source": "https://vizwiz.cs.colorado.edu/VizWiz_final/image_quality/annotations.zip",

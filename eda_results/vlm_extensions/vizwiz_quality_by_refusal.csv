@@ -1,7 +1,7 @@
-﻿refusal_captions,images,blur_majority_pct,poor_framing_majority_pct,dark_majority_pct,unrecognizable_majority_pct
-0,5222,21.16,31.39,0.84,0.0
-1,1297,38.7,49.81,1.62,0.0
-2,480,52.92,51.46,3.54,0.0
-3,286,65.38,51.4,5.94,100.0
-4,273,59.71,35.16,20.51,100.0
-5,192,55.73,26.04,33.33,100.0
+﻿refusal_captions,images,blur_majority_pct,poor_framing_majority_pct,dark_majority_pct
+0,5222,21.16,31.39,0.84
+1,1297,38.7,49.81,1.62
+2,480,52.92,51.46,3.54
+3,286,65.38,51.4,5.94
+4,273,59.71,35.16,20.51
+5,192,55.73,26.04,33.33

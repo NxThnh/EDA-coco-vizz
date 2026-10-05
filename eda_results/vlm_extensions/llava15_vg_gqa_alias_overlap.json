@@ -1,0 +1,16 @@
+{
+  "vg_metadata_source": "https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip",
+  "vg_metadata_sha256": "b87a94918cb2ff4d952cf1dfeca0b9cf6cd6fd204c2f8704645653be1163681a",
+  "mix_sha256": "ce959ce6e23073ee1cd1a8a2ef1c633768c10d4174327b8b2dc7113b91af6cf8",
+  "vg_metadata_images": 108077,
+  "vg_images_with_coco_id": 51498,
+  "mix_vg_gqa_unique_image_ids": 101207,
+  "val_coco_direct": 5741,
+  "val_vg_gqa_alias": 16221,
+  "val_alias_only": 10877,
+  "eval_coco_direct": 70,
+  "eval_vg_gqa_alias": 201,
+  "eval_alias_only": 135,
+  "eval_neither": 295,
+  "scope": "Exact COCO ID alias through Visual Genome image_data.json; no pixel matching or pretraining audit."
+}

@@ -1,0 +1,20 @@
+{
+  "images": 7750,
+  "exif_orientation_counts": {
+    "1": 7257,
+    "6": 493
+  },
+  "exif_rotation_by_rotated_majority": {
+    "exif_0_label_0": 6611,
+    "exif_0_label_1": 646,
+    "exif_1_label_0": 294,
+    "exif_1_label_1": 199
+  },
+  "exif_dimension_swap_by_rotated_majority": {
+    "swap_0_label_0": 6611,
+    "swap_0_label_1": 646,
+    "swap_1_label_0": 294,
+    "swap_1_label_1": 199
+  },
+  "note": "EXIF tag signals requested display transform; Rotated is a human quality issue label."
+}

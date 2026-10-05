@@ -6,7 +6,7 @@ Chạy `python prepare_data.py --verify-images` để tạo manifest train/dev/e
 
 **Nhãn object VizWiz chưa hoàn thành:** `data_prepared/vizwiz_object_annotation_worklist.csv` là mẫu trống, hiện cả 1.000 dòng A/B đều là `unlabeled`. Không sử dụng file này như ground truth.
 
-**EDA dành cho LLaVA-1.5-7B đã tích hợp vào [báo cáo chính](EDA_COCO_vs_VizWiz_Report.md#phần-8-kiểm-tra-eda-bổ-sung-cho-llava-15-7b) và notebook.** Kiểm tra trực tiếp file instruction tuning LLaVA 665K, nhãn lỗi VizWiz, độ đầy đủ nhãn object từ caption, hình học pad/resize, CLIP có và không pad, cùng manifest eval. File `coco/annotations/instances_train2017.json` từ [gói annotation COCO 2017 chính thức](http://images.cocodataset.org/annotations/annotations_trainval2017.zip) chỉ dùng cho đối chứng train2017; không thay thế danh sách ảnh LLaVA thực sự dùng.
+**EDA dành cho LLaVA-1.5-7B đã tích hợp vào [báo cáo chính](EDA_COCO_vs_VizWiz_Report.md) và notebook.** Các phép kiểm tra được đặt trong Phần 1–6 theo chủ đề; Phần 8 ghi giao thức đánh giá. Báo cáo đối chiếu file instruction tuning LLaVA 665K với COCO và alias VG/GQA, nhãn lỗi VizWiz với EXIF, độ đầy đủ nhãn object từ caption, hình học pad/resize, CLIP cùng manifest eval. File `coco/annotations/instances_train2017.json` từ [gói annotation COCO 2017 chính thức](http://images.cocodataset.org/annotations/annotations_trainval2017.zip) chỉ dùng cho đối chứng train2017; không thay thế danh sách ảnh LLaVA thực sự dùng.
 
 ### Nghiên cứu Chuyên sâu về Domain Gap trong Trợ lý Thị giác Hỗ trợ Người Khiếm thị
 *Đề tài Khóa Luận Tốt Nghiệp — Image Captioning & Multimodal Vision-Language Models*
@@ -55,6 +55,7 @@ Kho lưu trữ này chứa toàn bộ mã nguồn phân tích khám phá dữ li
 ├── full_laplacian_audit.py            # Laplacian 480 px toàn bộ ảnh val
 ├── summarize_full_laplacian.py        # Phân tầng Laplacian trên toàn bộ val
 ├── llava_training_overlap.py          # Đối chiếu file mix665k chính thức
+├── audit_vg_exif.py                   # Alias VG/GQA và bảng chéo EXIF × Rotated
 ├── pope_manifest_audit.py             # Đối chiếu danh sách POPE COCO chính thức
 ├── vizwiz_quality_audit.py            # Ghép nhãn lỗi chất lượng chính thức
 ├── coco_caption_label_completeness.py # Độ đầy đủ lớp object lấy từ caption COCO
@@ -112,6 +113,7 @@ python plot_coco80_mentions.py
 python coco_caption_label_completeness.py
 python llava_training_overlap.py
 python vizwiz_quality_audit.py
+python audit_vg_exif.py
 python pope_manifest_audit.py
 python clip_embedding_audit.py
 python plot_vlm_findings.py
@@ -119,7 +121,7 @@ python plot_vlm_findings.py
 
 `clip_embedding_audit.py` đọc checkpoint `openai/clip-vit-large-patch14-336` từ `model_assets/clip-vit-large-patch14-336/`. Cần tải `config.json`, `preprocessor_config.json`, `merges.txt`, `vocab.json`, `tokenizer_config.json` và `pytorch_model.bin` từ [model card](https://huggingface.co/openai/clip-vit-large-patch14-336). Phép đếm token dùng `model_assets/llava-v1.5-7b/tokenizer.model` từ [checkpoint LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-7b). Các trọng số tải về được bỏ qua bởi `.gitignore`.
 
-Ba script đối chiếu nguồn ngoài đọc file trong `scratch/` (thư mục bị Git bỏ qua): tải [`llava_v1_5_mix665k.json`](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json) vào `scratch/llava_v1_5_mix665k.json`, [VizWiz-QualityIssues annotations.zip](https://vizwiz.org/tasks-and-datasets/image-quality-issues/) vào `scratch/vizwiz_quality_annotations.zip`, và [POPE COCO random](https://github.com/RUCAIBox/POPE/blob/main/output/coco/coco_pope_random.json) vào `scratch/coco_pope_random.json` trước khi chạy `llava_training_overlap.py`, `vizwiz_quality_audit.py` và `pope_manifest_audit.py`. Kết quả CSV/JSON ghi hash nguồn. Chạy `python prepare_data.py --verify-images` lại sau khi có `val_image_hashes.csv` để loại ảnh dev trùng byte với eval.
+Các script đối chiếu nguồn ngoài đọc file trong `scratch/` (thư mục bị Git bỏ qua): tải [`llava_v1_5_mix665k.json`](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json) vào `scratch/llava_v1_5_mix665k.json`, [Visual Genome `image_data.json.zip`](https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip) vào `scratch/image_data.json.zip`, [VizWiz-QualityIssues annotations.zip](https://vizwiz.org/tasks-and-datasets/image-quality-issues/) vào `scratch/vizwiz_quality_annotations.zip`, và [POPE COCO random](https://github.com/RUCAIBox/POPE/blob/main/output/coco/coco_pope_random.json) vào `scratch/coco_pope_random.json`. Chạy `llava_training_overlap.py` và `vizwiz_quality_audit.py` trước `audit_vg_exif.py`; kết quả CSV/JSON ghi hash nguồn. Chạy `python prepare_data.py --verify-images` lại sau khi có `val_image_hashes.csv` để loại ảnh dev trùng byte với eval.
 
 Pilot LLaVA chốt prompt, `max_new_tokens=64` và greedy trong `llava_pilot.py`. Máy hiện có tokenizer và CLIP, **chưa có trọng số LLaVA 7B**, nên chưa có output mô hình; script yêu cầu checkpoint cục bộ, không tải ngầm. Cài `requirements-llava-pilot.txt` và chạy trên máy đủ bộ nhớ sau khi có checkpoint.
 

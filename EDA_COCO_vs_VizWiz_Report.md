@@ -7,15 +7,15 @@
 
 Báo cáo so sánh MS-COCO val2014 (40.504 ảnh) và VizWiz-Captions val (7.750 ảnh). Các kết quả dưới đây mô tả khác biệt dữ liệu đầu vào; báo cáo chưa đo sai số của mô hình hoặc quan hệ nhân quả với hallucination.
 
-Checkpoint đích là **LLaVA-1.5-7B**. Phần 8 đối chiếu trực tiếp file instruction tuning 665K, nhãn chất lượng VizWiz, độ đầy đủ nhãn object lấy từ caption, hình học tiền xử lý, CLIP embedding, tokenizer và manifest đánh giá. Chưa có output sinh bởi LLaVA trong repo; vì vậy báo cáo chưa kết luận về hallucination của mô hình.
+Checkpoint đích là **LLaVA-1.5-7B**. Các mục tương ứng đối chiếu trực tiếp file instruction tuning 665K, nhãn chất lượng VizWiz, độ đầy đủ nhãn object lấy từ caption, hình học tiền xử lý, CLIP embedding, tokenizer và manifest đánh giá. Chưa có output sinh bởi LLaVA trong repo; vì vậy báo cáo chưa kết luận về hallucination của mô hình.
 
 ### Các phát hiện định lượng cốt lõi
 
-1. **Nguy cơ contamination phải theo đúng nguồn huấn luyện.** Có **35.504/40.504 ảnh COCO val2014** nằm trong COCO train2017, nhưng chỉ **5.741/40.504** có đường dẫn COCO trong [file instruction tuning LLaVA-1.5 665K](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json). Manifest COCO 500 ảnh gồm **70 ảnh trong mix và 430 ảnh ngoài mix**. Đây chưa phải kiểm toán toàn bộ pretraining hay ảnh trùng giữa các nguồn.
+1. **Nguy cơ contamination phải theo đúng nguồn huấn luyện.** Có **35.504/40.504 ảnh COCO val2014** nằm trong COCO train2017; **5.741/40.504** có đường dẫn COCO trong [mix instruction tuning LLaVA-1.5 665K](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json). Nối thêm `coco_id` của Visual Genome với đường dẫn VG/GQA trong mix tìm được **135 ảnh eval** ngoài nhóm đường dẫn COCO trực tiếp. Manifest 500 ảnh gồm **205 ảnh có ít nhất một trong hai kiểu đường dẫn** và **295 ảnh chưa khớp**; 295 vẫn chỉ là cận trên cho nhóm chưa từng thấy.
 2. **Hình học xử lý ảnh khác ở mức thu nhỏ.** Với mode pad 336×336, trung vị diện tích viền là **26,72% COCO** và **25,00% VizWiz**; cạnh dài trung vị lần lượt **640** và **1.296 px**, tương đương thu về 336 khoảng **1,90** và **3,86 lần**. Nguy cơ mất chữ nhỏ do downsample đáng kiểm tra hơn chênh lệch diện tích padding.
 3. **Ảnh khó có nhãn lỗi trực tiếp.** [VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/) khớp đủ 7.750 ảnh val: **29,91%** có đa số gán blur và **36,45%** poor framing. Laplacian toàn val là **1.140,08 COCO** so với **152,16 VizWiz**, nhưng vẫn chỉ là chỉ báo biên/texture.
-4. **Độ phủ metric theo từ chưa đủ để làm ground truth.** **52,666%** caption VizWiz hợp lệ nhắc từ COCO-80. Trên COCO, hợp nhất cả 5 caption chỉ nhắc **55,26%** số lượt lớp object được gán trong instance annotation (mỗi lớp đếm một lần/ảnh). Vì thế object chỉ suy từ caption sẽ bỏ sót nhãn hiện diện và có thể làm sai CHAIR.
-5. **Khoảng cách miền có tín hiệu khác ở ảnh và chữ.** JS unigram **0,266183 bit** so với mốc chia đôi COCO **0,018418 bit**; Jaccard caption **0,1989 COCO** và **0,1633 VizWiz**. CLIP cho thấy cosine nội miền VizWiz cao hơn COCO, còn khoảng cách giữa cặp ảnh–caption đúng và cặp hoán vị hẹp hơn; Phần 8 kiểm tra tác động của padding và phân tầng theo cờ chữ/từ chối.
+4. **Độ phủ metric theo từ chưa đủ để làm ground truth.** **52,7%** caption VizWiz hợp lệ nhắc từ COCO-80, nhưng các từ rộng như `computer` và `table` làm con số này lạc quan. Trên COCO, hợp nhất các caption chỉ nhắc **55,26%** số lượt lớp object được gán trong instance annotation (mỗi lớp đếm một lần/ảnh). Vì thế nhãn chỉ suy từ caption sẽ bỏ sót object hiện diện và có thể làm sai CHAIR.
+5. **Khoảng cách miền có tín hiệu khác ở ảnh và chữ.** JS unigram **0,266 bit** so với mốc chia đôi COCO **0,018 bit**; Jaccard caption **0,199 COCO** và **0,163 VizWiz**. CLIP cho thấy cosine nội miền VizWiz cao hơn COCO, còn khoảng cách giữa cặp ảnh–caption đúng và cặp hoán vị hẹp hơn; Phần 6 kiểm tra tác động của padding và phân tầng theo cờ chữ/từ chối.
 
 ---
 
@@ -34,17 +34,36 @@ Phần mở đầu mô tả **hai miền dữ liệu** theo đúng phạm vi ả
 
 Ảnh val của cả hai tập đã được giải mã đầy đủ, không thiếu hoặc rỗng. Có **49 nhóm ảnh VizWiz trùng byte** (100 ảnh). Trong manifest đánh giá 500 ảnh VizWiz không có cặp trùng byte nội bộ; 8 ảnh eval có bản sao nằm ở val ngoài eval, nên `prepare_data.py` giữ eval và loại **9 bản sao** khỏi dev. [Danh sách loại trừ](data_prepared/exact_duplicate_dev_exclusions.csv).
 
-Tỷ lệ giao nhau COCO val2014/train2017 (**87,656%**) không phải tỷ lệ mô hình LLaVA đã thấy. Đối chiếu file instruction tuning 665K chính thức cho **5.741/40.504 ảnh (14,174%)** có đường dẫn COCO trùng ID; **70/500** ảnh trong manifest thuộc nhóm đó. Phần 8.1 ghi phương pháp, hash nguồn và giới hạn của phép đối chiếu. Báo cáo sẽ giữ toàn bộ 500 ảnh và phân tích riêng 70 ảnh trong mix so với 430 ảnh ngoài mix; tập ngoài mix chỉ “sạch” theo file mix, không được gọi là sạch toàn bộ pretraining.
+Tỷ lệ giao nhau COCO val2014/train2017 (**87,66%**) không phải tỷ lệ mô hình LLaVA đã thấy. Trong mix 665K, **5.741/40.504 ảnh (14,17%)** có đường dẫn COCO trùng ID; thêm **10.877 ảnh val** có `coco_id` trùng với ảnh VG/GQA trong mix nhưng không thuộc nhóm COCO trực tiếp. Trên manifest, hai nhóm là **70** và **135 ảnh**, còn **295 ảnh** chưa khớp cả hai. Giữ nguyên 500 ảnh đã khóa và khi có output sẽ báo cáo theo các nhóm này; không gọi 295 ảnh là sạch toàn bộ pretraining.
+
+### Toàn vẹn dữ liệu và nguồn huấn luyện LLaVA
+
+| Kiểm tra | COCO | VizWiz | Cách đọc |
+| :--- | ---: | ---: | :--- |
+| Trùng ID ảnh giữa train2014/val2014 | 0 | — | Kết quả hiển nhiên của cách chia COCO 2014; không dùng làm kết luận rò rỉ VLM. |
+| **ID val2014 nằm trong train2017** | **35.504/40.504 (87,656%)** | — | Đo từ `instances_train2017.json` và `captions_val2014.json`; chỉ cần annotation, không cần ảnh train. |
+| **ID val2014 có đường dẫn COCO trong mix instruction tuning LLaVA-1.5** | **5.741/40.504 (14,174%)** | **0 đường dẫn tên VizWiz** | Đo từ chính file 665K, không suy từ toàn bộ train2017; không bao trùm pretraining hay ảnh có thể trùng ở nguồn khác. |
+| Caption val hợp lệ trùng câu train sau chuẩn hóa | 10.488/202.654 (5,175%) | 463/33.145 (1,397%) | Trùng câu phổ biến không chứng minh trùng ảnh hoặc contamination của VLM. Caption VizWiz từ chối/bị reject đã loại. |
+| Ảnh val thiếu hoặc 0 byte | 0/40.504 | 0/7.750 | Kiểm tra theo manifest. |
+| Giải mã toàn bộ ảnh val | 40.504/40.504 thành công | 7.750/7.750 thành công | EXIF transpose, giải mã và băm file. |
+| Annotation mồ côi; trùng ID ảnh, filename, ID annotation trong từng split | 0 | 0 | Xem số theo split trong `integrity.csv`. |
+| Ảnh có số caption khác 5 | Train: 197; val: 131 | Train: 0; val: 0 | Đây là đặc điểm annotation COCO, không tự động là lỗi. |
+
+Trong file val, MD5 cho **49 nhóm ảnh trùng byte** (100 ảnh, đều VizWiz); pHash bằng nhau cho 85 nhóm (78 VizWiz, 7 COCO). pHash bằng nhau chỉ là ứng viên cần xem ảnh. Manifest eval không có cặp trùng byte nội bộ, nhưng 8 ảnh eval có bản sao ở phần val còn lại; `prepare_data.py` giữ eval và loại 9 bản sao khỏi dev. [Danh sách loại trừ](data_prepared/exact_duplicate_dev_exclusions.csv).
+
+[File `llava_v1_5_mix665k.json` của tác giả LLaVA](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json) được xác minh SHA-256 `ce959ce6e23073ee1cd1a8a2ef1c633768c10d4174327b8b2dc7113b91af6cf8`, rồi quét trường `image` cấp bản ghi. Có 624.610 bản ghi mang đường dẫn ảnh, 349.034 đường dẫn duy nhất, **5.741** ID COCO val2014 trong đường dẫn COCO và **70/500** ID của manifest. Không có đường dẫn chứa tên `VizWiz`.
+
+[Metadata Visual Genome do tác giả phát hành](https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip) có SHA-256 `b87a94918cb2ff4d952cf1dfeca0b9cf6cd6fd204c2f8704645653be1163681a`; 51.498/108.077 bản ghi có `coco_id`. Đối chiếu `image_id` của đường dẫn `vg/` hoặc `gqa/` trong mix với trường này rồi nối vào COCO val2014: **16.221 ảnh val** có alias VG/GQA, trong đó **10.877** chưa có đường dẫn COCO trực tiếp. Trên manifest, **201/500** có alias VG/GQA, gồm **135** không có đường dẫn COCO trực tiếp. Như vậy 70 + 135 = **205/500** ảnh có ít nhất một dấu hiệu hiện diện trong mix; **295/500** chưa khớp. Đây là phép nối ID, chưa kiểm tra trùng pixel giữa nguồn khác hoặc pretraining. [Cờ từng ảnh](eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv), [tóm tắt và hash](eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.json), [kiểm tra ảnh](eda_results/vlm_extensions/val_image_audit.json).
 
 ---
 
 ## PHẦN 2: ĐỘ PHÂN GIẢI & TỶ LỆ KHUNG HÌNH (RESOLUTION & ASPECT RATIO)
 
-Khảo sát gồm 40.504 ảnh MS-COCO val2014 và 7.750 ảnh VizWiz-Captions val. Kích thước VizWiz được đo từ file sau EXIF transpose (493 ảnh có thẻ xoay 90°); kích thước COCO lấy từ annotation. Trước EXIF, tỷ lệ ảnh dọc VizWiz là 92,86%; sau EXIF là 99,23%.
+Khảo sát gồm 40.504 ảnh MS-COCO val2014 và 7.750 ảnh VizWiz-Captions val. Kích thước VizWiz được đo từ file sau EXIF transpose (493 ảnh có thẻ xoay 90°); kích thước COCO lấy từ annotation. Trước EXIF, tỷ lệ ảnh dọc VizWiz là 92,86%; sau EXIF là 99,23%. Pipeline EDA, CLIP và pilot LLaVA áp dụng `ImageOps.exif_transpose` trước khi resize/pad; phải giữ bước này khi chạy eval cuối.
 
 Các số pixel dưới đây mô tả **phiên bản file/annotation được dùng trong EDA**. COCO val2014 trong bộ khảo sát bị giới hạn cạnh tối đa ở 640 px, còn VizWiz được đo từ file ảnh phân phối. Vì vậy chênh lệch số pixel có thể chịu ảnh hưởng của cách chuẩn bị/phát hành dữ liệu; không suy ra độ phân giải cảm biến, độ chi tiết ảnh gốc hay chất lượng thu nhận chỉ từ bảng này.
 
-Các thống kê mô tả trong phần này dùng toàn bộ tập val. Bộ 500 ảnh COCO duy nhất dùng cho đánh giá mô hình được cố định ở Phần 8.4.
+Các thống kê mô tả trong phần này dùng toàn bộ tập val. Bộ 500 ảnh COCO duy nhất dùng cho đánh giá mô hình được cố định ở Phần 8.1.
 
 | Chỉ số hình ảnh | MS-COCO val2014 ($N=40.504$) | VizWiz-Captions ($N=7.750$) | Ý nghĩa trong Khóa luận |
 | :--- | :---: | :---: | :--- |
@@ -79,6 +98,12 @@ trong đó $H',W'$ là kích thước **sau tiền xử lý**. Vì vậy cần t
 - **Aspect-ratio preserving / dynamic tiling**: ảnh dọc hoặc chứa chữ nhỏ có thể cần nhiều tile/token hơn nếu giữ độ chi tiết. Nếu ép cùng ngân sách token với COCO, mỗi token phải đại diện vùng nội dung lớn hơn hoặc hệ thống phải downsample nhiều hơn, làm giảm khả năng đọc nhãn/OCR.
 - **Hệ quả cần báo cáo**: cùng với CHAIR/POPE, cần ghi rõ image size, patch size, chiến lược crop/pad/tile, số visual-token trung bình và tỷ lệ vùng ảnh bị crop. Nếu thiếu các thông tin này, chưa thể quy kết chênh lệch hallucination cho bản thân mô hình thay vì cho bước tokenization.
 
+### Hình học tiền xử lý LLaVA-1.5
+
+[Config LLaVA-1.5-7B](https://huggingface.co/liuhaotian/llava-v1.5-7b/blob/main/config.json) ghi `image_aspect_ratio: pad`. Với ảnh 336×336 và patch 14×14, model nhận **576 patch token** mỗi ảnh. Mode pad theo mã gốc có **0% diện tích ảnh bị cắt, hệ số méo hình 1**; trung vị vùng padding là **26,72% COCO** và **25,00% VizWiz**, tương đương khoảng **154** và **144** patch theo diện tích (ước lượng, không phải đếm patch rỗng ở biên). Cạnh dài trung vị của file là **640 px COCO** và **1.296 px VizWiz**, nên khi đưa về 336 px, tỷ số pixel gốc/pixel mô hình là **1,90** và **3,86**. Do đó tỷ lệ ảnh dọc không tự tạo bất lợi về số patch hoặc diện tích pad; việc thu nhỏ mạnh hơn ở VizWiz là rủi ro cụ thể cho chữ nhỏ (64,75% ảnh có cờ chữ theo đa số annotator), cần thử nghiệm đầu ra để xác nhận. [Bảng từng ảnh](eda_results/vlm_extensions/llava15_preprocessing_geometry.csv), [tóm tắt](eda_results/vlm_extensions/llava15_preprocessing_geometry.json).
+
+Con số 0% bị cắt áp dụng khi chạy pipeline **gốc** ở mode pad. [Tài liệu Transformers về LLaVA](https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/llava.md) lưu ý bản `llava-hf` cần đặt `LlavaImageProcessor(..., do_pad=True)` để khớp triển khai gốc; phải ghi cấu hình processor thực tế khi chạy mô hình. Center crop và resize thẳng vuông chỉ là tình huống đối chứng hình học, không phải cấu hình checkpoint đã đo.
+
 ---
 
 ## PHẦN 3: PHÂN TÍCH CHÚ THÍCH & ĐẶC TRƯNG NGÔN NGỮ
@@ -112,9 +137,26 @@ Hình 3A biểu diễn phần phân phối 3–30 từ theo tỷ lệ caption tr
 3. **Top-15 danh từ tính từ dữ liệu**:
    - NLTK POS tagger chỉ giữ danh từ và WordNet lemmatizer chuẩn hóa số ít. Bảng báo cả count lẫn số lượt nhắc trên 1.000 caption.
    - VizWiz nhắc nhiều đến `screen`, `computer`, `table`, `bottle`, `box`; COCO nổi bật với `man`, `people`, `woman`. `person` riêng lẻ đạt 54,89/1.000 caption VizWiz và 41,16 ở COCO. [Bảng danh từ](eda_results/tables/caption_noun_entities_top15.csv).
-   - Gộp `man/men/woman/people/person`, COCO có **326,71 lượt nhắc/1.000 caption**, VizWiz **79,29**; tỷ lệ caption đã chọn có ít nhất một từ thuộc nhóm là **30,92%** so với **7,78%**. Đây là tần suất lời mô tả, không phải số người thực sự trong ảnh. [Bảng nhóm từ chỉ người](eda_results/tables/person_reference_summary.csv).
+   - Để thống nhất với Hình 4, **`person` được định nghĩa bằng toàn bộ nhóm đồng nghĩa CHAIR** trong một caption hợp lệ được chọn/ảnh: **37,52% COCO** và **8,66% VizWiz**. Đây là tần suất lời mô tả, không phải số người thực sự trong ảnh. [Bảng từ gốc theo lớp](eda_results/tables/coco80_source_terms.csv).
 
 Quy tắc chọn một caption có ID thấp nhất được dùng nhất quán trong phép đo chính và tái lập bằng `caption_sampling_sensitivity.py`; bảng phụ không còn chọn ngẫu nhiên. [Bảng đối chiếu](eda_results/tables/person_reference_one_caption_per_image.csv).
+
+### Phân kỳ từ vựng và đồng thuận giữa caption
+
+Tách từ bằng regex tiếng Anh và chuyển chữ thường trên 40.504 caption COCO và 7.542 caption VizWiz. JS unigram giữa hai miền là **0,266 bit**. Mốc nhiễu nền từ 100 lần chia ngẫu nhiên caption COCO thành hai nửa (`seed=42`) là **0,018 bit trung bình**, phân vị 95% **0,019 bit**; khoảng cách hai miền lớn hơn rõ rệt nhiễu do chia mẫu ở COCO. Mốc nền cùng miền không thay thế khoảng tin cậy hai miền và không đo embedding. OOV của VizWiz so với từ vựng COCO train2014 là **4,53% token** và **36,45% type** theo cùng cách tách từ. [Bảng từ vựng](eda_results/vlm_extensions/vocabulary.csv), [100 từ đặc trưng log-odds](eda_results/vlm_extensions/distinctive_words_log_odds.csv), [tóm tắt](eda_results/vlm_extensions/summary.json).
+
+Các từ phân biệt nổi bật trong [bảng log-odds](eda_results/vlm_extensions/distinctive_words_log_odds.csv) giúp đọc nguồn phân kỳ. Điểm dương thiên về VizWiz; điểm âm thiên về COCO. Điểm được làm trơn 0,5 và chỉ xét từ có tổng tần suất ≥20, nên đây là mô tả từ vựng, không phải nhãn object thật.
+
+| Từ | COCO | VizWiz | Log-odds VizWiz − COCO |
+| :--- | ---: | ---: | ---: |
+| label | 1 | 299 | +6,81 |
+| packet | 0 | 55 | +6,23 |
+| nutritional | 0 | 51 | +6,15 |
+| frisbee | 573 | 0 | −5,53 |
+| court | 507 | 0 | −5,41 |
+| surfboard | 479 | 0 | −5,35 |
+
+Tính Jaccard từ nội dung giữa mọi cặp caption hợp lệ của mỗi ảnh, bỏ cùng một tập stopword rồi lấy trung bình theo ảnh. **COCO: 0,1989** trên 40.504 ảnh; **VizWiz: 0,1633** trên 7.268 ảnh có ít nhất hai caption hợp lệ. Có 208 ảnh VizWiz không còn caption hợp lệ; chúng không bị gán điểm 0. Điểm này đo từ trùng, không xác nhận hai caption đồng nghĩa hay bám sát ảnh. [COCO từng ảnh](eda_results/vlm_extensions/coco_caption_agreement.csv), [VizWiz từng ảnh](eda_results/vlm_extensions/vizwiz_caption_agreement.csv).
 
 ---
 
@@ -122,7 +164,15 @@ Quy tắc chọn một caption có ID thấp nhất được dùng nhất quán 
 
 Tập dữ liệu COCO được xây dựng dựa trên hệ thống phân cấp 80 danh mục đối tượng thuộc 12 siêu danh mục (Supercategories). Phân tích $291.875$ đối tượng được gán nhãn trong phạm vi khảo sát cho thấy:
 
-Hình 4 so sánh **tỷ lệ ảnh có một caption được chọn nhắc đến từng lớp COCO-80** ở hai miền, cùng một đơn vị đo. Đây là tần suất từ theo bảng đồng nghĩa CHAIR, không phải ground truth object VizWiz; [bảng đủ 80 lớp](eda_results/tables/coco80_caption_mentions.csv) giữ số đếm và denominator. Bảng siêu danh mục bên dưới vẫn là tỷ lệ object instance COCO và có đơn vị khác Hình 4.
+Hình 4 hiển thị **20 lớp có tỷ lệ nhắc cao nhất ở VizWiz** trong một caption hợp lệ được chọn/ảnh, cùng đơn vị cho hai miền. [Bảng đủ 80 lớp](eda_results/tables/coco80_caption_mentions.csv) giữ số đếm và denominator. Đây là khớp từ theo đồng nghĩa CHAIR, không phải ground truth object. Bảng siêu danh mục bên dưới là tỷ lệ object instance COCO, có đơn vị khác Hình 4.
+
+| Lớp CHAIR | VizWiz: ảnh nhắc lớp | Từ gốc đóng góp nhiều nhất trong VizWiz |
+| :--- | ---: | :--- |
+| `laptop` | 879/7.542 (11,66%) | `computer` 588, `laptop` 224, `laptop computer` 60 |
+| `dining table` | 794/7.542 (10,53%) | `table` 633, `desk` 157, `dining table` 7 |
+| `person` | 653/7.542 (8,66%) | `person` 403, `man` 95, `woman` 39 |
+
+Một ảnh có thể chứa nhiều từ đồng nghĩa nên các đóng góp không cộng bằng số ảnh của lớp. `computer` không chứng minh có laptop và `table` không chứng minh có bàn ăn; hai phép ánh xạ rộng này có thể làm **52,7%** độ phủ COCO-80 theo từ cao hơn mức khớp ngữ nghĩa thật. [Từ gốc của đủ 80 lớp](eda_results/tables/coco80_source_terms.csv).
 
 ### 12 siêu danh mục trong MS-COCO val2014:
 1. **`person` (Con người)**: **$88,153$ đối tượng ($30.20\%$)** — chiếm gần $1/3$ toàn bộ đối tượng trong tập dữ liệu!
@@ -153,6 +203,21 @@ Không nên đọc điểm CHAIR trên COCO và VizWiz như hai đại lượng 
 1. Giữ CHAIR/POPE-COCO để so sánh với literature, nhưng gắn nhãn rõ là **COCO-ontology score**.
 2. Báo cáo thêm metric open-vocabulary/domain-specific cho VizWiz, với ontology mở rộng gồm scene text, bao bì, nhãn, thuốc, màn hình và bộ phận cơ thể.
 3. Không kết luận mô hình hallucinate ít hơn trên VizWiz chỉ từ CHAIR thấp hơn.
+
+### Độ phủ COCO-80 và nhãn CHAIR
+
+| Hạng mục | Kết quả trên dữ liệu val | Giới hạn diễn giải |
+| :--- | :--- | :--- |
+| Độ dài caption theo tokenizer LLaVA-1.5-7B | COCO p50/p90/p95/p99 **13/17/19/24** token (`n=40.504`); VizWiz **14/21/25/35** (`n=7.542`). | Chỉ caption tham chiếu; chưa gồm chat template, ảnh hoặc output mô hình. |
+| Từ COCO-80 trong caption hai tập | VizWiz: **17.456/33.145 caption hợp lệ (52,7%)**, **5.771/7.542 ảnh (76,5%)** có ít nhất một từ CHAIR; COCO: **78,6%/202.654 caption**, **79,5% ảnh** ở một caption được chọn và **94,0% ảnh** khi hợp nhất caption. | Cùng phép khớp từ; đây là mức áp dụng từ vựng, không phải tỷ lệ object thực sự hiện diện. |
+| Độ đầy đủ của nhãn từ caption trên COCO | Một caption được chọn nhắc **38,07%** số lượt lớp object có trong instance annotation; hợp nhất mọi caption nhắc **55,26%** (`116.592` lượt lớp/ảnh). | Caption bỏ sót nhiều lớp được gán; lấy object từ caption làm ground truth có nguy cơ tính nhầm object thật thành hallucination. Nhãn instance cũng không tuyệt đối đầy đủ. |
+| Ground truth object VizWiz | [Gợi ý object được ≥2 caption nhắc](eda_results/vlm_extensions/vizwiz_chair_ontology_mentions.csv); [100 ảnh để rà tay](eda_results/vlm_extensions/vizwiz_object_consensus_review100_seed42.csv). | Gợi ý yếu có thể cùng sai; người rà ảnh xác nhận trước khi tính CHAIR/POPE. |
+
+[Bảng đồng nghĩa CHAIR gốc](https://github.com/LisaAnne/Hallucination/blob/master/data/synonyms.txt) được lưu tại `eda_resources/chair_synonyms.txt`. Phép đếm hiện dùng khớp từ/cụm từ không phân biệt chữ hoa, nên có thể khác chính xác bộ tiền xử lý số ít và các ngoại lệ của mã CHAIR gốc. [Kết quả CLIP](eda_results/vlm_extensions/clip_embedding_audit.json), [token và ontology](eda_results/vlm_extensions/summary.json).
+
+[Bảng độ đầy đủ nhãn COCO](eda_results/vlm_extensions/coco_caption_label_completeness.csv) đối chiếu tập lớp có trong instance annotation với lớp xuất hiện trong một hoặc mọi caption trên cùng ảnh; [tóm tắt](eda_results/vlm_extensions/coco_caption_label_completeness.json). Chỉ số recall ở đây lấy **số lớp COCO-80 khác nhau trên từng ảnh** làm denominator, không phải số instance; từ khớp nhầm và nhãn instance bỏ sót vẫn có thể làm lệch ước lượng.
+
+**Quyết định dựng nhãn CHAIR:** với phép **so sánh nội bộ COCO–VizWiz**, tạo tập lớp tham chiếu cho cả hai miền bằng cùng quy tắc: hợp nhất lớp COCO-80 được nhắc trong mọi caption hợp lệ của ảnh, sau cùng bảng đồng nghĩa và tiền xử lý. Trên COCO, tính thêm CHAIR bằng nhãn instance và báo cáo độ chênh giữa hai cách dựng nhãn để ước lượng độ chệch do caption bỏ sót. Không xem nhãn caption của VizWiz là ground truth ảnh; các nhãn rà tay chỉ dùng cho phân tích độ nhạy riêng khi được hoàn tất. Khi so với CHAIR đã công bố trên COCO, phải chạy đúng protocol nhãn và prompt của công trình đối chiếu.
 
 ---
 
@@ -209,7 +274,7 @@ Kiểm tra trên toàn bộ 7.750 ảnh VizWiz cho thấy chỉ số giảm theo
 | 4/5 | 273 | 25,76 | [20,96; 32,33] |
 | 5/5 | 192 | 16,18 | [12,46; 20,74] |
 
-Xu hướng này hỗ trợ giá trị chỉ báo của Laplacian đối với khả năng nhận diện nội dung, nhưng không chứng minh mọi ảnh có chỉ số thấp đều bị mờ. [Bảng toàn val](eda_results/tables/laplacian_by_precanned_full.csv) cho phép kiểm tra từng nhóm; nhãn lỗi chất lượng chính thức được ghép ở Phần 8.
+Xu hướng này hỗ trợ giá trị chỉ báo của Laplacian đối với khả năng nhận diện nội dung, nhưng không chứng minh mọi ảnh có chỉ số thấp đều bị mờ. [Bảng toàn val](eda_results/tables/laplacian_by_precanned_full.csv) cho phép kiểm tra từng nhóm; nhãn lỗi chất lượng chính thức được ghép bên dưới.
 
 ### Mờ/lệch tâm có tương quan với CHAIR/POPE hay không?
 
@@ -221,6 +286,24 @@ Kiểm định tối thiểu cần thực hiện trên cùng bộ ảnh và cùn
 - $y$ gồm CHAIR-I/CHAIR-S ở cấp ảnh và POPE error/F1. Dùng Spearman $\rho$ kèm bootstrap 95% CI; với POPE error nhị phân, dùng logistic regression có interaction `dataset × blur` và `dataset × off-center`.
 - Phân tích riêng COCO và VizWiz, đồng thời báo cáo trên ontology chung và ontology mở rộng. Nếu không, hiệu ứng “dataset” và giới hạn 80 category sẽ gây nhiễu kết luận.
 - Chỉ kết luận có tương quan khi CI không cắt 0 và hiệu ứng còn tồn tại sau khi kiểm soát độ dài output/ontology coverage. Thực nghiệm làm mờ/crop có kiểm soát trên cùng ảnh sẽ mạnh hơn tương quan quan sát trong việc lập luận nguyên nhân.
+
+### Nhãn lỗi chất lượng VizWiz và giới hạn của Laplacian
+
+[VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/) công bố số phiếu (trên 5 annotator) cho blur, ảnh quá sáng/tối, framing, che khuất và xoay trên đúng 7.750 ảnh val. Ghép bằng filename khớp **7.750/7.750** ảnh. Với ngưỡng đa số ≥3/5: **2.318 ảnh mờ (29,91%)**, **2.825 ảnh framing kém (36,45%)**, **219 ảnh quá tối (2,83%)**, **200 ảnh quá sáng (2,58%)** và **116 ảnh bị che (1,50%)**. Các lỗi có thể cùng xuất hiện trên một ảnh nên không cộng tỷ lệ thành 100%. [Phiếu từng ảnh](eda_results/vlm_extensions/vizwiz_quality_issue_votes_val.csv), [tóm tắt và hash nguồn](eda_results/vlm_extensions/vizwiz_quality_issue_summary.json).
+
+Tỷ lệ blur đa số tăng từ **21,16%** ở nhóm 0/5 caption từ chối lên **65,38%** ở nhóm 3/5; nhóm 5/5 là **55,73%**. Framing kém là **31,39%** ở 0/5 và **51,46%** ở 3/5. Đây là đồng xuất hiện giữa hai loại nhãn trên cùng ảnh, chưa chứng minh blur hoặc framing gây lỗi của mô hình. Trong ảnh được gán blur đa số, median Laplacian là **75,41**, so với **260,12** ở ảnh được gán không có lỗi đa số; điều này ủng hộ dùng Laplacian làm chỉ báo, không thay nhãn nguyên nhân. [Bảng theo mức từ chối](eda_results/vlm_extensions/vizwiz_quality_by_refusal.csv).
+
+![Nhãn lỗi chất lượng VizWiz trên toàn bộ val](eda_results/figures/09_vizwiz_quality_labels.png)
+
+Nhãn **Rotated** đa số có ở **845/7.750 ảnh (10,90%)**. EXIF orientation 6 xuất hiện ở **493 ảnh** và đều đổi chiều rộng/cao khi `exif_transpose`. Bảng chéo dưới đây ghép theo filename trên toàn bộ val:
+
+| | Rotated <3/5 | Rotated ≥3/5 | Tổng |
+| :--- | ---: | ---: | ---: |
+| Không có EXIF xoay | 6.611 | 646 | 7.257 |
+| Có EXIF xoay 90° | 294 | 199 | 493 |
+| Tổng | 6.905 | 845 | 7.750 |
+
+EXIF là chỉ dẫn hiển thị trong file, còn Rotated là đánh giá chất lượng từ người gán nhãn; hai biến không thay thế nhau. Sau khi áp EXIF, 646 ảnh vẫn mang nhãn Rotated đa số dù không có cờ xoay, và 294 ảnh có cờ xoay không mang nhãn đó. Pipeline eval sẽ áp `ImageOps.exif_transpose` trước pad/resize như pilot. [Bảng từng ảnh](eda_results/vlm_extensions/vizwiz_exif_rotated_crosscheck.csv), [tóm tắt](eda_results/vlm_extensions/vizwiz_exif_rotated_crosscheck.json).
 
 ---
 
@@ -239,6 +322,19 @@ Kiểm định tối thiểu cần thực hiện trên cùng bộ ảnh và cùn
 | Blur / poor framing theo đa số VizWiz-QualityIssues | Không có nhãn tương ứng | 29,91% / 36,45% |
 
 Vị trí chủ thể và sai số CHAIR/POPE cấp ảnh chưa được đo. Mode pad của LLaVA-1.5-7B không cắt ảnh theo hình học, nhưng vẫn downsample về 336×336; tác động lên chữ nhỏ và hallucination cần thực nghiệm.
+
+### CLIP image embedding và căn khớp caption
+
+| Hạng mục | Kết quả trên dữ liệu val | Giới hạn diễn giải |
+| :--- | :--- | :--- |
+| Khoảng cách miền trong CLIP image embedding | Trên **500 ảnh mỗi miền** (kể cả ảnh không có caption hợp lệ), cosine trung bình giữa miền **0,49271**; trong COCO **0,51932**, trong VizWiz **0,60370**; cosine hai centroid **0,87857**. | Mẫu lấy từ manifest, vector chuẩn hóa; ảnh được pad theo config LLaVA. CLIP là proxy, chưa phải kết quả sinh caption. |
+| Căn khớp ảnh–caption CLIP | COCO cặp đúng **0,25520**, hoán vị **0,08742** (`n=500`); VizWiz **0,26027** so với **0,13186** (`n=483`). | Cosine CLIP so cặp đúng với một hoán vị nội miền `seed=42`; không xác nhận object có thật. |
+
+**Diễn giải CLIP.** VizWiz có cosine nội miền cao hơn COCO (**0,60370 so với 0,51932**) dù khác miền; ảnh VizWiz trong mẫu này đồng nhất hơn theo biểu diễn CLIP. Điều đó làm baseline ảnh–caption hoán vị của VizWiz cao hơn (**0,13186 so với 0,08742**) và biên cặp đúng trừ hoán vị hẹp hơn (**0,12841 so với 0,16778**). Vì vậy không nên so điểm cặp đúng 0,26027/0,25520 riêng lẻ rồi kết luận alignment VizWiz tốt hơn. Đây là thống kê mô tả trên mẫu cố định, không phải kiểm định mô hình. Khi bỏ bước pad vuông và dùng resize/crop mặc định của CLIP, cosine nội miền còn **0,55781 VizWiz** và **0,48087 COCO**; khoảng chênh vẫn tồn tại. Padding có thể góp phần vào độ đồng nhất nhưng không giải thích hết. Phép không pad thay đổi cả crop nên không tách riêng nhân quả của màu viền.
+
+Phân tầng VizWiz theo số caption từ chối và cờ chữ cho thấy biên cặp đúng–hoán vị ở tầng 0 từ chối là **0,14186** khi có chữ (`n=236`) và **0,12764** khi không chữ (`n=82`). Ở tầng 3+, biên còn **0,06497** khi có chữ (`n=7`) và **0,08559** khi không chữ (`n=26`); hai nhóm nhỏ nên chưa kết luận chắc về độ dốc. Cờ chữ cũng giảm từ **74,24%** ở toàn bộ VizWiz 0/5 từ chối xuống **22,80%** ở 3+, vì vậy không đọc tác động từng biến như độc lập. [Điểm từng ảnh](eda_results/vlm_extensions/clip_pair_scores.csv), [bảng 8 tầng](eda_results/vlm_extensions/clip_alignment_by_vizwiz_stratum.csv).
+
+![So sánh CLIP với pad và không pad](eda_results/figures/08_clip_domain_alignment.png)
 
 ---
 
@@ -262,82 +358,13 @@ Hai ảnh VizWiz cuối minh họa sự khác nhau giữa đồng thuận 4/5 v�
 ---
 
 <!-- VLM_EDA_START -->
-## PHẦN 8: KIỂM TRA EDA BỔ SUNG CHO LLaVA-1.5-7B
+## PHẦN 8: GIAO THỨC ĐÁNH GIÁ LLaVA-1.5-7B
 
-Các phép đo được tái lập bằng `vlm_eda_extensions.py`, `llava_preprocessing_audit.py`, `clip_embedding_audit.py` và `audit_val_images.py`; bảng nằm trong `eda_results/vlm_extensions/`. Checkpoint đánh giá được chốt là **[liuhaotian/llava-v1.5-7b](https://huggingface.co/liuhaotian/llava-v1.5-7b)**. Phép đo ảnh–văn bản dùng [CLIP ViT-L/14-336](https://huggingface.co/openai/clip-vit-large-patch14-336) công khai, [vision tower của LLaVA-1.5](https://github.com/haotian-liu/LLaVA), như một proxy trước khi chạy sinh đáp án. Caption tham chiếu cho thống kê ngôn ngữ, token và CLIP luôn là **một caption hợp lệ có annotation ID thấp nhất mỗi ảnh**; Jaccard và đồng thuận object cần mọi caption hợp lệ vì bản chất là phép đo giữa các annotator.
-
-### 8.1. Toàn vẹn dữ liệu và nguy cơ rò rỉ
-
-| Kiểm tra | COCO | VizWiz | Cách đọc |
-| :--- | ---: | ---: | :--- |
-| Trùng ID ảnh giữa train2014/val2014 | 0 | — | Kết quả hiển nhiên của cách chia COCO 2014; không dùng làm kết luận rò rỉ VLM. |
-| **ID val2014 nằm trong train2017** | **35.504/40.504 (87,656%)** | — | Đo từ `instances_train2017.json` và `captions_val2014.json`; chỉ cần annotation, không cần ảnh train. |
-| **ID val2014 có đường dẫn COCO trong mix instruction tuning LLaVA-1.5** | **5.741/40.504 (14,174%)** | **0 đường dẫn tên VizWiz** | Đo từ chính file 665K, không suy từ toàn bộ train2017; không bao trùm pretraining hay ảnh có thể trùng ở nguồn khác. |
-| Caption val hợp lệ trùng câu train sau chuẩn hóa | 10.488/202.654 (5,175%) | 463/33.145 (1,397%) | Trùng câu phổ biến không chứng minh trùng ảnh hoặc contamination của VLM. Caption VizWiz từ chối/bị reject đã loại. |
-| Ảnh val thiếu hoặc 0 byte | 0/40.504 | 0/7.750 | Kiểm tra theo manifest. |
-| Giải mã toàn bộ ảnh val | 40.504/40.504 thành công | 7.750/7.750 thành công | EXIF transpose, giải mã và băm file. |
-| Annotation mồ côi; trùng ID ảnh, filename, ID annotation trong từng split | 0 | 0 | Xem số theo split trong `integrity.csv`. |
-| Ảnh có số caption khác 5 | Train: 197; val: 131 | Train: 0; val: 0 | Đây là đặc điểm annotation COCO, không tự động là lỗi. |
-
-Trong file val, MD5 cho **49 nhóm ảnh trùng byte** (100 ảnh, đều VizWiz); pHash bằng nhau cho 85 nhóm (78 VizWiz, 7 COCO). pHash bằng nhau chỉ là ứng viên cần xem ảnh. Manifest eval không có cặp trùng byte nội bộ, nhưng 8 ảnh eval có bản sao ở phần val còn lại; `prepare_data.py` giữ eval và loại 9 bản sao khỏi dev. [Danh sách loại trừ](data_prepared/exact_duplicate_dev_exclusions.csv).
-
-[File `llava_v1_5_mix665k.json` của tác giả LLaVA](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json) được xác minh SHA-256 `ce959ce6e23073ee1cd1a8a2ef1c633768c10d4174327b8b2dc7113b91af6cf8`, rồi quét các trường `image` cấp bản ghi. Có 624.610 bản ghi mang đường dẫn ảnh, 349.034 đường dẫn duy nhất, **5.741** ID COCO val2014 trong các đường dẫn COCO và **70/500** ID của manifest COCO. Không có đường dẫn chứa tên `VizWiz`. Con số 35.504 chỉ cho biết ảnh val2014 hiện diện trong COCO train2017, không cho biết tất cả đã được LLaVA dùng. Vẫn có thể có trùng nội dung giữa các nguồn ảnh hoặc giai đoạn pretraining; “ngoài mix” không đồng nghĩa “chưa từng thấy”. [Bảng từng ID](eda_results/vlm_extensions/llava15_instruction_mix_overlap.csv), [tóm tắt và hash nguồn](eda_results/vlm_extensions/llava15_instruction_mix_overlap.json), [kiểm tra ảnh](eda_results/vlm_extensions/val_image_audit.json).
-
-### 8.2. Phân kỳ từ vựng và đồng thuận giữa caption
-
-Tách từ bằng regex tiếng Anh và chuyển chữ thường trên 40.504 caption COCO và 7.542 caption VizWiz. JS unigram giữa hai miền là **0,266183 bit**. Mốc nhiễu nền từ 100 lần chia ngẫu nhiên caption COCO thành hai nửa (`seed=42`) là **0,018418 bit trung bình**, phân vị 95% **0,018630 bit**; do đó 0,266 lớn hơn rõ rệt nhiễu do chia mẫu ở COCO. Mốc nền cùng miền không thay thế khoảng tin cậy hai miền và không đo embedding. OOV của VizWiz so với từ vựng COCO train2014 là **4,5314% token** và **36,4543% type** theo cùng cách tách từ. [Bảng từ vựng](eda_results/vlm_extensions/vocabulary.csv), [100 từ đặc trưng log-odds](eda_results/vlm_extensions/distinctive_words_log_odds.csv), [tóm tắt](eda_results/vlm_extensions/summary.json).
-
-Các từ phân biệt nổi bật trong [bảng log-odds](eda_results/vlm_extensions/distinctive_words_log_odds.csv) giúp đọc nguồn phân kỳ. Điểm dương thiên về VizWiz; điểm âm thiên về COCO. Điểm được làm trơn 0,5 và chỉ xét từ có tổng tần suất ≥20, nên đây là mô tả từ vựng, không phải nhãn object thật.
-
-| Từ | COCO | VizWiz | Log-odds VizWiz − COCO |
-| :--- | ---: | ---: | ---: |
-| label | 1 | 299 | +6,81 |
-| packet | 0 | 55 | +6,23 |
-| nutritional | 0 | 51 | +6,15 |
-| frisbee | 573 | 0 | −5,53 |
-| court | 507 | 0 | −5,41 |
-| surfboard | 479 | 0 | −5,35 |
-
-Tính Jaccard từ nội dung giữa mọi cặp caption hợp lệ của mỗi ảnh, bỏ cùng một tập stopword rồi lấy trung bình theo ảnh. **COCO: 0,1989** trên 40.504 ảnh; **VizWiz: 0,1633** trên 7.268 ảnh có ít nhất hai caption hợp lệ. Có 208 ảnh VizWiz không còn caption hợp lệ; chúng không bị gán điểm 0. Điểm này đo từ trùng, không xác nhận hai caption đồng nghĩa hay bám sát ảnh. [COCO từng ảnh](eda_results/vlm_extensions/coco_caption_agreement.csv), [VizWiz từng ảnh](eda_results/vlm_extensions/vizwiz_caption_agreement.csv).
-
-### 8.3. CLIP, tokenizer, ontology và tiền xử lý
-
-| Hạng mục | Kết quả trên dữ liệu val | Giới hạn diễn giải |
-| :--- | :--- | :--- |
-| Khoảng cách miền trong CLIP image embedding | Trên **500 ảnh mỗi miền** (kể cả ảnh không có caption hợp lệ), cosine trung bình giữa miền **0,49271**; trong COCO **0,51932**, trong VizWiz **0,60370**; cosine hai centroid **0,87857**. | Mẫu lấy từ manifest, vector chuẩn hóa; ảnh được pad theo config LLaVA. CLIP là proxy, chưa phải kết quả sinh caption. |
-| Căn khớp ảnh–caption CLIP | COCO cặp đúng **0,25520**, hoán vị **0,08742** (`n=500`); VizWiz **0,26027** so với **0,13186** (`n=483`). | Cosine CLIP so cặp đúng với một hoán vị nội miền `seed=42`; không xác nhận object có thật. |
-| Độ dài caption theo tokenizer LLaVA-1.5-7B | COCO p50/p90/p95/p99 **13/17/19/24** token (`n=40.504`); VizWiz **14/21/25/35** (`n=7.542`). | Chỉ caption tham chiếu; chưa gồm chat template, ảnh hoặc output mô hình. |
-| Từ COCO-80 trong caption hai tập | VizWiz: **17.456/33.145 caption hợp lệ (52,666%)**, **5.771/7.542 ảnh (76,518%)** có ít nhất một từ CHAIR; COCO: **78,58%/202.654 caption**, **79,52% ảnh** ở một caption được chọn và **94,04% ảnh** khi hợp nhất caption. | Cùng phép khớp từ; đây là mức áp dụng từ vựng, không phải tỷ lệ object thực sự hiện diện. |
-| Độ đầy đủ của nhãn từ caption trên COCO | Một caption được chọn nhắc **38,07%** số lượt lớp object có trong instance annotation; hợp nhất mọi caption nhắc **55,26%** (`116.592` lượt lớp/ảnh). | Caption bỏ sót nhiều lớp được gán; lấy object từ caption làm ground truth có nguy cơ tính nhầm object thật thành hallucination. Nhãn instance cũng không tuyệt đối đầy đủ. |
-| Ground truth object VizWiz | [Gợi ý object được ≥2 caption nhắc](eda_results/vlm_extensions/vizwiz_chair_ontology_mentions.csv); [100 ảnh để rà tay](eda_results/vlm_extensions/vizwiz_object_consensus_review100_seed42.csv). | Gợi ý yếu có thể cùng sai; người rà ảnh xác nhận trước khi tính CHAIR/POPE. |
-
-[Bảng đồng nghĩa CHAIR gốc](https://github.com/LisaAnne/Hallucination/blob/master/data/synonyms.txt) được lưu tại `eda_resources/chair_synonyms.txt`. Phép đếm hiện dùng khớp từ/cụm từ không phân biệt chữ hoa, nên có thể khác chính xác bộ tiền xử lý số ít và các ngoại lệ của mã CHAIR gốc. [Kết quả CLIP](eda_results/vlm_extensions/clip_embedding_audit.json), [token và ontology](eda_results/vlm_extensions/summary.json).
-
-**Diễn giải CLIP.** VizWiz có cosine nội miền cao hơn COCO (**0,60370 so với 0,51932**) dù khác miền; ảnh VizWiz trong mẫu này đồng nhất hơn theo biểu diễn CLIP. Điều đó làm baseline ảnh–caption hoán vị của VizWiz cao hơn (**0,13186 so với 0,08742**) và biên cặp đúng trừ hoán vị hẹp hơn (**0,12841 so với 0,16778**). Vì vậy không nên so điểm cặp đúng 0,26027/0,25520 riêng lẻ rồi kết luận alignment VizWiz tốt hơn. Đây là thống kê mô tả trên mẫu cố định, không phải kiểm định mô hình. Khi bỏ bước pad vuông và dùng resize/crop mặc định của CLIP, cosine nội miền còn **0,55781 VizWiz** và **0,48087 COCO**; khoảng chênh vẫn tồn tại. Padding có thể góp phần vào độ đồng nhất nhưng không giải thích hết. Phép không pad thay đổi cả crop nên không tách riêng nhân quả của màu viền.
-
-Phân tầng VizWiz theo số caption từ chối và cờ chữ cho thấy biên cặp đúng–hoán vị ở tầng 0 từ chối là **0,14186** khi có chữ (`n=236`) và **0,12764** khi không chữ (`n=82`). Ở tầng 3+, biên còn **0,06497** khi có chữ (`n=7`) và **0,08559** khi không chữ (`n=26`); hai nhóm nhỏ nên chưa kết luận chắc về độ dốc. Cờ chữ cũng giảm từ **74,24%** ở toàn bộ VizWiz 0/5 từ chối xuống **22,80%** ở 3+, vì vậy không đọc tác động từng biến như độc lập. [Điểm từng ảnh](eda_results/vlm_extensions/clip_pair_scores.csv), [bảng 8 tầng](eda_results/vlm_extensions/clip_alignment_by_vizwiz_stratum.csv).
-
-![So sánh CLIP với pad và không pad](eda_results/figures/08_clip_domain_alignment.png)
-
-[Bảng độ đầy đủ nhãn COCO](eda_results/vlm_extensions/coco_caption_label_completeness.csv) đối chiếu tập lớp có trong instance annotation với lớp xuất hiện trong một hoặc mọi caption trên cùng ảnh; [tóm tắt](eda_results/vlm_extensions/coco_caption_label_completeness.json). Chỉ số recall ở đây lấy **số lớp COCO-80 khác nhau trên từng ảnh** làm denominator, không phải số instance; từ khớp nhầm và nhãn instance bỏ sót vẫn có thể làm lệch ước lượng.
-
-[Config LLaVA-1.5-7B](https://huggingface.co/liuhaotian/llava-v1.5-7b/blob/main/config.json) ghi `image_aspect_ratio: pad`. Với ảnh 336×336 và patch 14×14, model nhận **576 patch token** mỗi ảnh. Mode pad theo mã gốc có **0% diện tích ảnh bị cắt, hệ số méo hình 1**; trung vị vùng padding là **26,7188% COCO** và **25,0% VizWiz**, tương đương khoảng **154** và **144** patch theo diện tích (ước lượng, không phải đếm patch rỗng ở biên). Cạnh dài trung vị của file là **640 px COCO** và **1.296 px VizWiz**, nên khi đưa về 336 px, tỷ số pixel gốc/pixel mô hình là **1,9048** và **3,8571**. Do đó tỷ lệ ảnh dọc không tự tạo bất lợi về số patch hoặc diện tích pad; việc thu nhỏ mạnh hơn ở VizWiz mới là rủi ro cụ thể cho chữ nhỏ (64,75% ảnh có cờ chữ theo đa số annotator), cần thử nghiệm đầu ra để xác nhận. [Bảng từng ảnh](eda_results/vlm_extensions/llava15_preprocessing_geometry.csv), [tóm tắt](eda_results/vlm_extensions/llava15_preprocessing_geometry.json).
-
-Con số 0% bị cắt áp dụng khi chạy pipeline **gốc** ở mode pad. [Tài liệu Transformers về LLaVA](https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/llava.md) lưu ý bản `llava-hf` cần đặt `LlavaImageProcessor(..., do_pad=True)` để khớp triển khai gốc; phải ghi cấu hình processor thực tế khi chạy mô hình. Center crop và resize thẳng vuông chỉ là tình huống đối chứng hình học, không phải cấu hình checkpoint đã đo.
-
-### 8.4. Nhãn lỗi chất lượng VizWiz và giới hạn của Laplacian
-
-[VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/) công bố số phiếu (trên 5 annotator) cho blur, ảnh quá sáng/tối, framing, che khuất và xoay trên đúng 7.750 ảnh val. Ghép bằng filename khớp **7.750/7.750** ảnh. Với ngưỡng đa số ≥3/5: **2.318 ảnh mờ (29,91%)**, **2.825 ảnh framing kém (36,45%)**, **219 ảnh quá tối (2,83%)**, **200 ảnh quá sáng (2,58%)** và **116 ảnh bị che (1,50%)**. Các lỗi có thể cùng xuất hiện trên một ảnh nên không cộng tỷ lệ thành 100%. [Phiếu từng ảnh](eda_results/vlm_extensions/vizwiz_quality_issue_votes_val.csv), [tóm tắt và hash nguồn](eda_results/vlm_extensions/vizwiz_quality_issue_summary.json).
-
-Tỷ lệ blur đa số tăng từ **21,16%** ở nhóm 0/5 caption từ chối lên **65,38%** ở nhóm 3/5; nhóm 5/5 là **55,73%**. Framing kém là **31,39%** ở 0/5 và **51,46%** ở 3/5. Đây là đồng xuất hiện giữa hai loại nhãn trên cùng ảnh, chưa chứng minh blur hoặc framing gây lỗi của mô hình. Trong ảnh được gán blur đa số, median Laplacian là **75,41**, so với **260,12** ở ảnh được gán không có lỗi đa số; điều này ủng hộ dùng Laplacian làm chỉ báo, không thay nhãn nguyên nhân. [Bảng theo mức từ chối](eda_results/vlm_extensions/vizwiz_quality_by_refusal.csv).
-
-![Nhãn lỗi chất lượng VizWiz trên toàn bộ val](eda_results/figures/09_vizwiz_quality_labels.png)
-
-### 8.5. Thiết kế tập đánh giá
+### 8.1. Thiết kế tập đánh giá
 
 [Manifest seed 42](eda_results/vlm_extensions/evaluation_manifest_seed42.csv) cố định **500 ảnh COCO val và 500 ảnh VizWiz val**. Đây là bộ mẫu 500 ảnh COCO duy nhất của báo cáo. VizWiz chia **theo tỷ lệ** của 8 tầng số caption từ chối (0, 1, 2, 3+) × `text_detected`, phân bổ bằng phần dư lớn nhất. COCO chọn ngẫu nhiên độc lập.
 
-Trên 500 ảnh COCO này, **70 ID** có đường dẫn trong mix instruction tuning LLaVA và **430 ID** không có. Khi có output, báo cáo kết quả cả 500 để giữ mẫu đã khóa, đồng thời báo cáo riêng 70/430 với denominator và CI. Không thay manifest sau khi thấy output mô hình. [Cờ từng ảnh](eda_results/vlm_extensions/llava15_instruction_mix_overlap.csv) cho phép tách nhóm; trạng thái ngoài mix không chứng minh ngoài mọi nguồn huấn luyện.
+Trên 500 ảnh COCO này, **70 ID** có đường dẫn COCO trực tiếp trong mix instruction tuning LLaVA; thêm **135 ID** chỉ được phát hiện qua alias VG/GQA, còn **295 ID** chưa khớp hai nguồn đường dẫn. Khi có output, báo cáo cả 500 và phân tầng 70/135/295 với denominator và CI; không thay manifest sau khi thấy output mô hình. [Cờ từng ảnh](eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv) cho phép tách nhóm; trạng thái chưa khớp không chứng minh ngoài mọi nguồn huấn luyện.
 
 | Từ chối (gộp 3+) | Không có chữ: tổng/mẫu | Có chữ: tổng/mẫu | Mẫu cộng |
 | :---: | ---: | ---: | ---: |
@@ -350,15 +377,18 @@ Nhóm 3+ chỉ có 57 ảnh, trong đó tầng có chữ chỉ 13. Để ước 
 
 [Danh sách POPE COCO chính thức](https://github.com/RUCAIBox/POPE/tree/main/output/coco) có 500 ảnh và 3.000 câu hỏi ở bản random; chỉ **5 ảnh** giao với manifest COCO của báo cáo. Nếu so điểm với số POPE đã công bố, phải chạy theo danh sách/câu hỏi chính thức, không gán điểm từ manifest EDA cho POPE. [Bảng đối chiếu](eda_results/vlm_extensions/pope_manifest_overlap.json).
 
-### 8.6. Chạy thử LLaVA và trạng thái thực thi
+### 8.2. Chạy thử LLaVA và trạng thái thực thi
 
 Đã cố định giao thức trong [`llava_pilot.py`](llava_pilot.py): lấy ngẫu nhiên `seed=42` **100 ảnh mỗi tập từ `data_prepared/dev.jsonl`**, giữ nguyên eval để đánh giá cuối; EXIF transpose, pad vuông bằng màu trung bình CLIP rồi dùng processor của checkpoint Hugging Face tương đương. Prompt là `Describe the visible content in one concise sentence. If the image is too unclear to identify reliably, say "I cannot tell from this image."`, `max_new_tokens=64`, greedy (`do_sample=False`, `num_beams=1`). Script lưu nguyên câu trả lời, số output token, cờ từ chối, ID và cấu hình vào JSONL để sau này phân tích độ dài, tỷ lệ từ chối và lỗi theo ảnh.
 
+`dev` là phần ảnh val còn lại sau khi loại manifest eval và các bản sao trùng byte với eval; chỉ dùng để thử pipeline/chọn prompt, không dùng huấn luyện. Prompt một câu ngắn và cho phép từ chối có thể làm thay đổi cả độ dài lẫn tần suất nhắc object, nên CHAIR từ giao thức này **không so trực tiếp** với số CHAIR đã công bố nếu không chạy lại đúng prompt, giải mã và nhãn tham chiếu của protocol công bố.
+
 **Chưa có output LLaVA thật.** Máy hiện chỉ có tokenizer LLaVA và trọng số CLIP, không có trọng số ngôn ngữ LLaVA-1.5-7B; GPU RTX 3050 4 GB không đủ chạy checkpoint 7B nguyên dạng trong cấu hình hiện có. Script dừng rõ khi không thấy trọng số, không tự tải mô hình lớn hoặc tạo kết quả giả. Khi có môi trường phù hợp, cài `requirements-llava-pilot.txt`, cung cấp `--model-path` trỏ đến bản chuyển đổi `llava-hf/llava-1.5-7b-hf` đã tải, chạy pilot rồi rà ít nhất 20 ca lỗi bằng ảnh và caption. Cấu hình dùng **pad vuông thủ công trước processor** để tái hiện mode pad dù phiên bản Transformers ở máy hiện tại chưa có `LlavaImageProcessor(do_pad=True)`; phải xác nhận tương đương trên checkpoint thực tế trước khi so điểm cuối.
 
-### 8.7. Quyền riêng tư và giấy phép
+### 8.3. Quyền riêng tư và giấy phép
 
 VizWiz có thể chứa thông tin cá nhân như thuốc, thẻ, giấy tờ và màn hình. Manifest chỉ lưu ID và thống kê; lưới ảnh minh họa trong báo cáo cần được rà thủ công trước khi chia sẻ ra ngoài nhóm nghiên cứu, cũng như đầu ra OCR/caption có thể chép thông tin cá nhân. Kiểm tra điều khoản sử dụng của từng bộ dữ liệu trước khi phát hành ảnh hoặc bộ dẫn xuất; không suy diễn rằng giấy phép của [VizWiz-Priv](https://vizwiz.org/tasks-and-datasets/vizwiz-priv/) tự động áp dụng cho VizWiz-Captions. [Điều khoản COCO](https://cocodataset.org/#termsofuse) và [bài báo VizWiz-Captions](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php) là điểm đối chiếu nguồn.
+
 <!-- VLM_EDA_END -->
 
 ---
@@ -408,6 +438,8 @@ Biểu đồ (200–300 DPI) và dữ liệu bảng biểu được lưu tại:
 2. Gurari, D. và cộng sự (2020). *Captioning Images Taken by People Who Are Blind*. ECCV. [Trang bài báo ECVA](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php).
 3. Rohrbach, A. và cộng sự (2018). *Object Hallucination in Image Captioning*. EMNLP. [ACL Anthology](https://aclanthology.org/D18-1437/).
 4. Li, Y. và cộng sự (2023). *Evaluating Object Hallucination in Large Vision-Language Models*. EMNLP. [ACL Anthology](https://aclanthology.org/2023.emnlp-main.20/).
-5. Liu, H. và cộng sự. *Improved Baselines with Visual Instruction Tuning* và [file mix665k chính thức](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json).
-6. Chiu, T.-Y., Zhao, Y. và Gurari, D. (2020). *Assessing Image Quality Issues for Real-World Problems*. CVPR. [VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/).
-7. [POPE official repository](https://github.com/RUCAIBox/POPE), danh sách câu hỏi COCO random, popular và adversarial.
+5. Liu, H. và cộng sự (2023). *Improved Baselines with Visual Instruction Tuning* (LLaVA-1.5). [arXiv:2310.03744](https://arxiv.org/abs/2310.03744); [file mix665k chính thức](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json).
+6. Radford, A. và cộng sự (2021). *Learning Transferable Visual Models From Natural Language Supervision* (CLIP). [ICML/PMLR](https://proceedings.mlr.press/v139/radford21a.html).
+7. Chiu, T.-Y., Zhao, Y. và Gurari, D. (2020). *Assessing Image Quality Issues for Real-World Problems*. [arXiv:2003.12511](https://arxiv.org/abs/2003.12511); [VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/).
+8. Krishna, R. và cộng sự (2017). *Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations*. [Visual Genome](https://visualgenome.org/); [metadata ảnh](https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip).
+9. [POPE official repository](https://github.com/RUCAIBox/POPE), danh sách câu hỏi COCO random, popular và adversarial.

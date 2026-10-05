@@ -3,7 +3,7 @@
 import csv
 import json
 import re
-from collections import defaultdict
+from collections import defaultdict, Counter
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -26,6 +26,7 @@ def build_figure(coco=None, viz=None, categories=None):
         synonyms.update((term, terms[0]) for term in terms)
     pattern = re.compile(r"\b(?:" + "|".join(re.escape(term) for term in sorted(synonyms, key=len, reverse=True)) + r")\b", re.I)
     counts = {}
+    contributions = []
     denominators = {}
     for label, data in (("COCO", coco), ("VizWiz", viz)):
         grouped = defaultdict(list)
@@ -36,8 +37,22 @@ def build_figure(coco=None, viz=None, categories=None):
                 grouped[ann["image_id"]].append(ann)
         chosen = [min(anns, key=lambda x: x["id"])["caption"] for anns in grouped.values()]
         denominators[label] = len(chosen)
-        matches = [set(synonyms[m.group().casefold()] for m in pattern.finditer(caption)) for caption in chosen]
+        matches = []
+        source_counts = defaultdict(Counter)
+        for caption in chosen:
+            terms = defaultdict(set)
+            for match in pattern.finditer(caption):
+                term = match.group().casefold()
+                terms[synonyms[term]].add(term)
+            matches.append(set(terms))
+            for category, seen in terms.items():
+                for term in seen:
+                    source_counts[category][term] += 1
         counts[label] = {category: sum(category in found for found in matches) for category in categories}
+        contributions.extend({"dataset": label, "category": category, "source_term": term,
+                              "images_with_term": count, "images_with_category": counts[label][category],
+                              "denominator_images": denominators[label]}
+                             for category in categories for term, count in source_counts[category].most_common())
     rows = [{"category": category, "coco_images_with_mention": counts["COCO"][category],
              "coco_pct": round(100 * counts["COCO"][category] / denominators["COCO"], 3),
              "vizwiz_images_with_mention": counts["VizWiz"][category],
@@ -47,9 +62,11 @@ def build_figure(coco=None, viz=None, categories=None):
     table = ROOT / "eda_results/tables/coco80_caption_mentions.csv"
     with table.open("w", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
-    chart = list(reversed(rows))
+    with (ROOT / "eda_results/tables/coco80_source_terms.csv").open("w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=list(contributions[0])); writer.writeheader(); writer.writerows(contributions)
+    chart = list(reversed(rows[:20]))
     y = np.arange(len(chart))
-    fig, ax = plt.subplots(figsize=(12, 23))
+    fig, ax = plt.subplots(figsize=(10, 8))
     ax.barh(y - .19, [r["coco_pct"] for r in chart], height=.36, label=f"COCO (n={denominators['COCO']:,})", color="#3377b7")
     ax.barh(y + .19, [r["vizwiz_pct"] for r in chart], height=.36, label=f"VizWiz (n={denominators['VizWiz']:,})", color="#e08b3f")
     ax.set_yticks(y, [r["category"] for r in chart], fontsize=8)

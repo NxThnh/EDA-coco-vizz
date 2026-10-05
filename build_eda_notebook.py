@@ -168,7 +168,7 @@ exec_counter += 1
 cell3_md = r"""---
 ## 1. PHẠM VI ĐỐI SÁNH DỮ LIỆU
 
-Phần mở đầu mô tả hai miền dữ liệu theo đúng phạm vi ảnh và chú thích thực tế được khảo sát. Các thống kê mô tả dùng toàn bộ tập val; manifest 500 ảnh COCO ở Phần 8.4 chỉ dùng cho thiết kế đánh giá mô hình."""
+Phần mở đầu mô tả hai miền dữ liệu theo đúng phạm vi ảnh và chú thích thực tế được khảo sát. Các thống kê mô tả dùng toàn bộ tập val; manifest 500 ảnh COCO ở Phần 8.1 chỉ dùng cho thiết kế đánh giá mô hình."""
 cells.append(create_markdown_cell(cell3_md))
 
 # ==============================================================================
@@ -244,7 +244,7 @@ exec_counter += 1
 # ==============================================================================
 cell8_md = r"""### ⚠️ Ý Nghĩa Kỹ Thuật Đối Với Pipeline Tiền Xử Lý (Preprocessing):
 
-Config LLaVA-1.5-7B được chọn ghi `image_aspect_ratio: pad` trước CLIP ViT-L/14-336. Phần 8 đo diện tích padding trên từng ảnh; số patch là 576. Để đối chiếu các mode khác, báo cáo cũng tính diện tích center crop và độ méo nếu resize thẳng vuông.
+Config LLaVA-1.5-7B được chọn ghi `image_aspect_ratio: pad` trước CLIP ViT-L/14-336. Phần 2 đo diện tích padding trên từng ảnh; số patch là 576. Để đối chiếu các mode khác, báo cáo cũng tính diện tích center crop và độ méo nếu resize thẳng vuông.
 
 1. **Hiểm họa từ phép `Direct Resize` (Bóp méo hình dạng - Squishing):**
     - Với **99.23% ảnh dọc** trong VizWiz, phép resize trực tiếp về $336 \times 336$ sẽ nén chiều dọc (tỷ lệ $3:4$ thành $1:1$). Đây là kịch bản so sánh; LLaVA-1.5-7B được chọn dùng pad.
@@ -334,7 +334,7 @@ cell12_md = r"""### 💡 Phát Hiện Ngôn Ngữ Học Cốt Lõi:
     - TTR toàn kho là 0,0201 (COCO) và 0,0679 (VizWiz), nhưng không dùng để xếp hạng vì hai corpus có 423.828 và 89.433 token.
      - MATTR cửa sổ 1.000 token là **0,3718 (COCO)** và **0,3944 (VizWiz)**.
 3. **Danh từ trong caption:**
-      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `screen`, `computer`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Khi gộp `man/men/woman/people/person`, COCO có 326,71 lượt nhắc/1.000 caption, VizWiz 79,29. Tỷ lệ caption đã chọn nhắc nhóm này là 30,92% và 7,78%; đây là tần suất văn bản.
+      - Top-15 được POS-tag trực tiếp từ dữ liệu và chuẩn hóa theo 1.000 caption. VizWiz nhắc nhiều đến `screen`, `computer`, `bottle`, `box` và `label`; COCO nhắc nhiều đến `man`, `people` và `woman`. Theo nhóm đồng nghĩa CHAIR dùng ở Hình 4, `person` xuất hiện trong 37,52% caption COCO và 8,66% caption VizWiz được chọn; đây là tần suất văn bản.
 
 Quy tắc một caption hợp lệ có annotation ID thấp nhất được dùng ở tất cả thống kê ngôn ngữ chính. COCO có 40.504 ảnh đủ điều kiện; VizWiz có 7.542 ảnh, còn 208 ảnh không có caption hợp lệ. Bảng đối chiếu ở `eda_results/tables/person_reference_one_caption_per_image.csv`."""
 cells.append(create_markdown_cell(cell12_md))
@@ -360,7 +360,7 @@ render_table(df_coco_super, "Bảng 4: Phân bố 12 siêu danh mục trong MS-C
 # Hiển thị Biểu đồ 4
 show_figure(
     filename="04_coco_category_distribution.png",
-    title="Biểu đồ 4: Tần suất nhắc COCO-80 trong caption hai tập",
+    title="Biểu đồ 4: 20 lớp COCO-80 được nhắc nhiều nhất ở VizWiz",
     caption="Tỷ lệ ảnh có một caption hợp lệ được chọn nhắc từng lớp; đây là từ trong caption, không phải nhãn object VizWiz."
 )"""
 
@@ -371,6 +371,10 @@ out14 = [
 ]
 cells.append(create_code_cell(cell14_code, out14, exec_counter))
 exec_counter += 1
+
+figure4_text = (Path(BASE_DIR) / "EDA_COCO_vs_VizWiz_Report.md").read_text(encoding="utf-8")
+figure4_text = figure4_text.split("Hình 4 hiển thị", 1)[1].split("### 12 siêu danh mục", 1)[0]
+cells.append(create_markdown_cell("### Cách đọc Hình 4\n\nHình 4 hiển thị" + figure4_text))
 
 # ==============================================================================
 # CELL 15: Section 4 - Critical Thesis Argument (Markdown)
@@ -401,23 +405,16 @@ cells.append(create_markdown_cell(cell16_md))
 # ==============================================================================
 # CELL 17: Section 5 - Code & Display Table & Figure (Code)
 # ==============================================================================
-cell17_code = """# Bảng annotation trước, sau đó phép đo trên toàn bộ ảnh val.
+cell17_code = """# Bảng annotation trước, sau đó hình và kiểm tra độ nhạy.
 render_table(pd.read_csv(os.path.join(TAB_DIR, 'vizwiz_quality_breakdown.csv')),
              'Bảng 5: Số caption từ chối trên 7.750 ảnh VizWiz')
-full_lap = json.load(open(os.path.join(TAB_DIR, 'laplacian_full_val_summary.json'), encoding='utf-8'))
-full_rows = [{'Tập': name, 'Số ảnh': row['images'], 'Median Laplacian': row['median'],
-              'CI 95% thấp': row['bootstrap_ci95'][0], 'CI 95% cao': row['bootstrap_ci95'][1]}
-             for name, row in full_lap.items()]
-render_table(pd.DataFrame(full_rows), 'Laplacian trên toàn bộ ảnh val')
-render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_by_precanned_full.csv')),
-             'Laplacian theo 0–5 caption từ chối: toàn bộ VizWiz val')
-render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_resize_sensitivity_full.csv')),
-             'Độ nhạy resize: toàn bộ val')
 render_table(pd.read_csv(os.path.join(RESULTS_DIR, 'vlm_extensions', 'vizwiz_quality_by_refusal.csv')),
              'Nhãn lỗi VizWiz theo số caption từ chối')
 show_figure(filename='05_vizwiz_quality_and_text_issues.png',
             title='Biểu đồ 5: Caption từ chối, chữ viết và chỉ báo ảnh',
             caption='Hình gốc minh họa; bảng phía trên dùng toàn bộ val và nhãn lỗi chính thức.')
+render_table(pd.read_csv(os.path.join(TAB_DIR, 'laplacian_resize_sensitivity_full.csv')),
+             'Độ nhạy resize: toàn bộ val')
 """
 
 cells.append(create_code_cell(cell17_code))
@@ -444,7 +441,7 @@ cell18_md += "\n\nTrên toàn bộ val, bootstrap 95% CI (1.000 lần): COCO [1.
 cell18_md += "| Caption từ chối | Số ảnh VizWiz | Median Laplacian | Bootstrap 95% CI |\n| :---: | ---: | ---: | :---: |\n"
 for _g in pd.read_csv(os.path.join(TAB_DIR, 'laplacian_by_precanned_full.csv')).to_dict(orient='records'):
     cell18_md += f"| {_g['refusal_captions']}/5 | {_g['images']} | {_g['median_laplacian']:.2f} | [{_g['ci95_low']:.2f}, {_g['ci95_high']:.2f}] |\n"
-cell18_md += "\nTrung vị giảm theo số caption từ chối trên toàn bộ VizWiz val; đây vẫn là chỉ báo biên/texture. Nhãn lỗi chính thức ở Phần 8 cho biết tỷ lệ blur và framing. Độ sáng trung vị toàn val COCO 113,86 và VizWiz 108,04 gần nhau."
+cell18_md += "\nTrung vị giảm theo số caption từ chối trên toàn bộ VizWiz val; đây vẫn là chỉ báo biên/texture. Nhãn lỗi chính thức ở Phần 5 cho biết tỷ lệ blur và framing. Độ sáng trung vị toàn val COCO 113,86 và VizWiz 108,04 gần nhau."
 cell18_md += "\n\nResize cạnh ngắn lên 480 px đã phóng lớn 24.799/40.504 ảnh COCO và 759/7.750 ảnh VizWiz. Trên tập con có cạnh ngắn gốc ≥480 px, median Laplacian là 1.578,21 ở COCO (n=15.705) và 164,12 ở VizWiz (n=6.991). Hai tập con khác nhau về kích thước và nội dung, nên chênh lệch này chưa tách riêng chất lượng ảnh khỏi các yếu tố đó."
 cells.append(create_markdown_cell(cell18_md))
 
@@ -647,6 +644,20 @@ report_text = (Path(BASE_DIR) / "EDA_COCO_vs_VizWiz_Report.md").read_text(encodi
 vlm_start = "<!-- VLM_EDA_START -->"
 vlm_end = "<!-- VLM_EDA_END -->"
 assert report_text.count(vlm_start) == 1 and report_text.count(vlm_end) == 1
+
+# Place the additional audits beside their subject in the notebook as well.
+for heading, next_part, notebook_heading in [
+    ("### Toàn vẹn dữ liệu và nguồn huấn luyện LLaVA", "## PHẦN 2:", "## 2."),
+    ("### Hình học tiền xử lý LLaVA-1.5", "## PHẦN 3:", "## 3."),
+    ("### Phân kỳ từ vựng và đồng thuận giữa caption", "## PHẦN 4:", "## 4."),
+    ("### Độ phủ COCO-80 và nhãn CHAIR", "## PHẦN 5:", "## 5."),
+    ("### Nhãn lỗi chất lượng VizWiz và giới hạn của Laplacian", "## PHẦN 6:", "## 6."),
+    ("### CLIP image embedding và căn khớp caption", "## PHẦN 7:", "## 7."),
+]:
+    section = report_text.split(heading, 1)[1].split("---\n\n" + next_part, 1)[0].strip()
+    insertion = next(i for i, cell in enumerate(cells) if notebook_heading in "".join(cell["source"]))
+    cells.insert(insertion, create_markdown_cell(heading + "\n\n" + section))
+
 vlm_section = report_text.split(vlm_start, 1)[1].split(vlm_end, 1)[0].strip()
 cells.append(create_markdown_cell(vlm_section))
 cells.append(create_code_cell("""# Đọc các bảng EDA VLM. Cell 2 kiểm soát cờ REBUILD.
@@ -670,7 +681,7 @@ for title, filename in [('Toàn vẹn annotation', 'integrity.csv'),
                  '.vlm-table th,.vlm-table td{white-space:normal;min-width:7em;max-width:22em;word-break:break-word;padding:6px}</style>'))
 for filename, title in [('08_clip_domain_alignment.png', 'CLIP: khoảng cách miền và cặp ảnh–caption'),
                         ('09_vizwiz_quality_labels.png', 'Nhãn lỗi VizWiz chính thức')]:
-    show_figure(filename, title=title, caption='Phép đo trên dữ liệu val; xem Phần 8 để biết denominator và giới hạn.')
+    show_figure(filename, title=title, caption='Phép đo trên dữ liệu val; xem các mục tương ứng để biết denominator và giới hạn.')
 """))
 
 # ==============================================================================
@@ -684,9 +695,11 @@ references_md = """## TÀI LIỆU THAM KHẢO
 2. Gurari, D. và cộng sự (2020). *Captioning Images Taken by People Who Are Blind*. ECCV. [ECVA](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/2783_ECCV_2020_paper.php).
 3. Rohrbach, A. và cộng sự (2018). *Object Hallucination in Image Captioning*. EMNLP. [ACL Anthology](https://aclanthology.org/D18-1437/).
 4. Li, Y. và cộng sự (2023). *Evaluating Object Hallucination in Large Vision-Language Models*. EMNLP. [ACL Anthology](https://aclanthology.org/2023.emnlp-main.20/).
-5. [LLaVA-1.5 official instruction mix](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json).
-6. [VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/).
-7. [POPE official repository](https://github.com/RUCAIBox/POPE)."""
+5. Liu, H. và cộng sự (2023). *Improved Baselines with Visual Instruction Tuning*. [LLaVA-1.5](https://arxiv.org/abs/2310.03744).
+6. Radford, A. và cộng sự (2021). *Learning Transferable Visual Models From Natural Language Supervision*. [CLIP](https://proceedings.mlr.press/v139/radford21a.html).
+7. Chiu, T.-Y., Zhao, Y. và Gurari, D. (2020). *Assessing Image Quality Issues for Real-World Problems*. [arXiv](https://arxiv.org/abs/2003.12511).
+8. [Visual Genome image metadata](https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip).
+9. [POPE official repository](https://github.com/RUCAIBox/POPE)."""
 cells.append(create_markdown_cell(references_md))
 
 # Construct final notebook dict
