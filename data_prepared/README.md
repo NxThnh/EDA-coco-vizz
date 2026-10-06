@@ -1,5 +1,7 @@
 # Dữ liệu sau EDA
 
+> **Bản 8 HGAI:** dùng [ba manifest cố định trong `hgai/`](hgai/README.md). Các file `dev.jsonl`/`eval.jsonl` ở thư mục này giữ cho phân tích COCO–VizWiz cũ, không phải dev/eval HGAI. Phần val ngoài eval ở đây là kho bối cảnh, không dùng để tune HGAI.
+
 Tạo lại bằng lệnh `python prepare_data.py --verify-images` từ thư mục gốc. Script chỉ đọc ảnh và annotation; không sửa ảnh gốc.
 
 **Trạng thái nhãn object VizWiz (kiểm tra ngày 04/10/2026): 0/500 ảnh đã gán nhãn, 1.000/1.000 dòng A/B có `review_status=unlabeled`.** File CSV bên dưới là phiếu trống để người gán nhãn điền, chưa phải ground truth và chưa thể dùng để tính CHAIR/POPE trên VizWiz. Không có nhãn object VizWiz trong dữ liệu nguồn hiện có.
@@ -7,8 +9,8 @@ Tạo lại bằng lệnh `python prepare_data.py --verify-images` từ thư m�
 ## File đầu ra
 
 - `train.jsonl`: metadata và caption từ annotation train. **Chưa dùng để huấn luyện được** vì máy hiện chưa có file ảnh train.
-- `dev.jsonl`: các ảnh val nằm ngoài bộ đánh giá cố định **và không trùng byte với ảnh eval**. Dùng để kiểm tra pipeline, chọn prompt và tinh chỉnh cấu hình.
-- `eval.jsonl`: đúng 500 ảnh COCO và 500 ảnh VizWiz theo `eda_results/vlm_extensions/evaluation_manifest_seed42.csv`. Giữ tập này cho báo cáo cuối.
+- `dev.jsonl`: các ảnh val nằm ngoài bộ đánh giá EDA cũ **và không trùng byte với ảnh eval**. Giữ để đối chiếu bối cảnh; tuning HGAI dùng `hgai/dev500.jsonl`.
+- `eval.jsonl`: 500 ảnh COCO và 500 ảnh VizWiz theo `eda_results/vlm_extensions/evaluation_manifest_seed42.csv`, dùng cho phân tích dữ liệu nền. Giao thức HGAI dùng các bộ riêng trong `hgai/`.
 - `summary.json`: số lượng, tình trạng file ảnh và kết quả giải mã pixel + áp dụng EXIF transpose.
 - `vizwiz_object_annotation_worklist.csv`: **phiếu gán nhãn trống** cho hai người trên 500 ảnh VizWiz eval. `A` và `B` là chỗ dành cho hai người gán nhãn, không có nghĩa hai lượt gán nhãn đã được thực hiện.
 - `exact_duplicate_dev_exclusions.csv`: 9 ảnh VizWiz val bị loại khỏi dev vì trùng byte với 8 ảnh eval (49 nhóm trùng byte toàn val). Eval giữ nguyên 500 ảnh và không có hai ảnh trùng byte trong nội bộ manifest.

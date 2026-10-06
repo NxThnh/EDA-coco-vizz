@@ -1,0 +1,19 @@
+{
+  "repo": "huggingface/smollm",
+  "revision": "438be18dae658a638f3a6976fdf5190bb6d68619",
+  "mixture_entries": 110,
+  "recipe_sha256": "8521c515b76f1ee7995911805c31adb6a9dbee280ad2742bb48ea720a497768a",
+  "training_script": "vision/smolvlm2/scripts/train/multinode25.sh",
+  "exact_training_manifest_status": "not_verified",
+  "evidence": [
+    "Published launch script selects this mixture YAML.",
+    "YAML specifies source pools and percentages, including ShareGPT4V COCO and LLaVA at 100%.",
+    "Source JSON paths are author-local /fsx paths; no exact selected ID list accompanies this YAML.",
+    "A published recipe is not a checkpoint-specific complete exposure manifest."
+  ],
+  "remaining_unknown": [
+    "Selected IDs and private/modified source JSON contents",
+    "Checkpoint linkage to exact training run",
+    "Inherited SmolVLM training and vision/language pretraining exposure"
+  ]
+}

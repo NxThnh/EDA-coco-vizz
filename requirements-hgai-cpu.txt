@@ -1,0 +1,12 @@
+# Use in a workspace venv, leaving the earlier CLIP environment unchanged.
+transformers==4.53.3
+num2words
+numpy
+pandas
+Pillow
+matplotlib
+requests
+pyarrow
+sentencepiece
+nbformat==5.10.4
+nbconvert==7.16.6

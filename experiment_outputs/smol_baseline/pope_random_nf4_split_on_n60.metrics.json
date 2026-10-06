@@ -1,0 +1,83 @@
+{
+  "questions": 60,
+  "images": 10,
+  "TP": 28,
+  "TN": 26,
+  "FP": 4,
+  "FN": 2,
+  "accuracy": 0.9,
+  "precision": 0.875,
+  "recall": 0.9333333333333333,
+  "F1": 0.9032258064516129,
+  "yes_rate": 0.5333333333333333,
+  "role": "feasibility_pilot",
+  "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+  "task": "pope",
+  "partition": "official-pope-random",
+  "model_precision": "nf4",
+  "image_splitting": true,
+  "max_new_tokens": 64,
+  "output_sha256": "c2028281f7e665a292fae1de083fb5dd116e7af892d460db7a4e3857277caae6",
+  "config_sha256": "c6eb59d53e2378aa0bbe9346896947d6413ef05627be9fc45f9f7bd876569de6",
+  "evaluator_code_sha256": "8d41efda58fbe9eeddd0448883e6396d399dcce81efd183c0cc4d25dce12c50c",
+  "metric_sources": [
+    {
+      "repo": "LisaAnne/Hallucination",
+      "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+      "source_path": "data/synonyms.txt",
+      "local_path": "eda_resources/chair_official/synonyms.txt",
+      "sha256": "b685537b36fe21b791c87151b96a991ceb582edff19f3da204dcc7a7905502f2"
+    },
+    {
+      "repo": "LisaAnne/Hallucination",
+      "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+      "source_path": "utils/chair.py",
+      "local_path": "eda_resources/chair_official/chair.py",
+      "sha256": "b05f701ce6ec0125dd700ffb80ed58bfcf2686df8c9bd62f70169cb928de4627"
+    },
+    {
+      "repo": "LisaAnne/Hallucination",
+      "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+      "source_path": "utils/misc.py",
+      "local_path": "eda_resources/chair_official/misc.py",
+      "sha256": "8339e03d934bd43c34ce79bf71c84ebd7e6f0161574d0421af0df25f74b99697"
+    },
+    {
+      "repo": "RUCAIBox/POPE",
+      "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+      "source_path": "LICENSE",
+      "local_path": "eda_resources/pope_official/LICENSE",
+      "sha256": "e78a0718885c94799b5ad154dcba3ef10c4c388a67568b322a0525ebadbcc6b3"
+    },
+    {
+      "repo": "RUCAIBox/POPE",
+      "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+      "source_path": "evaluate.py",
+      "local_path": "eda_resources/pope_official/evaluate.py",
+      "sha256": "f0371dcec5f1bdbde017d1a02f5a9a04c53cb561a2874f3fb8f0718ce3d87036"
+    },
+    {
+      "repo": "RUCAIBox/POPE",
+      "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+      "source_path": "output/coco/coco_pope_adversarial.json",
+      "local_path": "eda_resources/pope_official/coco_pope_adversarial.json",
+      "sha256": "420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8"
+    },
+    {
+      "repo": "RUCAIBox/POPE",
+      "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+      "source_path": "output/coco/coco_pope_popular.json",
+      "local_path": "eda_resources/pope_official/coco_pope_popular.json",
+      "sha256": "72c1a8ad45d0c13514f5f22598261df41d3b533854d29682e924db50ed8aa753"
+    },
+    {
+      "repo": "RUCAIBox/POPE",
+      "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+      "source_path": "output/coco/coco_pope_random.json",
+      "local_path": "eda_resources/pope_official/coco_pope_random.json",
+      "sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994"
+    }
+  ],
+  "normalizer": "official POPE evaluate.py parser",
+  "note": "A pilot subset is not a full-benchmark score; NF4 is a separate precision condition."
+}

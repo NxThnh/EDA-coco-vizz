@@ -1,0 +1,89 @@
+{
+  "images": 20,
+  "legacy_source_sha256": "0fe7c29be181aef31b22ffa36c8f86b564794bc8ccee318c778e33ce1fafe1aa",
+  "processor_class_only_executed": true,
+  "checks": [
+    {
+      "image_id": 133,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 4265,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 4495,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 4795,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 5123,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 5178,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 6450,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 7155,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 8277,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 8721,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 8787,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 9647,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 10935,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 10977,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 11525,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 12947,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 13004,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 13159,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 13892,
+      "max_absolute_pixel_tensor_difference": 0.0
+    },
+    {
+      "image_id": 14773,
+      "max_absolute_pixel_tensor_difference": 0.0
+    }
+  ],
+  "max_absolute_difference": 0.0,
+  "limitation": "Processor equivalence on 20 fixed images; no TinyLLaVA language/vision forward pass."
+}

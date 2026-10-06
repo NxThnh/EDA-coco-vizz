@@ -1,0 +1,83 @@
+{
+  "transformers": "4.53.3",
+  "torch": "2.5.1+cu121",
+  "image_seq_len": 81,
+  "smol_image_token_id": 49190,
+  "smol_processor": {
+    "_processor_class": "SmolVLMProcessor",
+    "image_processor_type": "SmolVLMImageProcessor",
+    "video_sampling": {
+      "fps": 1,
+      "max_frames": 64,
+      "video_size": {
+        "longest_edge": 384
+      }
+    },
+    "do_convert_rgb": true,
+    "do_resize": true,
+    "size": {
+      "longest_edge": 1536
+    },
+    "resample": 1,
+    "do_image_splitting": true,
+    "max_image_size": {
+      "longest_edge": 384
+    },
+    "do_rescale": true,
+    "rescale_factor": 0.00392156862745098,
+    "do_normalize": true,
+    "image_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "image_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "do_pad": true
+  },
+  "tiny_processor": {
+    "_processor_class": "SiglipProcessor",
+    "image_processor_type": "SiglipImageProcessor",
+    "do_resize": true,
+    "size": {
+      "height": 384,
+      "width": 384
+    },
+    "resample": 3,
+    "do_rescale": true,
+    "rescale_factor": 0.00392156862745098,
+    "do_normalize": true,
+    "image_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "image_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "do_convert_rgb": null
+  },
+  "scope": "Actual CPU processor on all locked manifests. No model forward pass.",
+  "source_code_sha256": "5d974f14569a427ffc5c6d3093ce4bd09789ebd2868a586e13f0258c5c5fa289",
+  "manifest_lock_sha256": "de61f425834e6ea5ac965bedc014032bddb2c514d3df7ef7216cf53f94f131e9",
+  "processor_images": 2500,
+  "incremental_run_images": 0,
+  "common_manifest_lock_sha256": "26323802d5141d6d785bd2ba7533ffd8ba3b36788ced3ded0eddf06799181643",
+  "geometry_postprocessing": {
+    "code_sha256": "31d213982ba706054e6651f2419c804d86defb08f867017e7de35c314896c3b3",
+    "smol_rule": "Pinned resize->round grid to multiples384->tiles plus square global; split_off direct square",
+    "fields_corrected": [
+      "distortion_factor",
+      "global_image_distortion_factor",
+      "local_grid_width",
+      "local_grid_height",
+      "local_long_edge_source_per_model_pixel"
+    ],
+    "not_model_forward": "Analytical geometry appended to already measured CPU processor token outputs."
+  }
+}

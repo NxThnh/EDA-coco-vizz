@@ -1,0 +1,5 @@
+﻿task,partition,model_precision,role,images,questions,CHAIR_S_pct,CHAIR_I_pct,accuracy_pct,precision_pct,recall_pct,F1_pct,yes_rate_pct
+chair,dev_common_unmatched500,nf4,feasibility_pilot,20,,35.0,9.293680297397769,,,,,
+pope,official-pope-adversarial,nf4,feasibility_pilot,10,60.0,,,70.0,63.63636363636363,93.33333333333333,75.67567567567568,73.33333333333333
+pope,official-pope-popular,nf4,feasibility_pilot,10,60.0,,,76.66666666666667,70.0,93.33333333333333,80.0,66.66666666666666
+pope,official-pope-random,nf4,feasibility_pilot,10,60.0,,,90.0,87.5,93.33333333333333,90.32258064516128,53.333333333333336

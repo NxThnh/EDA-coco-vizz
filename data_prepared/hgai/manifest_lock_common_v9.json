@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "created_date": "2026-10-06",
+  "source_sha256": {
+    "version8_lock": "de61f425834e6ea5ac965bedc014032bddb2c514d3df7ef7216cf53f94f131e9",
+    "audited_id_flags": "925f409611055431bbe74d909e2ddd70372b5cb3395bd931b1578f601fe53b73",
+    "coco/annotations/captions_val2014.json": "7da4cc45cb76ee1642d163e846e1e0a33feffac2e841c9c426d585ea499165a4",
+    "eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv": "2b09c6d62f9e3073fbda22eb3df15189e06c49bf328f0f7622782d15889e7d20",
+    "eda_results/vlm_extensions/val_image_hashes.csv": "06ed7816bc1bac633876aab59d9f2122a6fb20e15584b5dce8d62985cb3a4947"
+  },
+  "manifest_sha256": {
+    "eval_common_unmatched500.jsonl": "2fd49523e3464f1d6d38517c0e81fbfbac41d87a95c5115dcaab9354f81aeb19",
+    "dev_common_unmatched500.jsonl": "580670e35afae240872999d75f9d9f5b9832c418cec6347763b246c54626615b"
+  },
+  "partitions": [
+    {
+      "partition": "eval_common_unmatched500",
+      "images": 500,
+      "seed": 45,
+      "direct_coco": 0,
+      "vg_gqa_alias": 0,
+      "known_union": 0,
+      "unmatched": 500,
+      "sha256": "2fd49523e3464f1d6d38517c0e81fbfbac41d87a95c5115dcaab9354f81aeb19"
+    },
+    {
+      "partition": "dev_common_unmatched500",
+      "images": 500,
+      "seed": 46,
+      "direct_coco": 0,
+      "vg_gqa_alias": 0,
+      "known_union": 0,
+      "unmatched": 500,
+      "sha256": "580670e35afae240872999d75f9d9f5b9832c418cec6347763b246c54626615b"
+    }
+  ],
+  "filter_columns": [
+    "llava_sft_union",
+    "share_sft_union",
+    "share_pretrain_union",
+    "share_cap100k_union",
+    "smol_checked_upstream_candidate"
+  ],
+  "total_common_unmatched": 2977,
+  "eligible_unused_id_pool": 2830,
+  "remaining_unique_pool": 1830,
+  "notes": [
+    "Version-8 manifests retained byte-for-byte; no model outputs existed at sampling.",
+    "All five manifests are pairwise disjoint in image ID and MD5.",
+    "Zero matches across audited pools only; unknown SmolVLM2 selection/base data remain unverified.",
+    "Filtered evaluation is separate from random500 paper-protocol comparison."
+  ]
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(coco)/train-00000-of-00006.parquet",
+    "rows": 8337,
+    "range_bytes_read": 261969,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(coco)/train-00001-of-00006.parquet",
+    "rows": 8336,
+    "range_bytes_read": 267163,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(coco)/train-00002-of-00006.parquet",
+    "rows": 8336,
+    "range_bytes_read": 265084,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(coco)/train-00003-of-00006.parquet",
+    "rows": 8336,
+    "range_bytes_read": 267021,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(coco)/train-00004-of-00006.parquet",
+    "rows": 8336,
+    "range_bytes_read": 266033,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(coco)/train-00005-of-00006.parquet",
+    "rows": 8336,
+    "range_bytes_read": 267341,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(llava)/train-00000-of-00002.parquet",
+    "rows": 14995,
+    "range_bytes_read": 364089,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  },
+  {
+    "repo": "lmms-lab/LLaVA-OneVision-Data",
+    "revision": "7ca5e5bf8b2006d5dfa0549756198474f0897f63",
+    "filename": "sharegpt4v(llava)/train-00001-of-00002.parquet",
+    "rows": 14995,
+    "range_bytes_read": 394625,
+    "columns": [
+      "id"
+    ],
+    "note": "Upstream candidate pool, not released exact SmolVLM2 sampled training manifest."
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-10-06",
+  "source_sha256": {
+    "coco/annotations/captions_val2014.json": "7da4cc45cb76ee1642d163e846e1e0a33feffac2e841c9c426d585ea499165a4",
+    "eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv": "2b09c6d62f9e3073fbda22eb3df15189e06c49bf328f0f7622782d15889e7d20",
+    "eda_results/vlm_extensions/val_image_hashes.csv": "06ed7816bc1bac633876aab59d9f2122a6fb20e15584b5dce8d62985cb3a4947"
+  },
+  "manifest_sha256": {
+    "eval_random500.jsonl": "87ef37f5340a9cdf45975cde336d2f6949170c2f1488892b9f375dc2fb0e0c1d",
+    "eval_unmatched500.jsonl": "62cb418bda826435a95d6a2ad4b75f30de4c1d1703aa228392ba8af3e9fede7a",
+    "dev500.jsonl": "09274293cab16d2b77fbcbc21c17d2fbb5c4dc8d5250a75c6912a6cebd7af108"
+  },
+  "partitions": [
+    {
+      "partition": "eval_random500",
+      "images": 500,
+      "seed": 42,
+      "direct_coco": 70,
+      "vg_gqa_alias": 201,
+      "known_union": 205,
+      "unmatched": 295,
+      "sha256": "87ef37f5340a9cdf45975cde336d2f6949170c2f1488892b9f375dc2fb0e0c1d"
+    },
+    {
+      "partition": "eval_unmatched500",
+      "images": 500,
+      "seed": 43,
+      "direct_coco": 0,
+      "vg_gqa_alias": 0,
+      "known_union": 0,
+      "unmatched": 500,
+      "sha256": "62cb418bda826435a95d6a2ad4b75f30de4c1d1703aa228392ba8af3e9fede7a"
+    },
+    {
+      "partition": "dev500",
+      "images": 500,
+      "seed": 44,
+      "direct_coco": 72,
+      "vg_gqa_alias": 205,
+      "known_union": 212,
+      "unmatched": 288,
+      "sha256": "09274293cab16d2b77fbcbc21c17d2fbb5c4dc8d5250a75c6912a6cebd7af108"
+    }
+  ],
+  "notes": [
+    "Main COCO500 retains prior seed42 random manifest.",
+    "Unmatched means LLaVA mix665K COCO/VG/GQA only; not clean across all models.",
+    "Dev is fixed at 500; pairwise image ID and exact-byte disjoint from both eval sets.",
+    "Remaining validation images are unused reservoir, not tuning dev.",
+    "Old COCO/VizWiz EDA manifest remains a context artifact; no VizWiz HGAI run is scheduled."
+  ]
+}

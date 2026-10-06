@@ -1,0 +1,9 @@
+﻿width,height,splitting,image_tokens,tiles
+640,480,False,81,1
+640,480,True,1053,13
+640,640,False,81,1
+640,640,True,1377,17
+384,384,False,81,1
+384,384,True,1377,17
+23,30,False,81,1
+23,30,True,1377,17

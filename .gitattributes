@@ -1,0 +1,10 @@
+# Preserve exact bytes: manifests, evidence and source snapshots use SHA-256 locks.
+# Automatic line-ending conversion would invalidate those locks after checkout.
+* -text whitespace=cr-at-eol
+
+# Upstream source snapshots retain their original formatting and hashes.
+eda_resources/chair_official/** whitespace=cr-at-eol,-blank-at-eol
+eda_resources/hgai_original/** whitespace=cr-at-eol,-blank-at-eol
+eda_resources/pope_official/** whitespace=cr-at-eol,-blank-at-eol
+eda_resources/smol_training/** whitespace=cr-at-eol,-blank-at-eol
+eda_resources/tinyllava_source/** whitespace=cr-at-eol,-blank-at-eol

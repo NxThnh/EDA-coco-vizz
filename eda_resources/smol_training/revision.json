@@ -1,0 +1,26 @@
+[
+  {
+    "path": "vision/smolvlm2/scripts/mixtures/onevision_less_mammoth_more_videos_balanced.yaml",
+    "revision": "438be18dae658a638f3a6976fdf5190bb6d68619"
+  },
+  {
+    "path": "vision/smolvlm2/scripts/train/multinode25.sh",
+    "revision": "438be18dae658a638f3a6976fdf5190bb6d68619"
+  },
+  {
+    "path": "vision/smolvlm2/smolvlm/datasets/builder.py",
+    "revision": "438be18dae658a638f3a6976fdf5190bb6d68619"
+  },
+  {
+    "path": "vision/smolvlm2/scripts/create_mixture.py",
+    "revision": "438be18dae658a638f3a6976fdf5190bb6d68619"
+  },
+  {
+    "path": "vision/data/datasets_processing_scripts/build_concatenation_datasets_sft/build_the_cauldron.py",
+    "revision": "438be18dae658a638f3a6976fdf5190bb6d68619"
+  },
+  {
+    "path": "vision/data/datasets_processing_scripts/create_fine_tuning_datasets/create_aokvqa.py",
+    "revision": "438be18dae658a638f3a6976fdf5190bb6d68619"
+  }
+]

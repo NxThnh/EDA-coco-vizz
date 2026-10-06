@@ -1,0 +1,26 @@
+[
+  {
+    "repo": "Lin-Chen/ShareGPT4V",
+    "revision": "55d02b0bc53a2754095a14110dda6daedd95671d",
+    "url": "https://huggingface.co/datasets/Lin-Chen/ShareGPT4V/resolve/55d02b0bc53a2754095a14110dda6daedd95671d/share-captioner_coco_lcs_sam_1246k_1107.json",
+    "path": "scratch/share-captioner_coco_lcs_sam_1246k_1107.json",
+    "bytes": 1492479912,
+    "sha256": "5c5f0f4ee58d7b7467f9e49eb5b17f930890a8a0c18a4e2a5be6b15714ef8b3c"
+  },
+  {
+    "repo": "Lin-Chen/ShareGPT4V",
+    "revision": "55d02b0bc53a2754095a14110dda6daedd95671d",
+    "url": "https://huggingface.co/datasets/Lin-Chen/ShareGPT4V/resolve/55d02b0bc53a2754095a14110dda6daedd95671d/sharegpt4v_instruct_gpt4-vision_cap100k.json",
+    "path": "scratch/sharegpt4v_instruct_gpt4-vision_cap100k.json",
+    "bytes": 133866626,
+    "sha256": "31061a20d2b8bc73fa0b5da9fe11b0e6125bece9db54a489b7b6e4723d0b7a1c"
+  },
+  {
+    "repo": "Lin-Chen/ShareGPT4V",
+    "revision": "55d02b0bc53a2754095a14110dda6daedd95671d",
+    "url": "https://huggingface.co/datasets/Lin-Chen/ShareGPT4V/resolve/55d02b0bc53a2754095a14110dda6daedd95671d/sharegpt4v_mix665k_cap23k_coco-ap9k_lcs3k_sam9k_div2k.json",
+    "path": "scratch/sharegpt4v_mix665k_cap23k_coco-ap9k_lcs3k_sam9k_div2k.json",
+    "bytes": 1230418359,
+    "sha256": "61b43cc69b38c642105fe60ea732d96f57b4c8a18d51eb2379746ccebfa9e11e"
+  }
+]

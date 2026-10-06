@@ -1,0 +1,39 @@
+{
+  "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+  "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+  "task": "pope",
+  "partition": "official-pope-random",
+  "manifest_sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994",
+  "weights": [
+    {
+      "repo": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+      "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+      "file": "model-00001-of-00002.safetensors",
+      "bytes": 4959390584,
+      "sha256": "7c88a90e78f567460b2369a0369cc4dafbfda5607c9cb090b30fa4437b0282f2"
+    },
+    {
+      "repo": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+      "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+      "file": "model-00002-of-00002.safetensors",
+      "bytes": 4027833472,
+      "sha256": "cf3d0958a8240f71054a6812038f2a6bfbe2e5124573a3b363f6b120c9a52657"
+    }
+  ],
+  "processor_config_sha256": "70d935393e28a5b77b8f46cbd3e3cb74a336e4814bd43983858215bd0be388e7",
+  "chat_template_sha256": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf",
+  "transformers": "4.53.3",
+  "seed": 927,
+  "requested_rows": 60,
+  "benchmark_rows": 3000,
+  "precision": "nf4",
+  "quantization": "NF4 all supported linear layers, double quant, FP16 compute",
+  "image_splitting": true,
+  "max_new_tokens": 64,
+  "do_sample": false,
+  "num_beams": 1,
+  "use_cache": true,
+  "intervention": "none",
+  "role": "feasibility_pilot",
+  "code_sha256": "f52410bd3e51b8b2fde6daba2ed8addb1788777bca397e7479c8fa403d7db2be"
+}

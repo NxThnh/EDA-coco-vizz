@@ -1,0 +1,11 @@
+﻿dataset,model,mode,images,median_pad_pct,median_crop_pct,median_distortion,median_long_edge_source_per_target
+COCO,LLaVA-1.5-7B,hgai_center_crop,40504,0.0,26.718750000000004,1.0,1.9047619047619047
+COCO,LLaVA-1.5-7B,pad_control,40504,26.718750000000004,0.0,1.0,1.9047619047619047
+COCO,TinyLLaVA-3.1B,center_crop_control,40504,0.0,26.718750000000004,1.0,1.6666666666666667
+COCO,TinyLLaVA-3.1B,direct_square_control,40504,0.0,0.0,1.3646055437100213,1.6666666666666667
+COCO,TinyLLaVA-3.1B,pad,40504,26.718750000000004,0.0,1.0,1.6666666666666667
+VizWiz,LLaVA-1.5-7B,hgai_center_crop,7750,0.0,25.0,1.0,3.857142857142857
+VizWiz,LLaVA-1.5-7B,pad_control,7750,25.0,0.0,1.0,3.857142857142857
+VizWiz,TinyLLaVA-3.1B,center_crop_control,7750,0.0,25.0,1.0,3.375
+VizWiz,TinyLLaVA-3.1B,direct_square_control,7750,0.0,0.0,1.3333333333333333,3.375
+VizWiz,TinyLLaVA-3.1B,pad,7750,25.0,0.0,1.0,3.375

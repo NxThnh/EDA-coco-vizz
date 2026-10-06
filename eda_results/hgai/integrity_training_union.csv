@@ -1,0 +1,9 @@
+﻿Kiểm tra,COCO,Diễn giải
+COCO val2014/train2017 ID,"35.504/40.504 (87,656%)",Giao nhau split; không phải bằng chứng VLM đã học mọi ảnh.
+COCO trực tiếp trong mix665K LLaVA,"5.741/40.504 (14,174%)",Đường dẫn ảnh trong file SFT chính thức.
+Visual Genome/GQA alias toàn bộ,"16.221/40.504 (40,048%)",Nối image_id VG/GQA với coco_id; có giao với nhóm trực tiếp.
+Visual Genome/GQA alias-only,"10.877/40.504 (26,854%)",Chưa có đường dẫn COCO trực tiếp.
+TỔNG COCO trực tiếp ∪ alias VG/GQA,"16.618/40.504 (41,028%)",5.741 + 10.877; không cộng lặp 16.221.
+Manifest eval_random500,"205/500 (41,000%)",70 trực tiếp + 135 alias-only; 295 chưa khớp.
+Ảnh thiếu/rỗng/giải mã lỗi,0/40.504,Kiểm tra toàn bộ val đã có; ảnh VizWiz cũng 0/7.750.
+Nhãn bbox COCO,291.875 instance; 367 ảnh không có instance,"Giữ ảnh không có instance, dùng hợp instance và mọi caption chuẩn cho CHAIR."

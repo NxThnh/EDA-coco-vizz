@@ -1,0 +1,4 @@
+-r requirements-hgai-cpu.txt
+accelerate==1.8.1
+bitsandbytes==0.45.5
+nltk==3.9.4

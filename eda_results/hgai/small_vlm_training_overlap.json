@@ -1,0 +1,79 @@
+{
+  "sources": {
+    "llava_sft": {
+      "records_with_image": 624610,
+      "prefix_counts": {
+        "coco": 364100,
+        "vg": 86417,
+        "gqa": 72140,
+        "ocr_vqa": 80000,
+        "textvqa": 21953
+      },
+      "sha256": "ce959ce6e23073ee1cd1a8a2ef1c633768c10d4174327b8b2dc7113b91af6cf8",
+      "path": "scratch/llava_v1_5_mix665k.json"
+    },
+    "share_sft": {
+      "records_with_image": 624370,
+      "prefix_counts": {
+        "coco": 349860,
+        "llava": 3000,
+        "sam": 9000,
+        "wikiart": 500,
+        "share_textvqa": 500,
+        "web-celebrity": 500,
+        "web-landmark": 500,
+        "vg": 86417,
+        "gqa": 72140,
+        "ocr_vqa": 80000,
+        "textvqa": 21953
+      },
+      "sha256": "61b43cc69b38c642105fe60ea732d96f57b4c8a18d51eb2379746ccebfa9e11e",
+      "path": "scratch/sharegpt4v_mix665k_cap23k_coco-ap9k_lcs3k_sam9k_div2k.json"
+    },
+    "share_pretrain": {
+      "records_with_image": 1246901,
+      "prefix_counts": {
+        "sam": 570486,
+        "coco": 118287,
+        "llava": 558128
+      },
+      "sha256": "5c5f0f4ee58d7b7467f9e49eb5b17f930890a8a0c18a4e2a5be6b15714ef8b3c",
+      "path": "scratch/share-captioner_coco_lcs_sam_1246k_1107.json"
+    },
+    "share_cap100k": {
+      "records_with_image": 102025,
+      "prefix_counts": {
+        "coco": 50027,
+        "sam": 20000,
+        "llava": 30000,
+        "wikiart": 500,
+        "share_textvqa": 500,
+        "web-celebrity": 498,
+        "web-landmark": 500
+      },
+      "sha256": "31061a20d2b8bc73fa0b5da9fe11b0e6125bece9db54a489b7b6e4723d0b7a1c",
+      "path": "scratch/sharegpt4v_instruct_gpt4-vision_cap100k.json"
+    },
+    "smol_onevision_coco": {
+      "path": "scratch/onevision_sharegpt4v_ids.csv",
+      "sha256": "579322dee197ad262f36a6417495433cba48dfd3ec7272d25b224abb6ef92120",
+      "status": "upstream_candidate_pool_not_exact_training_subset"
+    }
+  },
+  "tiny_checkpoint_recipe": "Model card lists both recipes; no exact per-checkpoint full training record supplied. Report both conditionally.",
+  "smol_training_sources": [
+    "LLaVA-OneVision",
+    "M4-Instruct",
+    "MAmmoTH-VL",
+    "LLaVA-Video-178K",
+    "FineVideo",
+    "Video-STaR",
+    "VRipt",
+    "VISTA-400K",
+    "MovieChat",
+    "ShareGPT4Video"
+  ],
+  "smol_scope": "Only exact upstream OneVision ShareGPT4V-COCO IDs checked; other slices, base SmolVLM training and sampled 3.3M training selection remain unknown.",
+  "not_clean": "Absence of a match never proves absence from all pretraining or unseen sources.",
+  "code_sha256": "c4991864b3905703bcf5bc6ac03db851b41502be3a9176a5d993c6db3dfacf85"
+}

@@ -436,6 +436,7 @@ generic_image_nouns = {
 lemmatizer = WordNetLemmatizer()
 
 human_noun_family = {'man', 'men', 'woman', 'people', 'person'}
+from person_synonyms import person_mentions
 
 def get_noun_entities(caps, image_ids, batch_size=2000):
     counts = Counter()
@@ -444,16 +445,15 @@ def get_noun_entities(caps, image_ids, batch_size=2000):
     human_image_ids = set()
     for start in range(0, len(caps), batch_size):
         tokenized = [re.findall(r'\b[a-z]+\b', c.lower()) for c in caps[start:start + batch_size]]
-        for tagged, image_id in zip(pos_tag_sents(tokenized, lang='eng'), image_ids[start:start + batch_size]):
-            caption_has_human_noun = False
+        for tagged, image_id, caption in zip(pos_tag_sents(tokenized, lang='eng'), image_ids[start:start + batch_size], caps[start:start + batch_size]):
+            count = person_mentions(caption)
+            human_mentions += count
+            caption_has_human_noun = count > 0
             for token, tag in tagged:
                 if tag in {'NN', 'NNS', 'NNP', 'NNPS'}:
                     lemma = lemmatizer.lemmatize(token, pos='n')
                     if len(lemma) >= 2 and lemma not in generic_image_nouns:
                         counts[lemma] += 1
-                        if lemma in human_noun_family:
-                            human_mentions += 1
-                            caption_has_human_noun = True
             if caption_has_human_noun:
                 human_caption_count += 1
                 human_image_ids.add(image_id)
@@ -467,12 +467,12 @@ top_viz_norm = viz_noun_counts.most_common(15)
 
 df_human_reference = pd.DataFrame([
     {'Dataset': 'MS-COCO val2014', 'Caption Count': len(coco_captions), 'Image Count': len(coco_val_cap['images']),
-     'Noun Family': 'man/men/woman/people/person', 'Mentions': coco_human_mentions,
+     'Noun Family': 'CHAIR person synonyms (same as Figure 4)', 'Mentions': coco_human_mentions,
      'Mentions per 1,000 captions': round(coco_human_mentions / len(coco_captions) * 1000, 2),
      'Captions with family (%)': round(coco_human_caps / len(coco_captions) * 100, 2),
      'Images whose selected caption mentions family (%)': round(len(coco_human_imgs) / len(coco_val_cap['images']) * 100, 2)},
     {'Dataset': 'VizWiz val', 'Caption Count': len(viz_captions_norm), 'Image Count': len(viz_val['images']),
-     'Noun Family': 'man/men/woman/people/person', 'Mentions': viz_human_mentions,
+     'Noun Family': 'CHAIR person synonyms (same as Figure 4)', 'Mentions': viz_human_mentions,
      'Mentions per 1,000 captions': round(viz_human_mentions / len(viz_captions_norm) * 1000, 2),
      'Captions with family (%)': round(viz_human_caps / len(viz_captions_norm) * 100, 2),
      'Images whose selected caption mentions family (%)': round(len(viz_human_imgs) / len(viz_val['images']) * 100, 2)},

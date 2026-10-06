@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Build reproducible image-caption manifests from the local COCO/VizWiz data.
+"""Build context EDA image-caption manifests from local COCO/VizWiz data.
 
 The 1,000-image evaluation set is fixed by the existing EDA manifest. Raw
 validation images outside that set form a separate development partition.
 Training images are currently absent; training records are metadata only.
+HGAI tuning/evaluation uses data_prepared/hgai from hgai_cpu_audit.py instead.
 """
 
 import argparse

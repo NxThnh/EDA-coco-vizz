@@ -129,21 +129,21 @@
       "Dataset": "MS-COCO val2014",
       "Caption Count": 40504,
       "Image Count": 40504,
-      "Noun Family": "man/men/woman/people/person",
-      "Mentions": 13233,
-      "Mentions per 1,000 captions": 326.71,
-      "Captions with family (%)": 30.92,
-      "Images whose selected caption mentions family (%)": 30.92
+      "Noun Family": "CHAIR person synonyms (same as Figure 4)",
+      "Mentions": 16557,
+      "Mentions per 1,000 captions": 408.77,
+      "Captions with family (%)": 37.52,
+      "Images whose selected caption mentions family (%)": 37.52
     },
     {
       "Dataset": "VizWiz val",
       "Caption Count": 7542,
       "Image Count": 7750,
-      "Noun Family": "man/men/woman/people/person",
-      "Mentions": 598,
-      "Mentions per 1,000 captions": 79.29,
-      "Captions with family (%)": 7.78,
-      "Images whose selected caption mentions family (%)": 7.57
+      "Noun Family": "CHAIR person synonyms (same as Figure 4)",
+      "Mentions": 678,
+      "Mentions per 1,000 captions": 89.9,
+      "Captions with family (%)": 8.66,
+      "Images whose selected caption mentions family (%)": 8.43
     }
   ],
   "coco_top_supercategories": [

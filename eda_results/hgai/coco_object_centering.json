@@ -1,0 +1,17 @@
+{
+  "images": 40504,
+  "instances": 291875,
+  "images_without_instances": 367,
+  "formula": "Euclidean bbox-center to image-center distance / half image diagonal; crowd included and flagged.",
+  "largest_object": {
+    "n": 40137,
+    "mean": 0.27022057386350123,
+    "min": 0.0,
+    "p50": 0.24361520901612307,
+    "p90": 0.5394381868587752,
+    "p95": 0.6178083243993596,
+    "p99": 0.743258186817772,
+    "max": 0.9346081968811761
+  },
+  "limitation": "Measured bbox geometry; not image quality or evidence of a CHAIR correlation. VizWiz has no bbox ground truth."
+}

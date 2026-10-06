@@ -1,0 +1,8 @@
+{
+  "seed": 42,
+  "images_reviewed_target": 40,
+  "exif_and_rotated_population": 199,
+  "rotated_without_exif_population": 646,
+  "stratum_sample_size": 20,
+  "note": "EXIF does not remove the original human Rotated label. Orientation judgment requires image review."
+}

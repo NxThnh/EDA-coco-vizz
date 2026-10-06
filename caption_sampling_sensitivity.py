@@ -6,14 +6,10 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-import nltk
-from nltk import pos_tag_sents
-from nltk.stem import WordNetLemmatizer
+from person_synonyms import person_mentions
 
 
 ROOT = Path(__file__).resolve().parent
-nltk.data.path.insert(0, str(ROOT / "eda_resources" / "nltk_data"))
-FAMILY = {"man", "men", "woman", "people", "person"}
 
 
 def select_one_per_image(annotations, eligible):
@@ -25,16 +21,10 @@ def select_one_per_image(annotations, eligible):
 
 
 def person_reference_rate(selected):
-    lemmatizer = WordNetLemmatizer()
-    tokens = [re.findall(r"\b[a-z]+\b", a["caption"].lower()) for a in selected]
     mentions = 0
     matched = 0
-    for tagged in pos_tag_sents(tokens, lang="eng"):
-        count = sum(
-            lemmatizer.lemmatize(word, pos="n") in FAMILY
-            for word, tag in tagged
-            if tag in {"NN", "NNS", "NNP", "NNPS"}
-        )
+    for ann in selected:
+        count = person_mentions(ann['caption'])
         mentions += count
         matched += count > 0
     return mentions, matched
@@ -58,9 +48,11 @@ def main():
             "Images with No Eligible Caption": len(data["images"]) - len(selected),
             "Selected Captions": len(selected),
             "Person-family Mentions": mentions,
+            "Selected Captions with Person Family": matched,
             "Mentions per 1,000 Selected Captions": round(mentions / len(selected) * 1000, 2),
             "Selected Captions with Person Family (%)": round(matched / len(selected) * 100, 2),
             "Selection Rule": "lowest valid annotation ID",
+            "Matching Rule": "CHAIR person synonyms; longest phrase first; lexical, no POS filter",
         })
     output = ROOT / "eda_results/tables/person_reference_one_caption_per_image.csv"
     with output.open("w", newline="", encoding="utf-8") as file:
@@ -70,6 +62,19 @@ def main():
     for row in rows:
         print(row)
     print(output)
+    import pandas as pd
+    summary=[]
+    for r in rows:
+        summary.append({'Dataset':r['Dataset'],'Caption Count':r['Selected Captions'],'Image Count':r['All Images'],
+                        'Noun Family':'CHAIR person synonyms (same as Figure 4)', 'Mentions':r['Person-family Mentions'],
+                        'Mentions per 1,000 captions':r['Mentions per 1,000 Selected Captions'],
+                        'Captions with family (%)':r['Selected Captions with Person Family (%)'],
+                        'Images whose selected caption mentions family (%)':round(100*r['Selected Captions with Person Family']/r['All Images'],2)})
+    pd.DataFrame(summary).to_csv(ROOT/'eda_results/tables/person_reference_summary.csv',index=False,encoding='utf-8-sig')
+    metrics_path=ROOT/'eda_results/eda_summary_metrics.json'
+    metrics=json.loads(metrics_path.read_text(encoding='utf-8'))
+    metrics['person_reference_summary']=summary
+    metrics_path.write_text(json.dumps(metrics,ensure_ascii=False,indent=2),encoding='utf-8')
 
 
 if __name__ == "__main__":

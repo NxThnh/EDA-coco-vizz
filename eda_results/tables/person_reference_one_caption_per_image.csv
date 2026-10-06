@@ -1,3 +1,3 @@
-Dataset,All Images,Images with Eligible Caption,Images with No Eligible Caption,Selected Captions,Person-family Mentions,"Mentions per 1,000 Selected Captions",Selected Captions with Person Family (%),Selection Rule
-MS-COCO val2014,40504,40504,0,40504,13233,326.71,30.92,lowest valid annotation ID
-VizWiz val,7750,7542,208,7542,598,79.29,7.78,lowest valid annotation ID
+Dataset,All Images,Images with Eligible Caption,Images with No Eligible Caption,Selected Captions,Person-family Mentions,Selected Captions with Person Family,"Mentions per 1,000 Selected Captions",Selected Captions with Person Family (%),Selection Rule,Matching Rule
+MS-COCO val2014,40504,40504,0,40504,16557,15196,408.77,37.52,lowest valid annotation ID,"CHAIR person synonyms; longest phrase first; lexical, no POS filter"
+VizWiz val,7750,7542,208,7542,678,653,89.9,8.66,lowest valid annotation ID,"CHAIR person synonyms; longest phrase first; lexical, no POS filter"

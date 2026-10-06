@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "date": "2026-10-06",
+  "scope": "COCO primary; VizWiz context only",
+  "scope_basis": "User-provided review of contribution report and council minutes dated 2026-10-05; originals not in workspace.",
+  "main_models": [
+    {
+      "id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+      "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+      "layers": 24,
+      "processor_mode": "split_on"
+    },
+    {
+      "id": "bczhou/TinyLLaVA-3.1B",
+      "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+      "layers": 32,
+      "processor_mode": "pad_384",
+      "selection_basis": "Explicit 384px checkpoint assumption; TinyLLaVA family alone is ambiguous."
+    }
+  ],
+  "reference_model": "liuhaotian/llava-v1.5-7b",
+  "reference_protocol_source": {
+    "repo": "ZhangqiJiang07/middle_layers_indicating_hallucinations",
+    "revision": "1467fe07fefd4f15ed1ac3560455dff5b53dbc08"
+  },
+  "main_partition": "eval_common_unmatched500",
+  "paper_protocol_partition": "eval_random500",
+  "historical_sensitivity_partition": "eval_unmatched500",
+  "dev_partition": "dev_common_unmatched500",
+  "sampling_scope": "Main small-model comparison excludes all audited ID pools. Random500 remains a separately reported paper-protocol reference; filtering changes the sampling distribution.",
+  "conditions": [
+    {
+      "name": "detailed512",
+      "prompt": "Please help me describe the image in detail.",
+      "max_new_tokens": 512,
+      "role": "primary"
+    },
+    {
+      "name": "detailed64",
+      "prompt": "Please help me describe the image in detail.",
+      "max_new_tokens": 64,
+      "role": "length-only control"
+    },
+    {
+      "name": "concise64",
+      "prompt": "Describe the visible content in one concise sentence. If the image is too unclear to identify reliably, say \"I cannot tell from this image.\"",
+      "max_new_tokens": 64,
+      "role": "prompt plus refusal control"
+    }
+  ],
+  "generation": {
+    "do_sample": false,
+    "num_beams": 1,
+    "use_cache": true
+  },
+  "metrics": {
+    "primary": [
+      "CHAIR_S",
+      "CHAIR_I"
+    ],
+    "crosscheck": "POPE random/popular/adversarial official separate benchmark",
+    "guards": [
+      "object recall/F1",
+      "generated token length",
+      "truncation rate",
+      "refusal rate",
+      "repetition/Distinct-1",
+      "latency and peak memory"
+    ]
+  },
+  "llava_reproduction": {
+    "first_step": "baseline then HGAI original 5-18 inclusive, alpha=0.5, mean aggregation",
+    "reference_image_mode": "direct CLIP processor center crop in published chair_eval data loader",
+    "control_image_mode": "square pad before CLIP processor",
+    "sampling_note": "Original uses seed927 and shuffles unsorted os.listdir. Original image manifest not released here; seed42 main sample is protocol-aligned, not exact original sample."
+  },
+  "small_model_tuning": {
+    "dev_images": 500,
+    "layer_grid_fractional_inclusive": [
+      [
+        0.1,
+        0.4
+      ],
+      [
+        0.15,
+        0.6
+      ],
+      [
+        0.25,
+        0.7
+      ]
+    ],
+    "alpha_grid": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "aggregation": "mean",
+    "selection": "Select on dev using CHAIR plus recall/F1 guards; freeze before eval; do not tune against eval or POPE.",
+    "note": "Exploratory grid, not experimentally selected layers or optimal alpha. No transfer of literal 5-18 or 576-token image interval to small models."
+  },
+  "smol_ablation": "split_on/off; count only true <image> positions per input and exclude grid/boundary tokens",
+  "inference_status": "Official SmolVLM2 weights are local. NF4 feasibility pilots are reported separately; no HGAI intervention or full three-model evaluation is claimed."
+}
