@@ -1,0 +1,13 @@
+{
+  "crop": "center square before resize to CLIP 336px",
+  "instances": 291874,
+  "center_outside": 54388,
+  "fully_outside": 35617,
+  "partly_outside": 110071,
+  "area_total": 6349901619.238386,
+  "area_outside": 1123306409.200181,
+  "center_outside_pct": 18.634068125286937,
+  "fully_outside_pct": 12.202868361005091,
+  "partly_outside_pct": 37.71182085420421,
+  "bbox_area_outside_pct": 17.690138785723605
+}

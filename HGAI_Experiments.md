@@ -8,7 +8,7 @@ Các mô-đun mới triển khai adapter, runner, scorer, guard, CI và chiến 
 
 `test_hgai_attention.py` kiểm tra công thức gốc, GQA, mask, cache, α=0 bit-exact và khôi phục backend. Kết quả ở [hgai_adapter_validation.json](eda_results/hgai/hgai_adapter_validation.json). Đây là kiểm tra kiến trúc nhỏ ngẫu nhiên; kiểm chứng bằng trọng số thật được ghi ở thư mục `experiment_outputs/adapter_smoke/` và phải hoàn tất riêng.
 
-TinyLLaVA dùng đúng checkpoint `bczhou/TinyLLaVA-3.1B` đã pin. Mã legacy bỏ layer thứ 27 và pooling head của SigLIP, rồi lấy hidden state cuối trước post-layernorm. Port giữ đúng 26 layer thực tế và toàn bộ tên tensor checkpoint, không thêm layer có trọng số ngẫu nhiên hoặc dùng encoder generic thay encoder đã fine-tune.
+Notebook hiện pin checkpoint `bczhou/TinyLLaVA-3.1B`; báo cáo đóng góp gọi `tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B`. Cần đối chiếu revision và hash trọng số trước khi coi đây là cùng mô hình hoặc dùng số liệu chung. Mã legacy bỏ layer thứ 27 và pooling head của SigLIP, rồi lấy hidden state cuối trước post-layernorm. Port giữ đúng 26 layer thực tế và tên tensor checkpoint hiện tải.
 
 ## Chạy và chấm điểm
 
@@ -36,7 +36,11 @@ Guard refusal là regex tiếng Anh được công bố trong scorer, không ph�
 .venv-eda/Scripts/python.exe build_experiment_status.py
 ```
 
-Campaign chạy tuần tự trên một GPU: dev500 baseline và 12 cấu hình can thiệp/mô hình; chọn cấu hình bằng CHAIR-S, CHAIR-I và guard đã khai báo; khóa selection; sau đó eval500 baseline–HGAI, CI và 3×3.000 câu POPE cho mỗi điều kiện baseline/HGAI. Smol/Tiny có thêm hai control prompt, Smol có split_off; LLaVA có pad/crop và random500 đối chiếu giao thức gốc. Baseline α=0 là ứng viên hợp lệ nếu mọi can thiệp vi phạm guard hoặc không tốt hơn.
+Campaign cũ đã tạm khóa trước lưới α=0,25–1,0. Phép dò trên cùng 10 ảnh dev đã đo α=0,02; 0,035; 0,05; 0,075; 0,10; 0,20; 0,30. Lưới Smol cho dev500 là **{0,02; 0,035; 0,05}** theo [khóa lưới](eda_results/hgai/smol_alpha_grid_lock.json); cả ba mức có 0/10 ảnh mất hơn nửa độ dài, còn 0,075 có 1/10. TinyLLaVA phải có phép dò riêng sau khi thống nhất checkpoint; không chuyển nguyên lưới Smol sang Tiny. Campaign v2 yêu cầu `eda_results/hgai/hgai_design_lock.json` chứa lưới α từng mô hình và hash bằng chứng layer. Layer cần được xác định từ đường cong VAR và độ nhạy che ảnh, kèm quy tắc ranh giới; báo thêm dải ngẫu nhiên cùng độ rộng, oracle trên dev và can thiệp mọi layer. LLaVA chỉ chạy hàng kiểm chứng baseline và HGAI layer 5–18, α=0,5. Smol/Tiny giữ các đối chứng prompt và POPE. Smol có mức token ảnh giữa bằng `size.longest_edge=768` khi vẫn bật chia ô.
+
+NF4 là điều kiện precision riêng. Cần so FP16 với NF4 trên cùng vài chục ảnh và cùng cấu hình ở máy GPU đủ lớn, báo chênh CHAIR ghép cặp trước khi diễn giải khác biệt với số LLaVA 53,0 của bài báo.
+
+Trên máy đủ VRAM, chạy `.venv-eda/Scripts/python.exe compare_precision.py --model llava --images 30`. Script dùng cùng prefix dev, prompt và decoding, chấm hai output rồi lưu CI ghép cặp trong `experiment_outputs/precision_control/`.
 
 Guard chọn trên dev: recall và F1 không giảm quá 0,02; refusal, output trống, truncation và lặp 4-gram không tăng quá 0,05; độ dài trung bình giữ ít nhất 50% baseline. Đây là quy tắc khám phá được chốt trước lượt tuning dev500 đầy đủ, không phải ngưỡng do tác giả HGAI xác lập. Không chọn α bằng eval/POPE.
 

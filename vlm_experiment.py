@@ -28,6 +28,8 @@ def run(args):
                               LlavaForConditionalGeneration,AutoTokenizer,AutoImageProcessor,BitsAndBytesConfig)
     from hgai_attention import HGAIAdapter,decoder_layers
     args.image_mode=args.image_mode or ('pad' if args.model=='tiny' else 'hgai_crop')
+    if args.smol_longest_edge is not None and (args.model!='smol' or args.split_off):
+        raise ValueError('--smol-longest-edge requires SmolVLM2 with image splitting enabled')
     if args.model=='tiny' and args.image_mode!='pad':
         raise ValueError('Pinned legacy TinyLLaVA uses pad384; crop is only an EDA geometry control, not this checkpoint protocol')
     if transformers.__version__!='4.53.3' or not torch.cuda.is_available():
@@ -64,6 +66,7 @@ def run(args):
         raise ValueError('Invalid inclusive layer range')
     condition=args.condition if args.task=='chair' else 'pope64'
     name=f'{args.model}_{partition}_{condition}_{args.precision}_{args.image_mode}_split{not args.split_off}_alpha{args.alpha}_layers{args.layers[0]}-{args.layers[1]}_n{args.limit}'
+    if args.smol_longest_edge is not None:name+=f'_edge{args.smol_longest_edge}'
     output=args.output or ROOT/'experiment_outputs/vlm_runs'/(name+'.jsonl')
     output.parent.mkdir(parents=True,exist_ok=True)
     config_path=output.with_suffix('.config.json')
@@ -72,6 +75,7 @@ def run(args):
             'task':args.task,'partition':partition,'condition':condition,'manifest_sha256':sha(manifest),
             'weights':weights,'precision':args.precision,'image_splitting':not args.split_off if args.model=='smol' else None,
             'image_mode':args.image_mode,'max_new_tokens':max_tokens,'requested_rows':args.limit,'benchmark_rows':benchmark_rows,
+            'smol_longest_edge':args.smol_longest_edge,
             'role':'feasibility_pilot' if args.limit<benchmark_rows else 'baseline' if args.alpha==0 else 'hgai',
             'alpha':args.alpha,'layers_inclusive':args.layers,'aggregation':'mean','intervention':'none' if args.alpha==0 else 'HGAI',
             'seed':927,'do_sample':False,'num_beams':1,'use_cache':True,'transformers':transformers.__version__,
@@ -103,6 +107,8 @@ def run(args):
     if args.model=='smol':
         processor=SmolVLMProcessor.from_pretrained(model_path,local_files_only=True)
         processor.image_processor.do_image_splitting=not args.split_off
+        if args.smol_longest_edge is not None:
+            processor.image_processor.size={'longest_edge':args.smol_longest_edge}
         model=SmolVLMForConditionalGeneration.from_pretrained(model_path,**loading).eval()
         tokenizer=processor.tokenizer
     elif args.model=='llava':
@@ -175,6 +181,7 @@ def main():
     parser.add_argument('--precision',choices=['nf4','fp16'],default='nf4')
     parser.add_argument('--image-mode',choices=['hgai_crop','pad'],default=None)
     parser.add_argument('--split-off',action='store_true')
+    parser.add_argument('--smol-longest-edge',type=int,choices=[768],default=None)
     parser.add_argument('--alpha',type=float,default=0)
     parser.add_argument('--layers',type=int,nargs=2,default=[5,18])
     parser.add_argument('--limit',type=int,default=500)

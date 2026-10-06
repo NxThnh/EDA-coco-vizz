@@ -270,7 +270,17 @@ def main():
     del tiny_model
     plan_path=ROOT/'experiment_outputs/hgai_campaign/campaign_plan.json'
     plan=json.loads(plan_path.read_text())
-    assert all(sha(ROOT/name)==digest for name,digest in plan['source_sha256'].items())
+    campaign_state=json.loads((plan_path.parent/'campaign_status.json').read_text())
+    source_matches=all(sha(ROOT/name)==digest for name,digest in plan['source_sha256'].items())
+    paused_safely=(campaign_state['status']=='paused_for_alpha_probe'
+                   and 'Campaign paused:' in (ROOT/'run_hgai_suite.py').read_text(encoding='utf-8'))
+    assert source_matches or paused_safely
+    alpha_lock=json.loads((OUT/'smol_alpha_grid_lock.json').read_text())
+    assert alpha_lock['alpha_grid']==[.02,.035,.05]
+    assert sha(ROOT/alpha_lock['probe_path'])==alpha_lock['probe_sha256']
+    alpha_probe=json.loads((ROOT/alpha_lock['probe_path']).read_text())
+    assert all(next(r for r in alpha_probe if r['alpha']==alpha)['images_below_half_baseline']==0
+               for alpha in alpha_lock['alpha_grid'])
     assert plan['dev_manifest_sha256']==sha(PREP/'dev_common_unmatched500.jsonl')
     assert plan['eval_manifest_sha256']==sha(PREP/'eval_common_unmatched500.jsonl')
     availability=json.loads((OUT/'source_availability.json').read_text())

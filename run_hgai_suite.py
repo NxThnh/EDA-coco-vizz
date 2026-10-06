@@ -16,14 +16,12 @@ os.environ.setdefault('USE_FLAX','0')
 os.environ.setdefault('HF_HUB_OFFLINE','1')
 
 from hgai_cpu_audit import ROOT,OUT,PREP,sha
-from hgai_attention import fractional_layers
 from score_vlm_runs import score,compare
 
-CAMPAIGN=ROOT/'experiment_outputs/hgai_campaign'
+CAMPAIGN=ROOT/'experiment_outputs/hgai_campaign_v2'
 STATE=CAMPAIGN/'campaign_status.json'
 PYTHON=ROOT/'.venv-eda/Scripts/python.exe'
-GRID=[[.1,.4],[.15,.6],[.25,.7]]
-ALPHAS=[.25,.5,.75,1.0]
+DESIGN_LOCK=ROOT/'eda_results/hgai/hgai_design_lock.json'
 GUARDS={'max_recall_drop':.02,'max_F1_drop':.02,'max_refusal_increase':.05,'max_empty_increase':.05,
         'max_truncation_increase':.05,'max_repeat_increase':.05,'minimum_length_ratio':.5}
 
@@ -40,9 +38,28 @@ def main():
     parser.add_argument('--external-smol-baseline',type=Path)
     parser.add_argument('--bootstrap',type=int,default=10000)
     args=parser.parse_args()
+    if not DESIGN_LOCK.exists():
+        raise RuntimeError('Campaign paused: review the 10–20 image alpha dose probe and per-layer VAR/image-masking curves, then write hgai_design_lock.json before starting campaign v2.')
+    design=json.loads(DESIGN_LOCK.read_text(encoding='utf-8'))
+    alpha_grids=design['alpha_grid_by_model']
+    for model in args.models:
+        if model=='llava':continue
+        alphas=alpha_grids.get(model,[])
+        if not alphas or any(not 0<alpha<=.3 for alpha in alphas):
+            raise ValueError('Each small model needs its own locked low-alpha grid')
+    for model in args.models:
+        if model=='llava':continue
+        probe=design['dose_probe_by_model'][model]
+        if sha(ROOT/probe['path'])!=probe['sha256']:
+            raise ValueError('Dose probe changed after design lock: '+model)
+    if sha(ROOT/design['layer_evidence_path'])!=design['layer_evidence_sha256']:
+        raise ValueError('Layer evidence changed after design lock')
+    if any(model not in design['layer_ranges_by_model'] for model in args.models if model!='llava'):
+        raise ValueError('Missing measured layer ranges for a small model')
     CAMPAIGN.mkdir(parents=True,exist_ok=True)
     plan={'models':args.models,'precision':'nf4','dev_images':500,'eval_images':500,'pope_questions_per_variant':3000,
-          'fractional_layers':GRID,'alphas':ALPHAS,'guards':GUARDS,'bootstrap':args.bootstrap,
+          'design_lock_sha256':sha(DESIGN_LOCK),'layer_ranges_by_model':design['layer_ranges_by_model'],
+          'alpha_grid_by_model':alpha_grids,'guards':GUARDS,'bootstrap':args.bootstrap,
           'selection':'minimum dev CHAIR_S, then CHAIR_I, then maximum F1, then lower alpha; baseline included',
           'dev_manifest_sha256':sha(PREP/'dev_common_unmatched500.jsonl'),
           'eval_manifest_sha256':sha(PREP/'eval_common_unmatched500.jsonl'),
@@ -68,11 +85,12 @@ def main():
         update('running',label)
         print('JOB',label,flush=True)
         subprocess.run([str(PYTHON),*command],cwd=ROOT,check=True)
-    def run(model,partition,alpha=0,layers=None,condition='detailed512',task='chair',variant='random',split_off=False,image_mode=None):
+    def run(model,partition,alpha=0,layers=None,condition='detailed512',task='chair',variant='random',split_off=False,image_mode=None,smol_longest_edge=None):
         depth=24 if model=='smol' else 32
         layers=layers or [5,18]
         tag=f'{model}_{partition if task=="chair" else "pope_"+variant}_{condition}_split{not split_off}_a{alpha}_l{layers[0]}-{layers[1]}'
         if image_mode:tag+='_'+image_mode
+        if smol_longest_edge:tag+=f'_edge{smol_longest_edge}'
         path=CAMPAIGN/(tag+'.jsonl')
         command=['vlm_experiment.py','--model',model,'--task',task,'--partition',partition,
                  '--condition',condition,'--alpha',str(alpha),'--layers',*[str(i) for i in layers],
@@ -80,6 +98,7 @@ def main():
         if task=='pope':command.extend(['--pope-variant',variant])
         if split_off:command.append('--split-off')
         if image_mode:command.extend(['--image-mode',image_mode])
+        if smol_longest_edge:command.extend(['--smol-longest-edge',str(smol_longest_edge)])
         execute(command,tag)
         metric=score(path)
         if tag not in state['completed_jobs']:state['completed_jobs'].append(tag)
@@ -99,13 +118,18 @@ def main():
                 update('waiting_for_weights',model)
                 print('Waiting for verified weights:',model,flush=True)
                 time.sleep(30)
+            if model=='llava':
+                reference,_=run('llava','eval_random500')
+                treated,_=run('llava','eval_random500',.5,[5,18])
+                compare(reference,treated,CAMPAIGN/'llava_paper_protocol_nf4_ci.json',args.bootstrap)
+                continue
             baseline_dev,baseline_metrics=run(model,'dev_common_unmatched500')
             candidates=[{'path':str(baseline_dev),'alpha':0,'layers':[5,18],'metrics':baseline_metrics,'guard_pass':True}]
             depth=24 if model=='smol' else 32
-            for bounds in GRID:
-                selected=fractional_layers(depth,bounds)
-                layers=[selected[0],selected[-1]]
-                for alpha in ALPHAS:
+            for layers in design['layer_ranges_by_model'][model]:
+                if len(layers)!=2 or not 0<=layers[0]<=layers[1]<depth:
+                    raise ValueError('Invalid locked layer range')
+                for alpha in alpha_grids[model]:
                     path,metrics=run(model,'dev_common_unmatched500',alpha,layers)
                     passed=(metrics['object_micro_recall']>=baseline_metrics['object_micro_recall']-GUARDS['max_recall_drop']
                         and metrics['object_micro_F1']>=baseline_metrics['object_micro_F1']-GUARDS['max_F1_drop']
@@ -140,16 +164,12 @@ def main():
                     treated,_=run(model,'eval_common_unmatched500',chosen['alpha'],chosen['layers'],condition=condition)
                     compare(base,treated,CAMPAIGN/(model+'_'+condition+'_paired_ci.json'),args.bootstrap)
             if model=='smol':
+                base,_=run(model,'eval_common_unmatched500',smol_longest_edge=768)
+                treated,_=run(model,'eval_common_unmatched500',chosen['alpha'],chosen['layers'],smol_longest_edge=768)
+                compare(base,treated,CAMPAIGN/'smol_edge768_paired_ci.json',args.bootstrap)
                 base,_=run(model,'eval_common_unmatched500',split_off=True)
                 treated,_=run(model,'eval_common_unmatched500',chosen['alpha'],chosen['layers'],split_off=True)
                 compare(base,treated,CAMPAIGN/'smol_split_off_paired_ci.json',args.bootstrap)
-            if model=='llava':
-                base,_=run(model,'eval_common_unmatched500',image_mode='pad')
-                treated,_=run(model,'eval_common_unmatched500',chosen['alpha'],chosen['layers'],image_mode='pad')
-                compare(base,treated,CAMPAIGN/'llava_pad_paired_ci.json',args.bootstrap)
-                base,_=run(model,'eval_random500')
-                treated,_=run(model,'eval_random500',.5,[5,18])
-                compare(base,treated,CAMPAIGN/'llava_paper_protocol_nf4_ci.json',args.bootstrap)
         update('complete')
     except BaseException as error:
         update('failed',state.get('active_job'),str(error))

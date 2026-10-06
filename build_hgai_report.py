@@ -10,14 +10,34 @@ import pandas as pd
 from hgai_cpu_audit import ROOT,OUT,PREP,EXT
 
 
-def table(relative,title,columns=None):
+def table(relative,title,columns=None,active_only=False):
     frame=pd.read_csv(ROOT/relative)
+    if active_only and 'partition' in frame:
+        frame=frame[frame.partition.isin(['dev_common_unmatched500','eval_common_unmatched500','eval_random500'])]
+    if active_only and 'scope' in frame:
+        frame=frame[frame.scope.isin(['val2014','dev_common_unmatched500','eval_common_unmatched500','eval_random500'])]
+    if relative.endswith('image_token_summary.csv'):
+        frame=frame[(frame.model=='SmolVLM2-2.2B')&(frame['mode']=='split_on')]
     if columns:frame=frame[columns]
     def cell(x):
         if pd.isna(x):return '—'
-        if isinstance(x,float):return str(int(x)) if x.is_integer() else f'{x:.3f}'
+        if isinstance(x,float):return str(int(x)) if x.is_integer() else f'{x:.3f}'.replace('.',',')
         return str(x).replace('|',' / ').replace('\n',' ')
-    lines=['| '+' | '.join(frame.columns)+' |','| '+' | '.join([':---']*len(frame.columns))+' |']
+    labels={'partition':'Bộ ảnh','images':'Số ảnh','seed':'Seed','model':'Mô hình','mode':'Chế độ',
+            'n':'Số ảnh','mean':'Trung bình','min':'Nhỏ nhất','max':'Lớn nhất','p50':'P50',
+            'p90':'P90','p95':'P95','p99':'P99','direct_coco':'COCO trực tiếp',
+            'vg_gqa_alias':'VG/GQA','known_union':'Khớp hợp nguồn','unmatched':'Chưa khớp',
+            'category':'Vật thể','eval_random500_pct':'Mẫu ngẫu nhiên (%)',
+            'eval_common_unmatched500_pct':'Mẫu lọc (%)','common_minus_random_pp':'Chênh (điểm %)',
+            'scope':'Phạm vi','model_or_recipe':'Mô hình / recipe','matched_ids':'ID khớp',
+            'matched_pct':'Tỷ lệ khớp (%)','status':'Giới hạn kết luận',
+            'mean_padding_pct':'Đệm trung bình (%)','crop_area_lost_pct':'Diện tích cắt (%)',
+            'median_distortion':'Méo trung vị','max_distortion':'Méo lớn nhất',
+            'median_global_distortion':'Méo ảnh toàn cảnh',
+            'median_local_source_per_pixel':'Pixel nguồn / pixel tile',
+            'width':'Rộng','height':'Cao','splitting':'Chia ô','image_tokens':'Token ảnh',
+            'tiles':'Số ô'}
+    lines=['| '+' | '.join(labels.get(c,c) for c in frame.columns)+' |','| '+' | '.join([':---']*len(frame.columns))+' |']
     lines += ['| '+' | '.join(cell(x) for x in row)+' |' for row in frame.itertuples(index=False,name=None)]
     marker=json.dumps({'path':relative,'title':title,'columns':columns},ensure_ascii=False)
     return '\n\n### '+title+'\n\n<!-- CSV '+marker+' -->\n'+'\n'.join(lines)+'\n<!-- /CSV -->\n'
@@ -59,6 +79,15 @@ def figures():
     ax.set(xlabel='Largest annotated object: normalized center offset (0=center, 1=corner)',ylabel='Images',
            title=f'COCO val2014 bounding-box geometry (n={len(c):,})')
     fig.tight_layout();fig.savefig(OUT/'coco_object_centering.png',dpi=220);plt.close(fig)
+    shift=pd.read_csv(OUT/'sampling_object_distribution.csv')
+    shift=shift.reindex(shift.common_minus_random_pp.abs().sort_values(ascending=False).index).head(10)
+    fig,ax=plt.subplots(figsize=(7.5,4.1))
+    ax.barh(shift.category[::-1],shift.common_minus_random_pp[::-1],
+            color=['#b35836' if x<0 else '#237b91' for x in shift.common_minus_random_pp[::-1]])
+    ax.axvline(0,color='#444',linewidth=.8)
+    ax.set(xlabel='Mẫu lọc trừ mẫu ngẫu nhiên (điểm phần trăm)',
+           title='Thay đổi tỷ lệ vật thể sau lọc nguồn ảnh COCO')
+    fig.tight_layout();fig.savefig(OUT/'sampling_object_shift.png',dpi=220);plt.close(fig)
 
 
 def config():
@@ -90,16 +119,18 @@ def config():
                                     'reference_image_mode':'direct CLIP processor center crop in published chair_eval data loader',
                                     'control_image_mode':'square pad before CLIP processor',
                                     'sampling_note':'Original uses seed927 and shuffles unsorted os.listdir. Original image manifest not released here; seed42 main sample is protocol-aligned, not exact original sample.'},
-              'small_model_tuning':{'dev_images':500,'layer_grid_fractional_inclusive':[[.10,.40],[.15,.60],[.25,.70]],
-                                   'alpha_grid':[0,.25,.5,.75,1],'aggregation':'mean',
-                                   'selection':'Select on dev using CHAIR plus recall/F1 guards; freeze before eval; do not tune against eval or POPE.',
-                                   'note':'Exploratory grid, not experimentally selected layers or optimal alpha. No transfer of literal 5-18 or 576-token image interval to small models.'},
-              'smol_ablation':'split_on/off; count only true <image> positions per input and exclude grid/boundary tokens',
+              'small_model_tuning':{'dev_images':500,'smol_alpha_grid':[.02,.035,.05],
+                                   'smol_alpha_grid_lock':'eda_results/hgai/smol_alpha_grid_lock.json',
+                                   'tiny_alpha_grid_status':'pending checkpoint reconciliation and separate dose probe',
+                                   'layer_selection':'Measure per-layer VAR and image-masking sensitivity; publish boundary rule; compare with equal-width random bands, dev oracle and all layers.',
+                                   'selection':'Freeze low-alpha grid and layer rule before dev500 CHAIR; use recall/F1 and length guards; never select on eval or POPE.',
+                                   'aggregation':'mean'},
+              'smol_ablation':'split_on default / split_on longest_edge=768 / split_off; count true <image> positions and report geometry change',
               'implementation_status':{
                   'SmolVLM2_baseline':'Shared runner supports all three prompt conditions and official POPE; real-weight alpha-zero smoke exactly matches native baseline.',
                   'LLaVA_baseline':'HF runner is connected to shared scorer; actual completed runs are listed in experiment_run_status.json. Native/HF equivalence remains unverified.',
                   'TinyLLaVA_baseline':'Legacy Phi/SigLIP port and runner implemented; all 877 tensor names match checkpoint index; actual completed runs are listed in experiment_run_status.json.',
-                  'HGAI_and_tuning':'Adapter semantics/GQA/cache validated on CPU and Smol real weights. Full dev grid, freezing and eval/control orchestration implemented; campaign is running, not yet complete.',
+                  'HGAI_and_tuning':'Adapter semantics/GQA/cache validated on CPU and Smol real weights. Old dev grid is paused pending output-length dose probe and layer-boundary measurements.',
                   'guards_and_CI':'Refusal, empty-output, repetition/Distinct-1 and paired image bootstrap implemented and tested. POPE bootstrap keeps questions clustered by image.'},
               'inference_status':'See experiment_run_status.json for a dated snapshot of actual counts. Full three-model results, optimal alpha/layers and native FP16 replication are not yet established.'}
     (OUT/'experiment_config.json').write_text(json.dumps(protocol,ensure_ascii=False,indent=2),encoding='utf-8')
@@ -145,11 +176,11 @@ def main():
 
 **Bản 9 — ngày 06/10/2026.** COCO val2014 là dữ liệu đánh giá chính; SmolVLM2-2.2B và TinyLLaVA-3.1B là mô hình chính; LLaVA-1.5-7B là mốc kiểm chứng. CHAIR là thước đo chính, POPE kiểm tra chéo. VizWiz được rút thành bối cảnh ở phụ lục, không nhân đôi thí nghiệm HGAI.
 
-Phạm vi dựa trên phần đối chiếu báo cáo đóng góp và biên bản hội đồng ngày 05/10 do người dùng cung cấp. Người dùng xác nhận chưa có hai tài liệu gốc, nên không tuyên bố đã đọc trực tiếp. TinyLLaVA có nhiều checkpoint; bản này chốt tạm **bczhou/TinyLLaVA-3.1B, Phi-2 + SigLIP 384px** để các phép đo có đối tượng cụ thể. Revision, cấu hình processor và tokenizer đã được lưu; nếu đổi checkpoint phải tạo phiên bản thí nghiệm mới.
+Phạm vi nghiên cứu là COCO val2014 với hai VLM nhỏ; LLaVA-1.5-7B dùng làm mốc kiểm chứng. Thí nghiệm TinyLLaVA hiện dùng **bczhou/TinyLLaVA-3.1B, Phi-2 + SigLIP 384px**. Cần đối chiếu checkpoint này với `tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B` trong kế hoạch đóng góp trước khi gộp kết quả; hai định danh không được mặc nhiên xem là cùng trọng số.
 
-Các mục 1–4 là EDA/processor trên CPU và phép nối annotation; mục 6 ghi riêng pilot sinh caption/POPE trên GPU. Chưa có kết quả hiệu quả HGAI. Các bảng trong notebook đọc trực tiếp CSV ở đúng mục; hình được nhúng một lần để xuất báo cáo không phụ thuộc đường dẫn tương đối.
+Các mục 1–4 trình bày EDA, processor và phép nối annotation. Kết quả sinh caption thăm dò cùng trạng thái chạy được lưu trong tài liệu thí nghiệm riêng. Chưa có kết quả đầy đủ để kết luận hiệu quả HGAI.
 
-**Đã sửa vấn đề 433/500:** bộ cũ chỉ lọc LLaVA được giữ làm đối chiếu lịch sử. Nhánh đánh giá chính và dev mới mỗi bộ 500 ảnh có **0/500 khớp tất cả các nguồn ID đã kiểm tra**: LLaVA, ShareGPT4V SFT/pretraining/cap100K và OneVision ShareGPT4V-COCO. Đây là “chưa khớp nguồn đã kiểm tra”, không phải bảo đảm sạch mọi lịch sử huấn luyện. Khi tắt chia ô, SmolVLM2 giảm còn 81 token và resize vuông; control này thay cả ngân sách token lẫn hình học, không phải riêng số token.
+Nhánh đánh giá chính và dev mỗi bộ 500 ảnh có **0/500 khớp các nguồn ID đã kiểm tra**: LLaVA, ShareGPT4V SFT/pretraining/cap100K và OneVision ShareGPT4V-COCO. Điều này chỉ mô tả phạm vi nguồn đã kiểm tra. Khi tắt chia ô, SmolVLM2 giảm còn 81 token và resize vuông; phép đối chứng này thay cả ngân sách token lẫn hình học.
 
 ## 1. Dữ liệu, toàn vẹn và nguồn huấn luyện
 
@@ -168,22 +199,26 @@ Số 41,028% đo trên **mix instruction tuning LLaVA**, không bao trùm pretra
 Đã kiểm tra thêm [repository chính thức của SmolVLM2](https://github.com/huggingface/smollm/tree/main/vision/smolvlm2): script `multinode25.sh` chọn YAML mixture gồm **110 mục nguồn**, có tỷ lệ lấy mẫu riêng; ShareGPT4V-COCO và ShareGPT4V-LLaVA được ghi 100%. YAML trỏ tới các JSON nội bộ `/fsx/...`, chưa cung cấp danh sách ID được chọn cùng liên kết đầy đủ tới checkpoint này. Vì vậy đã xác minh thêm **recipe công bố**, chưa thể biến nó thành manifest huấn luyện thực tế. [Bằng chứng đã lưu](eda_results/hgai/smol_training_evidence.json), [110 mục nguồn](eda_results/hgai/smol_published_recipe.csv), [kiểm kê nguồn còn thiếu](eda_results/hgai/source_availability.json). Không suy luận rằng hai slice đã kiểm tra bao phủ toàn bộ dữ liệu SmolVLM2.
 '''
     text+=table('eda_results/hgai/small_vlm_training_overlap_summary.csv','Khớp ID theo mô hình/recipe và từng manifest',
-                ['scope','model_or_recipe','images','matched_ids','matched_pct','status'])
+                ['scope','model_or_recipe','images','matched_ids','matched_pct','status'],active_only=True)
     pv=json.loads((OUT/'onevision_id_provenance.json').read_text()) if (OUT/'onevision_id_provenance.json').exists() else []
     text+=f'\nPhạm vi OneVision đã đọc: **{len(pv)}/8 shard ID** của `sharegpt4v(coco)` (6 shard) và `sharegpt4v(llava)` (2 shard); tổng {sum(p["rows"] for p in pv):,} dòng metadata. Xem [provenance](eda_results/hgai/onevision_id_provenance.json), [cờ từng ảnh](eda_results/hgai/small_vlm_training_overlap.csv) và [phạm vi kiểm tra](eda_results/hgai/small_vlm_training_overlap.json). Không gán giá trị 0 cho nguồn chưa kiểm tra.\n'
     text+='''
 ## 2. Manifest dev/eval cố định và vai trò từng bộ
 
-Đã tìm được **2.977 ảnh** chưa khớp hợp của toàn bộ các nguồn ID đã kiểm tra; **2.830 ảnh** trong đó chưa nằm ở bất kỳ manifest cũ nào. Từ pool này chọn **eval_common_unmatched500** bằng seed45 và **dev_common_unmatched500** bằng seed46, mỗi bộ 500 ảnh. Đây là nhánh chính cho so sánh các VLM nhỏ và tập tuning đang dùng. Hai bộ không trùng ID/MD5 với nhau hoặc ba bộ cũ; còn 1.830 ảnh dự phòng sau khi chọn.
+Tập **2.977 ảnh** chưa khớp hợp nguồn đã kiểm tra đúng bằng phần bù **theo từng ID** của 37.527 ảnh thuộc ShareGPT4V-recipe trong COCO val2014 (đã so cờ trên toàn bộ 40.504 ảnh). Chưa xác minh giả thuyết đây chính là các ảnh COCO val2017 không có trong Visual Genome. Từ pool này chọn **eval_common_unmatched500** (seed45) và **dev_common_unmatched500** (seed46), mỗi bộ 500 ảnh, không trùng ID/MD5.
 
-**eval_random500** giữ nguyên seed42 để đối chiếu giao thức bài báo theo mẫu ngẫu nhiên. **eval_unmatched500** seed43 và **dev500** seed44 là các manifest lịch sử của bản 8, không còn là nhánh chính hoặc dev tuning. Vấn đề 433/500 khớp TinyLLaVA ở bộ cũ đã được xử lý bằng hai bộ mới có 0/500 khớp từng nguồn đã kiểm tra. Không gộp điểm của mẫu lọc và mẫu ngẫu nhiên.
+**eval_random500** (seed42) là nhánh mẫu ngẫu nhiên dùng đối chiếu giao thức bài báo. Ba bộ đang dùng là dev_common_unmatched500, eval_common_unmatched500 và eval_random500; điểm của mẫu lọc và mẫu ngẫu nhiên được báo riêng.
 
 Mỗi bộ có đúng 500 ảnh, JSONL kèm mọi caption và CSV có ID/đường dẫn/cờ nguồn. [Khóa bản 8](data_prepared/hgai/manifest_lock.json) được giữ nguyên byte; [khóa hai bộ mới bản 9](data_prepared/hgai/manifest_lock_common_v9.json) lưu SHA-256 nguồn và từng JSONL. Việc chọn hai bộ mới diễn ra trước khi có output mô hình. Chạy lại kiểm tra khóa; không âm thầm rút ảnh mới sau khi có output. Mọi mô hình và điều kiện trong một nhánh dùng cùng danh sách ảnh.
 '''
     text+=table('eda_results/hgai/manifest_summary.csv','Kích thước và cờ nguồn LLaVA của các bộ cố định',
-                ['partition','images','seed','direct_coco','vg_gqa_alias','known_union','unmatched'])
+                ['partition','images','seed','direct_coco','vg_gqa_alias','known_union','unmatched'],active_only=True)
     text+='''
 Các bộ common-unmatched chỉ loại các nguồn đã kiểm tra, còn những nguồn SmolVLM2 khác chưa được xác minh. Lọc ảnh thay đổi phân bố đánh giá; báo nhánh lọc và random riêng, không chọn nhánh có điểm tốt hơn. Đã tính chênh lệch hình học/token và phân bố 80 lớp object giữa hai nhánh, thay vì coi mẫu lọc tương đương ngẫu nhiên. [Bảng object theo ảnh](eda_results/hgai/sampling_object_distribution.csv).
+
+Trong 500 ảnh eval, tỷ lệ có `person` giảm từ 54,2% ở mẫu ngẫu nhiên xuống 50,4% ở mẫu lọc (−3,8 điểm phần trăm), `car` giảm từ 11,0% xuống 8,4% (−2,6 điểm), còn `carrot` tăng 2,8 điểm. Đây là thay đổi có thể ảnh hưởng CHAIR và cần hiện diện cùng bảng điểm.
+
+![Mười lớp vật thể có chênh lệch tỷ lệ xuất hiện lớn nhất giữa hai mẫu eval](eda_results/hgai/sampling_object_shift.png)
 
 '''
     text+=table('eda_results/hgai/sampling_geometry_shift.csv','Kiểm tra thay đổi phân bố sau khi lọc nguồn huấn luyện')
@@ -193,19 +228,20 @@ Tác giả HGAI dùng seed927 và `random.shuffle(os.listdir(...))`; thứ tự 
 
 ## 3. Tiền xử lý thật và số visual token
 
-Đã chạy processor thực tế trên **toàn bộ năm manifest, tổng 2.500 ảnh**. Có **7.500 dòng kiểm tra**: SmolVLM2 ở hai chế độ × 2.500 ảnh và TinyLLaVA pad384 × 2.500 ảnh. Đã tính lại thực tế cho toàn bộ 1.000 ảnh mới, giữ phép đo cũ để đối chiếu. Phép đo chỉ nạp processor/tokenizer, không cần trọng số ngôn ngữ. Môi trường CPU cố định Transformers 4.53.3; [cấu hình và phiên bản](eda_results/hgai/processor_environment.json) được lưu cùng revision nguồn.
+Processor đã được đo trên ba manifest đang dùng, mỗi bộ 500 ảnh. SmolVLM2 được đo khi bật và tắt chia ô; TinyLLaVA dùng pad384. Phép đo chỉ nạp processor/tokenizer. Môi trường CPU là Transformers 4.53.3; [cấu hình và phiên bản](eda_results/hgai/processor_environment.json) được lưu cùng revision nguồn.
 
 ### 3.1. SmolVLM2: đếm placeholder ảnh sau processor
 
 Processor checkpoint có `size.longest_edge=1536`, `max_image_size.longest_edge=384`, `image_seq_len=81`. Đếm ID `<image>` trong `input_ids` đã mở rộng, kiểm tra bằng số tile trong `pixel_values` × 81. Không cộng token hàng/cột, token biên, prompt hay frame video vào số visual token. Không dùng số patch encoder 729 thay cho 81 token nén đưa vào LLM.
 '''
-    text+=table('eda_results/hgai/image_token_summary.csv','Phân bố token ảnh theo manifest và chế độ',
-                ['partition','model','mode','n','mean','p50','p90','p95','p99','min','max'])
-    text+=table('eda_results/hgai/image_token_examples.csv','Kiểm chứng trường hợp 640×480, vuông và ảnh nhỏ')
+    text+=table('eda_results/hgai/image_token_summary.csv','Phân bố token ảnh SmolVLM2 khi bật chia ô',
+                ['partition','model','mode','n','mean','p50','p90','p95','p99','min','max'],active_only=True)
     text+='''
 ![Phân bố token ảnh SmolVLM2 trên ba manifest](eda_results/hgai/smol_image_token_distribution.png)
 
-Bật chia ô giữ thêm các tile cục bộ và một ảnh global; 640×480 cho **13 × 81 = 1.053 token**, 640×640 cho **17 × 81 = 1.377 token**. Tắt chia ô cho **81 token** ở mọi ảnh trong năm manifest. Đây là số processor đo, không phải ước lượng từ pixel gốc.
+Bật chia ô giữ các tile cục bộ và một ảnh global; 640×480 cho **13 × 81 = 1.053 token**, 640×640 cho **17 × 81 = 1.377 token**. Tắt chia ô cho **81 token** ở mọi ảnh; TinyLLaVA pad384 luôn cho **729 patch token**. Hai giá trị hằng không cần lặp lại trong bảng.
+
+Hai bộ dev hiện hành và cũ có cùng trung bình 1.091,232 token vì cùng histogram đo được: 5 ảnh có 729, 431 ảnh có 1.053 và 64 ảnh có 1.377 token. Danh sách ID không giao nhau và chuỗi token theo thứ tự ảnh khác nhau; đây không phải dòng bị sao chép.
 
 ### 3.2. Pad, crop, thu nhỏ và méo hình
 
@@ -214,11 +250,13 @@ TinyLLaVA-3.1B dùng pad vuông trước SigLIP 384px, 27×27 = **729 patch toke
 SmolVLM2 **không luôn giữ nguyên tỷ lệ khung hình**: khi chia ô, processor làm tròn hai cạnh lên bội số 384 rồi tạo tile vuông; ảnh global bị resize vuông. Khi tắt chia ô, ảnh bị resize thẳng về 384×384. `do_pad=True` ở đây chủ yếu phục vụ tensor/batch, không đồng nghĩa với letterbox của TinyLLaVA. Báo độ méo tile và độ méo global riêng. Diện tích crop bằng 0 nghĩa là hợp mọi tile còn phủ ảnh, không phải từng tile nhìn thấy toàn ảnh.
 '''
     text+=table('eda_results/hgai/processor_geometry_summary.csv','Hình học processor trên từng dev/eval',
-                ['partition','model','mode','n','mean_padding_pct','crop_area_lost_pct','median_distortion','max_distortion','median_global_distortion','median_local_source_per_pixel'])
+                ['partition','model','mode','n','mean_padding_pct','crop_area_lost_pct','median_distortion','max_distortion','median_global_distortion','median_local_source_per_pixel'],active_only=True)
     text+='''
 Hệ số méo = tỷ số giữa hệ số scale hai trục, lấy giá trị ≥1; 1 là giữ tỷ lệ. Tỷ số pixel nguồn/pixel mô hình >1 là thu nhỏ và <1 là phóng lớn. Với SmolVLM2, tỷ số cục bộ dùng canvas tile còn tỷ số global dùng 384px; không đồng nhất ngân sách tile với độ thu nhỏ toàn ảnh.
 
 `crop_area_lost_pct` đo phép crop của processor. Với đầu vào 384px, patch convolution 14px ở mode valid có 27 patch mỗi trục, phủ 378px; 6px cuối bên phải/dưới không thuộc patch (khoảng 3,10% diện tích tensor danh nghĩa). Vì vậy “processor không crop” không đồng nghĩa encoder sử dụng mọi pixel; không cộng tỷ lệ này như một phép center crop trên ảnh nguồn.
+
+Với phép center crop vuông lý tưởng trước CLIP 336px trên COCO val2014, **12,20% bbox nằm hoàn toàn ngoài vùng cắt**, **18,63% có tâm nằm ngoài**, và **37,71% bị cắt ít nhất một phần** (291.874 bbox có diện tích dương). Đây là tỷ lệ trên bbox, không phải tỷ lệ ảnh; [phép đếm](eda_results/hgai/coco_center_crop_object_coverage.json) đo rủi ro trực tiếp cho nhánh cắt giữa.
 
 Đã bổ sung đối chứng hình học **toàn bộ val** ở TinyLLaVA 384px (pad, center crop, resize vuông) và LLaVA 336px (crop theo mã HGAI, pad). Đây là phép tính hình học trên kích thước đã áp EXIF, không phải chạy processor/model trên toàn val.
 '''
@@ -263,7 +301,7 @@ CHAIR chính thức dùng hợp nhãn instance và đối tượng từ mọi ca
 
 Bảng 2 và 3 của bài báo HGAI v3 ghi CHAIR-S greedy LLaVA **53,0 ở 512 token** và **23,8 ở 64 token**; đây là số công bố, không phải kết quả ở workspace. [Bảng 2](https://arxiv.org/html/2411.16724v3#S4.T2), [bảng 3](https://arxiv.org/html/2411.16724v3#S4.T3). Con số 20,8 trong nội dung đối chiếu người dùng gửi chưa khớp nguồn gốc; bản v1 cũng ghi 23,8. Độ dài ngắn thu hẹp phần lỗi có thể giảm (headroom), nên 64 token không còn là giao thức chính.
 
-Mã `eval_data_loader.py` gọi processor trực tiếp; với CLIP 336px đây là resize/crop. Config checkpoint LLaVA ghi pad nhưng không tự chứng minh đường chạy đánh giá đã pad. Nhánh kiểm chứng dùng đường xử lý theo mã tác giả; pad là control riêng. EXIF vẫn áp trước mọi tiền xử lý. Cần kiểm tra equivalence native LLaVA/HF conversion khi có trọng số; chưa tuyên bố đã tái lập hàng 53,0 bằng script baseline chưa chạy.
+Mã `eval_data_loader.py` gọi processor trực tiếp; với CLIP 336px đây là resize/crop. Nhánh kiểm chứng giới hạn ở baseline và HGAI layer 5–18, α=0,5 trên mẫu ngẫu nhiên. Kết quả NF4 phải được ghi riêng với hàng FP16 công bố. Cần chạy cặp FP16–NF4 trên cùng vài chục ảnh, cùng checkpoint/processor/decoding, ở GPU đủ bộ nhớ; báo chênh lệch CHAIR ghép cặp trước khi diễn giải độ lệch so với 53,0.
 
 ### 5.2. Tách ảnh hưởng độ dài khỏi ảnh hưởng prompt
 
@@ -277,9 +315,11 @@ Mỗi so sánh baseline–HGAI phải giữ cùng manifest, processor, template 
 
 ### 5.3. Layer và α của VLM nhỏ
 
-Tuning dùng **dev_common_unmatched500**, không dùng eval hoặc POPE để chọn thông số. Dải layer gốc chỉ là mốc LLaVA; kiểm tra dải theo tỷ lệ chiều sâu của từng LLM, rồi hiệu chỉnh từ đo attention/ablation trên dev. Grid đề xuất ban đầu: [10%,40%], [15%,60%], [25%,70%] chiều sâu; α ∈ {0; 0,25; 0,5; 0,75; 1}. Đây là kế hoạch, chưa phải dải layer hay α đã được thực nghiệm chọn.
+Tuning dùng **dev_common_unmatched500**. Trước hết đo đường cong VAR và độ nhạy khi che ảnh theo từng layer trên dev, công bố tiêu chí xác định hai ranh giới từ đường cong rồi mới chọn dải can thiệp. So dải đã chọn với phân phối dải ngẫu nhiên cùng độ rộng, quét oracle trên dev và điều kiện can thiệp **mọi layer**. Không dùng eval hoặc POPE để đặt ranh giới hay chọn α. Ba dải cố định theo tỷ lệ chiều sâu chỉ có thể là phân tích phụ, không phải phương pháp chọn layer chính.
 
-HGAI gốc cộng α × trung bình liên head của trị tuyệt đối attention **logit** vào các vị trí ảnh trước softmax. Không thay công thức thành α nhân số token. Số vị trí ảnh thay đổi sẽ làm thay đổi số phần tử bị can thiệp và phép chuẩn hóa softmax; vì vậy phải báo kết quả theo phân bố token và có split_on/off ablation. Nhận diện đúng các vị trí `<image>` của SmolVLM2 sau processor; loại token grid/biên. Không hard-code một dải liên tục 576 token cho SmolVLM2, hoặc dùng số head/query-head của LLaVA cho mô hình có GQA. Phi-2 có cấu trúc attention khác; adapter cần kiểm tra α=0 khớp baseline, KV-cache, mask và generation từng bước trước đo điểm.
+Kiểm chứng SmolVLM2 trên hai ảnh cho thấy α=0,5 làm độ dài caption trung bình giảm từ 298 xuống 10,5 token và object F1 về 0. Phép dò chỉ đo độ dài output trên cùng 10 ảnh dev: α=0,02/0,035/0,05 đều có **0/10 ảnh** mất quá nửa độ dài so với baseline; ở 0,075 là **1/10**, ở 0,10 là **3/10**. Lưới Smol cho dev500 được khóa ở **{0,02; 0,035; 0,05}**, kèm baseline α=0. [Kết quả ghép ảnh](experiment_outputs/alpha_dose_probe/paired_length_analysis.json) và [khóa lưới](eda_results/hgai/smol_alpha_grid_lock.json) chỉ dựa vào độ dài; CHAIR, recall/F1 và guard trên dev500 mới quyết định cấu hình cuối. TinyLLaVA cần phép dò riêng sau khi thống nhất checkpoint.
+
+HGAI gốc cộng α × trung bình liên head của trị tuyệt đối attention **logit** vào các vị trí ảnh trước softmax. Số vị trí ảnh thay đổi làm đổi số phần tử bị can thiệp và phép chuẩn hóa softmax. Đối chứng SmolVLM2 cần ba mức token ảnh: chia ô mặc định, chia ô với `size.longest_edge=768`, và tắt chia ô. Processor cho **405 token** với ảnh 640×480 ở mức giữa; cần đo phân bố trên toàn manifest trước khi chạy. Mức giữa giữ cơ chế chia ô; nhánh tắt chia ô đồng thời thay hình học. Ảnh COCO có thể được phóng lớn khoảng 2,4 lần khi chia ô, nên số token tăng không đồng nghĩa thông tin ảnh tăng. Nhận diện đúng các vị trí `<image>` sau processor và loại token grid/biên.
 
 CHAIR-S/I cần đi cùng object recall/F1, số output token thật, tỷ lệ chạm giới hạn, tỷ lệ từ chối, repetition/Distinct-1, thời gian và bộ nhớ. Ước lượng CI bằng bootstrap **ghép cặp theo ảnh** cho baseline–HGAI; giữ toàn bộ lỗi trên cùng ảnh trong một mẫu bootstrap. Chọn thông số xong phải lưu cấu hình rồi mới chạy eval.
 
@@ -287,7 +327,7 @@ CHAIR-S/I cần đi cùng object recall/F1, số output token thật, tỷ lệ 
 
 Dùng các bộ COCO random/popular/adversarial chính thức, giữ nhãn và negative sampling gốc. Không coi 500 ảnh CHAIR là một POPE mới hoặc ép POPE trùng manifest rồi so với số công bố. Báo accuracy, precision, recall, F1 và yes-rate, kèm số câu hỏi/ảnh, nguồn và hash. Nếu phân tích thêm các ảnh giao với eval500 thì ghi rõ đó là subset, không thay điểm POPE chính thức.
 
-[Cấu hình thí nghiệm máy đọc được](eda_results/hgai/experiment_config.json) cố định các điều kiện trên. Adapter HGAI đã triển khai, kiểm tra công thức, GQA, mask/cache và α=0 trên CPU, rồi chạy với trọng số Smol thật. Chiến dịch tuning/dev500, khóa lựa chọn trước eval, đối chứng và POPE đã có mã thực thi; đánh giá đầy đủ ba VLM đang chờ hoàn tất. [Hướng dẫn thực thi](HGAI_Experiments.md).
+[Cấu hình thí nghiệm máy đọc được](eda_results/hgai/experiment_config.json) ghi các điều kiện trên. Adapter HGAI đã được kiểm tra công thức, GQA, mask/cache và α=0 trên CPU, rồi chạy với trọng số Smol thật. Lưới α cũ đã dừng trước tuning; kết quả đầy đủ cho hai VLM nhỏ và hàng kiểm chứng LLaVA còn chờ thực thi theo kế hoạch cập nhật. [Hướng dẫn thực thi](HGAI_Experiments.md).
 
 ## 6. Trạng thái và tái lập
 
@@ -301,7 +341,7 @@ Máy hiện tại có RTX 3050 Laptop 4 GB; runner `smol_baseline.py` dùng NF4,
 
 **Kiểm chứng Smol thật trên hai ảnh dev:** α=0 cho caption và số token khớp baseline native; α=0,5 thực thi can thiệp nhưng độ dài trung bình giảm từ **298 xuống 10,5 token**, object F1 giảm về 0 và CHAIR-I trở thành không xác định vì không có object được nhận diện. Đây là kiểm tra đường chạy, không phải bằng chứng cải thiện HGAI. Guard chọn cấu hình yêu cầu recall/F1 không giảm quá 0,02, độ dài còn ít nhất 50% baseline; refusal/output trống/truncation/lặp không tăng quá 0,05. Các ngưỡng được khóa trước lượt tuning dev500 đầy đủ. [Kiểm chứng trọng số thật](eda_results/hgai/hgai_smol_real_weight_validation.json).
 
-`run_hgai_suite.py` chạy tuần tự dev500 baseline + 12 cấu hình can thiệp mỗi mô hình; lưu selection trước eval500 và POPE 3×3.000 câu/điều kiện. Có hai control prompt cho cả Smol/Tiny, split_off cho Smol và pad/crop cho LLaVA. GPU 4 GB dùng NF4/offload; cả chiến dịch có thể kéo dài nhiều ngày. Bảng tiến độ dưới đây là ảnh chụp tại thời điểm dựng báo cáo, không phải trạng thái trực tiếp; output chưa đủ dòng không có điểm. [Thời điểm và trạng thái chiến dịch](eda_results/hgai/experiment_run_status.json).
+Campaign cũ đã dừng trước lưới α. `run_hgai_suite.py` phiên bản mới đòi khóa thiết kế α theo mô hình và bằng chứng layer; Smol/Tiny dùng dev500 rồi eval và POPE, LLaVA chỉ chạy hàng baseline/HGAI 5–18, α=0,5. Đối chứng Smol có chia ô mặc định, cạnh dài 768 và tắt chia ô. Bảng tiến độ dưới đây là ảnh chụp, không phải trạng thái trực tiếp; output chưa đủ dòng không có điểm. [Thời điểm và trạng thái chiến dịch](eda_results/hgai/experiment_run_status.json).
 
 '''
     text+=baseline_table()
@@ -350,7 +390,7 @@ VizWiz không nằm trong benchmark HGAI chính hiện tại. Vai trò của nó
 
 Có 493 ảnh có EXIF xoay, 845 ảnh có nhãn Rotated đa số, giao 199. Nhóm **646/7.750 (8,335%)** có nhãn Rotated nhưng không có thẻ EXIF xoay: EXIF không biến đổi pixel nhóm này. Đây là nhóm nguy cơ còn lại, **không phải số ảnh lỗi sau EXIF đã được gán nhãn lại**; không suy rằng toàn bộ 199 ảnh giao đã được sửa hoàn toàn.
 
-Đã xem 40 cặp raw/sau EXIF, seed42, 20 ảnh ở mỗi nhóm. Một reviewer là trợ lý đã ghi từng ảnh và giữ trường hợp không rõ. Nhóm có EXIF: 17 ảnh hướng upright, 1 upright nhưng còn tilt, 2 chưa đủ chắc hướng; nhóm không EXIF: 18 sideways/upside-down, 1 nhãn vật thể quay ngang, 1 upright nhưng có tilt. Mẫu có phân tầng theo filename/ID và có thể chứa ảnh trùng byte, chỉ dùng kiểm tra pipeline; không ngoại suy thành tỷ lệ lỗi toàn bộ 199 hoặc 646 ảnh. [Worklist đã rà](eda_results/hgai/vizwiz_rotation_review40.csv), [thiết kế lấy mẫu](eda_results/hgai/vizwiz_rotation_review_sampling.json) và bốn contact sheet lưu cùng thư mục. Pipeline vẫn chốt EXIF; không tự xoay thêm ảnh từ nhãn Rotated vì nhãn này không cung cấp hướng/độ xoay.
+Đã xem 40 cặp raw/sau EXIF, seed42, 20 ảnh ở mỗi nhóm và giữ trường hợp không rõ. Nhóm có EXIF: 17 ảnh hướng upright, 1 upright nhưng còn tilt, 2 chưa đủ chắc hướng; nhóm không EXIF: 18 sideways/upside-down, 1 nhãn vật thể quay ngang, 1 upright nhưng có tilt. Mẫu có phân tầng theo filename/ID và có thể chứa ảnh trùng byte, chỉ dùng kiểm tra pipeline; không ngoại suy thành tỷ lệ lỗi toàn bộ 199 hoặc 646 ảnh. [Worklist đã rà](eda_results/hgai/vizwiz_rotation_review40.csv), [thiết kế lấy mẫu](eda_results/hgai/vizwiz_rotation_review_sampling.json) và bốn contact sheet lưu cùng thư mục. Pipeline vẫn chốt EXIF; không tự xoay thêm ảnh từ nhãn Rotated vì nhãn này không cung cấp hướng/độ xoay.
 '''
     text+='''
 Hình 4 giữ **20 lớp** được nhắc nhiều nhất trong caption VizWiz, cùng đơn vị một caption/ảnh; bảng đủ 80 lớp nằm ở CSV. `laptop` phần lớn đến từ từ `computer` (588/879), `dining table` từ `table` (633/794). Đây là quy tắc đồng nghĩa CHAIR, không phải ground truth object của VizWiz; phần mở rộng VizWiz nếu có sau này cần nhãn object và negative probes phù hợp.
@@ -374,16 +414,10 @@ Toàn bộ phân tích COCO–VizWiz cũ được giữ ở [tài liệu bối c
 5. [CHAIR gốc](https://aclanthology.org/D18-1437/); [POPE chính thức](https://github.com/RUCAIBox/POPE).
 6. [COCO](https://cocodataset.org/); [VizWiz-QualityIssues](https://vizwiz.org/tasks-and-datasets/image-quality-issues/).
 '''
-    snapshot=json.loads((OUT/'experiment_run_status.json').read_text())
-    campaign_status=(snapshot.get('campaign') or {}).get('status','not_started')
-    text=text.replace('**Bản 9 — ngày 06/10/2026.**',
-        '**Bản 9 — ngày 06/10/2026.** Snapshot thực thi UTC: '+snapshot['snapshot_utc']+'; trạng thái campaign: `'+campaign_status+'`.')
-    text=text.replace('Trọng số Tiny/LLaVA đang tải; chưa khẳng định forward thực tế hoặc equivalence native/HF của chúng đã đạt.',
-        'Trạng thái tải/chạy Tiny/LLaVA được đối chiếu với output thật trong snapshot; không khẳng định equivalence native/HF đã đạt.')
-    if campaign_status=='complete':
-        text=text.replace('đánh giá đầy đủ ba VLM đang chờ hoàn tất','campaign NF4 đầy đủ ba VLM đã hoàn tất')
-        text=text.replace('Chưa có α được chọn từ dev500 hoàn chỉnh hoặc benchmark/đối chứng đầy đủ ba VLM.',
-            'Campaign đã chọn và khóa cấu hình từ dev500, hoàn tất benchmark/đối chứng NF4; các điểm công bố FP16 vẫn là mốc tham chiếu riêng.')
+    section_start=text.index('## 6. Trạng thái và tái lập')
+    appendix_start=text.index('## Phụ lục A.',section_start)
+    (ROOT/'HGAI_Run_Log.md').write_text(('# Nhật ký thực thi HGAI\n\n'+text[section_start:appendix_start]).rstrip()+'\n',encoding='utf-8')
+    text=text[:section_start]+'Các lệnh chạy, pilot và tiến độ được ghi trong [nhật ký thực thi](HGAI_Run_Log.md).\n\n'+text[appendix_start:]
     (ROOT/'EDA_COCO_vs_VizWiz_Report.md').write_text(text,encoding='utf-8')
     print('Report written:',len(text),'characters; all tables read from artifacts.')
 

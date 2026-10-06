@@ -70,17 +70,17 @@ Notebook được dựng từ một nguồn Markdown duy nhất; bảng đọc C
 
 Sau khi đã có đủ output CPU, chạy `python rebuild_hgai.py` để dựng, thực thi, xuất và kiểm tra báo cáo trong một lệnh; pipeline dừng ngay nếu một bước lỗi. Dùng `--refresh-training-overlap` khi metadata nguồn vừa được bổ sung; `--recompute-cpu` chỉ khi cần chạy lại toàn bộ processor.
 
-Xem [hướng dẫn thí nghiệm](HGAI_Experiments.md) và [rà soát tổng quan](EDA_HGAI_Review.md). Runner chung `vlm_experiment.py` hỗ trợ Smol/Tiny/LLaVA, cả ba prompt, baseline/HGAI và POPE; scorer chung có refusal/output trống/repetition/Distinct-1 và CI ghép cặp theo ảnh. Port Tiny đã khớp 877 tên tensor, cần kiểm chứng forward khi tải xong trọng số. Chiến dịch đầy đủ đã khởi chạy, gồm tuning dev500, khóa selection, eval500, đối chứng và POPE 3.000 câu mỗi biến thể/điều kiện. [Bảng tiến độ](eda_results/hgai/experiment_run_status.csv) là snapshot có thời điểm, chưa phải điểm đầy đủ. Số tham chiếu CHAIR-S 64 token đã đối chiếu [bảng 3 HGAI v3](https://arxiv.org/html/2411.16724v3#S4.T3): **23,8**.
+Xem [hướng dẫn thí nghiệm](HGAI_Experiments.md), [nhật ký chạy](HGAI_Run_Log.md) và [rà soát tổng quan](EDA_HGAI_Review.md). Runner chung `vlm_experiment.py` hỗ trợ Smol/Tiny/LLaVA, baseline/HGAI và POPE; scorer có guard và CI ghép cặp theo ảnh. Campaign cũ đã dừng trước lưới α; Smol đã khóa lưới mới **{0,02; 0,035; 0,05}** từ phép dò độ dài 10 ảnh. `run_hgai_suite.py` chỉ cho phép campaign v2 sau khi có thêm bằng chứng chọn layer và lưới riêng của Tiny. [Bảng tiến độ](eda_results/hgai/experiment_run_status.csv) là snapshot, không phải điểm đầy đủ. Số tham chiếu CHAIR-S 64 token trong [bảng 3 HGAI v3](https://arxiv.org/html/2411.16724v3#S4.T3) là **23,8**.
 
 ```powershell
 .venv-eda/Scripts/python.exe fetch_vlm_weights.py --model all
 .venv-eda/Scripts/python.exe test_hgai_attention.py
 .venv-eda/Scripts/python.exe test_hgai_scoring.py
-.venv-eda/Scripts/python.exe run_hgai_suite.py --models smol tiny llava --external-smol-baseline experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl
+.venv-eda/Scripts/python.exe probe_alpha_length.py
 .venv-eda/Scripts/python.exe show_hgai_progress.py
 ```
 
-Máy đang chạy campaign nền tuần tự; không mở thêm runner GPU đồng thời. Campaign và caption dở được giữ local, flush từng ảnh, `--resume` giữ nguyên config/hash. Các kết quả hoàn tất được lưu cùng hash và có thể đưa lên Git riêng. Toàn grid có thể mất nhiều ngày trên GPU 4 GB; NF4 và HF conversion không phải hàng tái lập native FP16 của bài báo.
+Phép dò α chạy tuần tự trên GPU 4 GB; không mở runner GPU thứ hai cùng lúc. Caption dở được flush theo ảnh và giữ hash cấu hình để tiếp tục. Kết quả NF4 và HF conversion không thay số tái lập native FP16 của bài báo.
 
 ## Dữ liệu nền được giữ
 

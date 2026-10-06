@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+  "model_key": "smol",
+  "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+  "task": "chair",
+  "partition": "dev_common_unmatched500",
+  "condition": "detailed512",
+  "manifest_sha256": "580670e35afae240872999d75f9d9f5b9832c418cec6347763b246c54626615b",
+  "weights": [
+    {
+      "repo": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+      "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+      "file": "model-00001-of-00002.safetensors",
+      "bytes": 4959390584,
+      "sha256": "7c88a90e78f567460b2369a0369cc4dafbfda5607c9cb090b30fa4437b0282f2"
+    },
+    {
+      "repo": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+      "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+      "file": "model-00002-of-00002.safetensors",
+      "bytes": 4027833472,
+      "sha256": "cf3d0958a8240f71054a6812038f2a6bfbe2e5124573a3b363f6b120c9a52657"
+    }
+  ],
+  "precision": "nf4",
+  "image_splitting": true,
+  "image_mode": "hgai_crop",
+  "max_new_tokens": 512,
+  "requested_rows": 10,
+  "benchmark_rows": 500,
+  "role": "feasibility_pilot",
+  "alpha": 0.02,
+  "layers_inclusive": [
+    5,
+    18
+  ],
+  "aggregation": "mean",
+  "intervention": "HGAI",
+  "seed": 927,
+  "do_sample": false,
+  "num_beams": 1,
+  "use_cache": true,
+  "transformers": "4.53.3",
+  "code_sha256": {
+    "vlm_experiment.py": "669e04abcce427dcbddf38815f5a6c8481cb14b5697405441663bee805ce92ad",
+    "hgai_attention.py": "ecbc1197105df72fd402bb002aefa4984a88b870664d700a1c767bee5bb81c47",
+    "tinyllava_model.py": "a7894386d8efb1c9ac06f3f4e6671ad6f7a508f99fb5098f7be576cfb77402ba"
+  },
+  "assets_sha256": {
+    "added_tokens.json": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+    "chat_template.json": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf",
+    "config.json": "ec1f7e45deeafba7601f8dd0b6ca9ba75985dffc2f053e82341d12d06e2d9d46",
+    "generation_config.json": "34835060c9f0f74d1acb456cc72ca32746d3843d9eb5f578f9cbffac1d2eb840",
+    "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+    "model.safetensors.index.json": "d7c4b7a36f51bc15755cb11938c76f66be56e7c0d2bf3606335a8f77f90a551d",
+    "preprocessor_config.json": "70d935393e28a5b77b8f46cbd3e3cb74a336e4814bd43983858215bd0be388e7",
+    "processor_config.json": "55fb18f99dcce2694a011d46addf50a8114e6458d1847f6da9a0af22c6695a95",
+    "special_tokens_map.json": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+    "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+    "tokenizer_config.json": "30d7854334f3f96e9dc8e5210777ba030d55257de0d9c9b5ce65387f2ab73773",
+    "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+    "weights_api.json": "b0fc4cac134bf62368ddb44dde41db2a564cf4d86ef6351c558e7bbed27e4a15"
+  },
+  "annotation_sha256": {
+    "instances_val2014.json": "e1b4d1bc54906827b1a029981b1c77f2088bd4462569b7615db7929070c3ab47",
+    "captions_val2014.json": "7da4cc45cb76ee1642d163e846e1e0a33feffac2e841c9c426d585ea499165a4"
+  }
+}

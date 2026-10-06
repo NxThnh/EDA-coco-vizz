@@ -1,0 +1,17 @@
+{
+  "status": "alpha_grid_locked_before_dev500",
+  "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+  "partition": "dev_common_unmatched500",
+  "probe_images": 10,
+  "probe_measure": "generated token count only",
+  "baseline_alpha": 0,
+  "alpha_grid": [
+    0.02,
+    0.035,
+    0.05
+  ],
+  "selection_rationale": "All three tested low doses had 0/10 images below half paired baseline length; 0.075 had 1/10 and 0.10 had 3/10. This lock covers SmolVLM2 only. Full dev CHAIR and recall/F1 guards are still required.",
+  "probe_path": "experiment_outputs/alpha_dose_probe/paired_length_analysis.json",
+  "probe_sha256": "9266c5e82443529f51ad6a9eca2883af354b2aefa50f7445abaed20f43663232",
+  "not_a_benchmark": true
+}
