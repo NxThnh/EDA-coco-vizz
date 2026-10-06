@@ -1,6 +1,6 @@
 # Rà soát tổng quan EDA HGAI — 06/10/2026
 
-EDA đã có dữ liệu, manifest và kiểm tra processor cần thiết cho hướng VLM nhỏ. Thí nghiệm chứng minh hiệu quả HGAI chưa hoàn tất. Rà soát này phân biệt kết quả đã đo, phần triển khai còn thiếu và nguồn chưa thể xác minh.
+EDA đã có dữ liệu, manifest và kiểm tra processor cần thiết cho hướng VLM nhỏ. Adapter, runner, tuning/đối chứng, scorer, guard và CI đã được triển khai; campaign đang chạy, chưa có kết luận hiệu quả HGAI. [Hướng dẫn thực thi](HGAI_Experiments.md), [snapshot tiến độ](eda_results/hgai/experiment_run_status.json).
 
 ## Lỗi đã sửa trong lượt rà soát
 
@@ -29,15 +29,15 @@ Số 433/500 vẫn thuộc `eval_unmatched500` cũ; số 0/500 thuộc hai manif
 
 | Hạng mục | Trạng thái và việc cần hoàn thành |
 | :--- | :--- |
-| Adapter HGAI trên SmolVLM2/Phi-2 | Chưa triển khai. Cần giữ công thức logit trước softmax, vị trí token ảnh thật, GQA/KV-cache/mask; α=0 phải khớp baseline. |
-| Tuning trên dev | Mới có grid đề xuất. Chưa đo attention/ablation hoặc chọn α/dải layer; phải khóa lựa chọn trước eval. |
-| Baseline và HGAI đủ 500 ảnh | Smol chỉ có pilot dev20 NF4. TinyLLaVA chưa có runner sinh caption; LLaVA chưa có output và chưa nối schema runner vào scorer. |
-| Control độ dài/prompt | LLaVA có lựa chọn ba điều kiện; runner Smol hiện chỉ có detailed512 và POPE. detailed64/concise64 của Smol còn là thiết kế. |
-| POPE đầy đủ | Mỗi biến thể hiện chỉ có 60/3.000 câu; là prefix kiểm tra pipeline, không phải ước lượng benchmark đại diện. |
-| Guard và độ bất định | Recall/F1, độ dài, truncation, latency, memory đã có trong điểm CHAIR pilot. Refusal/repetition/Distinct-1, CI bootstrap ghép cặp và tiêu chí chọn cấu hình cụ thể chưa hoàn tất. |
-| Tái lập hàng LLaVA gốc | Cần trọng số, kiểm tra native/HF equivalence và baseline→HGAI. Chưa có manifest gốc của tác giả; random500 hiện chỉ khớp kiểu giao thức. |
+| Adapter HGAI trên SmolVLM2/Phi-2 | Đã kiểm tra công thức, GQA, mask/cache, α=0 bit-exact trên kiến trúc CPU; Smol thật α=0 khớp baseline, α>0 thực thi được. Tiny/LLaVA cần forward với trọng số đang tải. |
+| Tuning trên dev | Mã chạy 12 cấu hình/model và guard đã khóa; selection chỉ dùng dev500 hoàn chỉnh và lưu trước eval. Chưa chọn α/dải layer thực nghiệm. |
+| Baseline và HGAI đủ 500 ảnh | Smol full500 đang chạy. Tiny port khớp 877 tên tensor, runner/scorer chung đã nối cả ba mô hình. Chưa có điểm đầy đủ ba mô hình. |
+| Control độ dài/prompt | Runner hỗ trợ cả ba điều kiện; campaign có detailed64/concise64 cho Smol/Tiny, split_off cho Smol và pad/crop cho LLaVA. Chờ thực thi hoàn tất. |
+| POPE đầy đủ | Mã chạy 3.000 câu mỗi biến thể cho baseline/HGAI đã có; hiện chỉ pilot 60 câu/biến thể hoàn tất. CI giữ các câu hỏi cùng ảnh trong một cluster. |
+| Guard và độ bất định | Recall/F1, độ dài, truncation, latency/memory, refusal/output trống/repetition/Distinct-1 và bootstrap ghép cặp đã triển khai, kiểm tra CPU và smoke thật. α=0,5 làm caption nghèo object trên hai ảnh; chưa phải cải thiện HGAI. |
+| Tái lập hàng LLaVA gốc | Có HF runner và tải checkpoint đã pin; campaign có random500 với layer5–18/α=0,5. Native/HF equivalence, native FP16 và manifest gốc vẫn chưa xác minh. NF4 không thay hàng bài báo. |
 | Manifest huấn luyện SmolVLM2 đầy đủ | Chưa xác minh được subset thực tế gắn checkpoint, các nguồn còn lại và lịch sử mô hình nền. Recipe/upstream không đủ để bảo đảm sạch. |
-| Tài liệu định hướng gốc | Chưa có hai tài liệu gốc; phạm vi VizWiz bối cảnh và checkpoint TinyLLaVA tạm chọn vẫn dựa vào nội dung người dùng cung cấp. |
+| Tài liệu định hướng gốc | Người dùng xác nhận chưa có; COCO chính, VizWiz bối cảnh và TinyLLaVA-3.1B tạm chọn giữ theo nội dung đã thống nhất. Không dựng bản thay thế và gọi là gốc. |
 
 Mẫu lọc có thay đổi phân bố: person giảm 3,8 điểm phần trăm và car giảm 2,6 điểm phần trăm so với random500; carrot tăng 2,8 điểm phần trăm. Đây là chênh lệch quan sát trong mẫu, chưa phải kết luận ý nghĩa thống kê. Giữ hai nhánh và báo điểm riêng.
 

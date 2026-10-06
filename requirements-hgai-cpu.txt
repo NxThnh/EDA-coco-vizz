@@ -2,11 +2,13 @@
 transformers==4.53.3
 # Existing CUDA builds such as 2.5.1+cu121 satisfy this version for GPU pilots.
 torch==2.5.1
+accelerate==1.8.1
 nltk==3.9.4
 beautifulsoup4
 PyYAML
 ipykernel
 jupyter-client
+filelock
 num2words
 numpy
 pandas

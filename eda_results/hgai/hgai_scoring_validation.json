@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "paired_chair_ratio_and_undefined_denominator": true,
+  "pope_image_clusters_and_known_deltas": true,
+  "refusal_repetition_empty_guards": true,
+  "partial_benchmark_rejected": true,
+  "test_sha256": "683ebb26ebfba89e0e11aef3cefa598fbaa91eb76a8491805bb4b92d84de5ab7",
+  "real_smoke_checked": true,
+  "scorer_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5"
+}

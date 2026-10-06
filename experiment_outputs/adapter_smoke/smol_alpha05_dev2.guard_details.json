@@ -1,0 +1,18 @@
+[
+  {
+    "image_id": 802,
+    "refusal": false,
+    "lexical_tokens": 8,
+    "distinct_1": 0.875,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 872,
+    "refusal": false,
+    "lexical_tokens": 9,
+    "distinct_1": 0.8888888888888888,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  }
+]

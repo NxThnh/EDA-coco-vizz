@@ -1,0 +1,46 @@
+{
+  "checked_utc": "2026-10-06T08:19:57.026990+00:00",
+  "direction_documents": {
+    "status": "unavailable_user_confirmed",
+    "originals_read": false,
+    "basis": "User states they do not have the two original documents.",
+    "working_scope": "COCO primary; VizWiz context; TinyLLaVA-3.1B provisional checkpoint"
+  },
+  "smol_complete_training_manifest": {
+    "status": "not_published_in_inspected_sources",
+    "checkpoint_revision": "482adb537c021c86670beed01cd58990d01e72e4",
+    "repository_inventory_sha256": "b0fc4cac134bf62368ddb44dde41db2a564cf4d86ef6351c558e7bbed27e4a15",
+    "published_files": [
+      ".gitattributes",
+      "README.md",
+      "added_tokens.json",
+      "chat_template.json",
+      "config.json",
+      "generation_config.json",
+      "merges.txt",
+      "model-00001-of-00002.safetensors",
+      "model-00002-of-00002.safetensors",
+      "model.safetensors.index.json",
+      "preprocessor_config.json",
+      "processor_config.json",
+      "special_tokens_map.json",
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "vocab.json"
+    ],
+    "recipe_revision": "438be18dae658a638f3a6976fdf5190bb6d68619",
+    "recipe_entries": 110,
+    "recipe_source_paths": "Author-local /fsx JSON paths, not complete selected-ID manifests.",
+    "remaining_unknown": [
+      "Selected IDs and private/modified source JSON contents",
+      "Checkpoint linkage to exact training run",
+      "Inherited SmolVLM training and vision/language pretraining exposure"
+    ],
+    "sources": [
+      "https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct/tree/main",
+      "https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct#training-data",
+      "https://github.com/huggingface/smollm/tree/438be18dae658a638f3a6976fdf5190bb6d68619/vision/smolvlm2"
+    ],
+    "conclusion": "Zero audited matches does not establish zero actual training exposure."
+  }
+}

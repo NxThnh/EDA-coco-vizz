@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "images": 2,
+  "partition": "dev_common_unmatched500",
+  "precision": "nf4",
+  "alpha_zero_matches_native_caption_and_token_lengths": true,
+  "positive_alpha_executes_modified_attention": true,
+  "alpha05_mean_output_tokens": 10.5,
+  "baseline_mean_output_tokens": 298.0,
+  "guard_warning": "Alpha=0.5 shrinks captions strongly in this two-image smoke; tuning must enforce recall/F1/length guards.",
+  "baseline_output_sha256": "dd07d21be228509facd0259d7194b1ac4c484d81f1b520dd4973a90359206be8",
+  "intervention_output_sha256": "02cda184be544772ec46c23a5836964c0013e39641a3089cf6395348725fc0d6",
+  "scope": "Actual Smol weight smoke only; not full500 or proof of HGAI benefit."
+}

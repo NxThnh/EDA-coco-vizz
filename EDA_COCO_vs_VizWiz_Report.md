@@ -1,8 +1,8 @@
 # EDA phục vụ khái quát hóa HGAI sang VLM nhỏ
 
-**Bản 9 — ngày 06/10/2026.** COCO val2014 là dữ liệu đánh giá chính; SmolVLM2-2.2B và TinyLLaVA-3.1B là mô hình chính; LLaVA-1.5-7B là mốc kiểm chứng. CHAIR là thước đo chính, POPE kiểm tra chéo. VizWiz được rút thành bối cảnh ở phụ lục, không nhân đôi thí nghiệm HGAI.
+**Bản 9 — ngày 06/10/2026.** Snapshot thực thi UTC: 2026-10-06T08:19:56.197715+00:00; trạng thái campaign: `running`. COCO val2014 là dữ liệu đánh giá chính; SmolVLM2-2.2B và TinyLLaVA-3.1B là mô hình chính; LLaVA-1.5-7B là mốc kiểm chứng. CHAIR là thước đo chính, POPE kiểm tra chéo. VizWiz được rút thành bối cảnh ở phụ lục, không nhân đôi thí nghiệm HGAI.
 
-Phạm vi dựa trên phần đối chiếu báo cáo đóng góp và biên bản hội đồng ngày 05/10 do người dùng cung cấp. Hai tài liệu gốc chưa có trong workspace này, nên không tuyên bố đã đọc trực tiếp. TinyLLaVA có nhiều checkpoint; bản này chốt tạm **bczhou/TinyLLaVA-3.1B, Phi-2 + SigLIP 384px** để các phép đo có đối tượng cụ thể. Revision, cấu hình processor và tokenizer đã được lưu; nếu đổi checkpoint phải tạo phiên bản thí nghiệm mới.
+Phạm vi dựa trên phần đối chiếu báo cáo đóng góp và biên bản hội đồng ngày 05/10 do người dùng cung cấp. Người dùng xác nhận chưa có hai tài liệu gốc, nên không tuyên bố đã đọc trực tiếp. TinyLLaVA có nhiều checkpoint; bản này chốt tạm **bczhou/TinyLLaVA-3.1B, Phi-2 + SigLIP 384px** để các phép đo có đối tượng cụ thể. Revision, cấu hình processor và tokenizer đã được lưu; nếu đổi checkpoint phải tạo phiên bản thí nghiệm mới.
 
 Các mục 1–4 là EDA/processor trên CPU và phép nối annotation; mục 6 ghi riêng pilot sinh caption/POPE trên GPU. Chưa có kết quả hiệu quả HGAI. Các bảng trong notebook đọc trực tiếp CSV ở đúng mục; hình được nhúng một lần để xuất báo cáo không phụ thuộc đường dẫn tương đối.
 
@@ -36,7 +36,7 @@ Số 41,028% đo trên **mix instruction tuning LLaVA**, không bao trùm pretra
 
 [Model card SmolVLM2](https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct) nêu tập huấn luyện lấy mẫu từ mười nguồn, gồm OneVision, M4-Instruct và MAmmoTH-VL; mô hình cũng kế thừa SmolVLM nền. Bản này đọc riêng cột ID của hai slice OneVision ShareGPT4V để nối COCO, không tải các cột ảnh. **Khớp nguồn upstream chỉ là ảnh ứng viên có thể được chọn**, chưa chứng minh ảnh nằm trong chính 3,3 triệu mẫu dùng huấn luyện SmolVLM2. Các slice còn lại và pretraining nền chưa có full manifest để kết luận sạch.
 
-Đã kiểm tra thêm [repository chính thức của SmolVLM2](https://github.com/huggingface/smollm/tree/main/vision/smolvlm2): script `multinode25.sh` chọn YAML mixture gồm **110 mục nguồn**, có tỷ lệ lấy mẫu riêng; ShareGPT4V-COCO và ShareGPT4V-LLaVA được ghi 100%. YAML trỏ tới các JSON nội bộ `/fsx/...`, chưa cung cấp danh sách ID được chọn cùng liên kết đầy đủ tới checkpoint này. Vì vậy đã xác minh thêm **recipe công bố**, chưa thể biến nó thành manifest huấn luyện thực tế. [Bằng chứng đã lưu](eda_results/hgai/smol_training_evidence.json), [110 mục nguồn](eda_results/hgai/smol_published_recipe.csv). Không suy luận rằng hai slice đã kiểm tra bao phủ toàn bộ dữ liệu SmolVLM2.
+Đã kiểm tra thêm [repository chính thức của SmolVLM2](https://github.com/huggingface/smollm/tree/main/vision/smolvlm2): script `multinode25.sh` chọn YAML mixture gồm **110 mục nguồn**, có tỷ lệ lấy mẫu riêng; ShareGPT4V-COCO và ShareGPT4V-LLaVA được ghi 100%. YAML trỏ tới các JSON nội bộ `/fsx/...`, chưa cung cấp danh sách ID được chọn cùng liên kết đầy đủ tới checkpoint này. Vì vậy đã xác minh thêm **recipe công bố**, chưa thể biến nó thành manifest huấn luyện thực tế. [Bằng chứng đã lưu](eda_results/hgai/smol_training_evidence.json), [110 mục nguồn](eda_results/hgai/smol_published_recipe.csv), [kiểm kê nguồn còn thiếu](eda_results/hgai/source_availability.json). Không suy luận rằng hai slice đã kiểm tra bao phủ toàn bộ dữ liệu SmolVLM2.
 
 
 ### Khớp ID theo mô hình/recipe và từng manifest
@@ -314,7 +314,7 @@ CHAIR-S/I cần đi cùng object recall/F1, số output token thật, tỷ lệ 
 
 Dùng các bộ COCO random/popular/adversarial chính thức, giữ nhãn và negative sampling gốc. Không coi 500 ảnh CHAIR là một POPE mới hoặc ép POPE trùng manifest rồi so với số công bố. Báo accuracy, precision, recall, F1 và yes-rate, kèm số câu hỏi/ảnh, nguồn và hash. Nếu phân tích thêm các ảnh giao với eval500 thì ghi rõ đó là subset, không thay điểm POPE chính thức.
 
-[Cấu hình thí nghiệm máy đọc được](eda_results/hgai/experiment_config.json) cố định các điều kiện trên. Đã chạy forward/generate SmolVLM2 trong điều kiện NF4 và kiểm tra evaluator với output thật; adapter HGAI và đánh giá đầy đủ ba VLM chưa hoàn tất. Các phép bổ sung CPU có output thật và phạm vi đối chiếu nguồn được ghi rõ.
+[Cấu hình thí nghiệm máy đọc được](eda_results/hgai/experiment_config.json) cố định các điều kiện trên. Adapter HGAI đã triển khai, kiểm tra công thức, GQA, mask/cache và α=0 trên CPU, rồi chạy với trọng số Smol thật. Chiến dịch tuning/dev500, khóa lựa chọn trước eval, đối chứng và POPE đã có mã thực thi; đánh giá đầy đủ ba VLM đang chờ hoàn tất. [Hướng dẫn thực thi](HGAI_Experiments.md).
 
 ## 6. Trạng thái và tái lập
 
@@ -322,9 +322,13 @@ Dùng các bộ COCO random/popular/adversarial chính thức, giữ nhãn và n
 
 Máy hiện tại có RTX 3050 Laptop 4 GB; runner `smol_baseline.py` dùng NF4, greedy, template của processor chính thức và bật chia ô. Caption dùng prompt chi tiết, giới hạn 512 token. CHAIR dùng mã evaluator gốc đã pin, chỉ chuyển cú pháp print Python 2 và IO JSONL/val2014; vẫn giữ tokenizer NLTK, singularize Pattern, synonym và các quy tắc cụm từ. POPE giữ parser yes/no trong evaluator chính thức. Nguồn và revision nằm trong [provenance evaluator](eda_results/hgai/metrics_provenance.json).
 
-**Pilot không thay đánh giá đầy đủ:** caption pilot là prefix 20 ảnh của dev mới, không phải mẫu eval500. POPE pilot giữ prefix câu hỏi theo thứ tự gốc, không phải đủ 3.000 câu mỗi biến thể. Không dùng các điểm pilot để kết luận hiệu quả HGAI hoặc so trực tiếp với hàng LLaVA 53,0; NF4 cũng là một điều kiện precision riêng. Chưa có adapter HGAI, α được chọn trên dev, baseline đầy đủ ba VLM hoặc thí nghiệm đối chứng hoàn tất.
+**Pilot không thay đánh giá đầy đủ:** caption pilot là prefix 20 ảnh của dev mới, không phải mẫu eval500. POPE pilot giữ prefix câu hỏi theo thứ tự gốc, không phải đủ 3.000 câu mỗi biến thể. Không dùng các điểm pilot để kết luận hiệu quả HGAI hoặc so trực tiếp với hàng LLaVA 53,0; NF4 cũng là một điều kiện precision riêng. Chưa có α được chọn từ dev500 hoàn chỉnh hoặc benchmark/đối chứng đầy đủ ba VLM.
 
-**Trạng thái triển khai:** SmolVLM2 hiện chạy được `detailed512` và POPE, chưa có lựa chọn `detailed64`/`concise64` trong runner. LLaVA có ba điều kiện prompt nhưng chưa có output và chưa nối định dạng runner vào scorer hiện tại; TinyLLaVA chưa có runner sinh caption. Refusal rate, repetition/Distinct-1 và CI bootstrap ghép cặp là yêu cầu cho giai đoạn thí nghiệm, chưa phải cột điểm đã được tính cho pilot. Báo cáo EDA không thay các phần triển khai này. [Kết quả rà soát tổng quan](EDA_HGAI_Review.md).
+**Trạng thái triển khai:** `vlm_experiment.py` hỗ trợ cả ba mô hình, ba điều kiện prompt, CHAIR/POPE, baseline/HGAI và resume với cấu hình/hash cố định; `score_vlm_runs.py` dùng chung schema, guard từ chối/output trống/lặp, Distinct-1 và CI ghép cặp theo ảnh. CI POPE gom toàn bộ câu hỏi của cùng ảnh trong một mẫu bootstrap. TinyLLaVA giữ 26 layer SigLIP thực tế theo mã legacy; cả 877 tên tensor khớp index checkpoint. Trạng thái tải/chạy Tiny/LLaVA được đối chiếu với output thật trong snapshot; không khẳng định equivalence native/HF đã đạt. [Kiểm chứng adapter](eda_results/hgai/hgai_adapter_validation.json), [kiểm chứng scorer](eda_results/hgai/hgai_scoring_validation.json), [rà soát tổng quan](EDA_HGAI_Review.md).
+
+**Kiểm chứng Smol thật trên hai ảnh dev:** α=0 cho caption và số token khớp baseline native; α=0,5 thực thi can thiệp nhưng độ dài trung bình giảm từ **298 xuống 10,5 token**, object F1 giảm về 0 và CHAIR-I trở thành không xác định vì không có object được nhận diện. Đây là kiểm tra đường chạy, không phải bằng chứng cải thiện HGAI. Guard chọn cấu hình yêu cầu recall/F1 không giảm quá 0,02, độ dài còn ít nhất 50% baseline; refusal/output trống/truncation/lặp không tăng quá 0,05. Các ngưỡng được khóa trước lượt tuning dev500 đầy đủ. [Kiểm chứng trọng số thật](eda_results/hgai/hgai_smol_real_weight_validation.json).
+
+`run_hgai_suite.py` chạy tuần tự dev500 baseline + 12 cấu hình can thiệp mỗi mô hình; lưu selection trước eval500 và POPE 3×3.000 câu/điều kiện. Có hai control prompt cho cả Smol/Tiny, split_off cho Smol và pad/crop cho LLaVA. GPU 4 GB dùng NF4/offload; cả chiến dịch có thể kéo dài nhiều ngày. Bảng tiến độ dưới đây là ảnh chụp tại thời điểm dựng báo cáo, không phải trạng thái trực tiếp; output chưa đủ dòng không có điểm. [Thời điểm và trạng thái chiến dịch](eda_results/hgai/experiment_run_status.json).
 
 
 
@@ -337,6 +341,22 @@ Máy hiện tại có RTX 3050 Laptop 4 GB; runner `smol_baseline.py` dùng NF4,
 | pope | official-pope-adversarial | nf4 | feasibility_pilot | 10 | 60 | — | — | 70 | 63.636 | 93.333 | 75.676 | 73.333 |
 | pope | official-pope-popular | nf4 | feasibility_pilot | 10 | 60 | — | — | 76.667 | 70 | 93.333 | 80 | 66.667 |
 | pope | official-pope-random | nf4 | feasibility_pilot | 10 | 60 | — | — | 90 | 87.500 | 93.333 | 90.323 | 53.333 |
+<!-- /CSV -->
+
+
+### Tiến độ thực tế — tách pilot khỏi benchmark đầy đủ
+
+<!-- CSV {"path": "eda_results/hgai/experiment_run_status.csv", "title": "Tiến độ thực tế — tách pilot khỏi benchmark đầy đủ", "columns": ["model_key", "task", "partition", "alpha", "precision", "generated_rows", "requested_rows", "status", "role", "CHAIR_S_pct", "CHAIR_I_pct", "accuracy"]} -->
+| model_key | task | partition | alpha | precision | generated_rows | requested_rows | status | role | CHAIR_S_pct | CHAIR_I_pct | accuracy |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| smol | chair | dev_common_unmatched500 | 0.500 | nf4 | 2 | 2 | scored | feasibility_pilot | 0 | — | — |
+| smol | chair | dev_common_unmatched500 | 0 | nf4 | 2 | 2 | scored | feasibility_pilot | 0 | 0 | — |
+| smol | chair | eval_common_unmatched500 | 0 | nf4 | 65 | 500 | partial | baseline | — | — | — |
+| smol | chair | dev_common_unmatched500 | 0 | nf4 | 20 | 20 | scored | feasibility_pilot | 35 | 9.294 | — |
+| smol | pope | official-pope-adversarial | 0 | nf4 | 60 | 60 | scored | feasibility_pilot | — | — | 0.700 |
+| smol | pope | official-pope-popular | 0 | nf4 | 60 | 60 | scored | feasibility_pilot | — | — | 0.767 |
+| smol | pope | official-pope-random | 0 | nf4 | 60 | 60 | scored | feasibility_pilot | — | — | 0.900 |
+| smol | chair | dev_common_unmatched500 | 0 | nf4 | 1 | 1 | scored | feasibility_pilot | 0 | 0 | — |
 <!-- /CSV -->
 
 

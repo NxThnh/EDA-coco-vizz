@@ -2,6 +2,7 @@
 import ast
 import hashlib
 import json
+import os
 import re
 import subprocess
 from collections import Counter
@@ -13,6 +14,9 @@ from PIL import Image, ImageOps
 
 from hgai_cpu_audit import ROOT,OUT,PREP,sha,prepare
 from lock_common_unmatched import prepare_common, FLAGS
+
+os.environ.setdefault('USE_TF','0')
+os.environ.setdefault('USE_FLAX','0')
 
 
 def main():
@@ -141,7 +145,11 @@ def main():
                      'caption_sampling_sensitivity.py','eda_coco_vs_vizwiz.py','vizwiz_rotation_review.py',
                      'lock_common_unmatched.py','sampling_fix_diagnostics.py','fetch_smol_baseline.py',
                      'fetch_hgai_metrics.py','smol_baseline.py','score_hgai_baseline.py','run_smol_pilots.py',
-                     'export_hgai_html.py','rebuild_hgai.py','run_eda_notebook.py']:
+                     'export_hgai_html.py','rebuild_hgai.py','run_eda_notebook.py',
+                     'hgai_attention.py','test_hgai_attention.py','tinyllava_model.py',
+                     'vlm_experiment.py','score_vlm_runs.py','run_hgai_suite.py',
+                     'test_hgai_scoring.py','build_experiment_status.py','fetch_vlm_weights.py',
+                     'show_hgai_progress.py','audit_source_availability.py','monitor_hgai_report.py']:
         ast.parse((ROOT/filename).read_text(encoding='utf-8'),filename=filename)
     html_path=OUT/'EDA_HGAI_Small_VLM_Report.html'
     html_local_links=[]
@@ -204,6 +212,70 @@ def main():
             assert abs(metric['precision']-metric['TP']/(metric['TP']+metric['FP']))<1e-9
             assert all(0<=metric[k]<=1 for k in ['accuracy','precision','recall','F1','yes_rate'])
         scored_runs.append(output.relative_to(ROOT).as_posix())
+    adapter_validation=json.loads((OUT/'hgai_adapter_validation.json').read_text())
+    assert adapter_validation['status']=='passed'
+    assert adapter_validation['adapter_sha256']==sha(ROOT/'hgai_attention.py')
+    assert adapter_validation['test_sha256']==sha(ROOT/'test_hgai_attention.py')
+    scoring_validation=json.loads((OUT/'hgai_scoring_validation.json').read_text())
+    assert scoring_validation['status']=='passed'
+    assert scoring_validation['test_sha256']==sha(ROOT/'test_hgai_scoring.py')
+    assert scoring_validation['scorer_sha256']==sha(ROOT/'score_vlm_runs.py')
+    from score_vlm_runs import verify,guards,bootstrap_statistics
+    new_scored=[]
+    for metric_path in (ROOT/'experiment_outputs').glob('**/*.metrics.json'):
+        metric=json.loads(metric_path.read_text())
+        if 'scorer_sha256' not in metric:continue
+        output=metric_path.with_name(metric_path.name.replace('.metrics.json','.jsonl'))
+        run_config,rows=verify(output)
+        assert metric['output_sha256']==sha(output) and metric['config_sha256']==sha(output.with_suffix('.config.json'))
+        assert metric['scorer_sha256']==sha(ROOT/'score_vlm_runs.py')
+        assert metric['chair_wrapper_sha256']==sha(ROOT/'score_hgai_baseline.py')
+        fresh,_=score_chair(rows) if run_config['task']=='chair' else score_pope(rows)
+        assert all(fresh[k]==metric[k] for k in fresh),output
+        expected=[guards(r.get('caption',r.get('answer',''))) for r in rows]
+        assert metric['refusal_rate']==sum(g['refusal'] for g in expected)/len(rows)
+        assert metric['empty_output_rate']==sum(g['empty_output'] for g in expected)/len(rows)
+        # Historical runner bytes remain available after metadata-only fixes.
+        source_hashes=run_config.get('code_sha256',{})
+        if isinstance(source_hashes,str):source_hashes={'smol_baseline.py':source_hashes}
+        for name,digest in source_hashes.items():
+            if sha(ROOT/name)!=digest:
+                historical=ROOT/'eda_resources/hgai_implementation_snapshots'/digest/name
+                assert historical.exists() and sha(historical)==digest,(name,digest)
+        new_scored.append(output.relative_to(ROOT).as_posix())
+    baseline=ROOT/'experiment_outputs/adapter_smoke/smol_alpha0_dev2.jsonl'
+    intervention=ROOT/'experiment_outputs/adapter_smoke/smol_alpha05_dev2.jsonl'
+    real_validation=json.loads((OUT/'hgai_smol_real_weight_validation.json').read_text())
+    assert sha(baseline)==real_validation['baseline_output_sha256']
+    assert sha(intervention)==real_validation['intervention_output_sha256']
+    zero=[json.loads(s) for s in baseline.read_text(encoding='utf-8').splitlines()]
+    native=[json.loads(s) for s in (ROOT/'experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl').read_text(encoding='utf-8').splitlines()][:2]
+    assert [(r['image_id'],r['caption'],r['new_tokens']) for r in zero]==[(r['image_id'],r['caption'],r['new_tokens']) for r in native]
+    assert all(r['hgai_modified_calls']==0 for r in zero)
+    assert all(json.loads(s)['hgai_modified_calls']>0 for s in intervention.read_text(encoding='utf-8').splitlines())
+    ci=json.loads((baseline.parent/'paired_smoke_ci.json').read_text())
+    detail_a=json.loads(baseline.with_suffix('.chair_details.json').read_text())
+    detail_b=json.loads(intervention.with_suffix('.chair_details.json').read_text())
+    assert ci['paired_ci']==bootstrap_statistics([r['paired_statistics'] for r in detail_a],[r['paired_statistics'] for r in detail_b],ci['bootstrap_replicates'])
+    from accelerate import init_empty_weights
+    from tinyllava_model import TinyPhiConfig,TinyPhiForCausalLM,validate_checkpoint_mapping
+    tiny_path=ROOT/'model_assets/TinyLLaVA-3.1B'
+    with init_empty_weights():
+        tiny_model=TinyPhiForCausalLM(TinyPhiConfig.from_pretrained(tiny_path,local_files_only=True))
+    index_folder=ROOT/'eda_resources/tinyllava_source'
+    index_provenance=json.loads((OUT/'tiny_checkpoint_index_provenance.json').read_text())
+    assert sha(index_folder/'model.safetensors.index.json')==index_provenance['sha256']
+    tensor_count=validate_checkpoint_mapping(tiny_model,index_folder)
+    assert tensor_count==877 and len(tiny_model.model.vision_tower.vision_tower.vision_model.encoder.layers)==26
+    del tiny_model
+    plan_path=ROOT/'experiment_outputs/hgai_campaign/campaign_plan.json'
+    plan=json.loads(plan_path.read_text())
+    assert all(sha(ROOT/name)==digest for name,digest in plan['source_sha256'].items())
+    assert plan['dev_manifest_sha256']==sha(PREP/'dev_common_unmatched500.jsonl')
+    assert plan['eval_manifest_sha256']==sha(PREP/'eval_common_unmatched500.jsonl')
+    availability=json.loads((OUT/'source_availability.json').read_text())
+    assert not availability['direction_documents']['originals_read']
+    assert availability['smol_complete_training_manifest']['status']=='not_published_in_inspected_sources'
     result={'status':'passed','locked_partitions':len(partitions),'images_per_partition':500,
             'actual_image_bytes_verified':sum(len(rows) for rows in partitions.values()),
             'git_locked_sources_verified':verified_git_sources,
@@ -211,6 +283,9 @@ def main():
             'executed_notebook_code_cells':len(codes),'embedded_figures':len(attachments),
             'local_report_links_checked':len(local_links),'verified_scored_runs':scored_runs,
             'local_html_links_checked':len(html_local_links),
+            'verified_new_scored_runs':new_scored,'tiny_checkpoint_tensor_names_verified':tensor_count,
+            'campaign_plan_sha256':sha(plan_path),
+            'full_campaign_complete':json.loads((OUT/'experiment_run_status.json').read_text()).get('campaign',{}).get('status')=='complete',
             'report_sha256':sha(ROOT/'EDA_COCO_vs_VizWiz_Report.md'),
             'notebook_sha256':sha(ROOT/'EDA_COCO_vs_VizWiz_Report.ipynb')}
     (OUT/'validation.json').write_text(json.dumps(result,indent=2),encoding='utf-8')

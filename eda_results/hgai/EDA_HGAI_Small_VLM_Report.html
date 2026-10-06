@@ -7531,8 +7531,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="EDA-ph%E1%BB%A5c-v%E1%BB%A5-kh%C3%A1i-qu%C3%A1t-h%C3%B3a-HGAI-sang-VLM-nh%E1%BB%8F">EDA phục vụ khái quát hóa HGAI sang VLM nhỏ<a class="anchor-link" href="#EDA-ph%E1%BB%A5c-v%E1%BB%A5-kh%C3%A1i-qu%C3%A1t-h%C3%B3a-HGAI-sang-VLM-nh%E1%BB%8F">¶</a></h1><p><strong>Bản 9 — ngày 06/10/2026.</strong> COCO val2014 là dữ liệu đánh giá chính; SmolVLM2-2.2B và TinyLLaVA-3.1B là mô hình chính; LLaVA-1.5-7B là mốc kiểm chứng. CHAIR là thước đo chính, POPE kiểm tra chéo. VizWiz được rút thành bối cảnh ở phụ lục, không nhân đôi thí nghiệm HGAI.</p>
-<p>Phạm vi dựa trên phần đối chiếu báo cáo đóng góp và biên bản hội đồng ngày 05/10 do người dùng cung cấp. Hai tài liệu gốc chưa có trong workspace này, nên không tuyên bố đã đọc trực tiếp. TinyLLaVA có nhiều checkpoint; bản này chốt tạm <strong>bczhou/TinyLLaVA-3.1B, Phi-2 + SigLIP 384px</strong> để các phép đo có đối tượng cụ thể. Revision, cấu hình processor và tokenizer đã được lưu; nếu đổi checkpoint phải tạo phiên bản thí nghiệm mới.</p>
+<h1 id="EDA-ph%E1%BB%A5c-v%E1%BB%A5-kh%C3%A1i-qu%C3%A1t-h%C3%B3a-HGAI-sang-VLM-nh%E1%BB%8F">EDA phục vụ khái quát hóa HGAI sang VLM nhỏ<a class="anchor-link" href="#EDA-ph%E1%BB%A5c-v%E1%BB%A5-kh%C3%A1i-qu%C3%A1t-h%C3%B3a-HGAI-sang-VLM-nh%E1%BB%8F">¶</a></h1><p><strong>Bản 9 — ngày 06/10/2026.</strong> Snapshot thực thi UTC: 2026-10-06T08:19:56.197715+00:00; trạng thái campaign: <code>running</code>. COCO val2014 là dữ liệu đánh giá chính; SmolVLM2-2.2B và TinyLLaVA-3.1B là mô hình chính; LLaVA-1.5-7B là mốc kiểm chứng. CHAIR là thước đo chính, POPE kiểm tra chéo. VizWiz được rút thành bối cảnh ở phụ lục, không nhân đôi thí nghiệm HGAI.</p>
+<p>Phạm vi dựa trên phần đối chiếu báo cáo đóng góp và biên bản hội đồng ngày 05/10 do người dùng cung cấp. Người dùng xác nhận chưa có hai tài liệu gốc, nên không tuyên bố đã đọc trực tiếp. TinyLLaVA có nhiều checkpoint; bản này chốt tạm <strong>bczhou/TinyLLaVA-3.1B, Phi-2 + SigLIP 384px</strong> để các phép đo có đối tượng cụ thể. Revision, cấu hình processor và tokenizer đã được lưu; nếu đổi checkpoint phải tạo phiên bản thí nghiệm mới.</p>
 <p>Các mục 1–4 là EDA/processor trên CPU và phép nối annotation; mục 6 ghi riêng pilot sinh caption/POPE trên GPU. Chưa có kết quả hiệu quả HGAI. Các bảng trong notebook đọc trực tiếp CSV ở đúng mục; hình được nhúng một lần để xuất báo cáo không phụ thuộc đường dẫn tương đối.</p>
 <p><strong>Đã sửa vấn đề 433/500:</strong> bộ cũ chỉ lọc LLaVA được giữ làm đối chiếu lịch sử. Nhánh đánh giá chính và dev mới mỗi bộ 500 ảnh có <strong>0/500 khớp tất cả các nguồn ID đã kiểm tra</strong>: LLaVA, ShareGPT4V SFT/pretraining/cap100K và OneVision ShareGPT4V-COCO. Đây là “chưa khớp nguồn đã kiểm tra”, không phải bảo đảm sạch mọi lịch sử huấn luyện. Khi tắt chia ô, SmolVLM2 giảm còn 81 token và resize vuông; control này thay cả ngân sách token lẫn hình học, không phải riêng số token.</p>
 </div>
@@ -7623,7 +7623,7 @@ a.anchor-link {
 <p>Số 41,028% đo trên <strong>mix instruction tuning LLaVA</strong>, không bao trùm pretraining của CLIP/LLM hay pixel trùng ở nguồn khác. Nguồn và hash đã lưu trong <a href="../vlm_extensions/llava15_vg_gqa_alias_overlap.json">kiểm tra VG/GQA</a>. Không dùng số này như tỷ lệ rò rỉ của hai VLM nhỏ.</p>
 <h3 id="1.1.-Ki%E1%BB%83m-tra-ri%C3%AAng-TinyLLaVA-v%C3%A0-SmolVLM2">1.1. Kiểm tra riêng TinyLLaVA và SmolVLM2<a class="anchor-link" href="#1.1.-Ki%E1%BB%83m-tra-ri%C3%AAng-TinyLLaVA-v%C3%A0-SmolVLM2">¶</a></h3><p><a href="https://huggingface.co/bczhou/TinyLLaVA-3.1B">Model card TinyLLaVA-3.1B</a> công bố hai recipe LLaVA và ShareGPT4V. Đã quét file SFT 665K LLaVA, SFT ShareGPT4V và pretraining ShareGPT4V, nối đường dẫn COCO trực tiếp và alias VG/GQA. Bảng ghi hai recipe riêng vì model card chưa xác định đầy đủ manifest huấn luyện cho riêng checkpoint; không tự coi tất cả recipe là lịch sử huấn luyện chắc chắn của checkpoint. Pretraining LAION/CC/SBU, encoder SigLIP và LLM nền vẫn ngoài phép nối ID này.</p>
 <p><a href="https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct">Model card SmolVLM2</a> nêu tập huấn luyện lấy mẫu từ mười nguồn, gồm OneVision, M4-Instruct và MAmmoTH-VL; mô hình cũng kế thừa SmolVLM nền. Bản này đọc riêng cột ID của hai slice OneVision ShareGPT4V để nối COCO, không tải các cột ảnh. <strong>Khớp nguồn upstream chỉ là ảnh ứng viên có thể được chọn</strong>, chưa chứng minh ảnh nằm trong chính 3,3 triệu mẫu dùng huấn luyện SmolVLM2. Các slice còn lại và pretraining nền chưa có full manifest để kết luận sạch.</p>
-<p>Đã kiểm tra thêm <a href="https://github.com/huggingface/smollm/tree/main/vision/smolvlm2">repository chính thức của SmolVLM2</a>: script <code>multinode25.sh</code> chọn YAML mixture gồm <strong>110 mục nguồn</strong>, có tỷ lệ lấy mẫu riêng; ShareGPT4V-COCO và ShareGPT4V-LLaVA được ghi 100%. YAML trỏ tới các JSON nội bộ <code>/fsx/...</code>, chưa cung cấp danh sách ID được chọn cùng liên kết đầy đủ tới checkpoint này. Vì vậy đã xác minh thêm <strong>recipe công bố</strong>, chưa thể biến nó thành manifest huấn luyện thực tế. <a href="smol_training_evidence.json">Bằng chứng đã lưu</a>, <a href="smol_published_recipe.csv">110 mục nguồn</a>. Không suy luận rằng hai slice đã kiểm tra bao phủ toàn bộ dữ liệu SmolVLM2.</p>
+<p>Đã kiểm tra thêm <a href="https://github.com/huggingface/smollm/tree/main/vision/smolvlm2">repository chính thức của SmolVLM2</a>: script <code>multinode25.sh</code> chọn YAML mixture gồm <strong>110 mục nguồn</strong>, có tỷ lệ lấy mẫu riêng; ShareGPT4V-COCO và ShareGPT4V-LLaVA được ghi 100%. YAML trỏ tới các JSON nội bộ <code>/fsx/...</code>, chưa cung cấp danh sách ID được chọn cùng liên kết đầy đủ tới checkpoint này. Vì vậy đã xác minh thêm <strong>recipe công bố</strong>, chưa thể biến nó thành manifest huấn luyện thực tế. <a href="smol_training_evidence.json">Bằng chứng đã lưu</a>, <a href="smol_published_recipe.csv">110 mục nguồn</a>, <a href="source_availability.json">kiểm kê nguồn còn thiếu</a>. Không suy luận rằng hai slice đã kiểm tra bao phủ toàn bộ dữ liệu SmolVLM2.</p>
 <h3 id="Kh%E1%BB%9Bp-ID-theo-m%C3%B4-h%C3%ACnh/recipe-v%C3%A0-t%E1%BB%ABng-manifest">Khớp ID theo mô hình/recipe và từng manifest<a class="anchor-link" href="#Kh%E1%BB%9Bp-ID-theo-m%C3%B4-h%C3%ACnh/recipe-v%C3%A0-t%E1%BB%ABng-manifest">¶</a></h3>
 </div>
 </div>
@@ -9060,7 +9060,7 @@ a.anchor-link {
 <p>HGAI gốc cộng α × trung bình liên head của trị tuyệt đối attention <strong>logit</strong> vào các vị trí ảnh trước softmax. Không thay công thức thành α nhân số token. Số vị trí ảnh thay đổi sẽ làm thay đổi số phần tử bị can thiệp và phép chuẩn hóa softmax; vì vậy phải báo kết quả theo phân bố token và có split_on/off ablation. Nhận diện đúng các vị trí <code>&lt;image&gt;</code> của SmolVLM2 sau processor; loại token grid/biên. Không hard-code một dải liên tục 576 token cho SmolVLM2, hoặc dùng số head/query-head của LLaVA cho mô hình có GQA. Phi-2 có cấu trúc attention khác; adapter cần kiểm tra α=0 khớp baseline, KV-cache, mask và generation từng bước trước đo điểm.</p>
 <p>CHAIR-S/I cần đi cùng object recall/F1, số output token thật, tỷ lệ chạm giới hạn, tỷ lệ từ chối, repetition/Distinct-1, thời gian và bộ nhớ. Ước lượng CI bằng bootstrap <strong>ghép cặp theo ảnh</strong> cho baseline–HGAI; giữ toàn bộ lỗi trên cùng ảnh trong một mẫu bootstrap. Chọn thông số xong phải lưu cấu hình rồi mới chạy eval.</p>
 <h3 id="5.4.-POPE-l%C3%A0-benchmark-ki%E1%BB%83m-tra-ch%C3%A9o-ri%C3%AAng">5.4. POPE là benchmark kiểm tra chéo riêng<a class="anchor-link" href="#5.4.-POPE-l%C3%A0-benchmark-ki%E1%BB%83m-tra-ch%C3%A9o-ri%C3%AAng">¶</a></h3><p>Dùng các bộ COCO random/popular/adversarial chính thức, giữ nhãn và negative sampling gốc. Không coi 500 ảnh CHAIR là một POPE mới hoặc ép POPE trùng manifest rồi so với số công bố. Báo accuracy, precision, recall, F1 và yes-rate, kèm số câu hỏi/ảnh, nguồn và hash. Nếu phân tích thêm các ảnh giao với eval500 thì ghi rõ đó là subset, không thay điểm POPE chính thức.</p>
-<p><a href="experiment_config.json">Cấu hình thí nghiệm máy đọc được</a> cố định các điều kiện trên. Đã chạy forward/generate SmolVLM2 trong điều kiện NF4 và kiểm tra evaluator với output thật; adapter HGAI và đánh giá đầy đủ ba VLM chưa hoàn tất. Các phép bổ sung CPU có output thật và phạm vi đối chiếu nguồn được ghi rõ.</p>
+<p><a href="experiment_config.json">Cấu hình thí nghiệm máy đọc được</a> cố định các điều kiện trên. Adapter HGAI đã triển khai, kiểm tra công thức, GQA, mask/cache và α=0 trên CPU, rồi chạy với trọng số Smol thật. Chiến dịch tuning/dev500, khóa lựa chọn trước eval, đối chứng và POPE đã có mã thực thi; đánh giá đầy đủ ba VLM đang chờ hoàn tất. <a href="../../HGAI_Experiments.md">Hướng dẫn thực thi</a>.</p>
 </div>
 </div>
 </div>
@@ -9073,8 +9073,10 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="6.-Tr%E1%BA%A1ng-th%C3%A1i-v%C3%A0-t%C3%A1i-l%E1%BA%ADp">6. Trạng thái và tái lập<a class="anchor-link" href="#6.-Tr%E1%BA%A1ng-th%C3%A1i-v%C3%A0-t%C3%A1i-l%E1%BA%ADp">¶</a></h2><p>Đã có năm manifest cố định, <strong>7.500 dòng processor</strong>, token caption của cả hai mô hình, hình học toàn val/COCO bbox, đối chiếu nguồn và rà EXIF. Trọng số <strong>SmolVLM2 chính thức đã được tải và xác minh SHA-256</strong>, tổng 8.987.224.056 byte; <a href="smol_weights_provenance.json">provenance trọng số</a>. Không còn dùng “thiếu trọng số” làm lý do cho SmolVLM2.</p>
 <p>Máy hiện tại có RTX 3050 Laptop 4 GB; runner <code>smol_baseline.py</code> dùng NF4, greedy, template của processor chính thức và bật chia ô. Caption dùng prompt chi tiết, giới hạn 512 token. CHAIR dùng mã evaluator gốc đã pin, chỉ chuyển cú pháp print Python 2 và IO JSONL/val2014; vẫn giữ tokenizer NLTK, singularize Pattern, synonym và các quy tắc cụm từ. POPE giữ parser yes/no trong evaluator chính thức. Nguồn và revision nằm trong <a href="metrics_provenance.json">provenance evaluator</a>.</p>
-<p><strong>Pilot không thay đánh giá đầy đủ:</strong> caption pilot là prefix 20 ảnh của dev mới, không phải mẫu eval500. POPE pilot giữ prefix câu hỏi theo thứ tự gốc, không phải đủ 3.000 câu mỗi biến thể. Không dùng các điểm pilot để kết luận hiệu quả HGAI hoặc so trực tiếp với hàng LLaVA 53,0; NF4 cũng là một điều kiện precision riêng. Chưa có adapter HGAI, α được chọn trên dev, baseline đầy đủ ba VLM hoặc thí nghiệm đối chứng hoàn tất.</p>
-<p><strong>Trạng thái triển khai:</strong> SmolVLM2 hiện chạy được <code>detailed512</code> và POPE, chưa có lựa chọn <code>detailed64</code>/<code>concise64</code> trong runner. LLaVA có ba điều kiện prompt nhưng chưa có output và chưa nối định dạng runner vào scorer hiện tại; TinyLLaVA chưa có runner sinh caption. Refusal rate, repetition/Distinct-1 và CI bootstrap ghép cặp là yêu cầu cho giai đoạn thí nghiệm, chưa phải cột điểm đã được tính cho pilot. Báo cáo EDA không thay các phần triển khai này. <a href="../../EDA_HGAI_Review.md">Kết quả rà soát tổng quan</a>.</p>
+<p><strong>Pilot không thay đánh giá đầy đủ:</strong> caption pilot là prefix 20 ảnh của dev mới, không phải mẫu eval500. POPE pilot giữ prefix câu hỏi theo thứ tự gốc, không phải đủ 3.000 câu mỗi biến thể. Không dùng các điểm pilot để kết luận hiệu quả HGAI hoặc so trực tiếp với hàng LLaVA 53,0; NF4 cũng là một điều kiện precision riêng. Chưa có α được chọn từ dev500 hoàn chỉnh hoặc benchmark/đối chứng đầy đủ ba VLM.</p>
+<p><strong>Trạng thái triển khai:</strong> <code>vlm_experiment.py</code> hỗ trợ cả ba mô hình, ba điều kiện prompt, CHAIR/POPE, baseline/HGAI và resume với cấu hình/hash cố định; <code>score_vlm_runs.py</code> dùng chung schema, guard từ chối/output trống/lặp, Distinct-1 và CI ghép cặp theo ảnh. CI POPE gom toàn bộ câu hỏi của cùng ảnh trong một mẫu bootstrap. TinyLLaVA giữ 26 layer SigLIP thực tế theo mã legacy; cả 877 tên tensor khớp index checkpoint. Trạng thái tải/chạy Tiny/LLaVA được đối chiếu với output thật trong snapshot; không khẳng định equivalence native/HF đã đạt. <a href="hgai_adapter_validation.json">Kiểm chứng adapter</a>, <a href="hgai_scoring_validation.json">kiểm chứng scorer</a>, <a href="../../EDA_HGAI_Review.md">rà soát tổng quan</a>.</p>
+<p><strong>Kiểm chứng Smol thật trên hai ảnh dev:</strong> α=0 cho caption và số token khớp baseline native; α=0,5 thực thi can thiệp nhưng độ dài trung bình giảm từ <strong>298 xuống 10,5 token</strong>, object F1 giảm về 0 và CHAIR-I trở thành không xác định vì không có object được nhận diện. Đây là kiểm tra đường chạy, không phải bằng chứng cải thiện HGAI. Guard chọn cấu hình yêu cầu recall/F1 không giảm quá 0,02, độ dài còn ít nhất 50% baseline; refusal/output trống/truncation/lặp không tăng quá 0,05. Các ngưỡng được khóa trước lượt tuning dev500 đầy đủ. <a href="hgai_smol_real_weight_validation.json">Kiểm chứng trọng số thật</a>.</p>
+<p><code>run_hgai_suite.py</code> chạy tuần tự dev500 baseline + 12 cấu hình can thiệp mỗi mô hình; lưu selection trước eval500 và POPE 3×3.000 câu/điều kiện. Có hai control prompt cho cả Smol/Tiny, split_off cho Smol và pad/crop cho LLaVA. GPU 4 GB dùng NF4/offload; cả chiến dịch có thể kéo dài nhiều ngày. Bảng tiến độ dưới đây là ảnh chụp tại thời điểm dựng báo cáo, không phải trạng thái trực tiếp; output chưa đủ dòng không có điểm. <a href="experiment_run_status.json">Thời điểm và trạng thái chiến dịch</a>.</p>
 <h3 id="Pilot-SmolVLM2-NF4-%E2%80%94-ki%E1%BB%83m-tra-pipeline,-kh%C3%B4ng-ph%E1%BA%A3i-%C4%91i%E1%BB%83m-benchmark-%C4%91%E1%BA%A7y-%C4%91%E1%BB%A7">Pilot SmolVLM2 NF4 — kiểm tra pipeline, không phải điểm benchmark đầy đủ<a class="anchor-link" href="#Pilot-SmolVLM2-NF4-%E2%80%94-ki%E1%BB%83m-tra-pipeline,-kh%C3%B4ng-ph%E1%BA%A3i-%C4%91i%E1%BB%83m-benchmark-%C4%91%E1%BA%A7y-%C4%91%E1%BB%A7">¶</a></h3>
 </div>
 </div>
@@ -9179,6 +9181,161 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Ti%E1%BA%BFn-%C4%91%E1%BB%99-th%E1%BB%B1c-t%E1%BA%BF-%E2%80%94-t%C3%A1ch-pilot-kh%E1%BB%8Fi-benchmark-%C4%91%E1%BA%A7y-%C4%91%E1%BB%A7">Tiến độ thực tế — tách pilot khỏi benchmark đầy đủ<a class="anchor-link" href="#Ti%E1%BA%BFn-%C4%91%E1%BB%99-th%E1%BB%B1c-t%E1%BA%BF-%E2%80%94-t%C3%A1ch-pilot-kh%E1%BB%8Fi-benchmark-%C4%91%E1%BA%A7y-%C4%91%E1%BB%A7">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=hgai-v9-032">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div class="audit-table"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>model_key</th>
+<th>task</th>
+<th>partition</th>
+<th>alpha</th>
+<th>precision</th>
+<th>generated_rows</th>
+<th>requested_rows</th>
+<th>status</th>
+<th>role</th>
+<th>CHAIR_S_pct</th>
+<th>CHAIR_I_pct</th>
+<th>accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>smol</td>
+<td>chair</td>
+<td>dev_common_unmatched500</td>
+<td>0.500</td>
+<td>nf4</td>
+<td>2</td>
+<td>2</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>0.000</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>chair</td>
+<td>dev_common_unmatched500</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>2</td>
+<td>2</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>—</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>chair</td>
+<td>eval_common_unmatched500</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>65</td>
+<td>500</td>
+<td>partial</td>
+<td>baseline</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>chair</td>
+<td>dev_common_unmatched500</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>20</td>
+<td>20</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>35.000</td>
+<td>9.294</td>
+<td>—</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>pope</td>
+<td>official-pope-adversarial</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>60</td>
+<td>60</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>—</td>
+<td>—</td>
+<td>0.700</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>pope</td>
+<td>official-pope-popular</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>60</td>
+<td>60</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>—</td>
+<td>—</td>
+<td>0.767</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>pope</td>
+<td>official-pope-random</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>60</td>
+<td>60</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>—</td>
+<td>—</td>
+<td>0.900</td>
+</tr>
+<tr>
+<td>smol</td>
+<td>chair</td>
+<td>dev_common_unmatched500</td>
+<td>0.000</td>
+<td>nf4</td>
+<td>1</td>
+<td>1</td>
+<td>scored</td>
+<td>feasibility_pilot</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div><style>.audit-table{overflow-x:auto;max-width:100%}.audit-table td,.audit-table th{padding:6px;white-space:normal;min-width:6em;max-width:24em}</style>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=hgai-v9-033">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Chạy phần CPU mới bằng môi trường riêng; không thay môi trường cũ dùng CLIP:</p>
 <div class="highlight"><pre><span></span><span class="c"># Dùng Python 3.10–3.12; CHAIR legacy cần lib2to3.</span>
 <span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">-</span><span class="n">-system-site-packages</span> <span class="p">.</span><span class="n">venv-eda</span>
@@ -9210,7 +9367,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=hgai-v9-032">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=hgai-v9-034">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9229,7 +9386,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=hgai-v9-033">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=hgai-v9-035">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

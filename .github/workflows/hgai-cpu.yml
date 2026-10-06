@@ -1,0 +1,26 @@
+name: HGAI CPU semantics
+on:
+  push:
+  pull_request:
+jobs:
+  semantic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: pip
+          cache-dependency-path: requirements-hgai-cpu.txt
+      - run: python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -r requirements-hgai-cpu.txt
+      - name: Check attention formula, masks, GQA and cache
+        run: python test_hgai_attention.py
+      - name: Check paired statistics, POPE clusters and guards
+        run: python test_hgai_scoring.py --unit-only
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cpu-semantic-checks
+          path: |
+            eda_results/hgai/hgai_adapter_validation.json
+            eda_results/hgai/hgai_scoring_validation.json

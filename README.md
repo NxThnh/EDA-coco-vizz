@@ -16,9 +16,9 @@
 
 **Đã sửa lỗi chọn ảnh 433/500:** hai bộ mới mỗi bộ 500 ảnh có **0/500 khớp toàn bộ nguồn ID đã kiểm tra** cho LLaVA, ShareGPT4V SFT/pretraining/cap100K và OneVision ShareGPT4V-COCO upstream. Các bộ cũ giữ nguyên. Chênh lệch hình học/token và phân bố 80 lớp object sau lọc đã được tính riêng.
 
-Trọng số **SmolVLM2 chính thức đã tải và kiểm tra SHA-256**; caption thực tế và pilot CHAIR/POPE nằm trong [`experiment_outputs/smol_baseline/`](experiment_outputs/smol_baseline/). Pilot dùng **NF4 trên GPU 4 GB**, không thay kết quả đủ 500 ảnh hoặc chứng minh hiệu quả HGAI. Bảng pilot cập nhật trong báo cáo chính khi một run được chấm hoàn tất. Chưa có adapter HGAI, baseline đầy đủ cả ba mô hình hoặc α/layer tối ưu.
+Trọng số **SmolVLM2 chính thức đã tải và kiểm tra SHA-256**; caption thực tế và pilot CHAIR/POPE nằm trong [`experiment_outputs/smol_baseline/`](experiment_outputs/smol_baseline/). Adapter HGAI đã chạy với trọng số Smol thật: α=0 khớp baseline, nhưng α=0,5 làm mất nội dung object trong smoke hai ảnh. Guard recall/F1/độ dài ngăn chọn cấu hình kiểu này. Pilot NF4 trên GPU 4 GB không thay kết quả đầy đủ hoặc chứng minh hiệu quả HGAI.
 
-Đã kiểm tra thêm 110 mục trong YAML mixture và mã huấn luyện của tác giả SmolVLM2, lưu ở [`eda_resources/smol_training/`](eda_resources/smol_training/). Recipe công bố không cung cấp đủ JSON nguồn nội bộ và danh sách mẫu thực tế gắn với checkpoint, nên chưa thể xác minh toàn bộ lịch sử huấn luyện. “Common-unmatched” chỉ nói về nguồn đã kiểm tra. Hai tài liệu định hướng gốc vẫn chưa tìm thấy trong workspace, Downloads hoặc Documents; phạm vi dựa trên nội dung người dùng cung cấp.
+Đã kiểm tra thêm 110 mục trong YAML mixture và mã huấn luyện của tác giả SmolVLM2, lưu ở [`eda_resources/smol_training/`](eda_resources/smol_training/). Recipe công bố không cung cấp đủ JSON nguồn nội bộ và danh sách mẫu thực tế gắn với checkpoint, nên chưa thể xác minh toàn bộ lịch sử huấn luyện. “Common-unmatched” chỉ nói về nguồn đã kiểm tra. Người dùng xác nhận chưa có hai tài liệu định hướng gốc; phạm vi dựa trên nội dung đã cung cấp.
 
 ## Manifest và giao thức
 
@@ -70,7 +70,17 @@ Notebook được dựng từ một nguồn Markdown duy nhất; bảng đọc C
 
 Sau khi đã có đủ output CPU, chạy `python rebuild_hgai.py` để dựng, thực thi, xuất và kiểm tra báo cáo trong một lệnh; pipeline dừng ngay nếu một bước lỗi. Dùng `--refresh-training-overlap` khi metadata nguồn vừa được bổ sung; `--recompute-cpu` chỉ khi cần chạy lại toàn bộ processor.
 
-Xem [rà soát tổng quan](EDA_HGAI_Review.md) để phân biệt EDA đã hoàn thành với phần thí nghiệm chưa triển khai. Runner Smol hiện hỗ trợ detailed512/POPE; hai control prompt còn ở mức thiết kế. TinyLLaVA chưa có runner sinh caption; output LLaVA chưa được nối vào scorer. Adapter HGAI, tuning, CI và guard refusal/repetition vẫn chưa hoàn tất. Số tham chiếu CHAIR-S 64 token đã đối chiếu lại với [bảng 3 HGAI v3](https://arxiv.org/html/2411.16724v3#S4.T3): **23,8**, thay số 20,8 trong phần đối chiếu được gửi trước đó.
+Xem [hướng dẫn thí nghiệm](HGAI_Experiments.md) và [rà soát tổng quan](EDA_HGAI_Review.md). Runner chung `vlm_experiment.py` hỗ trợ Smol/Tiny/LLaVA, cả ba prompt, baseline/HGAI và POPE; scorer chung có refusal/output trống/repetition/Distinct-1 và CI ghép cặp theo ảnh. Port Tiny đã khớp 877 tên tensor, cần kiểm chứng forward khi tải xong trọng số. Chiến dịch đầy đủ đã khởi chạy, gồm tuning dev500, khóa selection, eval500, đối chứng và POPE 3.000 câu mỗi biến thể/điều kiện. [Bảng tiến độ](eda_results/hgai/experiment_run_status.csv) là snapshot có thời điểm, chưa phải điểm đầy đủ. Số tham chiếu CHAIR-S 64 token đã đối chiếu [bảng 3 HGAI v3](https://arxiv.org/html/2411.16724v3#S4.T3): **23,8**.
+
+```powershell
+.venv-eda/Scripts/python.exe fetch_vlm_weights.py --model all
+.venv-eda/Scripts/python.exe test_hgai_attention.py
+.venv-eda/Scripts/python.exe test_hgai_scoring.py
+.venv-eda/Scripts/python.exe run_hgai_suite.py --models smol tiny llava --external-smol-baseline experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl
+.venv-eda/Scripts/python.exe show_hgai_progress.py
+```
+
+Máy đang chạy campaign nền tuần tự; không mở thêm runner GPU đồng thời. Campaign và caption dở được giữ local, flush từng ảnh, `--resume` giữ nguyên config/hash. Các kết quả hoàn tất được lưu cùng hash và có thể đưa lên Git riêng. Toàn grid có thể mất nhiều ngày trên GPU 4 GB; NF4 và HF conversion không phải hàng tái lập native FP16 của bài báo.
 
 ## Dữ liệu nền được giữ
 

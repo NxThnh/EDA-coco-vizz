@@ -1,0 +1,8 @@
+{
+  "repo": "bczhou/TinyLLaVA-3.1B",
+  "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+  "url": "https://huggingface.co/bczhou/TinyLLaVA-3.1B/resolve/71e73b5bef64b9e9b10028750d8c9494e904adb2/model.safetensors.index.json",
+  "git_blob_sha1": "372de936ba7deadd1a184c6c4248be1f05b5880f",
+  "sha256": "0b8634afc1427be75a2ec478e0d4de5ceffa06c3288eac467f0fb80e92b34648",
+  "parameter_names": 877
+}

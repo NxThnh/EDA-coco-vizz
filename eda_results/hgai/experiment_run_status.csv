@@ -1,0 +1,9 @@
+﻿model,model_key,task,partition,condition,alpha,precision,requested_rows,benchmark_rows,generated_rows,status,role,CHAIR_S_pct,CHAIR_I_pct,accuracy,output_path
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,chair,dev_common_unmatched500,detailed512,0.5,nf4,2,500,2,scored,feasibility_pilot,0.0,,,experiment_outputs/adapter_smoke/smol_alpha05_dev2.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,chair,dev_common_unmatched500,detailed512,0.0,nf4,2,500,2,scored,feasibility_pilot,0.0,0.0,,experiment_outputs/adapter_smoke/smol_alpha0_dev2.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,chair,eval_common_unmatched500,detailed512,0.0,nf4,500,500,65,partial,baseline,,,,experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,chair,dev_common_unmatched500,detailed512,0.0,nf4,20,500,20,scored,feasibility_pilot,35.0,9.293680297397769,,experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,pope,official-pope-adversarial,pope64,0.0,nf4,60,3000,60,scored,feasibility_pilot,,,0.7,experiment_outputs/smol_baseline/pope_adversarial_nf4_split_on_n60.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,pope,official-pope-popular,pope64,0.0,nf4,60,3000,60,scored,feasibility_pilot,,,0.7666666666666667,experiment_outputs/smol_baseline/pope_popular_nf4_split_on_n60.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,pope,official-pope-random,pope64,0.0,nf4,60,3000,60,scored,feasibility_pilot,,,0.9,experiment_outputs/smol_baseline/pope_random_nf4_split_on_n60.jsonl
+HuggingFaceTB/SmolVLM2-2.2B-Instruct,smol,chair,dev_common_unmatched500,detailed512,0.0,nf4,1,500,1,scored,feasibility_pilot,0.0,0.0,,experiment_outputs/smol_baseline/smoke1b_nf4.jsonl

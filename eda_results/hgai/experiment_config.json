@@ -2,7 +2,7 @@
   "schema_version": 2,
   "date": "2026-10-06",
   "scope": "COCO primary; VizWiz context only",
-  "scope_basis": "User-provided review of contribution report and council minutes dated 2026-10-05; originals not in workspace.",
+  "scope_basis": "User-provided review dated 2026-10-05; user confirms originals are unavailable. COCO primary / VizWiz context remains the working scope.",
   "main_models": [
     {
       "id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
@@ -110,11 +110,11 @@
   },
   "smol_ablation": "split_on/off; count only true <image> positions per input and exclude grid/boundary tokens",
   "implementation_status": {
-    "SmolVLM2_baseline": "Runner supports detailed512 and official POPE; NF4 pilots completed only.",
-    "LLaVA_baseline": "Runner supports all three prompt conditions; no generated outputs or scoring integration verified.",
-    "TinyLLaVA_baseline": "No inference runner or generated outputs yet.",
-    "HGAI_and_tuning": "Adapters, dev tuning, paired bootstrap CI and full evaluations not implemented/completed.",
-    "planned_guards": "Refusal and repetition/Distinct-1 are requirements, not current scored pilot columns."
+    "SmolVLM2_baseline": "Shared runner supports all three prompt conditions and official POPE; real-weight alpha-zero smoke exactly matches native baseline.",
+    "LLaVA_baseline": "HF runner is connected to shared scorer; actual completed runs are listed in experiment_run_status.json. Native/HF equivalence remains unverified.",
+    "TinyLLaVA_baseline": "Legacy Phi/SigLIP port and runner implemented; all 877 tensor names match checkpoint index; actual completed runs are listed in experiment_run_status.json.",
+    "HGAI_and_tuning": "Adapter semantics/GQA/cache validated on CPU and Smol real weights. Full dev grid, freezing and eval/control orchestration implemented; campaign is running, not yet complete.",
+    "guards_and_CI": "Refusal, empty-output, repetition/Distinct-1 and paired image bootstrap implemented and tested. POPE bootstrap keeps questions clustered by image."
   },
-  "inference_status": "Official SmolVLM2 weights are local. NF4 feasibility pilots are reported separately; no HGAI intervention or full three-model evaluation is claimed."
+  "inference_status": "See experiment_run_status.json for a dated snapshot of actual counts. Full three-model results, optimal alpha/layers and native FP16 replication are not yet established."
 }

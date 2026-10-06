@@ -28,6 +28,8 @@ def main():
             run(cpu,'hgai_geometry_finalize.py')
     if args.refresh_training_overlap:run(cpu,'small_vlm_training_overlap.py')
     run(cpu,'sampling_fix_diagnostics.py')
+    run(cpu,'build_experiment_status.py')
+    run(cpu,'audit_source_availability.py')
     run(cpu,'build_hgai_report.py')
     run(cpu,'build_eda_notebook.py')
     run(cpu,'run_eda_notebook.py')

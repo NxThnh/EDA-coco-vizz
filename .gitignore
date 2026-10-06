@@ -38,3 +38,9 @@ dist/
 work/
 .openai/
 model_assets/
+# Active generation stays local; publish only complete, scored runs.
+experiment_outputs/full_baseline/*.jsonl
+experiment_outputs/hgai_campaign/*.jsonl
+experiment_outputs/hgai_campaign/campaign_status.json
+experiment_outputs/hgai_campaign/campaign.lock
+experiment_outputs/hgai_campaign/campaign_plan_pre_*.json

@@ -9,9 +9,9 @@
   ],
   "processor_rows": 7500,
   "caption_token_rows": 96092,
-  "executed_notebook_code_cells": 13,
+  "executed_notebook_code_cells": 14,
   "embedded_figures": 5,
-  "local_report_links_checked": 23,
+  "local_report_links_checked": 29,
   "verified_scored_runs": [
     "experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl",
     "experiment_outputs/smol_baseline/pope_adversarial_nf4_split_on_n60.jsonl",
@@ -19,7 +19,14 @@
     "experiment_outputs/smol_baseline/pope_random_nf4_split_on_n60.jsonl",
     "experiment_outputs/smol_baseline/smoke1b_nf4.jsonl"
   ],
-  "local_html_links_checked": 23,
-  "report_sha256": "6d3c2638413ce97da6e3da8c2505b3527b8d7585082539f33f4ddcdf1a2a5550",
-  "notebook_sha256": "8b1a1de55a96c8602e9301a0035356a9c5a462d6b289d63337e4cebd59e3967c"
+  "local_html_links_checked": 29,
+  "verified_new_scored_runs": [
+    "experiment_outputs/adapter_smoke/smol_alpha05_dev2.jsonl",
+    "experiment_outputs/adapter_smoke/smol_alpha0_dev2.jsonl"
+  ],
+  "tiny_checkpoint_tensor_names_verified": 877,
+  "campaign_plan_sha256": "987d5316eb8103f9d4dfd51bc3ef65702a4f9456db3053f25eb842dc91f6f6f3",
+  "full_campaign_complete": false,
+  "report_sha256": "cce261d4c4638329764bc590f3cae89ee0b337fe5fc0f19d906f62acb4b6e6f2",
+  "notebook_sha256": "2f1d16f5506ee5540f6c6ceaae649149c6c4274d7d9d358463353312f5476a55"
 }

@@ -1,0 +1,53 @@
+{
+  "models": [
+    "smol",
+    "tiny",
+    "llava"
+  ],
+  "precision": "nf4",
+  "dev_images": 500,
+  "eval_images": 500,
+  "pope_questions_per_variant": 3000,
+  "fractional_layers": [
+    [
+      0.1,
+      0.4
+    ],
+    [
+      0.15,
+      0.6
+    ],
+    [
+      0.25,
+      0.7
+    ]
+  ],
+  "alphas": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "guards": {
+    "max_recall_drop": 0.02,
+    "max_F1_drop": 0.02,
+    "max_refusal_increase": 0.05,
+    "max_empty_increase": 0.05,
+    "max_truncation_increase": 0.05,
+    "max_repeat_increase": 0.05,
+    "minimum_length_ratio": 0.5
+  },
+  "bootstrap": 10000,
+  "selection": "minimum dev CHAIR_S, then CHAIR_I, then maximum F1, then lower alpha; baseline included",
+  "dev_manifest_sha256": "580670e35afae240872999d75f9d9f5b9832c418cec6347763b246c54626615b",
+  "eval_manifest_sha256": "2fd49523e3464f1d6d38517c0e81fbfbac41d87a95c5115dcaab9354f81aeb19",
+  "source_sha256": {
+    "hgai_attention.py": "ecbc1197105df72fd402bb002aefa4984a88b870664d700a1c767bee5bb81c47",
+    "vlm_experiment.py": "669e04abcce427dcbddf38815f5a6c8481cb14b5697405441663bee805ce92ad",
+    "tinyllava_model.py": "a7894386d8efb1c9ac06f3f4e6671ad6f7a508f99fb5098f7be576cfb77402ba",
+    "score_vlm_runs.py": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+    "run_hgai_suite.py": "0e7ee6064c1718ea69c4f24b4b1d106b52075639e3d2ec79bd797cdc0b627eb5"
+  },
+  "external_smol_baseline": "experiment_outputs\\full_baseline\\smol_chair_eval500_nf4_detailed512.jsonl",
+  "note": "NF4 campaign; it does not reproduce native FP16 paper numbers. Long-running local GPU work."
+}

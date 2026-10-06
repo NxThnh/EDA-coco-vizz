@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "original_formula_and_mask": true,
+  "models": [
+    {
+      "architecture": "LlamaForCausalLM",
+      "alpha_zero_bit_exact": true,
+      "cached_generation_finite": true,
+      "gqa_tested": true,
+      "registry_restored": true
+    },
+    {
+      "architecture": "PhiForCausalLM",
+      "alpha_zero_bit_exact": true,
+      "cached_generation_finite": true,
+      "gqa_tested": true,
+      "registry_restored": true
+    }
+  ],
+  "adapter_sha256": "ecbc1197105df72fd402bb002aefa4984a88b870664d700a1c767bee5bb81c47",
+  "test_sha256": "ef14a54bba73cc480eaa9f252e7a24c9a437bfa08d1ae44359be30ef20f4c726"
+}

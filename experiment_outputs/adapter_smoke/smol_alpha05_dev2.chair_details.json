@@ -1,0 +1,72 @@
+[
+  {
+    "image_id": 802,
+    "caption": "The image is a photograph of a kitchen.",
+    "mscoco_gt_words": [
+      "oven",
+      "refrigerator"
+    ],
+    "mscoco_generated_words": [],
+    "mscoco_hallucinated_words": [],
+    "hallucination_idxs": [],
+    "words": [
+      "the",
+      "image",
+      "is",
+      "a",
+      "photograph",
+      "of",
+      "a",
+      "kitchen",
+      "."
+    ],
+    "metrics": {
+      "CHAIRs": 0,
+      "CHAIRi": 0
+    },
+    "paired_statistics": {
+      "CHAIR_S": 0,
+      "hallucinated": 0,
+      "generated": 0,
+      "tp": 0,
+      "predicted": 0,
+      "ground": 2
+    }
+  },
+  {
+    "image_id": 872,
+    "caption": "The image is a photograph of a baseball game.",
+    "mscoco_gt_words": [
+      "baseball glove",
+      "person",
+      "sports ball"
+    ],
+    "mscoco_generated_words": [],
+    "mscoco_hallucinated_words": [],
+    "hallucination_idxs": [],
+    "words": [
+      "the",
+      "image",
+      "is",
+      "a",
+      "photograph",
+      "of",
+      "a",
+      "baseball",
+      "game",
+      "."
+    ],
+    "metrics": {
+      "CHAIRs": 0,
+      "CHAIRi": 0
+    },
+    "paired_statistics": {
+      "CHAIR_S": 0,
+      "hallucinated": 0,
+      "generated": 0,
+      "tp": 0,
+      "predicted": 0,
+      "ground": 3
+    }
+  }
+]
