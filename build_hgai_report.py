@@ -74,6 +74,9 @@ def config():
                              {'id':'bczhou/TinyLLaVA-3.1B','revision':revisions['bczhou/TinyLLaVA-3.1B'],
                               'layers':tiny['num_hidden_layers'],'processor_mode':'pad_384','selection_basis':'Explicit 384px checkpoint assumption; TinyLLaVA family alone is ambiguous.'}],
               'reference_model':'liuhaotian/llava-v1.5-7b','reference_protocol_source':original,
+              'published_reference_metrics':{'paper_version':'2411.16724v3',
+                  'CHAIR_S_greedy_512_pct':53.0,'table_512':'https://arxiv.org/html/2411.16724v3#S4.T2',
+                  'CHAIR_S_greedy_64_pct':23.8,'table_64':'https://arxiv.org/html/2411.16724v3#S4.T3'},
               'main_partition':'eval_common_unmatched500','paper_protocol_partition':'eval_random500',
               'historical_sensitivity_partition':'eval_unmatched500','dev_partition':'dev_common_unmatched500',
               'sampling_scope':'Main small-model comparison excludes all audited ID pools. Random500 remains a separately reported paper-protocol reference; filtering changes the sampling distribution.',
@@ -92,6 +95,12 @@ def config():
                                    'selection':'Select on dev using CHAIR plus recall/F1 guards; freeze before eval; do not tune against eval or POPE.',
                                    'note':'Exploratory grid, not experimentally selected layers or optimal alpha. No transfer of literal 5-18 or 576-token image interval to small models.'},
               'smol_ablation':'split_on/off; count only true <image> positions per input and exclude grid/boundary tokens',
+              'implementation_status':{
+                  'SmolVLM2_baseline':'Runner supports detailed512 and official POPE; NF4 pilots completed only.',
+                  'LLaVA_baseline':'Runner supports all three prompt conditions; no generated outputs or scoring integration verified.',
+                  'TinyLLaVA_baseline':'No inference runner or generated outputs yet.',
+                  'HGAI_and_tuning':'Adapters, dev tuning, paired bootstrap CI and full evaluations not implemented/completed.',
+                  'planned_guards':'Refusal and repetition/Distinct-1 are requirements, not current scored pilot columns.'},
               'inference_status':'Official SmolVLM2 weights are local. NF4 feasibility pilots are reported separately; no HGAI intervention or full three-model evaluation is claimed.'}
     (OUT/'experiment_config.json').write_text(json.dumps(protocol,ensure_ascii=False,indent=2),encoding='utf-8')
     return protocol
@@ -252,7 +261,7 @@ CHAIR chính thức dùng hợp nhãn instance và đối tượng từ mọi ca
 
 [Mã đánh giá của tác giả](https://github.com/ZhangqiJiang07/middle_layers_indicating_hallucinations/blob/main/chair_eval.py) dùng **“Please help me describe the image in detail.”**, 500 ảnh COCO, `max_new_tokens=512`, `do_sample=False`, `num_beams=1`, HGAI mean aggregation, α=0,5, layer **5–18 inclusive**. Bản source và commit được lưu trong `eda_resources/hgai_original/`.
 
-Bài báo báo CHAIR-S greedy LLaVA **53,0 ở 512 token** và **20,8 ở 64 token**; đây là số công bố, không phải kết quả ở workspace. [Bài báo HGAI](https://arxiv.org/abs/2411.16724). Độ dài ngắn thu hẹp phần lỗi có thể giảm (headroom), nên 64 token không còn là giao thức chính.
+Bảng 2 và 3 của bài báo HGAI v3 ghi CHAIR-S greedy LLaVA **53,0 ở 512 token** và **23,8 ở 64 token**; đây là số công bố, không phải kết quả ở workspace. [Bảng 2](https://arxiv.org/html/2411.16724v3#S4.T2), [bảng 3](https://arxiv.org/html/2411.16724v3#S4.T3). Con số 20,8 trong nội dung đối chiếu người dùng gửi chưa khớp nguồn gốc; bản v1 cũng ghi 23,8. Độ dài ngắn thu hẹp phần lỗi có thể giảm (headroom), nên 64 token không còn là giao thức chính.
 
 Mã `eval_data_loader.py` gọi processor trực tiếp; với CLIP 336px đây là resize/crop. Config checkpoint LLaVA ghi pad nhưng không tự chứng minh đường chạy đánh giá đã pad. Nhánh kiểm chứng dùng đường xử lý theo mã tác giả; pad là control riêng. EXIF vẫn áp trước mọi tiền xử lý. Cần kiểm tra equivalence native LLaVA/HF conversion khi có trọng số; chưa tuyên bố đã tái lập hàng 53,0 bằng script baseline chưa chạy.
 
@@ -288,6 +297,8 @@ Máy hiện tại có RTX 3050 Laptop 4 GB; runner `smol_baseline.py` dùng NF4,
 
 **Pilot không thay đánh giá đầy đủ:** caption pilot là prefix 20 ảnh của dev mới, không phải mẫu eval500. POPE pilot giữ prefix câu hỏi theo thứ tự gốc, không phải đủ 3.000 câu mỗi biến thể. Không dùng các điểm pilot để kết luận hiệu quả HGAI hoặc so trực tiếp với hàng LLaVA 53,0; NF4 cũng là một điều kiện precision riêng. Chưa có adapter HGAI, α được chọn trên dev, baseline đầy đủ ba VLM hoặc thí nghiệm đối chứng hoàn tất.
 
+**Trạng thái triển khai:** SmolVLM2 hiện chạy được `detailed512` và POPE, chưa có lựa chọn `detailed64`/`concise64` trong runner. LLaVA có ba điều kiện prompt nhưng chưa có output và chưa nối định dạng runner vào scorer hiện tại; TinyLLaVA chưa có runner sinh caption. Refusal rate, repetition/Distinct-1 và CI bootstrap ghép cặp là yêu cầu cho giai đoạn thí nghiệm, chưa phải cột điểm đã được tính cho pilot. Báo cáo EDA không thay các phần triển khai này. [Kết quả rà soát tổng quan](EDA_HGAI_Review.md).
+
 '''
     text+=baseline_table()
     text+='''
@@ -295,6 +306,7 @@ Máy hiện tại có RTX 3050 Laptop 4 GB; runner `smol_baseline.py` dùng NF4,
 Chạy phần CPU mới bằng môi trường riêng; không thay môi trường cũ dùng CLIP:
 
 ```powershell
+# Dùng Python 3.10–3.12; CHAIR legacy cần lib2to3.
 python -m venv --system-site-packages .venv-eda
 .venv-eda/Scripts/python.exe -m pip install -r requirements-hgai-cpu.txt
 python fetch_hgai_assets.py

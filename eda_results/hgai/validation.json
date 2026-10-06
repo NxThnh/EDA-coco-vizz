@@ -2,11 +2,16 @@
   "status": "passed",
   "locked_partitions": 5,
   "images_per_partition": 500,
+  "actual_image_bytes_verified": 2500,
+  "git_locked_sources_verified": [
+    "eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv",
+    "eda_results/vlm_extensions/val_image_hashes.csv"
+  ],
   "processor_rows": 7500,
   "caption_token_rows": 96092,
   "executed_notebook_code_cells": 13,
   "embedded_figures": 5,
-  "local_report_links_checked": 22,
+  "local_report_links_checked": 23,
   "verified_scored_runs": [
     "experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl",
     "experiment_outputs/smol_baseline/pope_adversarial_nf4_split_on_n60.jsonl",
@@ -14,6 +19,7 @@
     "experiment_outputs/smol_baseline/pope_random_nf4_split_on_n60.jsonl",
     "experiment_outputs/smol_baseline/smoke1b_nf4.jsonl"
   ],
-  "report_sha256": "250d8debdf3dbc6b59f386e1f09a4193789c8596eaf9ab9204945e3e0ab0bf8b",
-  "notebook_sha256": "2ebda3688f00958ce99f9b949d2906cfbc89c7ff2e473d95ca89b510fdb2e060"
+  "local_html_links_checked": 23,
+  "report_sha256": "6d3c2638413ce97da6e3da8c2505b3527b8d7585082539f33f4ddcdf1a2a5550",
+  "notebook_sha256": "8b1a1de55a96c8602e9301a0035356a9c5a462d6b289d63337e4cebd59e3967c"
 }

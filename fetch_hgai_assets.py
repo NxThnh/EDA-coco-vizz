@@ -34,6 +34,7 @@ def get(url):
 
 def main():
     LOG.parent.mkdir(parents=True, exist_ok=True)
+    (ROOT / 'scratch').mkdir(parents=True, exist_ok=True)
     records = []
     repos = ['HuggingFaceTB/SmolVLM2-2.2B-Instruct', 'bczhou/TinyLLaVA-3.1B',
              'bczhou/TinyLLaVA-3.1B-SigLIP', 'google/siglip-so400m-patch14-384']
@@ -41,7 +42,7 @@ def main():
         info = get('https://huggingface.co/api/models/' + repo + '/revision/' + REVISIONS[repo]).json()
         revision = info['sha']
         folder = ROOT / 'model_assets' / repo.split('/')[-1]
-        folder.mkdir(exist_ok=True)
+        folder.mkdir(parents=True, exist_ok=True)
         for item in info['siblings']:
             name = item['rfilename']
             if name not in ALLOWED:

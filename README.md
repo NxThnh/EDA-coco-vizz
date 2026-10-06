@@ -9,7 +9,7 @@
 - Processor chạy trên **2.500 ảnh cố định**, gồm cả 1.000 ảnh common-unmatched mới; tổng **7.500 dòng** cho SmolVLM2 chia ô bật/tắt và TinyLLaVA pad384.
 - SmolVLM2: 640×480 cho **1.053 visual token**, ảnh 640×640 cho **1.377**, tắt chia ô cho **81**. Số token được đếm từ input processor, không suy từ độ phân giải gốc.
 - Tokenizer đúng checkpoint trên 40.504 caption COCO và 7.542 caption VizWiz ở cả hai mô hình; không cộng token ảnh/prompt.
-- Pad/crop/scale trên toàn val; độ méo của SmolVLM2 được tách tile/global. Processor TinyLLaVA khớp tensor lớp legacy trên 20 ảnh, sai lệch tối đa 0.
+- Pad/crop/scale TinyLLaVA và LLaVA được tính trên toàn val; hình học SmolVLM2 được kiểm tra trên cả năm manifest, tách độ méo tile/global. Processor TinyLLaVA khớp tensor lớp legacy trên 20 ảnh, sai lệch tối đa 0.
 - Lệch tâm bbox đã đo trên **40.137 ảnh COCO có instance**; 367 ảnh không có bbox được để trống.
 - Rò rỉ LLaVA gồm COCO trực tiếp và alias VG/GQA: **16.618/40.504 (41,028%)**. TinyLLaVA được đối chiếu cả hai recipe; SmolVLM2 được kiểm tra ID nguồn upstream OneVision và ghi rõ giới hạn.
 - Rà trực quan 40 cặp ảnh VizWiz raw/sau EXIF; cập nhật nhóm từ chỉ người về cùng đồng nghĩa CHAIR (37,52% COCO và 8,66% VizWiz).
@@ -30,7 +30,7 @@ Giao thức chính: prompt mô tả chi tiết của HGAI, **512 token**, greedy
 
 ## Tái lập
 
-Các script EDA cũ vẫn dùng môi trường cũ. Tạo môi trường CPU riêng cho processor mới:
+Các script EDA cũ vẫn dùng môi trường cũ. Dùng Python 3.10–3.12 (CHAIR legacy cần `lib2to3`) và tạo môi trường CPU riêng cho processor mới. Các phụ thuộc CPU, Jupyter và chấm điểm đã khai báo trong requirements; notebook chạy bằng đúng interpreter của pipeline:
 
 ```powershell
 python -m venv --system-site-packages .venv-eda
@@ -69,6 +69,8 @@ Các fetch EDA lấy processor/tokenizer, annotation và ID; `fetch_smol_baselin
 Notebook được dựng từ một nguồn Markdown duy nhất; bảng đọc CSV ngay cạnh phần giải thích và hình nhúng vào attachment. Hình 8/9 xuất hiện một lần. `validate_hgai.py` kiểm tra khóa manifest, split ID/byte, token processor, cờ rò rỉ, độ dài caption, output notebook và ảnh nhúng HTML.
 
 Sau khi đã có đủ output CPU, chạy `python rebuild_hgai.py` để dựng, thực thi, xuất và kiểm tra báo cáo trong một lệnh; pipeline dừng ngay nếu một bước lỗi. Dùng `--refresh-training-overlap` khi metadata nguồn vừa được bổ sung; `--recompute-cpu` chỉ khi cần chạy lại toàn bộ processor.
+
+Xem [rà soát tổng quan](EDA_HGAI_Review.md) để phân biệt EDA đã hoàn thành với phần thí nghiệm chưa triển khai. Runner Smol hiện hỗ trợ detailed512/POPE; hai control prompt còn ở mức thiết kế. TinyLLaVA chưa có runner sinh caption; output LLaVA chưa được nối vào scorer. Adapter HGAI, tuning, CI và guard refusal/repetition vẫn chưa hoàn tất. Số tham chiếu CHAIR-S 64 token đã đối chiếu lại với [bảng 3 HGAI v3](https://arxiv.org/html/2411.16724v3#S4.T3): **23,8**, thay số 20,8 trong phần đối chiếu được gửi trước đó.
 
 ## Dữ liệu nền được giữ
 

@@ -3,6 +3,7 @@
 
 import json
 import os
+import sys
 from pathlib import Path
 from jupyter_client import KernelManager
 
@@ -10,6 +11,8 @@ root = Path(__file__).resolve().parent
 path = root / "EDA_COCO_vs_VizWiz_Report.ipynb"
 notebook = json.loads(path.read_text(encoding="utf-8"))
 kernel = KernelManager(kernel_name="python3")
+# Use the interpreter that invoked this script, irrespective of a global kernelspec.
+kernel.kernel_spec.argv = [sys.executable, "-m", "ipykernel_launcher", "-f", "{connection_file}"]
 kernel_env = os.environ.copy()
 kernel_env["IPYTHONDIR"] = str(root / ".ipython_runtime")
 kernel_env["JUPYTER_RUNTIME_DIR"] = str(root / ".jupyter_runtime")

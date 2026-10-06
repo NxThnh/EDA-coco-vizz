@@ -23,6 +23,13 @@
     "repo": "ZhangqiJiang07/middle_layers_indicating_hallucinations",
     "revision": "1467fe07fefd4f15ed1ac3560455dff5b53dbc08"
   },
+  "published_reference_metrics": {
+    "paper_version": "2411.16724v3",
+    "CHAIR_S_greedy_512_pct": 53.0,
+    "table_512": "https://arxiv.org/html/2411.16724v3#S4.T2",
+    "CHAIR_S_greedy_64_pct": 23.8,
+    "table_64": "https://arxiv.org/html/2411.16724v3#S4.T3"
+  },
   "main_partition": "eval_common_unmatched500",
   "paper_protocol_partition": "eval_random500",
   "historical_sensitivity_partition": "eval_unmatched500",
@@ -102,5 +109,12 @@
     "note": "Exploratory grid, not experimentally selected layers or optimal alpha. No transfer of literal 5-18 or 576-token image interval to small models."
   },
   "smol_ablation": "split_on/off; count only true <image> positions per input and exclude grid/boundary tokens",
+  "implementation_status": {
+    "SmolVLM2_baseline": "Runner supports detailed512 and official POPE; NF4 pilots completed only.",
+    "LLaVA_baseline": "Runner supports all three prompt conditions; no generated outputs or scoring integration verified.",
+    "TinyLLaVA_baseline": "No inference runner or generated outputs yet.",
+    "HGAI_and_tuning": "Adapters, dev tuning, paired bootstrap CI and full evaluations not implemented/completed.",
+    "planned_guards": "Refusal and repetition/Distinct-1 are requirements, not current scored pilot columns."
+  },
   "inference_status": "Official SmolVLM2 weights are local. NF4 feasibility pilots are reported separately; no HGAI intervention or full three-model evaluation is claimed."
 }
