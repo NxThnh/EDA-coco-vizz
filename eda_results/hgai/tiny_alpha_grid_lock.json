@@ -1,0 +1,42 @@
+{
+  "status": "locked_from_output_only_dev_probe",
+  "model": "bczhou/TinyLLaVA-3.1B",
+  "partition": "dev_common_unmatched500",
+  "images": 20,
+  "layers_inclusive": [
+    5,
+    18
+  ],
+  "condition": "detailed512",
+  "candidate_doses": [
+    0.02,
+    0.05,
+    0.1,
+    0.2,
+    0.35,
+    0.5
+  ],
+  "alpha_low_rule": "Smallest tested dose with at least 10/20 captions different from paired baseline.",
+  "alpha_high_rule": "Largest tested dose with at most 4/20 captions below half paired baseline length.",
+  "alpha_low": 0.02,
+  "alpha_high": 0.5,
+  "grid": "Five equally spaced levels on log scale, inclusive endpoints.",
+  "alpha_grid": [
+    0.02,
+    0.044721359549995794,
+    0.1,
+    0.22360679774997896,
+    0.5
+  ],
+  "selection_data": "Output only; no CHAIR or eval.",
+  "source_sha256": {
+    "tiny_pad_alpha_0.000.jsonl": "ad109905370333904c503a6aaece67e739e0922f5070948e5d108e494d5efcd2",
+    "tiny_pad_alpha_0.020.jsonl": "52f4a5d24653c3bf4e69675b887cac9e3b31f29a9c16316dec506defcb307de6",
+    "tiny_pad_alpha_0.050.jsonl": "b89916e746c4460718dfdb0c93ec940d92ee1357b140b0acdc829f192719d8a5",
+    "tiny_pad_alpha_0.100.jsonl": "89f3273fe01b5134419a57d7a399f434718b7c744ccf755038e6cb12dcac2769",
+    "tiny_pad_alpha_0.200.jsonl": "2f4a582d03fdb28e002eaf2dd6b016d7e6eb3a1154093f21909d89295abf61c4",
+    "tiny_pad_alpha_0.350.jsonl": "ba4161cdf486c37d0aa1ecb08b79fe180d1dc011afc2d188ef9421e17f79b0e3",
+    "tiny_pad_alpha_0.500.jsonl": "9ef8d585c7dd65cf3b8cd06a3613913ba06a6cf1b2824ecc8a87f108defd4dea"
+  },
+  "rule_sha256": "ebb885c60944a6221073b08ceecb267ee1b0a5ce5eacea88c83ba34369530e91"
+}

@@ -3,15 +3,3 @@ val2014,LLaVA-1.5-7B,"16.618/40.504 (41,0%)",Chỉ xác nhận ID trong SFT đã
 val2014,TinyLLaVA/LLaVA-recipe,"16.618/40.504 (41,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
 val2014,TinyLLaVA/ShareGPT4V-recipe,"37.527/40.504 (92,7%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
 val2014,SmolVLM2/OneVision-ShareGPT4V-COCO,"15.056/40.504 (37,2%)",Chỉ là ảnh ứng viên ở nguồn upstream.
-dev_common_unmatched500,LLaVA-1.5-7B,"0/500 (0,0%)",Chỉ xác nhận ID trong SFT đã kiểm tra.
-dev_common_unmatched500,TinyLLaVA/LLaVA-recipe,"0/500 (0,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
-dev_common_unmatched500,TinyLLaVA/ShareGPT4V-recipe,"0/500 (0,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
-dev_common_unmatched500,SmolVLM2/OneVision-ShareGPT4V-COCO,"0/500 (0,0%)",Chỉ là ảnh ứng viên ở nguồn upstream.
-eval_common_unmatched500,LLaVA-1.5-7B,"0/500 (0,0%)",Chỉ xác nhận ID trong SFT đã kiểm tra.
-eval_common_unmatched500,TinyLLaVA/LLaVA-recipe,"0/500 (0,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
-eval_common_unmatched500,TinyLLaVA/ShareGPT4V-recipe,"0/500 (0,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
-eval_common_unmatched500,SmolVLM2/OneVision-ShareGPT4V-COCO,"0/500 (0,0%)",Chỉ là ảnh ứng viên ở nguồn upstream.
-eval_random500,LLaVA-1.5-7B,"205/500 (41,0%)",Chỉ xác nhận ID trong SFT đã kiểm tra.
-eval_random500,TinyLLaVA/LLaVA-recipe,"205/500 (41,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
-eval_random500,TinyLLaVA/ShareGPT4V-recipe,"460/500 (92,0%)",Chỉ xác nhận ID nếu checkpoint dùng recipe này.
-eval_random500,SmolVLM2/OneVision-ShareGPT4V-COCO,"171/500 (34,2%)",Chỉ là ảnh ứng viên ở nguồn upstream.

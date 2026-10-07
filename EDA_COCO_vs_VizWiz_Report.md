@@ -25,19 +25,9 @@ COCO val2014 có 40.504 ảnh và 202.654 caption. Kiểm tra toàn vẹn giải
 | val2014 | TinyLLaVA/LLaVA-recipe | 16.618/40.504 (41,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
 | val2014 | TinyLLaVA/ShareGPT4V-recipe | 37.527/40.504 (92,7%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
 | val2014 | SmolVLM2/OneVision-ShareGPT4V-COCO | 15.056/40.504 (37,2%) | Chỉ là ảnh ứng viên ở nguồn upstream. |
-| dev_common_unmatched500 | LLaVA-1.5-7B | 0/500 (0,0%) | Chỉ xác nhận ID trong SFT đã kiểm tra. |
-| dev_common_unmatched500 | TinyLLaVA/LLaVA-recipe | 0/500 (0,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
-| dev_common_unmatched500 | TinyLLaVA/ShareGPT4V-recipe | 0/500 (0,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
-| dev_common_unmatched500 | SmolVLM2/OneVision-ShareGPT4V-COCO | 0/500 (0,0%) | Chỉ là ảnh ứng viên ở nguồn upstream. |
-| eval_common_unmatched500 | LLaVA-1.5-7B | 0/500 (0,0%) | Chỉ xác nhận ID trong SFT đã kiểm tra. |
-| eval_common_unmatched500 | TinyLLaVA/LLaVA-recipe | 0/500 (0,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
-| eval_common_unmatched500 | TinyLLaVA/ShareGPT4V-recipe | 0/500 (0,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
-| eval_common_unmatched500 | SmolVLM2/OneVision-ShareGPT4V-COCO | 0/500 (0,0%) | Chỉ là ảnh ứng viên ở nguồn upstream. |
-| eval_random500 | LLaVA-1.5-7B | 205/500 (41,0%) | Chỉ xác nhận ID trong SFT đã kiểm tra. |
-| eval_random500 | TinyLLaVA/LLaVA-recipe | 205/500 (41,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
-| eval_random500 | TinyLLaVA/ShareGPT4V-recipe | 460/500 (92,0%) | Chỉ xác nhận ID nếu checkpoint dùng recipe này. |
-| eval_random500 | SmolVLM2/OneVision-ShareGPT4V-COCO | 171/500 (34,2%) | Chỉ là ảnh ứng viên ở nguồn upstream. |
 <!-- /CSV -->
+
+Trong 12 phép đối chiếu ID ở ba manifest còn dùng, cả dev_common_unmatched500 và eval_common_unmatched500 đều khớp 0/500 ở bốn nguồn/recipe đã kiểm tra; eval_random500 lần lượt khớp 205/500 với LLaVA SFT, 205/500 với TinyLLaVA theo recipe LLaVA, 460/500 với recipe ShareGPT4V và 171/500 ứng viên upstream SmolVLM2. Đây là phép khớp ID, không phải bằng chứng checkpoint đã học ảnh.
 
 ## 2. Các bộ ảnh cố định và phân bố object
 
@@ -201,7 +191,38 @@ Bảng độ nhạy dưới đây áp cùng phép chọn dải cho ngưỡng 0,5
 | 0,70 | Không | 23 | không tìm thấy ranh giới |
 <!-- /CSV -->
 
-Quy tắc v1 trên LLaVA-1.5-7B: **chưa chạy**, vì checkpoint trọng số đầy đủ chưa có ở môi trường này; do đó chưa có dải đo để so với mốc 5–18. Không suy dải LLaVA từ đường cong SmolVLM2. Không đề xuất hoặc sử dụng quy tắc v2 trong báo cáo này.
+Trên 20 ảnh SmolVLM2, VAR ở layer 0 là 0,473, vùng thấp 3–5 là 0,019–0,022, rồi nổi lên tới 0,172 ở layer 12. Độ nhạy che ảnh tăng từ 0,197 ở layer 9 lên 0,259 ở layer 10, và từ 0,375 ở layer 22 lên 0,487 ở layer 23. Dải 5–18 tuyệt đối và dải co 3–14 đều phủ vùng VAR nổi lên quanh layer 12, nhưng đều bỏ đỉnh độ nhạy ở layer cuối. Trong min–max v1, đỉnh VAR ở layer 0 và đỉnh độ nhạy ở layer 23 chi phối hai thang; VAR của mọi layer còn lại đều dưới ngưỡng chuẩn hóa 0,60, nên hai đường không thể đồng thời đạt ngưỡng ở các layer đó.
+
+Quy tắc **v2** đã khóa riêng, SHA-256 `16a05a6fc5c360dc42cb8e9f0d988eb17033ef74d97c631ec8970b5ab125ee48`: chuẩn hóa riêng từng đường bằng `clip((x−P10)/(P90−P10), 0, 1)`, với P10/P90 là phân vị 10/90 qua layer; ngưỡng chung 0,50. Mọi bước chọn dải còn lại giữ như v1: dải đạt ngưỡng liền mạch tối đại, rộng ít nhất max(2, ⌈0,10L⌉), chọn tổng min lớn nhất, hòa chọn đầu sớm nhất; không có dải thì trả “không tìm thấy ranh giới”. **v2 được đặt sau khi đã thấy đường cong SmolVLM2 20 ảnh**; tham số không được sửa theo kết quả tiếp theo. Trên chính 20 ảnh này, v1 trả “không tìm thấy ranh giới”, v2 trả **layer 10–23**, chạm layer cuối. Kết quả này chỉ mô tả cùng tập ảnh đã dùng để quan sát đường cong.
+
+Cả hai phép đo 100 ảnh dùng cùng [danh sách ID dev seed 927](eda_results/hgai/layer_curves100_dev_ids.csv), không lấy ảnh eval.
+
+Trên 100 ảnh dev seed 927 của SmolVLM2-2.2B, v1: **không tìm thấy ranh giới**; v2: **layer 10–23**. Bootstrap 1.000 lần ghép theo ảnh cho tần suất từng cặp đầu–cuối trong [tệp kết quả](eda_results/hgai/layer_rule_v2_100_smol.json).
+
+![Đường cong layer của SmolVLM2-2.2B trên 100 ảnh dev](eda_results/hgai/layer_rule_v2_100_smol_curves.png)
+
+Trên 100 ảnh dev seed 927 của bczhou/TinyLLaVA-3.1B, v1: **layer 18–28**; v2: **layer 12–28**. Bootstrap 1.000 lần ghép theo ảnh cho tần suất từng cặp đầu–cuối trong [tệp kết quả](eda_results/hgai/layer_rule_v2_100_tiny.json).
+
+Với TinyLLaVA NF4, forward decoder dùng SDPA như nhánh sinh caption; xác suất attention của query được đọc ở float32. Forward eager cho NaN ở layer 29–31 trên 100/100 ảnh nên không dùng để áp quy tắc ([kiểm kê giá trị lỗi](eda_results/hgai/tiny_eager_invalid_audit.json)). CSV SDPA đã kiểm tra mọi giá trị hữu hạn.
+
+![Đường cong layer của bczhou/TinyLLaVA-3.1B trên 100 ảnh dev](eda_results/hgai/layer_rule_v2_100_tiny_curves.png)
+
+### Tần suất dải v2 qua bootstrap theo ảnh
+
+<!-- CSV {"path": "eda_results/hgai/report_layer_v2_bootstrap.csv", "title": "Tần suất dải v2 qua bootstrap theo ảnh", "columns": null} -->
+| Mô hình | Dải v2 | Số lần / 1.000 | Tần suất |
+| :--- | :--- | :--- | :--- |
+| SmolVLM2-2.2B | 10–23 | 985 | 98,5% |
+| SmolVLM2-2.2B | 15–23 | 15 | 1,5% |
+| bczhou/TinyLLaVA-3.1B | 12–28 | 606 | 60,6% |
+| bczhou/TinyLLaVA-3.1B | 13–28 | 394 | 39,4% |
+<!-- /CSV -->
+
+VAR trung bình trên mọi bước sinh của cùng 20 ảnh dev SmolVLM2 là phân tích mô tả riêng: giải mã greedy NF4 với attention eager, lấy trung bình các bước query của từng ảnh đến EOS hoặc trần 512 rồi lấy trung bình đều theo ảnh. Ở layer 0, giá trị giảm từ 0,473 ở bước đầu xuống 0,201 khi lấy mọi bước; layer 12 tương ứng 0,172 và 0,136. [Đường cong theo layer](eda_results/hgai/var_all_steps_smol20_summary.csv) không dùng để sửa v1 hoặc v2.
+
+![VAR ở bước đầu và trung bình mọi bước sinh trên 20 ảnh dev SmolVLM2](eda_results/hgai/var_all_steps_smol20.png)
+
+Quy tắc v1 và v2 trên LLaVA-1.5-7B: **chưa chạy**, vì checkpoint trọng số đầy đủ chưa có ở môi trường này; do đó chưa có dải đo để so với mốc 5–18. Không suy dải LLaVA từ đường cong của mô hình khác.
 
 Phép dò α trên 20 ảnh dev, dải layer 5–18, với ba chế độ token ảnh và các liều 0,02/0,035/0,05/0,075/0,10. Tỷ lệ độ dài là trung bình của 20 tỷ số token sinh theo cặp can thiệp/baseline; caption chạm trần 512 token dùng độ dài quan sát. Khoảng cách sửa là Levenshtein ở mức từ, phân tách theo khoảng trắng, giữ chữ hoa và dấu câu. Bảng không dùng điểm CHAIR.
 
@@ -253,26 +274,32 @@ Tỷ lệ chạm trần và lặp là chỉ báo suy giảm output, không dùng
 
 Lưới α khóa trước khi đo CHAIR trên 500 ảnh dev: 0,02, 0,035, 0,05, 0,075, 0,10. Guard đã khóa trên toàn bộ 500 ảnh dev quyết định cấu hình hợp lệ.
 
-Phép dò tương tự trên **bczhou/TinyLLaVA-3.1B**, 10 ảnh dev, NF4, pad384, layer 5–18, prompt detailed512. Các tỷ lệ độ dài được ghép theo cùng ảnh baseline; đây chỉ là phép dò output, không dùng CHAIR để chọn α.
+Phép dò trên **bczhou/TinyLLaVA-3.1B**, 20 ảnh đầu theo manifest dev đã khóa, NF4, pad384, layer 5–18, prompt detailed512, các liều 0,02/0,05/0,10/0,20/0,35/0,50. Mọi tỷ lệ độ dài và caption trùng hệt được ghép theo cùng ảnh baseline; khoảng cách sửa là Levenshtein mức từ. Không dùng CHAIR hoặc eval để chọn α.
 
-### Phép dò liều α của TinyLLaVA trên 10 ảnh dev
+### Phép dò liều α của TinyLLaVA trên 20 ảnh dev
 
-<!-- CSV {"path": "eda_results/hgai/report_tiny_alpha_probe10.csv", "title": "Phép dò liều α của TinyLLaVA trên 10 ảnh dev", "columns": null} -->
-| α | Trung vị tỷ lệ độ dài | Token sinh TB | Co quá nửa | Chạm trần 512 | Có lặp 4-gram |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 0,00 | 1,00 | 182,9 | 0/10 (0,0%) | 0/10 (0,0%) | 3/10 (30,0%) |
-| 0,02 | 1,00 | 172,8 | 0/10 (0,0%) | 0/10 (0,0%) | 4/10 (40,0%) |
-| 0,035 | 1,00 | 186,4 | 0/10 (0,0%) | 0/10 (0,0%) | 4/10 (40,0%) |
-| 0,05 | 1,03 | 200,0 | 0/10 (0,0%) | 0/10 (0,0%) | 4/10 (40,0%) |
-| 0,075 | 1,01 | 202,5 | 0/10 (0,0%) | 0/10 (0,0%) | 4/10 (40,0%) |
-| 0,10 | 1,00 | 195,6 | 0/10 (0,0%) | 0/10 (0,0%) | 4/10 (40,0%) |
+<!-- CSV {"path": "eda_results/hgai/report_tiny_alpha_probe20_v2.csv", "title": "Phép dò liều α của TinyLLaVA trên 20 ảnh dev", "columns": null} -->
+| α | Tỷ lệ độ dài TB | Trung vị tỷ lệ độ dài | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB | Chạm trần 512 | Có lặp 4-gram |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 0,02 | 0,99 | 1,00 | 0/20 (0,0%) | 8/20 (40,0%) | 38,85 | 0/20 (0,0%) | 7/20 (35,0%) |
+| 0,05 | 1,09 | 1,05 | 0/20 (0,0%) | 0/20 (0,0%) | 87,70 | 0/20 (0,0%) | 8/20 (40,0%) |
+| 0,10 | 1,07 | 1,04 | 0/20 (0,0%) | 0/20 (0,0%) | 104,75 | 0/20 (0,0%) | 7/20 (35,0%) |
+| 0,20 | 1,13 | 1,08 | 0/20 (0,0%) | 0/20 (0,0%) | 112,15 | 0/20 (0,0%) | 9/20 (45,0%) |
+| 0,35 | 1,13 | 1,12 | 0/20 (0,0%) | 0/20 (0,0%) | 127,40 | 0/20 (0,0%) | 14/20 (70,0%) |
+| 0,50 | 1,14 | 0,89 | 0/20 (0,0%) | 0/20 (0,0%) | 133,25 | 1/20 (5,0%) | 15/20 (75,0%) |
 <!-- /CSV -->
+
+Lưới α TinyLLaVA đã khóa riêng: α thấp=0,02 là liều nhỏ nhất làm ít nhất 10/20 caption khác baseline; α cao=0,50 là liều lớn nhất có không quá 4/20 ảnh co quá nửa. Năm mức cách đều theo thang log, kể cả hai đầu: 0,0200, 0,0447, 0,1000, 0,2236, 0,5000. SHA-256 `ebb885c60944a6221073b08ceecb267ee1b0a5ce5eacea88c83ba34369530e91`. Lưới SmolVLM2 giữ nguyên.
 
 ### 5.4. Đối chứng layer và ngân sách tính toán
 
-Dải ngẫu nhiên phải rút **ít nhất 20 lần**, mỗi dải có đúng chiều rộng của dải đang đối chiếu, trên cùng tập con **125 ảnh dev** cố định; khi v1 không trả dải, dùng chiều rộng 14 layer của nhánh 5–18 làm tham chiếu mô tả. Quét oracle trên 125 ảnh dev chỉ là trần tham chiếu, không dùng eval để chọn. Hai nhánh định trước gồm **layer 5–18 tuyệt đối** và dải co theo độ sâu từ LLaVA 32 layer: lấy khoảng nửa mở [5,19), chuyển sang độ sâu L bằng `start=floor(5L/32)`, `end=ceil(19L/32)-1` (hai đầu tính vào). Vì vậy SmolVLM2 24 layer dùng dải co 3–14; TinyLLaVA 32 layer có dải co trùng 5–18. Điều kiện “mọi layer” được báo riêng.
+Liệt kê **toàn bộ dải liền mạch cùng độ rộng** trên cùng tập con **125 ảnh dev** cố định; một tập dải vừa cho phân phối đối chứng vừa cho oracle ở đúng độ rộng đó. Độ rộng thứ nhất là độ rộng dải v2 của từng mô hình; nếu v2 không trả dải thì dùng 14 layer. Độ rộng thứ hai là ⌈L/4⌉: 6 layer ở SmolVLM2 và 8 layer ở TinyLLaVA. Với độ rộng w và L layer, số dải là L−w+1. Phân vị của dải v2 trong phân phối cùng độ rộng cần tính từ các lượt chạy dev; phép quét này **chưa chạy** vì cần sinh caption cho toàn bộ dải trên 125 ảnh, nên chưa có phân vị hoặc điểm oracle để báo. Oracle là **cận trên chọn trên dev** để mô tả; điểm CHAIR trong phép quét không được dùng để thay dải v2 hoặc chọn cấu hình đem sang eval. Hai nhánh định trước gồm **layer 5–18 tuyệt đối** và dải co theo độ sâu từ LLaVA 32 layer: lấy khoảng nửa mở [5,19), chuyển sang độ sâu L bằng `start=floor(5L/32)`, `end=ceil(19L/32)-1` (hai đầu tính vào). Vì vậy SmolVLM2 24 layer dùng dải co 3–14; TinyLLaVA 32 layer có dải co trùng 5–18. Điều kiện “mọi layer” và dải v2 được báo riêng.
 
-Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/chế độ**: Smol detailed512 mặc định 20 ảnh, chia ô 768 và tắt chia ô mỗi chế độ 20 ảnh, POPE 60 câu hỏi mỗi biến thể; Tiny dùng pilot detailed512 khi hoàn tất. Các ô “chưa ước tính” không được gán tốc độ của mô hình khác. Tổng giờ toàn chiến dịch chỉ xác định sau khi có tốc độ Tiny/LLaVA và hai điều kiện prompt 64 token.
+Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/chế độ**: Smol detailed512 mặc định 20 ảnh, chia ô 768 và tắt chia ô mỗi chế độ 20 ảnh, POPE 60 câu hỏi mỗi biến thể; Tiny dùng baseline detailed512 trên 20 ảnh dev. Các ô “chưa ước tính” không được gán tốc độ của mô hình khác. Tổng giờ toàn chiến dịch chỉ xác định sau khi có tốc độ LLaVA, hai điều kiện prompt 64 token và phép đo attention chuyên biệt.
+
+SmolVLM2 (24 layer): độ rộng 14 có 11 dải, độ rộng hẹp 6 có 19 dải. TinyLLaVA (32 layer): độ rộng 17 có 16 dải, độ rộng hẹp 8 có 25 dải. Các số dải chỉ là liệt kê hình học; phân phối điểm trên 125 ảnh dev chưa chạy.
+
+[Danh sách đầy đủ các dải](eda_results/hgai/layer_band_scan_plan.csv) và [125 ID dev seed 42](eda_results/hgai/layer_band_scan_dev125_ids.csv) xác định chính xác các lượt chạy đối chứng. Hai tệp này không chứa điểm CHAIR hoặc kết quả chọn dải.
 
 ### Ngân sách theo thời gian pilot
 
@@ -280,8 +307,10 @@ Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/
 | Mô hình | Nhánh | Cấu hình | Ảnh/câu mỗi cấu hình | Tổng lượt sinh | Giây/lượt từ pilot | Giờ quy đổi |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Smol | Dev baseline + lưới α (dải kiểm chứng) | 6 | 500 | 3.000 | 20,16 | 16,80 |
-| Smol | 20 dải ngẫu nhiên cùng độ rộng | 20 | 125 | 2.500 | 20,16 | 14,00 |
-| Smol | Quét oracle 24 layer | 24 | 125 | 3.000 | 20,16 | 16,80 |
+| Smol | Đo lại hai đường cong trên 100 ảnh dev | 1 | 100 | 100 | chưa đo | chưa ước tính |
+| Smol | VAR mọi bước sinh, phân tích mô tả | 1 | 20 | 20 | chưa đo | chưa ước tính |
+| Smol | Liệt kê đủ dải rộng 14 layer; gồm phân phối và oracle dev | 11 | 125 | 1.375 | 20,16 | 7,70 |
+| Smol | Liệt kê đủ dải hẹp 6 layer; gồm phân phối và oracle dev | 19 | 125 | 2.375 | 20,16 | 13,30 |
 | Smol | Dải 5–18 và dải co, 5 liều | 10 | 125 | 1.250 | 20,16 | 7,00 |
 | Smol | Mọi layer | 1 | 125 | 125 | 20,16 | 0,70 |
 | Smol | Eval lọc: 512 token, baseline/HGAI | 2 | 500 | 1.000 | 20,16 | 5,60 |
@@ -290,17 +319,19 @@ Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/
 | Smol | Eval lọc: tắt chia ô, baseline/HGAI | 2 | 500 | 1.000 | 14,53 | 4,04 |
 | Smol | Eval lọc: detailed64/concise64, 2 nhánh | 4 | 500 | 2.000 | chưa đo | chưa ước tính |
 | Smol | POPE: 3 biến thể, baseline/HGAI | 6 | 3.000 | 18.000 | 2,67 | 13,34 |
-| Tiny | Dev baseline + 5 liều | 6 | 500 | 3.000 | 12,71 | 10,59 |
-| Tiny | 20 dải ngẫu nhiên cùng độ rộng | 20 | 125 | 2.500 | 12,71 | 8,83 |
-| Tiny | Quét oracle 32 layer | 32 | 125 | 4.000 | 12,71 | 14,12 |
-| Tiny | Dải 5–18 và dải co (trùng ở 32 layer) | 5 | 125 | 625 | 12,71 | 2,21 |
-| Tiny | Mọi layer | 1 | 125 | 125 | 12,71 | 0,44 |
+| Tiny | Dev baseline + 5 liều | 6 | 500 | 3.000 | 18,10 | 15,08 |
+| Tiny | Dò liều output: baseline + 6 liều trên 20 ảnh | 7 | 20 | 140 | 18,10 | 0,70 |
+| Tiny | Đo hai đường cong trên 100 ảnh dev | 1 | 100 | 100 | chưa đo | chưa ước tính |
+| Tiny | Liệt kê đủ dải rộng 17 layer; gồm phân phối và oracle dev | 16 | 125 | 2.000 | 18,10 | 10,05 |
+| Tiny | Liệt kê đủ dải hẹp 8 layer; gồm phân phối và oracle dev | 25 | 125 | 3.125 | 18,10 | 15,71 |
+| Tiny | Dải 5–18 và dải co (trùng ở 32 layer) | 5 | 125 | 625 | 18,10 | 3,14 |
+| Tiny | Mọi layer | 1 | 125 | 125 | 18,10 | 0,63 |
 | Tiny | Eval lọc: 512/64/concise64, 2 nhánh | 6 | 500 | 3.000 | chưa đo | chưa ước tính |
 | Tiny | Eval ngẫu nhiên: 512, baseline/HGAI | 2 | 500 | 1.000 | chưa đo | chưa ước tính |
 | Tiny | POPE: 3 biến thể, baseline/HGAI | 6 | 3.000 | 18.000 | chưa đo | chưa ước tính |
 | LLaVA | Eval ngẫu nhiên: baseline và 5–18/α=0,5 | 2 | 500 | 1.000 | chưa đo | chưa ước tính |
 | LLaVA | Đối chiếu FP16–NF4 trên 30 ảnh | 2 | 30 | 60 | chưa đo | chưa ước tính |
-| Tổng | Phần có tốc độ pilot / toàn kế hoạch | — | — | 67.185 | các hàng còn thiếu chưa đo | 125,04 giờ phần quy đổi; tổng đầy đủ chưa xác định |
+| Tổng | Phần có tốc độ pilot / toàn kế hoạch | — | — | 64.420 | các hàng còn thiếu chưa đo | 124,36 giờ phần quy đổi; tổng đầy đủ chưa xác định |
 <!-- /CSV -->
 
 Tập con 125 ảnh dev dùng seed 42; các cấu hình dẫn đầu sau quét thô mới chạy đủ 500 ảnh dev và qua guard trước hai bộ eval. Ngân sách gồm cả 3 mức token ảnh Smol, hai bộ eval, POPE và hàng LLaVA; số giờ là ước lượng quy mô, chưa phải thời gian hoàn thành đo được.
@@ -454,6 +485,24 @@ Checkpoint được chọn: `bczhou/TinyLLaVA-3.1B` cho nhánh pad và adapter P
 <!-- /CSV -->
 
 ![Phân bố độ lệch tâm bbox COCO](eda_results/hgai/coco_object_centering.png)
+
+## Tái lập
+
+| Script | Bảng/hình hoặc dữ liệu sinh ra |
+| :--- | :--- |
+| `audit_report_additions.py`, `audit_smol_768.py` | Dịch chuyển object, độ phủ cắt giữa, phân bố token 768 |
+| `audit_report_round.py` | Hình layer 20 ảnh, bảng độ nhạy v1 và chỉ số lặp SmolVLM2 |
+| `run_alpha_probe20.py`, `summarize_alpha_probe20.py` | Caption và bảng liều SmolVLM2 |
+| `run_tiny_alpha_probe20_v2.py`, `summarize_tiny_alpha_probe20_v2.py` | Caption, bảng liều và khóa lưới TinyLLaVA riêng |
+| `lock_layer_rule_v2.py` | Tệp khóa v2 và SHA-256, tạo đúng một lần |
+| `measure_layer_curves100.py`, `measure_layer_curves100_tiny_sdpa.py`, `analyze_layer_rule_v2.py` | Đường cong 100 ảnh, kết quả v1/v2, bootstrap 1.000 lần và hình; TinyLLaVA dùng forward SDPA và đọc attention float32 |
+| `measure_var_all_steps_smol20.py` | Đường cong VAR trung bình mọi bước sinh |
+| `enumerate_layer_band_plan.py` | Danh sách đầy đủ dải và 125 ID dev seed 42 |
+| `build_hgai_report_final.py`, `build_hgai_notebook.py` | Các bảng `report_*.csv`, Markdown và notebook từ cùng nguồn |
+
+Các phép sinh caption và đo attention cần checkpoint cùng GPU tương ứng; chỉ dựng lại báo cáo từ CSV/JSON đã đo không cần GPU.
+
+Từ thư mục repo `_archive`, dựng lại `.md` và notebook bằng `./.venv-eda/Scripts/python.exe build_hgai_report_final.py` rồi `./.venv-eda/Scripts/python.exe build_hgai_notebook.py`. `publish_hgai_report.py` xuất hai bản đọc ở thư mục cha và kiểm tra các bảng/hình khớp nhau. Không chạy lại các script đo khi chỉ cần dựng lại báo cáo; manifest và các tệp khóa đang có là đầu vào cố định.
 
 ## Tài liệu nguồn
 

@@ -1,0 +1,27 @@
+{
+  "model": "SmolVLM2-2.2B",
+  "images": 100,
+  "layers": 24,
+  "seed": 927,
+  "source": "eda_results/hgai/layer_curves100_smol_per_image.csv",
+  "v1_rule_sha256": "7faf7ebde361aed139c4d592537f8f2814e6345bee9ae6c62bd67702ec382fdc",
+  "v2_rule_sha256": "16a05a6fc5c360dc42cb8e9f0d988eb17033ef74d97c631ec8970b5ab125ee48",
+  "v1_band": null,
+  "v2_band": [
+    10,
+    23
+  ],
+  "bootstrap_replicates": 1000,
+  "v2_bootstrap_frequencies": [
+    {
+      "band": "10-23",
+      "count": 985,
+      "frequency": 0.985
+    },
+    {
+      "band": "15-23",
+      "count": 15,
+      "frequency": 0.015
+    }
+  ]
+}

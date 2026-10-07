@@ -1,0 +1,11 @@
+{
+  "model": "bczhou/TinyLLaVA-3.1B",
+  "images": 100,
+  "backend": "eager",
+  "invalid_layers": {
+    "29": 100,
+    "30": 100,
+    "31": 100
+  },
+  "disposition": "excluded from v1/v2; rerun with SDPA and float32 attention readout"
+}

@@ -1,5 +1,6 @@
 """Build both reader-facing HGAI reports from measured repository artifacts."""
 import json
+import math
 from pathlib import Path
 
 import pandas as pd
@@ -62,7 +63,7 @@ def main():
         'Chưa khớp nguồn đã kiểm tra':ratio(int(r.unmatched),int(r.images))}
         for r in summary.itertuples()])
     overlap=pd.read_csv(OUT/'small_vlm_training_overlap_summary.csv')
-    overlap=overlap[overlap.scope.isin(['val2014']+ACTIVE)]
+    overlap_main=overlap[overlap.scope.eq('val2014')]
     meaning={'exact_SFT_manifest_ID_join':'Chỉ xác nhận ID trong SFT đã kiểm tra.',
              'recipe_conditional_exact_SFT_ID_join':'Chỉ xác nhận ID nếu checkpoint dùng recipe này.',
              'recipe_conditional_pretrain_and_SFT_ID_join':'Chỉ xác nhận ID nếu checkpoint dùng recipe này.',
@@ -70,7 +71,7 @@ def main():
     save('report_training_overlap.csv',[{'Bộ ảnh':r.scope,'Mô hình hoặc recipe':r.model_or_recipe,
          'ID khớp':ratio(int(r.matched_ids),int(r.images)),
          'Giới hạn kết luận':meaning.get(r.status,'Chưa xác định phạm vi huấn luyện.')}
-         for r in overlap.itertuples()])
+         for r in overlap_main.itertuples()])
     geometry=pd.read_csv(OUT/'sampling_geometry_shift.csv')
     geometry=geometry[geometry.partition.isin(ACTIVE)]
     save('report_sampling_geometry.csv',[{'Bộ ảnh':r.partition,
@@ -125,8 +126,23 @@ def main():
     edge_rate=pilot_rate('experiment_outputs/alpha_probe20/smol_split_768_alpha_0.000.run.json')
     off_rate=pilot_rate('experiment_outputs/alpha_probe20/smol_split_off_alpha_0.000.run.json')
     pope_rate=sum(pilot_rate(f'experiment_outputs/smol_baseline/pope_{v}_nf4_split_on_n60.run.json') for v in ('random','popular','adversarial'))/3
-    tiny_pilot=ROOT/'experiment_outputs/tiny_alpha_probe10/tiny_pad_alpha_0.000.run.json'
-    tiny_rate=pilot_rate('experiment_outputs/tiny_alpha_probe10/tiny_pad_alpha_0.000.run.json') if tiny_pilot.exists() else None
+    tiny_pilot20=ROOT/'experiment_outputs/tiny_alpha_probe20_v2/tiny_pad_alpha_0.000.run.json'
+    tiny_pilot10=ROOT/'experiment_outputs/tiny_alpha_probe10/tiny_pad_alpha_0.000.run.json'
+    tiny_rate=(pilot_rate('experiment_outputs/tiny_alpha_probe20_v2/tiny_pad_alpha_0.000.run.json')
+               if tiny_pilot20.exists() else
+               pilot_rate('experiment_outputs/tiny_alpha_probe10/tiny_pad_alpha_0.000.run.json')
+               if tiny_pilot10.exists() else None)
+    def chosen_width(model,depth):
+        result_path=OUT/f'layer_rule_v2_100_{model}.json'
+        if not result_path.exists() and model=='smol':result_path=OUT/'layer_rule_v2_20_smol.json'
+        if result_path.exists():
+            found=json.loads(result_path.read_text(encoding='utf-8'))['v2_band']
+            if found is not None:return found[1]-found[0]+1
+        return 14
+    smol_width=chosen_width('smol',24)
+    tiny_width=chosen_width('tiny',32)
+    smol_narrow=math.ceil(24/4)
+    tiny_narrow=math.ceil(32/4)
     budget=[]
     def budget_row(model,branch,configs,units,rate):
         hours=configs*units*rate/3600 if rate is not None else None
@@ -135,8 +151,10 @@ def main():
                        'Giờ quy đổi':vi(hours,2) if hours is not None else 'chưa ước tính',
                        '_hours':hours})
     budget_row('Smol','Dev baseline + lưới α (dải kiểm chứng)',1+current_grid,full,seconds_per_image)
-    budget_row('Smol','20 dải ngẫu nhiên cùng độ rộng',20,coarse,seconds_per_image)
-    budget_row('Smol','Quét oracle 24 layer',24,coarse,seconds_per_image)
+    budget_row('Smol','Đo lại hai đường cong trên 100 ảnh dev',1,100,None)
+    budget_row('Smol','VAR mọi bước sinh, phân tích mô tả',1,20,None)
+    budget_row('Smol',f'Liệt kê đủ dải rộng {smol_width} layer; gồm phân phối và oracle dev',24-smol_width+1,coarse,seconds_per_image)
+    budget_row('Smol',f'Liệt kê đủ dải hẹp {smol_narrow} layer; gồm phân phối và oracle dev',24-smol_narrow+1,coarse,seconds_per_image)
     budget_row('Smol','Dải 5–18 và dải co, 5 liều',2*current_grid,coarse,seconds_per_image)
     budget_row('Smol','Mọi layer',1,coarse,seconds_per_image)
     budget_row('Smol','Eval lọc: 512 token, baseline/HGAI',2,full,seconds_per_image)
@@ -146,8 +164,10 @@ def main():
     budget_row('Smol','Eval lọc: detailed64/concise64, 2 nhánh',4,full,None)
     budget_row('Smol','POPE: 3 biến thể, baseline/HGAI',6,3000,pope_rate)
     budget_row('Tiny','Dev baseline + 5 liều',6,full,tiny_rate)
-    budget_row('Tiny','20 dải ngẫu nhiên cùng độ rộng',20,coarse,tiny_rate)
-    budget_row('Tiny','Quét oracle 32 layer',32,coarse,tiny_rate)
+    budget_row('Tiny','Dò liều output: baseline + 6 liều trên 20 ảnh',7,20,tiny_rate)
+    budget_row('Tiny','Đo hai đường cong trên 100 ảnh dev',1,100,None)
+    budget_row('Tiny',f'Liệt kê đủ dải rộng {tiny_width} layer; gồm phân phối và oracle dev',32-tiny_width+1,coarse,tiny_rate)
+    budget_row('Tiny',f'Liệt kê đủ dải hẹp {tiny_narrow} layer; gồm phân phối và oracle dev',32-tiny_narrow+1,coarse,tiny_rate)
     budget_row('Tiny','Dải 5–18 và dải co (trùng ở 32 layer)',current_grid,coarse,tiny_rate)
     budget_row('Tiny','Mọi layer',1,coarse,tiny_rate)
     budget_row('Tiny','Eval lọc: 512/64/concise64, 2 nhánh',6,full,None)
@@ -227,6 +247,7 @@ COCO val2014 có {vi(coverage['images'])} ảnh và {vi(coverage['captions'])} c
 
 **SFT** là giai đoạn fine-tune có giám sát; **recipe** là công thức phối trộn nguồn huấn luyện, không phải danh sách chắc chắn từng mẫu mà checkpoint đã thấy. LLaVA được kiểm tra bằng đường dẫn COCO trực tiếp trong mix SFT 665K và nối `image_id` Visual Genome/GQA sang `coco_id`: 5.741 ID trực tiếp, 10.877 ID chỉ qua alias, hợp là 16.618. TinyLLaVA được đối chiếu riêng với recipe LLaVA và ShareGPT4V, gồm SFT và pretraining có ID công khai. Với SmolVLM2, tám shard ID của hai slice OneVision ShareGPT4V-COCO/LLaVA được quét; khớp chỉ đánh dấu ứng viên trong nguồn upstream. Các nguồn khác, lịch sử mô hình nền và mẫu thực sự được rút từ recipe SmolVLM2 chưa có manifest đầy đủ. Phép nối ID vì vậy không chứng minh hai VLM nhỏ chưa từng thấy ảnh.''')
     add(table('eda_results/hgai/report_training_overlap.csv','Khớp ID theo nguồn đã kiểm tra'))
+    add('Trong 12 phép đối chiếu ID ở ba manifest còn dùng, cả dev_common_unmatched500 và eval_common_unmatched500 đều khớp 0/500 ở bốn nguồn/recipe đã kiểm tra; eval_random500 lần lượt khớp 205/500 với LLaVA SFT, 205/500 với TinyLLaVA theo recipe LLaVA, 460/500 với recipe ShareGPT4V và 171/500 ứng viên upstream SmolVLM2. Đây là phép khớp ID, không phải bằng chứng checkpoint đã học ảnh.')
     add('''## 2. Các bộ ảnh cố định và phân bố object
 
 Ba manifest dùng cho thí nghiệm gồm dev_common_unmatched500, eval_common_unmatched500 và eval_random500. Dev dùng để chọn cấu hình; hai bộ eval dùng để báo kết quả.''')
@@ -302,7 +323,47 @@ Quy tắc khóa có SHA-256 `{lock['rule_sha256']}`. Chuẩn hóa min–max riê
          'Số layer xét':int(r.layers_considered),'Dải mô tả':r.band} for r in sensitivity.itertuples()])
     add('Bảng độ nhạy dưới đây áp cùng phép chọn dải cho ngưỡng 0,50/0,60/0,70; khi bỏ layer 0, min–max được tính lại trên layer 1…L−1. Đây là phân tích mô tả, **không thay quy tắc v1 đã khóa**.')
     add(table('eda_results/hgai/report_layer_sensitivity.csv','Độ nhạy của ranh giới theo ngưỡng và layer 0'))
-    add('Quy tắc v1 trên LLaVA-1.5-7B: **chưa chạy**, vì checkpoint trọng số đầy đủ chưa có ở môi trường này; do đó chưa có dải đo để so với mốc 5–18. Không suy dải LLaVA từ đường cong SmolVLM2. Không đề xuất hoặc sử dụng quy tắc v2 trong báo cáo này.')
+    curves=pd.read_csv(OUT/'layer_curves_summary.csv').set_index('layer')
+    var0=float(curves.loc[0,'var'])
+    var_low=curves.loc[3:5,'var']
+    var_mid=float(curves.loc[12,'var'])
+    mask9=float(curves.loc[9,'mask_sensitivity'])
+    mask10=float(curves.loc[10,'mask_sensitivity'])
+    mask22=float(curves.loc[22,'mask_sensitivity'])
+    mask23=float(curves.loc[23,'mask_sensitivity'])
+    add(f'Trên 20 ảnh SmolVLM2, VAR ở layer 0 là {vi(var0,3)}, vùng thấp 3–5 là {vi(var_low.min(),3)}–{vi(var_low.max(),3)}, rồi nổi lên tới {vi(var_mid,3)} ở layer 12. Độ nhạy che ảnh tăng từ {vi(mask9,3)} ở layer 9 lên {vi(mask10,3)} ở layer 10, và từ {vi(mask22,3)} ở layer 22 lên {vi(mask23,3)} ở layer 23. Dải 5–18 tuyệt đối và dải co 3–14 đều phủ vùng VAR nổi lên quanh layer 12, nhưng đều bỏ đỉnh độ nhạy ở layer cuối. Trong min–max v1, đỉnh VAR ở layer 0 và đỉnh độ nhạy ở layer 23 chi phối hai thang; VAR của mọi layer còn lại đều dưới ngưỡng chuẩn hóa 0,60, nên hai đường không thể đồng thời đạt ngưỡng ở các layer đó.')
+    v2_lock=read('layer_rule_v2_lock.json')
+    v2_20=read('layer_rule_v2_20_smol.json')
+    def band_text(value):
+        return 'không tìm thấy ranh giới' if value is None else f'layer {value[0]}–{value[1]}'
+    add(f'Quy tắc **v2** đã khóa riêng, SHA-256 `{v2_lock["rule_sha256"]}`: chuẩn hóa riêng từng đường bằng `clip((x−P10)/(P90−P10), 0, 1)`, với P10/P90 là phân vị 10/90 qua layer; ngưỡng chung 0,50. Mọi bước chọn dải còn lại giữ như v1: dải đạt ngưỡng liền mạch tối đại, rộng ít nhất max(2, ⌈0,10L⌉), chọn tổng min lớn nhất, hòa chọn đầu sớm nhất; không có dải thì trả “không tìm thấy ranh giới”. **v2 được đặt sau khi đã thấy đường cong SmolVLM2 20 ảnh**; tham số không được sửa theo kết quả tiếp theo. Trên chính 20 ảnh này, v1 trả “không tìm thấy ranh giới”, v2 trả **{band_text(v2_20["v2_band"])}**, chạm layer cuối. Kết quả này chỉ mô tả cùng tập ảnh đã dùng để quan sát đường cong.')
+    bootstrap_rows=[]
+    if (OUT/'layer_curves100_dev_ids.csv').exists():
+        add('Cả hai phép đo 100 ảnh dùng cùng [danh sách ID dev seed 927](eda_results/hgai/layer_curves100_dev_ids.csv), không lấy ảnh eval.')
+    for model,label in [('smol','SmolVLM2-2.2B'),('tiny','bczhou/TinyLLaVA-3.1B')]:
+        path=OUT/f'layer_rule_v2_100_{model}.json'
+        if path.exists():
+            result=json.loads(path.read_text(encoding='utf-8'))
+            add(f'Trên 100 ảnh dev seed {result["seed"]} của {label}, v1: **{band_text(result["v1_band"])}**; v2: **{band_text(result["v2_band"])}**. Bootstrap 1.000 lần ghép theo ảnh cho tần suất từng cặp đầu–cuối trong [tệp kết quả](eda_results/hgai/layer_rule_v2_100_{model}.json).')
+            if model=='tiny':
+                add('Với TinyLLaVA NF4, forward decoder dùng SDPA như nhánh sinh caption; xác suất attention của query được đọc ở float32. Forward eager cho NaN ở layer 29–31 trên 100/100 ảnh nên không dùng để áp quy tắc ([kiểm kê giá trị lỗi](eda_results/hgai/tiny_eager_invalid_audit.json)). CSV SDPA đã kiểm tra mọi giá trị hữu hạn.')
+            add(f'![Đường cong layer của {label} trên 100 ảnh dev](eda_results/hgai/layer_rule_v2_100_{model}_curves.png)')
+            bootstrap_rows.extend({'Mô hình':label,'Dải v2':('không tìm thấy ranh giới' if entry['band']=='none' else entry['band'].replace('-', '–')),
+                'Số lần / 1.000':int(entry['count']),'Tần suất':vi(100*entry['frequency'],1)+'%'}
+                for entry in result['v2_bootstrap_frequencies'])
+        else:
+            add(f'Đo lại VAR/độ nhạy che ảnh trên 100 ảnh dev cho {label}, rồi áp v1/v2 và bootstrap 1.000 lần theo ảnh: **chưa chạy xong** vì phép forward GPU trên checkpoint {label} chưa hoàn tất.')
+    if bootstrap_rows:
+        save('report_layer_v2_bootstrap.csv',bootstrap_rows)
+        add(table('eda_results/hgai/report_layer_v2_bootstrap.csv','Tần suất dải v2 qua bootstrap theo ảnh'))
+    all_step=OUT/'var_all_steps_smol20_summary.csv'
+    if all_step.exists():
+        allstep_values=pd.read_csv(all_step).set_index('layer')['var_all_steps']
+        add(f'VAR trung bình trên mọi bước sinh của cùng 20 ảnh dev SmolVLM2 là phân tích mô tả riêng: giải mã greedy NF4 với attention eager, lấy trung bình các bước query của từng ảnh đến EOS hoặc trần 512 rồi lấy trung bình đều theo ảnh. Ở layer 0, giá trị giảm từ {vi(var0,3)} ở bước đầu xuống {vi(allstep_values.loc[0],3)} khi lấy mọi bước; layer 12 tương ứng {vi(var_mid,3)} và {vi(allstep_values.loc[12],3)}. [Đường cong theo layer](eda_results/hgai/var_all_steps_smol20_summary.csv) không dùng để sửa v1 hoặc v2.')
+        add('![VAR ở bước đầu và trung bình mọi bước sinh trên 20 ảnh dev SmolVLM2](eda_results/hgai/var_all_steps_smol20.png)')
+    else:
+        add('Đường cong VAR trung bình trên mọi bước sinh của 20 ảnh dev: **chưa chạy** vì cần đọc attention tại từng bước sinh; không dùng phép đo này để sửa v1 hoặc v2.')
+    add('Quy tắc v1 và v2 trên LLaVA-1.5-7B: **chưa chạy**, vì checkpoint trọng số đầy đủ chưa có ở môi trường này; do đó chưa có dải đo để so với mốc 5–18. Không suy dải LLaVA từ đường cong của mô hình khác.')
     probe=design['alpha_probe']
     doses='/'.join(vi(a,3 if a in (0.035,0.075) else 2) for a in probe['alphas'])
     alpha_path=OUT/'alpha_probe20_summary.csv'
@@ -327,27 +388,37 @@ Quy tắc khóa có SHA-256 `{lock['rule_sha256']}`. Chuẩn hóa min–max riê
         add('Tỷ lệ chạm trần và lặp là chỉ báo suy giảm output, không dùng thay recall/F1. Lặp được đo bằng tỷ phần 4-gram từ lặp trong từng caption, tách từ theo khoảng trắng và đưa về chữ thường.')
         add(table('eda_results/hgai/report_alpha_probe20_extra.csv','Trung vị độ dài, chạm trần và lặp trong phép dò α'))
         add('Lưới α khóa trước khi đo CHAIR trên 500 ảnh dev: '+', '.join(vi(a,3 if a in (0.035,0.075) else 2) for a in read('smol_alpha_grid_lock.json')['alpha_grid'])+'. Guard đã khóa trên toàn bộ 500 ảnh dev quyết định cấu hình hợp lệ.')
-        tiny_probe_path=OUT/'tiny_alpha_probe10_summary.csv'
+        tiny_probe_path=OUT/'tiny_alpha_probe20_v2_summary.csv'
         if tiny_probe_path.exists():
             tiny_probe=pd.read_csv(tiny_probe_path)
-            save('report_tiny_alpha_probe10.csv',[{'α':vi(r.alpha,3 if r.alpha in (.035,.075) else 2),
+            save('report_tiny_alpha_probe20_v2.csv',[{'α':vi(r.alpha,2),
+                'Tỷ lệ độ dài TB':vi(r.mean_length_ratio,2),
                 'Trung vị tỷ lệ độ dài':vi(r.median_length_ratio,2),
-                'Token sinh TB':vi(r.mean_output_tokens,1),
                 'Co quá nửa':ratio(int(r.less_than_half_count),int(r.images)),
+                'Caption trùng hệt':ratio(int(r.identical_caption_count),int(r.images)),
+                'Khoảng cách sửa từ TB':vi(r.mean_word_edit_distance,2),
                 'Chạm trần 512':ratio(int(r.ceiling_512_count),int(r.images)),
-                'Có lặp 4-gram':ratio(int(r.repetition_any_count),int(r.images))}
+                'Có lặp 4-gram':ratio(int(r.repetition_4gram_count),int(r.images))}
                 for r in tiny_probe.itertuples()])
-            add('Phép dò tương tự trên **bczhou/TinyLLaVA-3.1B**, 10 ảnh dev, NF4, pad384, layer 5–18, prompt detailed512. Các tỷ lệ độ dài được ghép theo cùng ảnh baseline; đây chỉ là phép dò output, không dùng CHAIR để chọn α.')
-            add(table('eda_results/hgai/report_tiny_alpha_probe10.csv','Phép dò liều α của TinyLLaVA trên 10 ảnh dev'))
+            add('Phép dò trên **bczhou/TinyLLaVA-3.1B**, 20 ảnh đầu theo manifest dev đã khóa, NF4, pad384, layer 5–18, prompt detailed512, các liều 0,02/0,05/0,10/0,20/0,35/0,50. Mọi tỷ lệ độ dài và caption trùng hệt được ghép theo cùng ảnh baseline; khoảng cách sửa là Levenshtein mức từ. Không dùng CHAIR hoặc eval để chọn α.')
+            add(table('eda_results/hgai/report_tiny_alpha_probe20_v2.csv','Phép dò liều α của TinyLLaVA trên 20 ảnh dev'))
+            tiny_grid_path=OUT/'tiny_alpha_grid_lock.json'
+            if tiny_grid_path.exists():
+                tiny_grid=read('tiny_alpha_grid_lock.json')
+                add(f'Lưới α TinyLLaVA đã khóa riêng: α thấp={vi(tiny_grid["alpha_low"],2)} là liều nhỏ nhất làm ít nhất 10/20 caption khác baseline; α cao={vi(tiny_grid["alpha_high"],2)} là liều lớn nhất có không quá 4/20 ảnh co quá nửa. Năm mức cách đều theo thang log, kể cả hai đầu: '+', '.join(vi(value,4) for value in tiny_grid['alpha_grid'])+f'. SHA-256 `{tiny_grid["rule_sha256"]}`. Lưới SmolVLM2 giữ nguyên.')
+            else:
+                add('Lưới α TinyLLaVA: **chưa khóa** vì các điều kiện đầu mút của quy tắc trên output chưa cho năm mức phân biệt hợp lệ. Lưới SmolVLM2 giữ nguyên.')
         else:
-            add('Phép dò liều α tương tự cho **bczhou/TinyLLaVA-3.1B** trên 10 ảnh dev: **chưa chạy xong**; chưa có bảng hoàn chỉnh cho mọi liều.')
+            add('Phép dò liều α cho **bczhou/TinyLLaVA-3.1B** trên 20 ảnh dev ở sáu liều 0,02/0,05/0,10/0,20/0,35/0,50: **chưa chạy xong** vì phép sinh caption GPU đang tiếp tục; chưa khóa lưới TinyLLaVA. Lưới SmolVLM2 giữ nguyên.')
     else:
         add(f"Phép dò α trên {vi(probe['dev_images'])} ảnh dev, dải layer {probe['layer_start_inclusive']}–{probe['layer_end_inclusive']}, ba mức token và các liều {doses}: **chưa chạy**. Cần hoàn tất {vi(probe['dev_images']*len(probe['alphas'])*len(probe['processor_modes']))} lượt sinh caption can thiệp ghép với baseline trên GPU; tệp khóa lưới α hiện hành giữ nguyên. Lưới đề xuất gồm cả 0,075 và 0,10; guard đã khóa trên toàn bộ 500 ảnh dev sẽ quyết định loại cấu hình, trừ mức tạo caption trùng hệt baseline ở mọi ảnh. Chưa có số về độ dài, ảnh co quá nửa, caption trùng hệt hoặc khoảng cách chỉnh sửa cho phép dò này.")
     add('''### 5.4. Đối chứng layer và ngân sách tính toán
 
-Dải ngẫu nhiên phải rút **ít nhất 20 lần**, mỗi dải có đúng chiều rộng của dải đang đối chiếu, trên cùng tập con **125 ảnh dev** cố định; khi v1 không trả dải, dùng chiều rộng 14 layer của nhánh 5–18 làm tham chiếu mô tả. Quét oracle trên 125 ảnh dev chỉ là trần tham chiếu, không dùng eval để chọn. Hai nhánh định trước gồm **layer 5–18 tuyệt đối** và dải co theo độ sâu từ LLaVA 32 layer: lấy khoảng nửa mở [5,19), chuyển sang độ sâu L bằng `start=floor(5L/32)`, `end=ceil(19L/32)-1` (hai đầu tính vào). Vì vậy SmolVLM2 24 layer dùng dải co 3–14; TinyLLaVA 32 layer có dải co trùng 5–18. Điều kiện “mọi layer” được báo riêng.
+Liệt kê **toàn bộ dải liền mạch cùng độ rộng** trên cùng tập con **125 ảnh dev** cố định; một tập dải vừa cho phân phối đối chứng vừa cho oracle ở đúng độ rộng đó. Độ rộng thứ nhất là độ rộng dải v2 của từng mô hình; nếu v2 không trả dải thì dùng 14 layer. Độ rộng thứ hai là ⌈L/4⌉: 6 layer ở SmolVLM2 và 8 layer ở TinyLLaVA. Với độ rộng w và L layer, số dải là L−w+1. Phân vị của dải v2 trong phân phối cùng độ rộng cần tính từ các lượt chạy dev; phép quét này **chưa chạy** vì cần sinh caption cho toàn bộ dải trên 125 ảnh, nên chưa có phân vị hoặc điểm oracle để báo. Oracle là **cận trên chọn trên dev** để mô tả; điểm CHAIR trong phép quét không được dùng để thay dải v2 hoặc chọn cấu hình đem sang eval. Hai nhánh định trước gồm **layer 5–18 tuyệt đối** và dải co theo độ sâu từ LLaVA 32 layer: lấy khoảng nửa mở [5,19), chuyển sang độ sâu L bằng `start=floor(5L/32)`, `end=ceil(19L/32)-1` (hai đầu tính vào). Vì vậy SmolVLM2 24 layer dùng dải co 3–14; TinyLLaVA 32 layer có dải co trùng 5–18. Điều kiện “mọi layer” và dải v2 được báo riêng.
 
-Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/chế độ**: Smol detailed512 mặc định 20 ảnh, chia ô 768 và tắt chia ô mỗi chế độ 20 ảnh, POPE 60 câu hỏi mỗi biến thể; Tiny dùng pilot detailed512 khi hoàn tất. Các ô “chưa ước tính” không được gán tốc độ của mô hình khác. Tổng giờ toàn chiến dịch chỉ xác định sau khi có tốc độ Tiny/LLaVA và hai điều kiện prompt 64 token.''')
+Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/chế độ**: Smol detailed512 mặc định 20 ảnh, chia ô 768 và tắt chia ô mỗi chế độ 20 ảnh, POPE 60 câu hỏi mỗi biến thể; Tiny dùng baseline detailed512 trên 20 ảnh dev. Các ô “chưa ước tính” không được gán tốc độ của mô hình khác. Tổng giờ toàn chiến dịch chỉ xác định sau khi có tốc độ LLaVA, hai điều kiện prompt 64 token và phép đo attention chuyên biệt.''')
+    add(f'SmolVLM2 (24 layer): độ rộng {smol_width} có {24-smol_width+1} dải, độ rộng hẹp {smol_narrow} có {24-smol_narrow+1} dải. TinyLLaVA (32 layer): độ rộng {tiny_width} có {32-tiny_width+1} dải, độ rộng hẹp {tiny_narrow} có {32-tiny_narrow+1} dải. Các số dải chỉ là liệt kê hình học; phân phối điểm trên 125 ảnh dev chưa chạy.')
+    add('[Danh sách đầy đủ các dải](eda_results/hgai/layer_band_scan_plan.csv) và [125 ID dev seed 42](eda_results/hgai/layer_band_scan_dev125_ids.csv) xác định chính xác các lượt chạy đối chứng. Hai tệp này không chứa điểm CHAIR hoặc kết quả chọn dải.')
     add(table('eda_results/hgai/report_compute_budget.csv','Ngân sách theo thời gian pilot'))
     add(f"Tập con {vi(coarse)} ảnh dev dùng seed {design['coarse_scan']['seed']}; các cấu hình dẫn đầu sau quét thô mới chạy đủ {vi(full)} ảnh dev và qua guard trước hai bộ eval. Ngân sách gồm cả 3 mức token ảnh Smol, hai bộ eval, POPE và hàng LLaVA; số giờ là ước lượng quy mô, chưa phải thời gian hoàn thành đo được.")
     add('''### 5.5. POPE kiểm tra chéo
@@ -375,7 +446,25 @@ POPE dùng ba bộ COCO random, popular và adversarial chính thức, mỗi b�
     add('### A.3. Siêu danh mục và lệch tâm')
     add(table('eda_results/hgai/report_supercategories.csv','12 siêu danh mục COCO val2014'))
     add('![Phân bố độ lệch tâm bbox COCO](eda_results/hgai/coco_object_centering.png)')
-    add('''## Tài liệu nguồn
+    add('''## Tái lập
+
+| Script | Bảng/hình hoặc dữ liệu sinh ra |
+| :--- | :--- |
+| `audit_report_additions.py`, `audit_smol_768.py` | Dịch chuyển object, độ phủ cắt giữa, phân bố token 768 |
+| `audit_report_round.py` | Hình layer 20 ảnh, bảng độ nhạy v1 và chỉ số lặp SmolVLM2 |
+| `run_alpha_probe20.py`, `summarize_alpha_probe20.py` | Caption và bảng liều SmolVLM2 |
+| `run_tiny_alpha_probe20_v2.py`, `summarize_tiny_alpha_probe20_v2.py` | Caption, bảng liều và khóa lưới TinyLLaVA riêng |
+| `lock_layer_rule_v2.py` | Tệp khóa v2 và SHA-256, tạo đúng một lần |
+| `measure_layer_curves100.py`, `measure_layer_curves100_tiny_sdpa.py`, `analyze_layer_rule_v2.py` | Đường cong 100 ảnh, kết quả v1/v2, bootstrap 1.000 lần và hình; TinyLLaVA dùng forward SDPA và đọc attention float32 |
+| `measure_var_all_steps_smol20.py` | Đường cong VAR trung bình mọi bước sinh |
+| `enumerate_layer_band_plan.py` | Danh sách đầy đủ dải và 125 ID dev seed 42 |
+| `build_hgai_report_final.py`, `build_hgai_notebook.py` | Các bảng `report_*.csv`, Markdown và notebook từ cùng nguồn |
+
+Các phép sinh caption và đo attention cần checkpoint cùng GPU tương ứng; chỉ dựng lại báo cáo từ CSV/JSON đã đo không cần GPU.
+
+Từ thư mục repo `_archive`, dựng lại `.md` và notebook bằng `./.venv-eda/Scripts/python.exe build_hgai_report_final.py` rồi `./.venv-eda/Scripts/python.exe build_hgai_notebook.py`. `publish_hgai_report.py` xuất hai bản đọc ở thư mục cha và kiểm tra các bảng/hình khớp nhau. Không chạy lại các script đo khi chỉ cần dựng lại báo cáo; manifest và các tệp khóa đang có là đầu vào cố định.
+
+## Tài liệu nguồn
 
 1. [HGAI: Devils in Middle Layers, bài báo](https://arxiv.org/abs/2411.16724), [mã đánh giá và data loader của tác giả](https://github.com/ZhangqiJiang07/middle_layers_indicating_hallucinations).
 2. [SmolVLM2-2.2B-Instruct, model card và processor](https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct); [recipe SmolVLM2](https://github.com/huggingface/smollm/tree/main/vision/smolvlm2).
