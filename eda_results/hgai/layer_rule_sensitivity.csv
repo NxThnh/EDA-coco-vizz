@@ -1,0 +1,7 @@
+﻿threshold,include_layer_0,band,layers_considered
+0.5,True,không tìm thấy ranh giới,24
+0.5,False,21–23,23
+0.6,True,không tìm thấy ranh giới,24
+0.6,False,không tìm thấy ranh giới,23
+0.7,True,không tìm thấy ranh giới,24
+0.7,False,không tìm thấy ranh giới,23

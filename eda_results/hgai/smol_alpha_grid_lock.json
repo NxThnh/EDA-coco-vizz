@@ -2,16 +2,46 @@
   "status": "alpha_grid_locked_before_dev500",
   "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
   "partition": "dev_common_unmatched500",
-  "probe_images": 10,
-  "probe_measure": "generated token count only",
+  "probe_images": 20,
+  "probe_layers_inclusive": [
+    5,
+    18
+  ],
+  "processor_modes": [
+    "split_on",
+    "split_768",
+    "split_off"
+  ],
+  "probe_measure": "Paired generated token ratio, strict below-half count, exact caption equality, and whitespace-word Levenshtein distance; no CHAIR.",
   "baseline_alpha": 0,
   "alpha_grid": [
     0.02,
     0.035,
-    0.05
+    0.05,
+    0.075,
+    0.1
   ],
-  "selection_rationale": "All three tested low doses had 0/10 images below half paired baseline length; 0.075 had 1/10 and 0.10 had 3/10. This lock covers SmolVLM2 only. Full dev CHAIR and recall/F1 guards are still required.",
-  "probe_path": "experiment_outputs/alpha_dose_probe/paired_length_analysis.json",
-  "probe_sha256": "9266c5e82443529f51ad6a9eca2883af354b2aefa50f7445abaed20f43663232",
+  "selection_rationale": "5 of 5 candidate doses retained; only doses whose captions equal baseline on all 20 images in all three modes are removed. Frozen dev500 guards make later exclusions.",
+  "probe_path": "eda_results/hgai/alpha_probe20_summary.csv",
+  "source_sha256": {
+    "smol_split_on_alpha_0.000.jsonl": "24e138d6dc62ed12db3842e7d27880330781aeb288274eece0b9a84ffbdb5612",
+    "smol_split_on_alpha_0.020.jsonl": "781c875249a18e7d9aae83dc40a898f962888536588a6fe9bf70584786b46e0c",
+    "smol_split_on_alpha_0.035.jsonl": "223fdb95f0bc81070c66abf03067723f9189b249373ab0bbe2e4ba23b2cbb4cc",
+    "smol_split_on_alpha_0.050.jsonl": "1d8ddbdca6b8f69efbf4b8eac3a9ee45046692b7ff282a1a333dbc7fbbe9359d",
+    "smol_split_on_alpha_0.075.jsonl": "1a8fc89362e098801b5a8c8125fa4668eca9f2f3f13c835079e20677712c7a5d",
+    "smol_split_on_alpha_0.100.jsonl": "e449f71d32b164f8d38944d409cffefa02b0a73efd59eb2e5e8ba71ee3d4389a",
+    "smol_split_768_alpha_0.000.jsonl": "495cde23377922672309fc1512fa3f6fc9d00191c8d9aeeeb34519f7bef58419",
+    "smol_split_768_alpha_0.020.jsonl": "9735823227194fb59c9611b7b1952d34aca6ad78462364116b71cd7f75d14d66",
+    "smol_split_768_alpha_0.035.jsonl": "5904f11ca26043306635beb5846572a719100aa37c9f79565c50e9a50c052601",
+    "smol_split_768_alpha_0.050.jsonl": "3659c945d28354a437b9791a6dbafab18e4ae69ba7d4f11e3d1c4145caa2c9cf",
+    "smol_split_768_alpha_0.075.jsonl": "aa044d5352ebaa862d75da84c21cc5950ff6b6c76020036f40ba06c1b285b0aa",
+    "smol_split_768_alpha_0.100.jsonl": "a79317280badca070177b3b37461481c2e5d338e1ec2c4f03d7d546f7338d64a",
+    "smol_split_off_alpha_0.000.jsonl": "1cc15f45488381081428988cccfa34c7b65d1d30225c4b20523574021d1d00a2",
+    "smol_split_off_alpha_0.020.jsonl": "6a291106b150d5cc47850c2b134d2c40633fb38aa10c020291cff70eadd3102a",
+    "smol_split_off_alpha_0.035.jsonl": "43b9d57a233c9cb86dffa52eaf9ba77f77f04fe25d8c0bdc397761c8a586eb4b",
+    "smol_split_off_alpha_0.050.jsonl": "863635bc768e2925c2d43e6b4a120cf57b124d5be9aa72fa7fcecd047f70db84",
+    "smol_split_off_alpha_0.075.jsonl": "2b9919b2e0eaccafce79902e96368f0bcc79b4021132355fbe0234336f6224eb",
+    "smol_split_off_alpha_0.100.jsonl": "6aa1c8f8b0ecda91563cdedfc04358c907638bb44366b88c333b2c351eec03d8"
+  },
   "not_a_benchmark": true
 }

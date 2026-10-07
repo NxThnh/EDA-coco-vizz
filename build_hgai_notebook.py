@@ -40,38 +40,15 @@ def markdown_cells(text):
 
 def main():
     cells=[code('''from pathlib import Path
-import json, html, subprocess, sys
-import pandas as pd
-from IPython.display import display, HTML
-ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / "hgai_cpu_audit.py").is_file())
-# The report normally reads audited outputs. Enable only for a deliberate CPU rebuild.
-REBUILD = False
-if REBUILD:
-    cpu_python = ROOT / ".venv-eda/Scripts/python.exe"
-    for script in ["hgai_cpu_audit.py", "verify_tiny_processor.py", "small_vlm_training_overlap.py",
-                   "caption_sampling_sensitivity.py", "vizwiz_rotation_review.py", "sampling_fix_diagnostics.py"]:
-        subprocess.run([str(cpu_python), str(ROOT/script)], cwd=ROOT, check=True)
-pd.set_option("display.max_columns", None)
-def render_csv(relative, columns=None):
-    frame = pd.read_csv(ROOT/relative)
-    if columns:
-        frame = frame[columns]
-    display(HTML('<div class="audit-table">' + frame.to_html(index=False, escape=True, na_rep='—',
-                      float_format=lambda v: f'{v:.3f}') + '</div><style>.audit-table{overflow-x:auto;max-width:100%}'
-                 '.audit-table td,.audit-table th{padding:6px;white-space:normal;min-width:6em;max-width:24em}</style>'))
-print("Measured HGAI EDA artifacts loaded; completed GPU pilots are reported separately from full HGAI experiments.")''')]
+ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / "EDA_COCO_vs_VizWiz_Report.md").is_file())
+assert (ROOT / "EDA_COCO_vs_VizWiz_Report.md").is_file()''')]
     text=REPORT.read_text(encoding='utf-8')
-    pos=0
-    for match in re.finditer(r'<!-- CSV (.*?) -->\n.*?<!-- /CSV -->',text,re.S):
-        cells.extend(markdown_cells(text[pos:match.start()]))
-        spec=json.loads(match.group(1))
-        cells.append(code('render_csv('+repr(spec['path'])+', '+repr(spec['columns'])+')'))
-        pos=match.end()
-    cells.extend(markdown_cells(text[pos:]))
-    for i,cell in enumerate(cells):cell['id']=f'hgai-v9-{i:03d}'
+    # Preserve the exact tables emitted by build_hgai_report.table in both artifacts.
+    cells.extend(markdown_cells(text))
+    for i,cell in enumerate(cells):cell['id']=f'hgai-report-{i:03d}'
     nb={'nbformat':4,'nbformat_minor':5,'cells':cells,'metadata':{
         'kernelspec':{'display_name':'Python 3 (ipykernel)','language':'python','name':'python3'},
-        'hgai_report':{'version':9,'source':'EDA_COCO_vs_VizWiz_Report.md','date':'2026-10-06'}}}
+        'hgai_report':{'source':'EDA_COCO_vs_VizWiz_Report.md'}}}
     TARGET.write_text(json.dumps(nb,ensure_ascii=False,indent=1),encoding='utf-8')
     print('Notebook built:',len(cells),'cells; embedded figures exactly once.')
 

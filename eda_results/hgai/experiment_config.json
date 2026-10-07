@@ -86,20 +86,23 @@
     "smol_alpha_grid": [
       0.02,
       0.035,
-      0.05
+      0.05,
+      0.075,
+      0.1
     ],
     "smol_alpha_grid_lock": "eda_results/hgai/smol_alpha_grid_lock.json",
-    "tiny_alpha_grid_status": "pending checkpoint reconciliation and separate dose probe",
-    "layer_selection": "Measure per-layer VAR and image-masking sensitivity; publish boundary rule; compare with equal-width random bands, dev oracle and all layers.",
+    "tiny_alpha_grid_status": "bczhou checkpoint loaded and attention intervention verified on one dev image; separate Tiny dose probe pending",
+    "layer_selection": "VAR and image-masking sensitivity measured on 20 dev images under locked SHA-256 rule; no qualifying contiguous band. Random bands, dev oracle and all layers remain comparison designs.",
     "selection": "Freeze low-alpha grid and layer rule before dev500 CHAIR; use recall/F1 and length guards; never select on eval or POPE.",
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "alpha_probe_status": "20 paired dev images, three image-processor modes, detailed512; see alpha_probe20_summary.csv"
   },
   "smol_ablation": "split_on default / split_on longest_edge=768 / split_off; count true <image> positions and report geometry change",
   "implementation_status": {
     "SmolVLM2_baseline": "Shared runner supports all three prompt conditions and official POPE; real-weight alpha-zero smoke exactly matches native baseline.",
     "LLaVA_baseline": "HF runner is connected to shared scorer; actual completed runs are listed in experiment_run_status.json. Native/HF equivalence remains unverified.",
-    "TinyLLaVA_baseline": "Legacy Phi/SigLIP port and runner implemented; all 877 tensor names match checkpoint index; actual completed runs are listed in experiment_run_status.json.",
-    "HGAI_and_tuning": "Adapter semantics/GQA/cache validated on CPU and Smol real weights. Old dev grid is paused pending output-length dose probe and layer-boundary measurements.",
+    "TinyLLaVA_baseline": "Pinned bczhou Phi/SigLIP checkpoint loaded with all three weight shards verified; one dev image generated at alpha zero and 0.02, with 896 modified attention calls at alpha 0.02.",
+    "HGAI_and_tuning": "Adapter semantics/GQA/cache validated on CPU and Smol real weights. The 20-image alpha probe locks doses before dev500; dev CHAIR, recall/F1, and length guards remain separate.",
     "guards_and_CI": "Refusal, empty-output, repetition/Distinct-1 and paired image bootstrap implemented and tested. POPE bootstrap keeps questions clustered by image."
   },
   "inference_status": "See experiment_run_status.json for a dated snapshot of actual counts. Full three-model results, optimal alpha/layers and native FP16 replication are not yet established."

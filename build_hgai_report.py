@@ -10,18 +10,28 @@ import pandas as pd
 from hgai_cpu_audit import ROOT,OUT,PREP,EXT
 
 
-def table(relative,title,columns=None,active_only=False):
-    frame=pd.read_csv(ROOT/relative)
+def table(relative,title,columns=None,active_only=False,frame=None):
+    frame=frame.copy() if frame is not None else pd.read_csv(ROOT/relative)
     if active_only and 'partition' in frame:
         frame=frame[frame.partition.isin(['dev_common_unmatched500','eval_common_unmatched500','eval_random500'])]
     if active_only and 'scope' in frame:
         frame=frame[frame.scope.isin(['val2014','dev_common_unmatched500','eval_common_unmatched500','eval_random500'])]
+    if 'partition' in frame:
+        frame=frame[frame.partition.isin(['dev_common_unmatched500','eval_common_unmatched500','eval_random500'])]
     if relative.endswith('image_token_summary.csv'):
         frame=frame[(frame.model=='SmolVLM2-2.2B')&(frame['mode']=='split_on')]
     if columns:frame=frame[columns]
-    def cell(x):
+    def cell(x,column):
         if pd.isna(x):return '—'
-        if isinstance(x,float):return str(int(x)) if x.is_integer() else f'{x:.3f}'.replace('.',',')
+        if column == 'status':
+            return {'recipe_conditional_pretrain_and_SFT_ID_join':'Chỉ khớp ID ở nguồn huấn luyện đã kiểm tra; chưa xác nhận ảnh thực dùng.',
+                    'not_a_complete_training_manifest':'Chưa có danh sách ảnh huấn luyện đầy đủ.'}.get(str(x),str(x).replace('_',' '))
+        if isinstance(x,(int,float)) and not isinstance(x,bool):
+            if column.lower().endswith(('_pct','percentage','(%)')) or 'pct' in column.lower():
+                return f'{x:,.1f}%'.replace(',','@').replace('.',',').replace('@','.')
+            if float(x).is_integer() or column in ('mean','p50','p90','p95','p99','min','max','mean_smol_image_tokens_split_on'):
+                return f'{x:,.0f}'.replace(',','.')
+            return f'{x:,.2f}'.replace(',','@').replace('.',',').replace('@','.')
         return str(x).replace('|',' / ').replace('\n',' ')
     labels={'partition':'Bộ ảnh','images':'Số ảnh','seed':'Seed','model':'Mô hình','mode':'Chế độ',
             'n':'Số ảnh','mean':'Trung bình','min':'Nhỏ nhất','max':'Lớn nhất','p50':'P50',
@@ -36,9 +46,25 @@ def table(relative,title,columns=None,active_only=False):
             'median_global_distortion':'Méo ảnh toàn cảnh',
             'median_local_source_per_pixel':'Pixel nguồn / pixel tile',
             'width':'Rộng','height':'Cao','splitting':'Chia ô','image_tokens':'Token ảnh',
-            'tiles':'Số ô'}
+            'tiles':'Số ô','dataset':'Bộ dữ liệu','Dataset':'Bộ dữ liệu',
+            'Supercategory':'Siêu danh mục','Count':'Số instance','Percentage':'Tỷ lệ (%)',
+            'All Images':'Tổng ảnh','Selected Captions':'Caption chọn',
+            'Person-family Mentions':'Lượt nhắc nhóm người',
+            'Selected Captions with Person Family':'Caption nhắc nhóm người',
+            'Selected Captions with Person Family (%)':'Caption nhắc nhóm người (%)',
+            'Matching Rule':'Quy tắc khớp','portrait_pct':'Ảnh dọc (%)',
+            'square_pct':'Ảnh vuông (%)','mean_tiny_pad_pct':'Đệm Tiny trung bình (%)',
+            'mean_smol_image_tokens_split_on':'Token ảnh Smol trung bình',
+            'median_reference_caption_tokens_smol':'Token caption P50',
+            'median_largest_object_center_offset':'Lệch tâm P50',
+            'images_without_instances':'Ảnh không có instance',
+            'mean_crop_pct':'Cắt trung bình (%)','median_pad_pct':'Đệm P50 (%)',
+            'ID khớp':'ID khớp'}
+    for col in frame.columns:
+        if col not in labels:
+            labels[col]=col.replace('_',' ')
     lines=['| '+' | '.join(labels.get(c,c) for c in frame.columns)+' |','| '+' | '.join([':---']*len(frame.columns))+' |']
-    lines += ['| '+' | '.join(cell(x) for x in row)+' |' for row in frame.itertuples(index=False,name=None)]
+    lines += ['| '+' | '.join(cell(x,c) for x,c in zip(row,frame.columns))+' |' for row in frame.itertuples(index=False,name=None)]
     marker=json.dumps({'path':relative,'title':title,'columns':columns},ensure_ascii=False)
     return '\n\n### '+title+'\n\n<!-- CSV '+marker+' -->\n'+'\n'.join(lines)+'\n<!-- /CSV -->\n'
 
@@ -422,4 +448,6 @@ Toàn bộ phân tích COCO–VizWiz cũ được giữ ở [tài liệu bối c
     print('Report written:',len(text),'characters; all tables read from artifacts.')
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    from build_hgai_report_final import main as final_main
+    final_main()

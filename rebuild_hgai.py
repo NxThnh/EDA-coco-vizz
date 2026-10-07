@@ -21,6 +21,7 @@ def main():
     if args.recompute_cpu:
         run(cpu,'hgai_cpu_audit.py')
         run(cpu,'verify_tiny_processor.py')
+        run(cpu,'audit_smol_768.py')
     else:
         from hgai_cpu_audit import sha
         environment=json.loads((ROOT/'eda_results/hgai/processor_environment.json').read_text(encoding='utf-8'))
@@ -30,9 +31,15 @@ def main():
     run(cpu,'sampling_fix_diagnostics.py')
     run(cpu,'build_experiment_status.py')
     run(cpu,'audit_source_availability.py')
-    run(cpu,'build_hgai_report.py')
+    if not (ROOT/'eda_results/hgai/smol_tokens_768_per_image.csv').exists():
+        run(cpu,'audit_smol_768.py')
+    run(cpu,'audit_report_additions.py')
+    if not (ROOT/'eda_results/hgai/layer_rule_lock.json').exists():
+        raise FileNotFoundError('Missing layer rule lock')
+    run(cpu,'build_hgai_report_final.py')
     run(cpu,'build_eda_notebook.py')
     run(cpu,'run_eda_notebook.py')
+    run(cpu,'verify_hgai_report.py')
     run(cpu,'export_hgai_html.py')
     run(cpu,'validate_hgai.py')
 

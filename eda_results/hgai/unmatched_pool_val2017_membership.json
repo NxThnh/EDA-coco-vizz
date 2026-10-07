@@ -1,0 +1,7 @@
+{
+  "pool_images": 2977,
+  "in_val2017": 2977,
+  "outside_val2017": 0,
+  "val2017_images": 5000,
+  "source": "coco/annotations/instances_val2017.json"
+}

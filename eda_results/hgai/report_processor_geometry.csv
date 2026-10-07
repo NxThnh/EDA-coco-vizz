@@ -1,0 +1,5 @@
+﻿Mô hình/chế độ,Token ảnh,Đệm/cắt,Méo trung vị,Hình học
+SmolVLM2 chia ô mặc định,81 × số ô,0% crop hợp tile,"1,12","Pixel nguồn/pixel tile 0,417 (phóng 2,4 lần); ảnh global bị bóp vuông, méo 1,40."
+SmolVLM2 tắt chia ô,81,resize vuông,"1,40",Thay cả số token lẫn hình học.
+TinyLLaVA pad384,729,"pad P50 26,7%","1,00",Giữ tỷ lệ ảnh bằng đệm vuông.
+LLaVA CLIP336 cắt giữa,576,"crop P50 26,7%","1,00",Bỏ mép ảnh trước encoder.

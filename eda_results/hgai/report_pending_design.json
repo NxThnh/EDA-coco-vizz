@@ -1,0 +1,27 @@
+{
+  "alpha_probe": {
+    "status": "complete",
+    "dev_images": 20,
+    "layer_start_inclusive": 5,
+    "layer_end_inclusive": 18,
+    "alphas": [
+      0.02,
+      0.035,
+      0.05,
+      0.075,
+      0.1
+    ],
+    "processor_modes": [
+      "split_on",
+      "split_768",
+      "split_off"
+    ],
+    "baseline_alpha": 0,
+    "current_lock_unchanged": false
+  },
+  "coarse_scan": {
+    "dev_subset_images": 125,
+    "seed": 42,
+    "full_dev_images": 500
+  }
+}

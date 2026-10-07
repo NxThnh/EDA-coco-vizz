@@ -1,0 +1,9 @@
+{
+  "pool_images": 2977,
+  "val_images": 40504,
+  "pool_mean_classes_per_image": 3.0020154517971114,
+  "val_mean_classes_per_image": 2.8785305155046417,
+  "pool_mean_instances_per_image": 7.406113537117904,
+  "val_mean_instances_per_image": 7.206078412008691,
+  "ci_method": "Wald 95%, finite-pool overlap handled by comparison to complement"
+}

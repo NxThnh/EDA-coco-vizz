@@ -1,0 +1,23 @@
+[
+  {
+    "repo": "bczhou/TinyLLaVA-3.1B",
+    "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+    "file": "model-00001-of-00003.safetensors",
+    "bytes": 4982355512,
+    "sha256": "adac2836b85d1267a4f4bf6f8a0ed77bc6ed46870daac94100bee1522b203f34"
+  },
+  {
+    "repo": "bczhou/TinyLLaVA-3.1B",
+    "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+    "file": "model-00002-of-00003.safetensors",
+    "bytes": 4982541984,
+    "sha256": "aa3028a5e43d1cc5cb73fd976c36c2030dbfcc7e6d1f0904b85db25b96b1a021"
+  },
+  {
+    "repo": "bczhou/TinyLLaVA-3.1B",
+    "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+    "file": "model-00003-of-00003.safetensors",
+    "bytes": 2782771216,
+    "sha256": "414bf35a7b5a081cdc2157bf5130ee0435c7eac6d6b148079373f342175bc5a3"
+  }
+]

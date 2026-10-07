@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "rows": 10,
+  "role": "feasibility_pilot",
+  "output_sha256": "44679516cc46aa39b62a3183ba7d9dfed4a8b7e85d479a7bced50b0704e846df",
+  "config_sha256": "64ba7e7a10e1723ef1bd13bbda7692745efbfc561a0bf7348cedf7979ed8a92b",
+  "seconds_this_run": 127.10566910001216,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "torch": "2.5.1+cu121",
+  "device_map": "{'': 0}",
+  "adapter_calls": 25606,
+  "modified_calls": 0
+}

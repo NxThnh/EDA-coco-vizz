@@ -1,0 +1,15 @@
+{
+  "checkpoint": "bczhou/TinyLLaVA-3.1B",
+  "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+  "weight_shards_verified_sha256": 3,
+  "partition": "dev_common_unmatched500",
+  "images": 1,
+  "condition": "detailed64",
+  "alpha_tested": 0.02,
+  "loaded": true,
+  "attention_intervention": true,
+  "modified_calls": 896,
+  "caption_identical": true,
+  "baseline_path": "experiment_outputs\\tiny_checkpoint_validation\\tiny_dev1_alpha_0.000.jsonl",
+  "intervention_path": "experiment_outputs\\tiny_checkpoint_validation\\tiny_dev1_alpha_0.020.jsonl"
+}

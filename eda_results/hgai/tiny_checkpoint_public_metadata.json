@@ -1,0 +1,28 @@
+{
+  "bczhou/TinyLLaVA-3.1B": {
+    "published_repository_size_gb": 12.8,
+    "source": "https://huggingface.co/bczhou/TinyLLaVA-3.1B/tree/main",
+    "weight_shards": [
+      {"bytes": 4982355512, "sha256": "adac2836b85d1267a4f4bf6f8a0ed77bc6ed46870daac94100bee1522b203f34"},
+      {"bytes": 4982541984, "sha256": "aa3028a5e43d1cc5cb73fd976c36c2030dbfcc7e6d1f0904b85db25b96b1a021"},
+      {"bytes": 2782771216, "sha256": "414bf35a7b5a081cdc2157bf5130ee0435c7eac6d6b148079373f342175bc5a3"}
+    ],
+    "weight_hash_source": "https://huggingface.co/bczhou/TinyLLaVA-3.1B/commit/b0ade9ccc702b46b82693f71a48fd802c40e3b22"
+  },
+  "tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B": {
+    "published_repository_size_gb": 6.44,
+    "source": "https://huggingface.co/tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B/tree/main",
+    "config_source": "https://huggingface.co/tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B/blob/a5501098449440fa319da7b0814dc53bf8530f14/config.json",
+    "model_type": "tinyllava",
+    "architecture": "TinyLlavaForConditionalGeneration",
+    "auto_model": "modeling_tinyllava_phi.TinyLlavaForConditionalGeneration",
+    "text_layers": 32,
+    "image_aspect_ratio": "square",
+    "vision_image_size": 384,
+    "weight_shards": [
+      {"bytes": 4995590776, "sha256": "0ef383f3357694d5432fd3a45b2ac45bfc9e8ccb9eb4ee8368a86fde5274cc1e"},
+      {"bytes": 1439367824, "sha256": "9c658ee49bb2b64f89ffd09291b136ff292a800c1563f57bbf1110ffddc3dee7"}
+    ],
+    "weight_hash_source": "https://huggingface.co/tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B/tree/main"
+  }
+}

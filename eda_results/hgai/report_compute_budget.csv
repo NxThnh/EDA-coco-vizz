@@ -1,0 +1,23 @@
+﻿Mô hình,Nhánh,Cấu hình,Ảnh/câu mỗi cấu hình,Tổng lượt sinh,Giây/lượt từ pilot,Giờ quy đổi
+Smol,Dev baseline + lưới α (dải kiểm chứng),6,500,3000,"20,16","16,80"
+Smol,20 dải ngẫu nhiên cùng độ rộng,20,125,2500,"20,16","14,00"
+Smol,Quét oracle 24 layer,24,125,3000,"20,16","16,80"
+Smol,"Dải 5–18 và dải co, 5 liều",10,125,1250,"20,16","7,00"
+Smol,Mọi layer,1,125,125,"20,16","0,70"
+Smol,"Eval lọc: 512 token, baseline/HGAI",2,500,1000,"20,16","5,60"
+Smol,"Eval ngẫu nhiên: 512 token, baseline/HGAI",2,500,1000,"20,16","5,60"
+Smol,"Eval lọc: chia ô 768, baseline/HGAI",2,500,1000,"17,92","4,98"
+Smol,"Eval lọc: tắt chia ô, baseline/HGAI",2,500,1000,"14,53","4,04"
+Smol,"Eval lọc: detailed64/concise64, 2 nhánh",4,500,2000,chưa đo,chưa ước tính
+Smol,"POPE: 3 biến thể, baseline/HGAI",6,3000,18000,"2,67","13,34"
+Tiny,Dev baseline + 5 liều,6,500,3000,"12,71","10,59"
+Tiny,20 dải ngẫu nhiên cùng độ rộng,20,125,2500,"12,71","8,83"
+Tiny,Quét oracle 32 layer,32,125,4000,"12,71","14,12"
+Tiny,Dải 5–18 và dải co (trùng ở 32 layer),5,125,625,"12,71","2,21"
+Tiny,Mọi layer,1,125,125,"12,71","0,44"
+Tiny,"Eval lọc: 512/64/concise64, 2 nhánh",6,500,3000,chưa đo,chưa ước tính
+Tiny,"Eval ngẫu nhiên: 512, baseline/HGAI",2,500,1000,chưa đo,chưa ước tính
+Tiny,"POPE: 3 biến thể, baseline/HGAI",6,3000,18000,chưa đo,chưa ước tính
+LLaVA,"Eval ngẫu nhiên: baseline và 5–18/α=0,5",2,500,1000,chưa đo,chưa ước tính
+LLaVA,Đối chiếu FP16–NF4 trên 30 ảnh,2,30,60,chưa đo,chưa ước tính
+Tổng,Phần có tốc độ pilot / toàn kế hoạch,—,—,67185,các hàng còn thiếu chưa đo,"125,04 giờ phần quy đổi; tổng đầy đủ chưa xác định"

@@ -1,0 +1,26 @@
+{
+  "status": "approved_for_dev_measurement",
+  "input": "Hai mảng VAR và độ nhạy che ảnh theo cùng thứ tự layer, đo trên dev chung; không dùng điểm CHAIR.",
+  "normalization": "Min-max riêng từng đường cong trên toàn bộ L layer; đường cong hằng hoặc giá trị không hữu hạn cho kết quả không tìm thấy ranh giới.",
+  "threshold": 0.6,
+  "minimum_width": "max(2, ceil(0.10 * L)) layer",
+  "candidate": "Mọi dải liền mạch tối đại mà VAR chuẩn hóa và độ nhạy chuẩn hóa đều >= 0.60.",
+  "selection": "Trong các dải đủ rộng, chọn dải có tổng min(VAR chuẩn hóa, độ nhạy chuẩn hóa) lớn nhất; hòa thì chọn dải có layer đầu nhỏ nhất.",
+  "failure": "Không có dải đạt điều kiện hoặc L < 8: không tìm thấy ranh giới.",
+  "indexing": "Layer đánh số từ 0; hai đầu dải được tính vào.",
+  "version": 1,
+  "measurement_protocol": {
+    "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+    "partition": "dev_common_unmatched500",
+    "images": "first 20 image IDs in locked JSONL order",
+    "processor": "split_on, size.longest_edge=1536, image_seq_len=81",
+    "prompt": "Please help me describe the image in detail.",
+    "generation": "greedy, alpha=0, first generated token is then used as a fixed query token",
+    "var": "For each decoder layer, average over heads the sum of attention probabilities from the fixed query token to all expanded <image> positions; average over 20 images.",
+    "mask": "Replace source image pixels by constant RGB (127,127,127) at unchanged dimensions before the same processor; use the same query token as the original image.",
+    "sensitivity": "For each decoder layer, L2 norm of original-minus-masked query hidden state divided by L2 norm of original query hidden state plus 1e-8; average over 20 images.",
+    "model_precision": "NF4 with float16 compute, same pinned Smol weights",
+    "attention_backend": "eager for attention probability readout"
+  },
+  "rule_sha256": "7faf7ebde361aed139c4d592537f8f2814e6345bee9ae6c62bd67702ec382fdc"
+}
