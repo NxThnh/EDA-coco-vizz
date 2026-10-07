@@ -1,0 +1,19 @@
+{
+  "scope": "first CSV write to last CSV write; excludes model loading, setup and bootstrap",
+  "models": {
+    "smol": {
+      "source": "layer_curves100_smol_per_image.csv",
+      "source_sha256": "0dd09bfd04c509f32e78af0e28ee4450677fa9537c920b19d4469d211c541291",
+      "first_write_utc": "2026-10-07T07:24:17.404561+00:00",
+      "last_write_utc": "2026-10-07T07:35:54.869269+00:00",
+      "minutes": 11.624411805470784
+    },
+    "tiny": {
+      "source": "layer_curves100_tiny_sdpa_per_image.csv",
+      "source_sha256": "1b0f4bc3da78a156342050c9054fc2a68340e1edc56d994d1a72a93d1a061ad9",
+      "first_write_utc": "2026-10-07T07:53:24.537906+00:00",
+      "last_write_utc": "2026-10-07T07:58:35.457849+00:00",
+      "minutes": 5.181999043623606
+    }
+  }
+}

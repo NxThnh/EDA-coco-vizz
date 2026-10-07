@@ -4,6 +4,7 @@ import math
 from pathlib import Path
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from build_hgai_report import table as source_table
 
@@ -143,15 +144,23 @@ def main():
     tiny_width=chosen_width('tiny',32)
     smol_narrow=math.ceil(24/4)
     tiny_narrow=math.ceil(32/4)
+    tiny_adapter_path=OUT/'tiny_last3_adapter5_validation.json'
+    tiny_adapter=read('tiny_last3_adapter5_validation.json') if tiny_adapter_path.exists() else None
+    tiny_last3_invalid=bool(tiny_adapter and tiny_adapter['nonfinite_images']>0)
+    tiny_last_valid=28 if tiny_last3_invalid else 31
     budget=[]
-    def budget_row(model,branch,configs,units,rate):
+    curve_windows=read('curve_measure_windows.json')['models']
+    def curve_window(model):
+        return f'{vi(curve_windows[model]["minutes"],2)} phút từ dòng đầu đến dòng cuối; chưa gồm nạp model'
+    def budget_row(model,branch,configs,units,rate,measured='—'):
         hours=configs*units*rate/3600 if rate is not None else None
         budget.append({'Mô hình':model,'Nhánh':branch,'Cấu hình':configs,'Ảnh/câu mỗi cấu hình':units,
                        'Tổng lượt sinh':configs*units,'Giây/lượt từ pilot':vi(rate,2) if rate is not None else 'chưa đo',
-                       'Giờ quy đổi':vi(hours,2) if hours is not None else 'chưa ước tính',
+                       'Giờ quy đổi':vi(hours,2) if hours is not None else 'chưa ước tính','Thời gian đã đo':measured,
                        '_hours':hours})
     budget_row('Smol','Dev baseline + lưới α (dải kiểm chứng)',1+current_grid,full,seconds_per_image)
-    budget_row('Smol','Đo lại hai đường cong trên 100 ảnh dev',1,100,None)
+    budget_row('Smol','Dò độ dài trên dải v2: baseline + 5 liều',1+current_grid,20,seconds_per_image)
+    budget_row('Smol','Đo lại hai đường cong trên 100 ảnh dev',1,100,None,curve_window('smol'))
     budget_row('Smol','VAR mọi bước sinh, phân tích mô tả',1,20,None)
     budget_row('Smol',f'Liệt kê đủ dải rộng {smol_width} layer; gồm phân phối và oracle dev',24-smol_width+1,coarse,seconds_per_image)
     budget_row('Smol',f'Liệt kê đủ dải hẹp {smol_narrow} layer; gồm phân phối và oracle dev',24-smol_narrow+1,coarse,seconds_per_image)
@@ -164,12 +173,13 @@ def main():
     budget_row('Smol','Eval lọc: detailed64/concise64, 2 nhánh',4,full,None)
     budget_row('Smol','POPE: 3 biến thể, baseline/HGAI',6,3000,pope_rate)
     budget_row('Tiny','Dev baseline + 5 liều',6,full,tiny_rate)
+    budget_row('Tiny','Dò độ dài trên dải v2: baseline + 5 liều',6,20,tiny_rate)
     budget_row('Tiny','Dò liều output: baseline + 6 liều trên 20 ảnh',7,20,tiny_rate)
-    budget_row('Tiny','Đo hai đường cong trên 100 ảnh dev',1,100,None)
-    budget_row('Tiny',f'Liệt kê đủ dải rộng {tiny_width} layer; gồm phân phối và oracle dev',32-tiny_width+1,coarse,tiny_rate)
-    budget_row('Tiny',f'Liệt kê đủ dải hẹp {tiny_narrow} layer; gồm phân phối và oracle dev',32-tiny_narrow+1,coarse,tiny_rate)
+    budget_row('Tiny','Đo hai đường cong trên 100 ảnh dev',1,100,None,curve_window('tiny'))
+    budget_row('Tiny',f'Liệt kê đủ dải rộng {tiny_width} layer; gồm phân phối và oracle dev',tiny_last_valid-tiny_width+2,coarse,tiny_rate)
+    budget_row('Tiny',f'Liệt kê đủ dải hẹp {tiny_narrow} layer; gồm phân phối và oracle dev',tiny_last_valid-tiny_narrow+2,coarse,tiny_rate)
     budget_row('Tiny','Dải 5–18 và dải co (trùng ở 32 layer)',current_grid,coarse,tiny_rate)
-    budget_row('Tiny','Mọi layer',1,coarse,tiny_rate)
+    if not tiny_last3_invalid:budget_row('Tiny','Mọi layer',1,coarse,tiny_rate)
     budget_row('Tiny','Eval lọc: 512/64/concise64, 2 nhánh',6,full,None)
     budget_row('Tiny','Eval ngẫu nhiên: 512, baseline/HGAI',2,full,None)
     budget_row('Tiny','POPE: 3 biến thể, baseline/HGAI',6,3000,None)
@@ -180,7 +190,7 @@ def main():
     budget.append({'Mô hình':'Tổng','Nhánh':'Phần có tốc độ pilot / toàn kế hoạch',
                    'Cấu hình':'—','Ảnh/câu mỗi cấu hình':'—','Tổng lượt sinh':total_units,
                    'Giây/lượt từ pilot':'các hàng còn thiếu chưa đo',
-                   'Giờ quy đổi':f'{vi(known_hours,2)} giờ phần quy đổi; tổng đầy đủ chưa xác định','_hours':None})
+                   'Giờ quy đổi':f'{vi(known_hours,2)} giờ phần quy đổi; tổng đầy đủ chưa xác định','Thời gian đã đo':'—','_hours':None})
     save('report_compute_budget.csv',[{k:v for k,v in row.items() if k!='_hours'} for row in budget])
     cfg=json.loads((ROOT/'model_assets/TinyLLaVA-3.1B/config.json').read_text(encoding='utf-8'))
     tiny_public=read('tiny_checkpoint_public_metadata.json')
@@ -318,6 +328,8 @@ Quy tắc khóa có SHA-256 `{lock['rule_sha256']}`. Chuẩn hóa min–max riê
     else:
         add('Đường cong VAR và độ nhạy che ảnh: **chưa đo**, do phép tính GPU chưa hoàn tất.')
     add('![Đường cong VAR và độ nhạy che ảnh: giá trị thô và chuẩn hóa](eda_results/hgai/layer_curves_raw_normalized.png)')
+    add('Độ nhạy che ảnh là sai khác hidden state **cộng dồn theo độ sâu**: layer sau nhận biểu diễn đã qua các layer trước. Vì vậy dải v2 chỉ gợi ý **ranh giới dưới** của vùng ảnh bắt đầu có ảnh hưởng lớn; dải chạm layer cuối không chứng minh từng layer cuối là quan trọng. Mức tăng giữa hai layer kề nhau dưới đây là phân tích mô tả, không tham gia quy tắc v1/v2 hay lựa chọn dải.')
+    add('![Mức tăng độ nhạy che ảnh giữa hai layer liên tiếp](eda_results/hgai/layer_mask_increment.png)')
     sensitivity=pd.read_csv(OUT/'layer_rule_sensitivity.csv')
     save('report_layer_sensitivity.csv',[{'Ngưỡng':vi(r.threshold,2),'Layer 0':('Có' if r.include_layer_0 else 'Không'),
          'Số layer xét':int(r.layers_considered),'Dải mô tả':r.band} for r in sensitivity.itertuples()])
@@ -364,6 +376,25 @@ Quy tắc khóa có SHA-256 `{lock['rule_sha256']}`. Chuẩn hóa min–max riê
     else:
         add('Đường cong VAR trung bình trên mọi bước sinh của 20 ảnh dev: **chưa chạy** vì cần đọc attention tại từng bước sinh; không dùng phép đo này để sửa v1 hoặc v2.')
     add('Quy tắc v1 và v2 trên LLaVA-1.5-7B: **chưa chạy**, vì checkpoint trọng số đầy đủ chưa có ở môi trường này; do đó chưa có dải đo để so với mốc 5–18. Không suy dải LLaVA từ đường cong của mô hình khác.')
+    attention_check=OUT/'layer_attention_validation.json'
+    if attention_check.exists():
+        check=read('layer_attention_validation.json')
+        save('report_layer_attention_validation.csv',[{'Mô hình':r['model'],'Ảnh dev':r['images'],
+            'Vị trí ảnh':', '.join(map(str,r['image_positions'])),
+            'Vị trí đầu':', '.join(map(str,r['first_position'])),
+            'Vị trí cuối':', '.join(map(str,r['last_position'])),
+            'Sai số tổng hàng lớn nhất':vi(r['max_row_sum_error'],7),
+            'Sai lệch eager–SDPA lớn nhất':vi(r['max_eager_sdpa_abs_error'],7)}
+            for r in check['models']])
+        add('Tổng hàng attention được tính trên xác suất eager sau khi lưu ở FP16; tiêu chí kiểm tra là |tổng−1| < 0,0005 trên từng hàng và head, còn bảng báo sai số lớn nhất của 20 ảnh. Đối chiếu SDPA tái dựng xác suất từ cùng query/key ở float32 trước phép can thiệp: TinyLLaVA xét layer 0–28, SmolVLM2 xét toàn bộ layer 0–23. Layer 29–31 của TinyLLaVA không được dùng trong cực đại vì eager cho giá trị không hữu hạn.')
+        add('Sai lệch xác suất cực đại của TinyLLaVA là '+vi(check['models'][1]['max_eager_sdpa_abs_error'],5)+'; đường cong VAR TinyLLaVA vì vậy phụ thuộc cách tính xác suất attention trong NF4/FP16. Đây là giới hạn của phép đo và không được dùng để sửa các ngưỡng hoặc dải v1/v2 đã khóa.')
+        add(table('eda_results/hgai/report_layer_attention_validation.csv','Kiểm chứng phép đo VAR trên 20 ảnh dev'))
+    else:
+        add('Kiểm chứng VAR trên 20 ảnh dev (vị trí ảnh, tổng hàng attention, đối chiếu eager–SDPA ở layer 0–28): **chưa chạy**; cần forward hai backend trên cùng đầu vào và kiểm tra sai số từng hàng.')
+    if tiny_adapter:
+        add(f'Can thiệp TinyLLaVA α=0,02 tại layer 29–31 trên {tiny_adapter["images"]} ảnh dev: {tiny_adapter["nonfinite_images"]}/{tiny_adapter["images"]} ảnh có NaN/Inf. '+('Các dải chứa layer 29–31 và điều kiện “mọi layer” bị loại khỏi kế hoạch.' if tiny_last3_invalid else 'Các dải chứa layer 29–31 và điều kiện “mọi layer” vẫn được giữ trong kế hoạch.'))
+    else:
+        add('Kiểm tra adapter TinyLLaVA tại layer 29–31 trên 5 ảnh dev: **chưa chạy**; NaN ở phép đo eager không đủ để loại điều kiện sinh caption dùng SDPA.')
     probe=design['alpha_probe']
     doses='/'.join(vi(a,3 if a in (0.035,0.075) else 2) for a in probe['alphas'])
     alpha_path=OUT/'alpha_probe20_summary.csv'
@@ -417,8 +448,29 @@ Quy tắc khóa có SHA-256 `{lock['rule_sha256']}`. Chuẩn hóa min–max riê
 Liệt kê **toàn bộ dải liền mạch cùng độ rộng** trên cùng tập con **125 ảnh dev** cố định; một tập dải vừa cho phân phối đối chứng vừa cho oracle ở đúng độ rộng đó. Độ rộng thứ nhất là độ rộng dải v2 của từng mô hình; nếu v2 không trả dải thì dùng 14 layer. Độ rộng thứ hai là ⌈L/4⌉: 6 layer ở SmolVLM2 và 8 layer ở TinyLLaVA. Với độ rộng w và L layer, số dải là L−w+1. Phân vị của dải v2 trong phân phối cùng độ rộng cần tính từ các lượt chạy dev; phép quét này **chưa chạy** vì cần sinh caption cho toàn bộ dải trên 125 ảnh, nên chưa có phân vị hoặc điểm oracle để báo. Oracle là **cận trên chọn trên dev** để mô tả; điểm CHAIR trong phép quét không được dùng để thay dải v2 hoặc chọn cấu hình đem sang eval. Hai nhánh định trước gồm **layer 5–18 tuyệt đối** và dải co theo độ sâu từ LLaVA 32 layer: lấy khoảng nửa mở [5,19), chuyển sang độ sâu L bằng `start=floor(5L/32)`, `end=ceil(19L/32)-1` (hai đầu tính vào). Vì vậy SmolVLM2 24 layer dùng dải co 3–14; TinyLLaVA 32 layer có dải co trùng 5–18. Điều kiện “mọi layer” và dải v2 được báo riêng.
 
 Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/chế độ**: Smol detailed512 mặc định 20 ảnh, chia ô 768 và tắt chia ô mỗi chế độ 20 ảnh, POPE 60 câu hỏi mỗi biến thể; Tiny dùng baseline detailed512 trên 20 ảnh dev. Các ô “chưa ước tính” không được gán tốc độ của mô hình khác. Tổng giờ toàn chiến dịch chỉ xác định sau khi có tốc độ LLaVA, hai điều kiện prompt 64 token và phép đo attention chuyên biệt.''')
-    add(f'SmolVLM2 (24 layer): độ rộng {smol_width} có {24-smol_width+1} dải, độ rộng hẹp {smol_narrow} có {24-smol_narrow+1} dải. TinyLLaVA (32 layer): độ rộng {tiny_width} có {32-tiny_width+1} dải, độ rộng hẹp {tiny_narrow} có {32-tiny_narrow+1} dải. Các số dải chỉ là liệt kê hình học; phân phối điểm trên 125 ảnh dev chưa chạy.')
-    add('[Danh sách đầy đủ các dải](eda_results/hgai/layer_band_scan_plan.csv) và [125 ID dev seed 42](eda_results/hgai/layer_band_scan_dev125_ids.csv) xác định chính xác các lượt chạy đối chứng. Hai tệp này không chứa điểm CHAIR hoặc kết quả chọn dải.')
+    add(f'SmolVLM2 (24 layer): độ rộng {smol_width} có {24-smol_width+1} dải, độ rộng hẹp {smol_narrow} có {24-smol_narrow+1} dải. TinyLLaVA (32 layer): độ rộng {tiny_width} còn {tiny_last_valid-tiny_width+2} dải, độ rộng hẹp {tiny_narrow} còn {tiny_last_valid-tiny_narrow+2} dải.'+(' Sáu dải TinyLLaVA chạm layer 29–31 bị loại; tổng còn 65 dải. Điều kiện “mọi layer” TinyLLaVA cũng bị loại, còn SmolVLM2 giữ nhánh này.' if tiny_last3_invalid else ' Tổng cộng 71 dải; điều kiện “mọi layer” còn trong kế hoạch.')+' Các số dải chỉ là liệt kê hình học; phân phối điểm trên 125 ảnh dev chưa chạy.')
+    add(table('eda_results/hgai/report_layer_band_overlap.csv','Số layer chung giữa dải v2 và các dải định trước'))
+    v2_dose=OUT/'v2_alpha_probe20_summary.csv'
+    if v2_dose.exists():
+        doses=pd.read_csv(v2_dose)
+        assert len(doses)==10 and set(doses.model)=={'smol','tiny'}
+        save('report_v2_alpha_probe20.csv',[{'Mô hình':r.model,'α':vi(r.alpha,4),
+            'Tỷ lệ độ dài TB':vi(r.mean_length_ratio,2),
+            'Trung vị tỷ lệ độ dài':vi(r.median_length_ratio,2),
+            'Co quá nửa':ratio(int(r.less_than_half_count),20),
+            'Caption trùng hệt':ratio(int(r.identical_caption_count),20),
+            'Khoảng cách sửa từ TB':vi(r.mean_word_edit_distance,2),
+            'Chạm trần 512':ratio(int(r.ceiling_512_count),20),
+            'Có lặp 4-gram':ratio(int(r.repetition_4gram_count),20),
+            'Phần 4-gram lặp TB':vi(r.mean_repeated_4gram_fraction,3)} for r in doses.itertuples()])
+        add('Bảng sau dùng 20 ảnh dev đầu theo manifest cố định, prompt detailed512, giải mã greedy và đúng hai lưới α đã khóa; baseline và can thiệp được ghép theo ảnh. Kết quả chỉ mô tả độ dài/output, không chọn liều hoặc dải. Guard trên 500 ảnh dev vẫn là bước quyết định.')
+        add(table('eda_results/hgai/report_v2_alpha_probe20.csv','Dò độ dài trên dải v2, 20 ảnh dev'))
+        high=doses[(doses.model=='tiny') & (doses.alpha.between(.22,.23))].iloc[0]
+        add(f'Ở TinyLLaVA α≈0,2236, {vi(int(high.ceiling_512_count))}/20 caption chạm trần và {vi(int(high.repetition_4gram_count))}/20 caption có lặp 4-gram. Đây là dấu hiệu suy giảm output ở dải v2 trên tập dò nhỏ; lưới α vẫn giữ nguyên và guard trên 500 ảnh dev quyết định cấu hình hợp lệ.')
+    else:
+        add('Dò độ dài trên chính dải v2 SmolVLM2 10–23 và TinyLLaVA 12–28, 20 ảnh dev, đúng các lưới α đã khóa: **chưa chạy**; cần sinh caption ghép cặp tại các dải mới. Lưới giữ nguyên; guard trên 500 ảnh dev vẫn là bước quyết định.')
+    add('[Danh sách các dải hợp lệ](eda_results/hgai/layer_band_scan_plan.csv) và [125 ID dev seed 42](eda_results/hgai/layer_band_scan_dev125_ids.csv) xác định chính xác các lượt chạy đối chứng. Hai tệp này không chứa điểm CHAIR hoặc kết quả chọn dải.')
+    add('Hai ô “Thời gian đã đo” của đường cong 100 ảnh là khoảng từ lúc tệp CSV bắt đầu được ghi đến lần ghi cuối; chúng không gồm nạp trọng số, chuẩn bị dữ liệu hoặc phân tích bootstrap, nên không thay thế tổng giờ quy đổi của chiến dịch.')
     add(table('eda_results/hgai/report_compute_budget.csv','Ngân sách theo thời gian pilot'))
     add(f"Tập con {vi(coarse)} ảnh dev dùng seed {design['coarse_scan']['seed']}; các cấu hình dẫn đầu sau quét thô mới chạy đủ {vi(full)} ảnh dev và qua guard trước hai bộ eval. Ngân sách gồm cả 3 mức token ảnh Smol, hai bộ eval, POPE và hàng LLaVA; số giờ là ước lượng quy mô, chưa phải thời gian hoàn thành đo được.")
     add('''### 5.5. POPE kiểm tra chéo
@@ -456,6 +508,10 @@ POPE dùng ba bộ COCO random, popular và adversarial chính thức, mỗi b�
 | `run_tiny_alpha_probe20_v2.py`, `summarize_tiny_alpha_probe20_v2.py` | Caption, bảng liều và khóa lưới TinyLLaVA riêng |
 | `lock_layer_rule_v2.py` | Tệp khóa v2 và SHA-256, tạo đúng một lần |
 | `measure_layer_curves100.py`, `measure_layer_curves100_tiny_sdpa.py`, `analyze_layer_rule_v2.py` | Đường cong 100 ảnh, kết quả v1/v2, bootstrap 1.000 lần và hình; TinyLLaVA dùng forward SDPA và đọc attention float32 |
+| `analyze_layer_diagnostics.py`, `validate_layer_attention.py` | Hình mức tăng độ nhạy, bảng chồng lấn và kiểm chứng VAR trên 20 ảnh dev |
+| `capture_curve_windows.py` | Đóng băng thời gian ghi CSV từ ảnh đầu đến ảnh cuối của hai đường cong 100 ảnh |
+| `check_tiny_last3_adapter.py`, `filter_layer_band_plan.py` | Kiểm tra NaN/Inf tại layer 29–31 và lọc kế hoạch dải TinyLLaVA |
+| `run_v2_alpha_probe20.py`, `summarize_v2_alpha_probe20.py` | Caption và bảng dò độ dài trên dải v2 với lưới α giữ nguyên |
 | `measure_var_all_steps_smol20.py` | Đường cong VAR trung bình mọi bước sinh |
 | `enumerate_layer_band_plan.py` | Danh sách đầy đủ dải và 125 ID dev seed 42 |
 | `build_hgai_report_final.py`, `build_hgai_notebook.py` | Các bảng `report_*.csv`, Markdown và notebook từ cùng nguồn |

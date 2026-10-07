@@ -68,6 +68,16 @@ def main():
                    resources={'metadata': {'path': str(ROOT)}}).execute()
     nbformat.write(notebook, NOTEBOOK)
     verify()
+    build_hgai_notebook.ROOT = ARCHIVE
+    build_hgai_notebook.REPORT = ARCHIVE / MARKDOWN.name
+    build_hgai_notebook.TARGET = ARCHIVE / NOTEBOOK.name
+    build_hgai_notebook.main()
+    archive_notebook = nbformat.read(build_hgai_notebook.TARGET, as_version=4)
+    NotebookClient(archive_notebook, timeout=120, kernel_name='python3',
+                   resources={'metadata': {'path': str(ARCHIVE)}}).execute()
+    nbformat.write(archive_notebook, build_hgai_notebook.TARGET)
+    import export_hgai_html
+    export_hgai_html.main()
 
 
 if __name__ == '__main__':

@@ -1,0 +1,5 @@
+﻿Mô hình,Dải v2,Đối chứng,Dải đối chứng,Số layer chung,Layer chung
+SmolVLM2-2.2B,10–23,5–18 tuyệt đối,5–18,9,"10, 11, 12, 13, 14, 15, 16, 17, 18"
+SmolVLM2-2.2B,10–23,co theo độ sâu,3–14,5,"10, 11, 12, 13, 14"
+bczhou/TinyLLaVA-3.1B,12–28,5–18 tuyệt đối,5–18,7,"12, 13, 14, 15, 16, 17, 18"
+bczhou/TinyLLaVA-3.1B,12–28,co theo độ sâu,5–18,7,"12, 13, 14, 15, 16, 17, 18"

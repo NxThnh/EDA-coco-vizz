@@ -176,6 +176,10 @@ Trên **SmolVLM2-2.2B, 20 ảnh dev**, đường cong VAR và độ nhạy che �
 
 ![Đường cong VAR và độ nhạy che ảnh: giá trị thô và chuẩn hóa](eda_results/hgai/layer_curves_raw_normalized.png)
 
+Độ nhạy che ảnh là sai khác hidden state **cộng dồn theo độ sâu**: layer sau nhận biểu diễn đã qua các layer trước. Vì vậy dải v2 chỉ gợi ý **ranh giới dưới** của vùng ảnh bắt đầu có ảnh hưởng lớn; dải chạm layer cuối không chứng minh từng layer cuối là quan trọng. Mức tăng giữa hai layer kề nhau dưới đây là phân tích mô tả, không tham gia quy tắc v1/v2 hay lựa chọn dải.
+
+![Mức tăng độ nhạy che ảnh giữa hai layer liên tiếp](eda_results/hgai/layer_mask_increment.png)
+
 Bảng độ nhạy dưới đây áp cùng phép chọn dải cho ngưỡng 0,50/0,60/0,70; khi bỏ layer 0, min–max được tính lại trên layer 1…L−1. Đây là phân tích mô tả, **không thay quy tắc v1 đã khóa**.
 
 ### Độ nhạy của ranh giới theo ngưỡng và layer 0
@@ -223,6 +227,21 @@ VAR trung bình trên mọi bước sinh của cùng 20 ảnh dev SmolVLM2 là p
 ![VAR ở bước đầu và trung bình mọi bước sinh trên 20 ảnh dev SmolVLM2](eda_results/hgai/var_all_steps_smol20.png)
 
 Quy tắc v1 và v2 trên LLaVA-1.5-7B: **chưa chạy**, vì checkpoint trọng số đầy đủ chưa có ở môi trường này; do đó chưa có dải đo để so với mốc 5–18. Không suy dải LLaVA từ đường cong của mô hình khác.
+
+Tổng hàng attention được tính trên xác suất eager sau khi lưu ở FP16; tiêu chí kiểm tra là |tổng−1| < 0,0005 trên từng hàng và head, còn bảng báo sai số lớn nhất của 20 ảnh. Đối chiếu SDPA tái dựng xác suất từ cùng query/key ở float32 trước phép can thiệp: TinyLLaVA xét layer 0–28, SmolVLM2 xét toàn bộ layer 0–23. Layer 29–31 của TinyLLaVA không được dùng trong cực đại vì eager cho giá trị không hữu hạn.
+
+Sai lệch xác suất cực đại của TinyLLaVA là 0,17879; đường cong VAR TinyLLaVA vì vậy phụ thuộc cách tính xác suất attention trong NF4/FP16. Đây là giới hạn của phép đo và không được dùng để sửa các ngưỡng hoặc dải v1/v2 đã khóa.
+
+### Kiểm chứng phép đo VAR trên 20 ảnh dev
+
+<!-- CSV {"path": "eda_results/hgai/report_layer_attention_validation.csv", "title": "Kiểm chứng phép đo VAR trên 20 ảnh dev", "columns": null} -->
+| Mô hình | Ảnh dev | Vị trí ảnh | Vị trí đầu | Vị trí cuối | Sai số tổng hàng lớn nhất | Sai lệch eager–SDPA lớn nhất |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| SmolVLM2-2.2B | 20 | 1053, 1377 | 5 | 1084, 1085, 1417 | 0,0003365 | 0,0030603 |
+| bczhou/TinyLLaVA-3.1B | 20 | 729 | 32 | 760 | 0,0003592 | 0,1787892 |
+<!-- /CSV -->
+
+Can thiệp TinyLLaVA α=0,02 tại layer 29–31 trên 5 ảnh dev: 5/5 ảnh có NaN/Inf. Các dải chứa layer 29–31 và điều kiện “mọi layer” bị loại khỏi kế hoạch.
 
 Phép dò α trên 20 ảnh dev, dải layer 5–18, với ba chế độ token ảnh và các liều 0,02/0,035/0,05/0,075/0,10. Tỷ lệ độ dài là trung bình của 20 tỷ số token sinh theo cặp can thiệp/baseline; caption chạm trần 512 token dùng độ dài quan sát. Khoảng cách sửa là Levenshtein ở mức từ, phân tách theo khoảng trắng, giữ chữ hoa và dấu câu. Bảng không dùng điểm CHAIR.
 
@@ -297,41 +316,76 @@ Liệt kê **toàn bộ dải liền mạch cùng độ rộng** trên cùng t�
 
 Số giờ bên dưới là **quy đổi từ tốc độ pilot cùng mô hình/chế độ**: Smol detailed512 mặc định 20 ảnh, chia ô 768 và tắt chia ô mỗi chế độ 20 ảnh, POPE 60 câu hỏi mỗi biến thể; Tiny dùng baseline detailed512 trên 20 ảnh dev. Các ô “chưa ước tính” không được gán tốc độ của mô hình khác. Tổng giờ toàn chiến dịch chỉ xác định sau khi có tốc độ LLaVA, hai điều kiện prompt 64 token và phép đo attention chuyên biệt.
 
-SmolVLM2 (24 layer): độ rộng 14 có 11 dải, độ rộng hẹp 6 có 19 dải. TinyLLaVA (32 layer): độ rộng 17 có 16 dải, độ rộng hẹp 8 có 25 dải. Các số dải chỉ là liệt kê hình học; phân phối điểm trên 125 ảnh dev chưa chạy.
+SmolVLM2 (24 layer): độ rộng 14 có 11 dải, độ rộng hẹp 6 có 19 dải. TinyLLaVA (32 layer): độ rộng 17 còn 13 dải, độ rộng hẹp 8 còn 22 dải. Sáu dải TinyLLaVA chạm layer 29–31 bị loại; tổng còn 65 dải. Điều kiện “mọi layer” TinyLLaVA cũng bị loại, còn SmolVLM2 giữ nhánh này. Các số dải chỉ là liệt kê hình học; phân phối điểm trên 125 ảnh dev chưa chạy.
 
-[Danh sách đầy đủ các dải](eda_results/hgai/layer_band_scan_plan.csv) và [125 ID dev seed 42](eda_results/hgai/layer_band_scan_dev125_ids.csv) xác định chính xác các lượt chạy đối chứng. Hai tệp này không chứa điểm CHAIR hoặc kết quả chọn dải.
+### Số layer chung giữa dải v2 và các dải định trước
+
+<!-- CSV {"path": "eda_results/hgai/report_layer_band_overlap.csv", "title": "Số layer chung giữa dải v2 và các dải định trước", "columns": null} -->
+| Mô hình | Dải v2 | Đối chứng | Dải đối chứng | Số layer chung | Layer chung |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SmolVLM2-2.2B | 10–23 | 5–18 tuyệt đối | 5–18 | 9 | 10, 11, 12, 13, 14, 15, 16, 17, 18 |
+| SmolVLM2-2.2B | 10–23 | co theo độ sâu | 3–14 | 5 | 10, 11, 12, 13, 14 |
+| bczhou/TinyLLaVA-3.1B | 12–28 | 5–18 tuyệt đối | 5–18 | 7 | 12, 13, 14, 15, 16, 17, 18 |
+| bczhou/TinyLLaVA-3.1B | 12–28 | co theo độ sâu | 5–18 | 7 | 12, 13, 14, 15, 16, 17, 18 |
+<!-- /CSV -->
+
+Bảng sau dùng 20 ảnh dev đầu theo manifest cố định, prompt detailed512, giải mã greedy và đúng hai lưới α đã khóa; baseline và can thiệp được ghép theo ảnh. Kết quả chỉ mô tả độ dài/output, không chọn liều hoặc dải. Guard trên 500 ảnh dev vẫn là bước quyết định.
+
+### Dò độ dài trên dải v2, 20 ảnh dev
+
+<!-- CSV {"path": "eda_results/hgai/report_v2_alpha_probe20.csv", "title": "Dò độ dài trên dải v2, 20 ảnh dev", "columns": null} -->
+| Mô hình | α | Tỷ lệ độ dài TB | Trung vị tỷ lệ độ dài | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB | Chạm trần 512 | Có lặp 4-gram | Phần 4-gram lặp TB |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| smol | 0,0200 | 1,03 | 1,00 | 0/20 (0,0%) | 4/20 (20,0%) | 115,40 | 1/20 (5,0%) | 18/20 (90,0%) | 0,043 |
+| smol | 0,0350 | 0,94 | 0,96 | 0/20 (0,0%) | 0/20 (0,0%) | 130,45 | 2/20 (10,0%) | 17/20 (85,0%) | 0,026 |
+| smol | 0,0500 | 1,06 | 1,00 | 1/20 (5,0%) | 0/20 (0,0%) | 164,10 | 2/20 (10,0%) | 17/20 (85,0%) | 0,034 |
+| smol | 0,0750 | 1,13 | 0,93 | 2/20 (10,0%) | 0/20 (0,0%) | 174,60 | 2/20 (10,0%) | 16/20 (80,0%) | 0,026 |
+| smol | 0,1000 | 1,24 | 0,95 | 2/20 (10,0%) | 0/20 (0,0%) | 195,65 | 2/20 (10,0%) | 18/20 (90,0%) | 0,081 |
+| tiny | 0,0200 | 1,21 | 1,08 | 1/20 (5,0%) | 0/20 (0,0%) | 110,95 | 1/20 (5,0%) | 9/20 (45,0%) | 0,037 |
+| tiny | 0,0447 | 1,42 | 1,06 | 1/20 (5,0%) | 0/20 (0,0%) | 145,95 | 2/20 (10,0%) | 16/20 (80,0%) | 0,072 |
+| tiny | 0,1000 | 1,23 | 1,20 | 0/20 (0,0%) | 0/20 (0,0%) | 135,30 | 1/20 (5,0%) | 14/20 (70,0%) | 0,051 |
+| tiny | 0,2236 | 2,35 | 2,06 | 0/20 (0,0%) | 0/20 (0,0%) | 271,50 | 11/20 (55,0%) | 20/20 (100,0%) | 0,470 |
+| tiny | 0,5000 | 1,50 | 1,01 | 0/20 (0,0%) | 0/20 (0,0%) | 206,95 | 2/20 (10,0%) | 20/20 (100,0%) | 0,462 |
+<!-- /CSV -->
+
+Ở TinyLLaVA α≈0,2236, 11/20 caption chạm trần và 20/20 caption có lặp 4-gram. Đây là dấu hiệu suy giảm output ở dải v2 trên tập dò nhỏ; lưới α vẫn giữ nguyên và guard trên 500 ảnh dev quyết định cấu hình hợp lệ.
+
+[Danh sách các dải hợp lệ](eda_results/hgai/layer_band_scan_plan.csv) và [125 ID dev seed 42](eda_results/hgai/layer_band_scan_dev125_ids.csv) xác định chính xác các lượt chạy đối chứng. Hai tệp này không chứa điểm CHAIR hoặc kết quả chọn dải.
+
+Hai ô “Thời gian đã đo” của đường cong 100 ảnh là khoảng từ lúc tệp CSV bắt đầu được ghi đến lần ghi cuối; chúng không gồm nạp trọng số, chuẩn bị dữ liệu hoặc phân tích bootstrap, nên không thay thế tổng giờ quy đổi của chiến dịch.
 
 ### Ngân sách theo thời gian pilot
 
 <!-- CSV {"path": "eda_results/hgai/report_compute_budget.csv", "title": "Ngân sách theo thời gian pilot", "columns": null} -->
-| Mô hình | Nhánh | Cấu hình | Ảnh/câu mỗi cấu hình | Tổng lượt sinh | Giây/lượt từ pilot | Giờ quy đổi |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Smol | Dev baseline + lưới α (dải kiểm chứng) | 6 | 500 | 3.000 | 20,16 | 16,80 |
-| Smol | Đo lại hai đường cong trên 100 ảnh dev | 1 | 100 | 100 | chưa đo | chưa ước tính |
-| Smol | VAR mọi bước sinh, phân tích mô tả | 1 | 20 | 20 | chưa đo | chưa ước tính |
-| Smol | Liệt kê đủ dải rộng 14 layer; gồm phân phối và oracle dev | 11 | 125 | 1.375 | 20,16 | 7,70 |
-| Smol | Liệt kê đủ dải hẹp 6 layer; gồm phân phối và oracle dev | 19 | 125 | 2.375 | 20,16 | 13,30 |
-| Smol | Dải 5–18 và dải co, 5 liều | 10 | 125 | 1.250 | 20,16 | 7,00 |
-| Smol | Mọi layer | 1 | 125 | 125 | 20,16 | 0,70 |
-| Smol | Eval lọc: 512 token, baseline/HGAI | 2 | 500 | 1.000 | 20,16 | 5,60 |
-| Smol | Eval ngẫu nhiên: 512 token, baseline/HGAI | 2 | 500 | 1.000 | 20,16 | 5,60 |
-| Smol | Eval lọc: chia ô 768, baseline/HGAI | 2 | 500 | 1.000 | 17,92 | 4,98 |
-| Smol | Eval lọc: tắt chia ô, baseline/HGAI | 2 | 500 | 1.000 | 14,53 | 4,04 |
-| Smol | Eval lọc: detailed64/concise64, 2 nhánh | 4 | 500 | 2.000 | chưa đo | chưa ước tính |
-| Smol | POPE: 3 biến thể, baseline/HGAI | 6 | 3.000 | 18.000 | 2,67 | 13,34 |
-| Tiny | Dev baseline + 5 liều | 6 | 500 | 3.000 | 18,10 | 15,08 |
-| Tiny | Dò liều output: baseline + 6 liều trên 20 ảnh | 7 | 20 | 140 | 18,10 | 0,70 |
-| Tiny | Đo hai đường cong trên 100 ảnh dev | 1 | 100 | 100 | chưa đo | chưa ước tính |
-| Tiny | Liệt kê đủ dải rộng 17 layer; gồm phân phối và oracle dev | 16 | 125 | 2.000 | 18,10 | 10,05 |
-| Tiny | Liệt kê đủ dải hẹp 8 layer; gồm phân phối và oracle dev | 25 | 125 | 3.125 | 18,10 | 15,71 |
-| Tiny | Dải 5–18 và dải co (trùng ở 32 layer) | 5 | 125 | 625 | 18,10 | 3,14 |
-| Tiny | Mọi layer | 1 | 125 | 125 | 18,10 | 0,63 |
-| Tiny | Eval lọc: 512/64/concise64, 2 nhánh | 6 | 500 | 3.000 | chưa đo | chưa ước tính |
-| Tiny | Eval ngẫu nhiên: 512, baseline/HGAI | 2 | 500 | 1.000 | chưa đo | chưa ước tính |
-| Tiny | POPE: 3 biến thể, baseline/HGAI | 6 | 3.000 | 18.000 | chưa đo | chưa ước tính |
-| LLaVA | Eval ngẫu nhiên: baseline và 5–18/α=0,5 | 2 | 500 | 1.000 | chưa đo | chưa ước tính |
-| LLaVA | Đối chiếu FP16–NF4 trên 30 ảnh | 2 | 30 | 60 | chưa đo | chưa ước tính |
-| Tổng | Phần có tốc độ pilot / toàn kế hoạch | — | — | 64.420 | các hàng còn thiếu chưa đo | 124,36 giờ phần quy đổi; tổng đầy đủ chưa xác định |
+| Mô hình | Nhánh | Cấu hình | Ảnh/câu mỗi cấu hình | Tổng lượt sinh | Giây/lượt từ pilot | Giờ quy đổi | Thời gian đã đo |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Smol | Dev baseline + lưới α (dải kiểm chứng) | 6 | 500 | 3.000 | 20,16 | 16,80 | — |
+| Smol | Dò độ dài trên dải v2: baseline + 5 liều | 6 | 20 | 120 | 20,16 | 0,67 | — |
+| Smol | Đo lại hai đường cong trên 100 ảnh dev | 1 | 100 | 100 | chưa đo | chưa ước tính | 11,62 phút từ dòng đầu đến dòng cuối; chưa gồm nạp model |
+| Smol | VAR mọi bước sinh, phân tích mô tả | 1 | 20 | 20 | chưa đo | chưa ước tính | — |
+| Smol | Liệt kê đủ dải rộng 14 layer; gồm phân phối và oracle dev | 11 | 125 | 1.375 | 20,16 | 7,70 | — |
+| Smol | Liệt kê đủ dải hẹp 6 layer; gồm phân phối và oracle dev | 19 | 125 | 2.375 | 20,16 | 13,30 | — |
+| Smol | Dải 5–18 và dải co, 5 liều | 10 | 125 | 1.250 | 20,16 | 7,00 | — |
+| Smol | Mọi layer | 1 | 125 | 125 | 20,16 | 0,70 | — |
+| Smol | Eval lọc: 512 token, baseline/HGAI | 2 | 500 | 1.000 | 20,16 | 5,60 | — |
+| Smol | Eval ngẫu nhiên: 512 token, baseline/HGAI | 2 | 500 | 1.000 | 20,16 | 5,60 | — |
+| Smol | Eval lọc: chia ô 768, baseline/HGAI | 2 | 500 | 1.000 | 17,92 | 4,98 | — |
+| Smol | Eval lọc: tắt chia ô, baseline/HGAI | 2 | 500 | 1.000 | 14,53 | 4,04 | — |
+| Smol | Eval lọc: detailed64/concise64, 2 nhánh | 4 | 500 | 2.000 | chưa đo | chưa ước tính | — |
+| Smol | POPE: 3 biến thể, baseline/HGAI | 6 | 3.000 | 18.000 | 2,67 | 13,34 | — |
+| Tiny | Dev baseline + 5 liều | 6 | 500 | 3.000 | 18,10 | 15,08 | — |
+| Tiny | Dò độ dài trên dải v2: baseline + 5 liều | 6 | 20 | 120 | 18,10 | 0,60 | — |
+| Tiny | Dò liều output: baseline + 6 liều trên 20 ảnh | 7 | 20 | 140 | 18,10 | 0,70 | — |
+| Tiny | Đo hai đường cong trên 100 ảnh dev | 1 | 100 | 100 | chưa đo | chưa ước tính | 5,18 phút từ dòng đầu đến dòng cuối; chưa gồm nạp model |
+| Tiny | Liệt kê đủ dải rộng 17 layer; gồm phân phối và oracle dev | 13 | 125 | 1.625 | 18,10 | 8,17 | — |
+| Tiny | Liệt kê đủ dải hẹp 8 layer; gồm phân phối và oracle dev | 22 | 125 | 2.750 | 18,10 | 13,82 | — |
+| Tiny | Dải 5–18 và dải co (trùng ở 32 layer) | 5 | 125 | 625 | 18,10 | 3,14 | — |
+| Tiny | Eval lọc: 512/64/concise64, 2 nhánh | 6 | 500 | 3.000 | chưa đo | chưa ước tính | — |
+| Tiny | Eval ngẫu nhiên: 512, baseline/HGAI | 2 | 500 | 1.000 | chưa đo | chưa ước tính | — |
+| Tiny | POPE: 3 biến thể, baseline/HGAI | 6 | 3.000 | 18.000 | chưa đo | chưa ước tính | — |
+| LLaVA | Eval ngẫu nhiên: baseline và 5–18/α=0,5 | 2 | 500 | 1.000 | chưa đo | chưa ước tính | — |
+| LLaVA | Đối chiếu FP16–NF4 trên 30 ảnh | 2 | 30 | 60 | chưa đo | chưa ước tính | — |
+| Tổng | Phần có tốc độ pilot / toàn kế hoạch | — | — | 63.785 | các hàng còn thiếu chưa đo | 121,24 giờ phần quy đổi; tổng đầy đủ chưa xác định | — |
 <!-- /CSV -->
 
 Tập con 125 ảnh dev dùng seed 42; các cấu hình dẫn đầu sau quét thô mới chạy đủ 500 ảnh dev và qua guard trước hai bộ eval. Ngân sách gồm cả 3 mức token ảnh Smol, hai bộ eval, POPE và hàng LLaVA; số giờ là ước lượng quy mô, chưa phải thời gian hoàn thành đo được.
@@ -496,6 +550,10 @@ Checkpoint được chọn: `bczhou/TinyLLaVA-3.1B` cho nhánh pad và adapter P
 | `run_tiny_alpha_probe20_v2.py`, `summarize_tiny_alpha_probe20_v2.py` | Caption, bảng liều và khóa lưới TinyLLaVA riêng |
 | `lock_layer_rule_v2.py` | Tệp khóa v2 và SHA-256, tạo đúng một lần |
 | `measure_layer_curves100.py`, `measure_layer_curves100_tiny_sdpa.py`, `analyze_layer_rule_v2.py` | Đường cong 100 ảnh, kết quả v1/v2, bootstrap 1.000 lần và hình; TinyLLaVA dùng forward SDPA và đọc attention float32 |
+| `analyze_layer_diagnostics.py`, `validate_layer_attention.py` | Hình mức tăng độ nhạy, bảng chồng lấn và kiểm chứng VAR trên 20 ảnh dev |
+| `capture_curve_windows.py` | Đóng băng thời gian ghi CSV từ ảnh đầu đến ảnh cuối của hai đường cong 100 ảnh |
+| `check_tiny_last3_adapter.py`, `filter_layer_band_plan.py` | Kiểm tra NaN/Inf tại layer 29–31 và lọc kế hoạch dải TinyLLaVA |
+| `run_v2_alpha_probe20.py`, `summarize_v2_alpha_probe20.py` | Caption và bảng dò độ dài trên dải v2 với lưới α giữ nguyên |
 | `measure_var_all_steps_smol20.py` | Đường cong VAR trung bình mọi bước sinh |
 | `enumerate_layer_band_plan.py` | Danh sách đầy đủ dải và 125 ID dev seed 42 |
 | `build_hgai_report_final.py`, `build_hgai_notebook.py` | Các bảng `report_*.csv`, Markdown và notebook từ cùng nguồn |

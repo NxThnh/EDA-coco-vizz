@@ -1,0 +1,361 @@
+{
+  "models": [
+    {
+      "model": "SmolVLM2-2.2B",
+      "images": 20,
+      "image_positions": [
+        1053,
+        1377
+      ],
+      "first_position": [
+        5
+      ],
+      "last_position": [
+        1084,
+        1085,
+        1417
+      ],
+      "max_row_sum_error": 0.0003364682197570801,
+      "max_eager_sdpa_abs_error": 0.003060281276702881,
+      "per_image": [
+        {
+          "image_id": 802,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1085,
+          "max_row_sum_error": 0.00031501054763793945,
+          "max_eager_sdpa_abs_error": 0.0012292861938476562
+        },
+        {
+          "image_id": 872,
+          "image_positions": 1377,
+          "first_position": 5,
+          "last_position": 1417,
+          "max_row_sum_error": 0.0002912282943725586,
+          "max_eager_sdpa_abs_error": 0.0025364160537719727
+        },
+        {
+          "image_id": 885,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.0003082752227783203,
+          "max_eager_sdpa_abs_error": 0.0009211301803588867
+        },
+        {
+          "image_id": 1503,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.0003261566162109375,
+          "max_eager_sdpa_abs_error": 0.0009642243385314941
+        },
+        {
+          "image_id": 2153,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.00028967857360839844,
+          "max_eager_sdpa_abs_error": 0.0014985203742980957
+        },
+        {
+          "image_id": 10363,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.0003094673156738281,
+          "max_eager_sdpa_abs_error": 0.0029531121253967285
+        },
+        {
+          "image_id": 10707,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.00032007694244384766,
+          "max_eager_sdpa_abs_error": 0.00103682279586792
+        },
+        {
+          "image_id": 10995,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.0002943277359008789,
+          "max_eager_sdpa_abs_error": 0.0027298927307128906
+        },
+        {
+          "image_id": 11615,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1085,
+          "max_row_sum_error": 0.00029754638671875,
+          "max_eager_sdpa_abs_error": 0.0016361474990844727
+        },
+        {
+          "image_id": 12748,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1085,
+          "max_row_sum_error": 0.0003364682197570801,
+          "max_eager_sdpa_abs_error": 0.0022116899490356445
+        },
+        {
+          "image_id": 13348,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.0002982616424560547,
+          "max_eager_sdpa_abs_error": 0.0010661408305168152
+        },
+        {
+          "image_id": 15746,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1085,
+          "max_row_sum_error": 0.00031256675720214844,
+          "max_eager_sdpa_abs_error": 0.0023824572563171387
+        },
+        {
+          "image_id": 17031,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.0003037452697753906,
+          "max_eager_sdpa_abs_error": 0.0016226768493652344
+        },
+        {
+          "image_id": 17178,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.00033336877822875977,
+          "max_eager_sdpa_abs_error": 0.0026813745498657227
+        },
+        {
+          "image_id": 18770,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.00030493736267089844,
+          "max_eager_sdpa_abs_error": 0.0008044242858886719
+        },
+        {
+          "image_id": 20992,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.00029408931732177734,
+          "max_eager_sdpa_abs_error": 0.00138014554977417
+        },
+        {
+          "image_id": 23751,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1085,
+          "max_row_sum_error": 0.0003058910369873047,
+          "max_eager_sdpa_abs_error": 0.0013711005449295044
+        },
+        {
+          "image_id": 25386,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1085,
+          "max_row_sum_error": 0.0003299117088317871,
+          "max_eager_sdpa_abs_error": 0.003060281276702881
+        },
+        {
+          "image_id": 27620,
+          "image_positions": 1053,
+          "first_position": 5,
+          "last_position": 1084,
+          "max_row_sum_error": 0.00033551454544067383,
+          "max_eager_sdpa_abs_error": 0.0013753175735473633
+        },
+        {
+          "image_id": 27768,
+          "image_positions": 1377,
+          "first_position": 5,
+          "last_position": 1417,
+          "max_row_sum_error": 0.00030165910720825195,
+          "max_eager_sdpa_abs_error": 0.0008419156074523926
+        }
+      ]
+    },
+    {
+      "model": "bczhou/TinyLLaVA-3.1B",
+      "images": 20,
+      "image_positions": [
+        729
+      ],
+      "first_position": [
+        32
+      ],
+      "last_position": [
+        760
+      ],
+      "max_row_sum_error": 0.0003592371940612793,
+      "max_eager_sdpa_abs_error": 0.17878924310207367,
+      "per_image": [
+        {
+          "image_id": 802,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.00022530555725097656,
+          "max_eager_sdpa_abs_error": 0.09599779546260834
+        },
+        {
+          "image_id": 872,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.00030493736267089844,
+          "max_eager_sdpa_abs_error": 0.094584621489048
+        },
+        {
+          "image_id": 885,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002824068069458008,
+          "max_eager_sdpa_abs_error": 0.0814301073551178
+        },
+        {
+          "image_id": 1503,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.00028640031814575195,
+          "max_eager_sdpa_abs_error": 0.09488846361637115
+        },
+        {
+          "image_id": 2153,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.00028443336486816406,
+          "max_eager_sdpa_abs_error": 0.0730082094669342
+        },
+        {
+          "image_id": 10363,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0003267526626586914,
+          "max_eager_sdpa_abs_error": 0.09211713075637817
+        },
+        {
+          "image_id": 10707,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0003592371940612793,
+          "max_eager_sdpa_abs_error": 0.06183779239654541
+        },
+        {
+          "image_id": 10995,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.00029480457305908203,
+          "max_eager_sdpa_abs_error": 0.1556236743927002
+        },
+        {
+          "image_id": 11615,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002942085266113281,
+          "max_eager_sdpa_abs_error": 0.08240765333175659
+        },
+        {
+          "image_id": 12748,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002620816230773926,
+          "max_eager_sdpa_abs_error": 0.0663711428642273
+        },
+        {
+          "image_id": 13348,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0003046989440917969,
+          "max_eager_sdpa_abs_error": 0.0826706737279892
+        },
+        {
+          "image_id": 15746,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002872347831726074,
+          "max_eager_sdpa_abs_error": 0.07316343486309052
+        },
+        {
+          "image_id": 17031,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0003046989440917969,
+          "max_eager_sdpa_abs_error": 0.15945090353488922
+        },
+        {
+          "image_id": 17178,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002745389938354492,
+          "max_eager_sdpa_abs_error": 0.10787123441696167
+        },
+        {
+          "image_id": 18770,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0003368854522705078,
+          "max_eager_sdpa_abs_error": 0.17878924310207367
+        },
+        {
+          "image_id": 20992,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002561211585998535,
+          "max_eager_sdpa_abs_error": 0.07025648653507233
+        },
+        {
+          "image_id": 23751,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002512931823730469,
+          "max_eager_sdpa_abs_error": 0.059820324182510376
+        },
+        {
+          "image_id": 25386,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.00026547908782958984,
+          "max_eager_sdpa_abs_error": 0.05601906031370163
+        },
+        {
+          "image_id": 27620,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002613067626953125,
+          "max_eager_sdpa_abs_error": 0.07905727624893188
+        },
+        {
+          "image_id": 27768,
+          "image_positions": 729,
+          "first_position": 32,
+          "last_position": 760,
+          "max_row_sum_error": 0.0002713203430175781,
+          "max_eager_sdpa_abs_error": 0.09705507755279541
+        }
+      ]
+    }
+  ]
+}
