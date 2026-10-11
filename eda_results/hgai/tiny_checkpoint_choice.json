@@ -1,0 +1,9 @@
+{
+  "status": "selected_before_tiny_experiments",
+  "checkpoint": "bczhou/TinyLLaVA-3.1B",
+  "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+  "decision_date": "2026-10-07",
+  "authorization": "User delegated model choice and requested completion of items 14, 15, and 17.",
+  "rationale": "Phi-2, SigLIP, square-pad 384 processor and current local adapter have matching source configuration; the alternative checkpoint requires separate processor/forward validation.",
+  "selection_data": "Published checkpoint metadata and local adapter mapping only; no eval scores."
+}

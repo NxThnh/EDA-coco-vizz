@@ -48,7 +48,7 @@ assert (ROOT / "EDA_COCO_vs_VizWiz_Report.md").is_file()''')]
     for i,cell in enumerate(cells):cell['id']=f'hgai-report-{i:03d}'
     nb={'nbformat':4,'nbformat_minor':5,'cells':cells,'metadata':{
         'kernelspec':{'display_name':'Python 3 (ipykernel)','language':'python','name':'python3'},
-        'hgai_report':{'source':'EDA_COCO_vs_VizWiz_Report.md'}}}
+        'hgai_report':{'source':'EDA_COCO_vs_VizWiz_Report.md','version':9}}}
     TARGET.write_text(json.dumps(nb,ensure_ascii=False,indent=1),encoding='utf-8')
     print('Notebook built:',len(cells),'cells; embedded figures exactly once.')
 

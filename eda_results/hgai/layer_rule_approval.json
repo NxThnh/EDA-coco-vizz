@@ -1,0 +1,6 @@
+{
+  "status": "approved_for_dev_measurement",
+  "rule_sha256": "7faf7ebde361aed139c4d592537f8f2814e6345bee9ae6c62bd67702ec382fdc",
+  "authorization": "User delegated model and design decisions on 2026-10-07",
+  "scope": "Run dev-only VAR and image-masking curves; apply the frozen rule before any new dev CHAIR comparison. Never select on eval."
+}

@@ -1,0 +1,19 @@
+{
+  "model": "bczhou/TinyLLaVA-3.1B",
+  "images": 100,
+  "layers": 32,
+  "seed": 927,
+  "source": "eda_results/hgai/layer_curves100_tiny_per_image.csv",
+  "v1_rule_sha256": "7faf7ebde361aed139c4d592537f8f2814e6345bee9ae6c62bd67702ec382fdc",
+  "v2_rule_sha256": "16a05a6fc5c360dc42cb8e9f0d988eb17033ef74d97c631ec8970b5ab125ee48",
+  "v1_band": null,
+  "v2_band": null,
+  "bootstrap_replicates": 1000,
+  "v2_bootstrap_frequencies": [
+    {
+      "band": "none",
+      "count": 1000,
+      "frequency": 1.0
+    }
+  ]
+}

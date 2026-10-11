@@ -1,0 +1,41 @@
+{
+  "role": "paired_eval",
+  "task": "chair",
+  "images": 500,
+  "rows": 500,
+  "bootstrap_unit": "image",
+  "bootstrap_replicates": 10000,
+  "seed": 927,
+  "delta_definition": "intervention minus baseline",
+  "baseline_sha256": "587646da46bf497babdd4ba62f87a8ee1191ffe3375dfbc429132e18e3ae3764",
+  "intervention_sha256": "6a7a4d8b9fd33e83b29a78966f447e6ff2bcbe069c7c8a27cbea928f6889ad99",
+  "code_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+  "delta_point": {
+    "CHAIR_S_pct": -0.3999999999999986,
+    "CHAIR_I_pct": -0.4370630348609934,
+    "object_micro_F1": 0.008791003715934886
+  },
+  "paired_ci": {
+    "CHAIR_S_pct": {
+      "delta_mean_bootstrap": -0.41653999999999997,
+      "ci95_low": -4.0,
+      "ci95_high": 3.1999999999999957,
+      "valid_replicates": 10000,
+      "undefined_replicates": 0
+    },
+    "CHAIR_I_pct": {
+      "delta_mean_bootstrap": -0.44071855266486193,
+      "ci95_low": -1.1858744017812743,
+      "ci95_high": 0.32718492058431575,
+      "valid_replicates": 10000,
+      "undefined_replicates": 0
+    },
+    "object_F1": {
+      "delta_mean_bootstrap": 0.008789134624821227,
+      "ci95_low": -0.0013615955975243982,
+      "ci95_high": 0.01896259742551842,
+      "valid_replicates": 10000,
+      "undefined_replicates": 0
+    }
+  }
+}

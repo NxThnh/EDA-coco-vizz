@@ -1,0 +1,738 @@
+[2026-10-10 01:43:10] Autonomous HGAI Pipeline started.
+[2026-10-10 01:43:10] === STARTING STAGE: 1. SmolVLM2 Eval HGAI Generation (500 images) ===
+[2026-10-10 01:43:10] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe vlm_experiment.py --model smol --task chair --partition eval_common_unmatched500 --condition detailed512 --alpha 0.035 --layers 10 23 --limit 500 --output experiment_outputs/hgai_campaign/smol_eval_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl --resume
+[1. SmolVLM2 Eval HGAI Generation (500 images)] Loading smol precision nf4
+[1. SmolVLM2 Eval HGAI Generation (500 images)] You have video processor config saved in `preprocessor.json` file which is deprecated. Video processor configs should be saved in their own `video_preprocessor.json` file. You can rename the file or load and save the processor back which renames it automatically. Loading from `preprocessor.json` will be removed in v5.0.
+[1. SmolVLM2 Eval HGAI Generation (500 images)] Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+[1. SmolVLM2 Eval HGAI Generation (500 images)] Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.53s/it]
+[1. SmolVLM2 Eval HGAI Generation (500 images)] Loading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  7.37s/it]
+[1. SmolVLM2 Eval HGAI Generation (500 images)] Loading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  7.54s/it]
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 1 / 500 181 tokens 14.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 2 / 500 371 tokens 23.78 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 3 / 500 139 tokens 9.85 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 4 / 500 302 tokens 19.71 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 5 / 500 427 tokens 27.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 6 / 500 289 tokens 18.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 7 / 500 330 tokens 21.22 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 8 / 500 295 tokens 19.06 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 9 / 500 410 tokens 26.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 10 / 500 361 tokens 23.35 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 11 / 500 95 tokens 6.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 12 / 500 438 tokens 28.13 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 13 / 500 401 tokens 25.58 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 14 / 500 329 tokens 21.28 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 15 / 500 446 tokens 28.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 16 / 500 395 tokens 24.99 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 17 / 500 381 tokens 24.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 18 / 500 392 tokens 25.09 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 19 / 500 175 tokens 12.5 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 20 / 500 470 tokens 30.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 21 / 500 366 tokens 24.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 22 / 500 415 tokens 27.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 23 / 500 429 tokens 28.08 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 24 / 500 480 tokens 31.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 25 / 500 105 tokens 7.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 26 / 500 171 tokens 11.93 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 27 / 500 393 tokens 25.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 28 / 500 512 tokens 33.5 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 29 / 500 368 tokens 24.04 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 30 / 500 400 tokens 26.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 31 / 500 512 tokens 33.31 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 32 / 500 121 tokens 8.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 33 / 500 291 tokens 19.24 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 34 / 500 390 tokens 25.29 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 35 / 500 182 tokens 12.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 36 / 500 393 tokens 25.56 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 37 / 500 383 tokens 24.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 38 / 500 391 tokens 25.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 39 / 500 251 tokens 16.61 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 40 / 500 358 tokens 23.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 41 / 500 275 tokens 18.65 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 42 / 500 402 tokens 26.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 43 / 500 332 tokens 21.65 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 44 / 500 512 tokens 34.15 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 45 / 500 297 tokens 19.76 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 46 / 500 390 tokens 25.8 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 47 / 500 512 tokens 34.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 48 / 500 131 tokens 9.4 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 49 / 500 340 tokens 23.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 50 / 500 324 tokens 22.32 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 51 / 500 172 tokens 11.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 52 / 500 414 tokens 27.12 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 53 / 500 144 tokens 10.22 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 54 / 500 376 tokens 24.58 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 55 / 500 389 tokens 25.31 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 56 / 500 403 tokens 26.53 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 57 / 500 360 tokens 23.77 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 58 / 500 172 tokens 12.3 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 59 / 500 189 tokens 13.21 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 60 / 500 460 tokens 30.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 61 / 500 414 tokens 28.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 62 / 500 343 tokens 23.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 63 / 500 389 tokens 25.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 64 / 500 378 tokens 25.18 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 65 / 500 354 tokens 23.38 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 66 / 500 324 tokens 21.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 67 / 500 368 tokens 24.38 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 68 / 500 407 tokens 26.99 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 69 / 500 242 tokens 16.19 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 70 / 500 431 tokens 28.19 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 71 / 500 497 tokens 31.97 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 72 / 500 314 tokens 20.88 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 73 / 500 137 tokens 9.59 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 74 / 500 418 tokens 27.24 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 75 / 500 234 tokens 15.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 76 / 500 460 tokens 30.09 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 77 / 500 441 tokens 28.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 78 / 500 138 tokens 9.95 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 79 / 500 494 tokens 32.04 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 80 / 500 280 tokens 18.52 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 81 / 500 422 tokens 27.54 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 82 / 500 126 tokens 9.6 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 83 / 500 372 tokens 24.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 84 / 500 451 tokens 29.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 85 / 500 138 tokens 9.7 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 86 / 500 394 tokens 25.78 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 87 / 500 349 tokens 23.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 88 / 500 356 tokens 23.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 89 / 500 407 tokens 26.46 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 90 / 500 313 tokens 20.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 91 / 500 382 tokens 25.05 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 92 / 500 402 tokens 26.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 93 / 500 313 tokens 20.59 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 94 / 500 331 tokens 22.47 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 95 / 500 390 tokens 26.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 96 / 500 317 tokens 21.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 97 / 500 133 tokens 9.73 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 98 / 500 370 tokens 24.22 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 99 / 500 394 tokens 25.97 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 100 / 500 176 tokens 12.19 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 101 / 500 258 tokens 17.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 102 / 500 419 tokens 27.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 103 / 500 108 tokens 7.99 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 104 / 500 140 tokens 9.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 105 / 500 284 tokens 19.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 106 / 500 356 tokens 23.4 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 107 / 500 404 tokens 26.38 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 108 / 500 385 tokens 25.45 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 109 / 500 301 tokens 20.69 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 110 / 500 512 tokens 33.48 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 111 / 500 442 tokens 28.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 112 / 500 330 tokens 21.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 113 / 500 375 tokens 25.24 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 114 / 500 355 tokens 24.2 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 115 / 500 346 tokens 23.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 116 / 500 406 tokens 27.34 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 117 / 500 393 tokens 26.17 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 118 / 500 512 tokens 33.8 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 119 / 500 506 tokens 32.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 120 / 500 334 tokens 22.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 121 / 500 431 tokens 28.43 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 122 / 500 384 tokens 24.99 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 123 / 500 106 tokens 7.81 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 124 / 500 120 tokens 8.18 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 125 / 500 468 tokens 30.39 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 126 / 500 432 tokens 28.12 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 127 / 500 317 tokens 20.78 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 128 / 500 159 tokens 11.73 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 129 / 500 345 tokens 22.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 130 / 500 344 tokens 22.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 131 / 500 327 tokens 21.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 132 / 500 379 tokens 25.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 133 / 500 151 tokens 10.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 134 / 500 369 tokens 24.47 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 135 / 500 379 tokens 24.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 136 / 500 401 tokens 26.18 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 137 / 500 328 tokens 21.85 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 138 / 500 371 tokens 24.4 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 139 / 500 384 tokens 25.45 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 140 / 500 361 tokens 24.19 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 141 / 500 132 tokens 9.98 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 142 / 500 418 tokens 27.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 143 / 500 289 tokens 19.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 144 / 500 406 tokens 26.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 145 / 500 393 tokens 25.79 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 146 / 500 300 tokens 20.05 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 147 / 500 512 tokens 33.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 148 / 500 199 tokens 14.06 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 149 / 500 351 tokens 23.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 150 / 500 430 tokens 29.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 151 / 500 512 tokens 33.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 152 / 500 402 tokens 26.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 153 / 500 353 tokens 23.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 154 / 500 328 tokens 22.06 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 155 / 500 366 tokens 24.92 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 156 / 500 450 tokens 29.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 157 / 500 366 tokens 24.3 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 158 / 500 117 tokens 8.45 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 159 / 500 270 tokens 18.01 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 160 / 500 383 tokens 25.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 161 / 500 405 tokens 26.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 162 / 500 358 tokens 23.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 163 / 500 109 tokens 7.94 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 164 / 500 298 tokens 19.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 165 / 500 415 tokens 27.0 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 166 / 500 366 tokens 24.1 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 167 / 500 400 tokens 26.91 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 168 / 500 352 tokens 23.23 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 169 / 500 416 tokens 27.34 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 170 / 500 319 tokens 21.21 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 171 / 500 416 tokens 27.18 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 172 / 500 488 tokens 31.72 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 173 / 500 355 tokens 23.38 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 174 / 500 304 tokens 20.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 175 / 500 140 tokens 10.38 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 176 / 500 396 tokens 26.01 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 177 / 500 150 tokens 10.72 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 178 / 500 470 tokens 30.93 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 179 / 500 464 tokens 30.04 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 180 / 500 343 tokens 22.63 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 181 / 500 378 tokens 24.79 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 182 / 500 414 tokens 27.08 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 183 / 500 238 tokens 16.12 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 184 / 500 438 tokens 28.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 185 / 500 367 tokens 24.28 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 186 / 500 319 tokens 21.05 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 187 / 500 413 tokens 27.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 188 / 500 405 tokens 26.64 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 189 / 500 124 tokens 8.95 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 190 / 500 115 tokens 8.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 191 / 500 420 tokens 27.53 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 192 / 500 180 tokens 12.44 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 193 / 500 392 tokens 25.63 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 194 / 500 340 tokens 22.54 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 195 / 500 322 tokens 22.08 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 196 / 500 374 tokens 24.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 197 / 500 359 tokens 23.72 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 198 / 500 333 tokens 21.88 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 199 / 500 142 tokens 10.44 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 200 / 500 463 tokens 29.86 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 201 / 500 231 tokens 15.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 202 / 500 179 tokens 12.27 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 203 / 500 360 tokens 23.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 204 / 500 512 tokens 33.75 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 205 / 500 140 tokens 9.89 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 206 / 500 330 tokens 21.85 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 207 / 500 383 tokens 25.54 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 208 / 500 170 tokens 12.04 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 209 / 500 186 tokens 12.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 210 / 500 328 tokens 21.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 211 / 500 426 tokens 27.94 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 212 / 500 171 tokens 11.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 213 / 500 390 tokens 25.21 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 214 / 500 384 tokens 25.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 215 / 500 324 tokens 21.34 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 216 / 500 358 tokens 23.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 217 / 500 302 tokens 20.19 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 218 / 500 384 tokens 25.1 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 219 / 500 365 tokens 24.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 220 / 500 432 tokens 28.63 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 221 / 500 363 tokens 23.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 222 / 500 117 tokens 8.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 223 / 500 482 tokens 31.15 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 224 / 500 351 tokens 22.71 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 225 / 500 366 tokens 24.05 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 226 / 500 352 tokens 22.93 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 227 / 500 143 tokens 10.22 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 228 / 500 347 tokens 22.59 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 229 / 500 151 tokens 10.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 230 / 500 128 tokens 9.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 231 / 500 126 tokens 9.06 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 232 / 500 512 tokens 33.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 233 / 500 268 tokens 17.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 234 / 500 393 tokens 25.71 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 235 / 500 376 tokens 24.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 236 / 500 451 tokens 28.99 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 237 / 500 380 tokens 24.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 238 / 500 417 tokens 26.76 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 239 / 500 114 tokens 8.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 240 / 500 394 tokens 26.21 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 241 / 500 436 tokens 28.79 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 242 / 500 323 tokens 21.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 243 / 500 308 tokens 20.36 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 244 / 500 347 tokens 23.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 245 / 500 388 tokens 25.36 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 246 / 500 512 tokens 33.51 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 247 / 500 383 tokens 23.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 248 / 500 160 tokens 11.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 249 / 500 361 tokens 23.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 250 / 500 358 tokens 23.48 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 251 / 500 165 tokens 11.5 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 252 / 500 402 tokens 26.26 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 253 / 500 230 tokens 15.69 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 254 / 500 355 tokens 23.36 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 255 / 500 124 tokens 8.97 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 256 / 500 331 tokens 22.72 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 257 / 500 390 tokens 25.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 258 / 500 158 tokens 10.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 259 / 500 400 tokens 26.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 260 / 500 285 tokens 18.94 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 261 / 500 372 tokens 24.48 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 262 / 500 422 tokens 27.73 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 263 / 500 512 tokens 33.45 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 264 / 500 125 tokens 8.98 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 265 / 500 321 tokens 21.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 266 / 500 298 tokens 20.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 267 / 500 385 tokens 25.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 268 / 500 512 tokens 33.47 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 269 / 500 390 tokens 26.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 270 / 500 355 tokens 23.58 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 271 / 500 408 tokens 26.94 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 272 / 500 367 tokens 24.24 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 273 / 500 420 tokens 27.45 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 274 / 500 424 tokens 27.86 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 275 / 500 407 tokens 26.53 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 276 / 500 438 tokens 28.75 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 277 / 500 435 tokens 28.86 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 278 / 500 227 tokens 15.44 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 279 / 500 457 tokens 29.85 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 280 / 500 390 tokens 25.71 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 281 / 500 165 tokens 11.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 282 / 500 260 tokens 17.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 283 / 500 347 tokens 23.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 284 / 500 385 tokens 25.61 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 285 / 500 332 tokens 21.92 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 286 / 500 364 tokens 23.98 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 287 / 500 373 tokens 24.92 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 288 / 500 346 tokens 22.92 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 289 / 500 370 tokens 24.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 290 / 500 438 tokens 28.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 291 / 500 336 tokens 21.89 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 292 / 500 461 tokens 29.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 293 / 500 92 tokens 6.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 294 / 500 151 tokens 10.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 295 / 500 134 tokens 9.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 296 / 500 136 tokens 9.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 297 / 500 129 tokens 9.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 298 / 500 361 tokens 24.21 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 299 / 500 374 tokens 24.56 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 300 / 500 160 tokens 11.16 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 301 / 500 160 tokens 11.2 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 302 / 500 437 tokens 29.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 303 / 500 205 tokens 14.02 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 304 / 500 312 tokens 20.4 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 305 / 500 366 tokens 23.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 306 / 500 128 tokens 9.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 307 / 500 408 tokens 26.53 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 308 / 500 305 tokens 20.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 309 / 500 359 tokens 23.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 310 / 500 456 tokens 29.7 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 311 / 500 180 tokens 12.56 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 312 / 500 342 tokens 22.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 313 / 500 369 tokens 24.64 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 314 / 500 512 tokens 33.39 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 315 / 500 145 tokens 10.23 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 316 / 500 415 tokens 27.2 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 317 / 500 191 tokens 13.05 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 318 / 500 156 tokens 10.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 319 / 500 380 tokens 24.88 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 320 / 500 416 tokens 27.49 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 321 / 500 418 tokens 27.0 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 322 / 500 385 tokens 25.33 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 323 / 500 405 tokens 26.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 324 / 500 131 tokens 9.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 325 / 500 375 tokens 24.48 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 326 / 500 251 tokens 16.77 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 327 / 500 355 tokens 23.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 328 / 500 373 tokens 24.28 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 329 / 500 512 tokens 32.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 330 / 500 467 tokens 30.37 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 331 / 500 380 tokens 24.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 332 / 500 294 tokens 19.54 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 333 / 500 371 tokens 24.61 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 334 / 500 380 tokens 25.28 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 335 / 500 400 tokens 26.27 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 336 / 500 512 tokens 33.19 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 337 / 500 187 tokens 13.02 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 338 / 500 399 tokens 26.47 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 339 / 500 387 tokens 25.54 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 340 / 500 333 tokens 22.34 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 341 / 500 357 tokens 23.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 342 / 500 342 tokens 22.47 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 343 / 500 340 tokens 22.59 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 344 / 500 380 tokens 24.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 345 / 500 359 tokens 23.73 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 346 / 500 202 tokens 13.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 347 / 500 378 tokens 25.17 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 348 / 500 383 tokens 25.39 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 349 / 500 284 tokens 18.84 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 350 / 500 143 tokens 10.28 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 351 / 500 420 tokens 27.6 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 352 / 500 266 tokens 18.06 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 353 / 500 512 tokens 33.47 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 354 / 500 419 tokens 27.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 355 / 500 267 tokens 18.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 356 / 500 164 tokens 11.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 357 / 500 235 tokens 15.98 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 358 / 500 328 tokens 21.81 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 359 / 500 374 tokens 24.85 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 360 / 500 416 tokens 27.23 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 361 / 500 195 tokens 13.6 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 362 / 500 425 tokens 27.79 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 363 / 500 410 tokens 26.83 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 364 / 500 417 tokens 27.27 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 365 / 500 390 tokens 25.75 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 366 / 500 402 tokens 26.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 367 / 500 305 tokens 20.39 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 368 / 500 364 tokens 24.34 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 369 / 500 512 tokens 33.57 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 370 / 500 371 tokens 24.35 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 371 / 500 279 tokens 18.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 372 / 500 512 tokens 33.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 373 / 500 359 tokens 23.4 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 374 / 500 457 tokens 29.96 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 375 / 500 438 tokens 28.59 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 376 / 500 410 tokens 27.24 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 377 / 500 134 tokens 9.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 378 / 500 410 tokens 26.65 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 379 / 500 318 tokens 21.06 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 380 / 500 356 tokens 23.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 381 / 500 512 tokens 33.09 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 382 / 500 340 tokens 22.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 383 / 500 141 tokens 10.1 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 384 / 500 400 tokens 26.22 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 385 / 500 448 tokens 29.01 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 386 / 500 403 tokens 26.32 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 387 / 500 134 tokens 9.53 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 388 / 500 386 tokens 25.51 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 389 / 500 394 tokens 26.32 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 390 / 500 420 tokens 28.02 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 391 / 500 443 tokens 28.89 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 392 / 500 172 tokens 11.95 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 393 / 500 369 tokens 24.44 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 394 / 500 189 tokens 13.2 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 395 / 500 342 tokens 22.23 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 396 / 500 270 tokens 18.46 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 397 / 500 512 tokens 32.92 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 398 / 500 415 tokens 27.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 399 / 500 222 tokens 15.16 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 400 / 500 398 tokens 25.91 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 401 / 500 512 tokens 32.99 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 402 / 500 458 tokens 30.01 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 403 / 500 152 tokens 10.8 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 404 / 500 346 tokens 22.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 405 / 500 289 tokens 19.13 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 406 / 500 397 tokens 25.81 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 407 / 500 348 tokens 22.72 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 408 / 500 211 tokens 14.58 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 409 / 500 376 tokens 24.63 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 410 / 500 512 tokens 32.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 411 / 500 102 tokens 7.74 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 412 / 500 337 tokens 22.41 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 413 / 500 244 tokens 16.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 414 / 500 446 tokens 29.03 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 415 / 500 330 tokens 21.76 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 416 / 500 358 tokens 23.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 417 / 500 512 tokens 33.39 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 418 / 500 133 tokens 9.46 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 419 / 500 161 tokens 11.63 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 420 / 500 373 tokens 24.65 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 421 / 500 382 tokens 25.24 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 422 / 500 372 tokens 24.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 423 / 500 377 tokens 25.27 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 424 / 500 450 tokens 29.86 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 425 / 500 242 tokens 16.63 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 426 / 500 404 tokens 26.73 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 427 / 500 329 tokens 22.48 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 428 / 500 343 tokens 22.72 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 429 / 500 262 tokens 17.55 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 430 / 500 170 tokens 11.86 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 431 / 500 432 tokens 28.14 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 432 / 500 372 tokens 24.25 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 433 / 500 387 tokens 25.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 434 / 500 404 tokens 27.18 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 435 / 500 370 tokens 24.64 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 436 / 500 151 tokens 10.69 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 437 / 500 375 tokens 24.48 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 438 / 500 205 tokens 13.9 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 439 / 500 336 tokens 22.68 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 440 / 500 357 tokens 24.0 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 441 / 500 402 tokens 26.42 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 442 / 500 122 tokens 8.79 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 443 / 500 341 tokens 22.51 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 444 / 500 456 tokens 29.76 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 445 / 500 118 tokens 8.65 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 446 / 500 437 tokens 28.44 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 447 / 500 467 tokens 30.58 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 448 / 500 421 tokens 27.52 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 449 / 500 157 tokens 11.15 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 450 / 500 479 tokens 31.98 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 451 / 500 226 tokens 15.52 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 452 / 500 382 tokens 25.16 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 453 / 500 395 tokens 25.98 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 454 / 500 381 tokens 25.15 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 455 / 500 512 tokens 33.61 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 456 / 500 166 tokens 11.65 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 457 / 500 419 tokens 27.7 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 458 / 500 124 tokens 9.0 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 459 / 500 512 tokens 32.77 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 460 / 500 417 tokens 27.39 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 461 / 500 127 tokens 9.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 462 / 500 312 tokens 20.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 463 / 500 362 tokens 23.88 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 464 / 500 174 tokens 12.16 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 465 / 500 355 tokens 23.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 466 / 500 419 tokens 27.59 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 467 / 500 215 tokens 14.66 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 468 / 500 389 tokens 25.67 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 469 / 500 437 tokens 28.44 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 470 / 500 395 tokens 26.05 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 471 / 500 458 tokens 29.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 472 / 500 512 tokens 33.23 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 473 / 500 162 tokens 11.52 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 474 / 500 213 tokens 14.58 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 475 / 500 389 tokens 25.5 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 476 / 500 416 tokens 26.56 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 477 / 500 224 tokens 15.02 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 478 / 500 428 tokens 27.62 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 479 / 500 160 tokens 11.6 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 480 / 500 374 tokens 24.61 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 481 / 500 433 tokens 28.32 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 482 / 500 387 tokens 25.35 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 483 / 500 323 tokens 22.17 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 484 / 500 395 tokens 25.82 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 485 / 500 397 tokens 25.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 486 / 500 512 tokens 32.88 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 487 / 500 137 tokens 9.86 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 488 / 500 132 tokens 10.02 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 489 / 500 349 tokens 22.75 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 490 / 500 317 tokens 20.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 491 / 500 344 tokens 22.07 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 492 / 500 445 tokens 28.89 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 493 / 500 418 tokens 27.1 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 494 / 500 155 tokens 11.11 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 495 / 500 413 tokens 27.2 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 496 / 500 339 tokens 22.45 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 497 / 500 149 tokens 10.71 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 498 / 500 351 tokens 23.15 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 499 / 500 463 tokens 30.87 s
+[1. SmolVLM2 Eval HGAI Generation (500 images)] smol chair 500 / 500 354 tokens 23.43 s
+[2026-10-10 04:51:10] === STAGE COMPLETED: 1. SmolVLM2 Eval HGAI Generation (500 images) in 11280.1s ===
+
+[2026-10-10 04:51:10] === STARTING STAGE: 2. Score SmolVLM2 Eval HGAI ===
+[2026-10-10 04:51:10] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe score_vlm_runs.py experiment_outputs/hgai_campaign/smol_eval_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl
+[2. Score SmolVLM2 Eval HGAI] {
+[2. Score SmolVLM2 Eval HGAI]   "images": 500,
+[2. Score SmolVLM2 Eval HGAI]   "hallucinated_captions": 191,
+[2. Score SmolVLM2 Eval HGAI]   "hallucinated_object_mentions": 430,
+[2. Score SmolVLM2 Eval HGAI]   "generated_object_mentions": 6341,
+[2. Score SmolVLM2 Eval HGAI]   "CHAIR_S_pct": 38.2,
+[2. Score SmolVLM2 Eval HGAI]   "CHAIR_I_pct": 6.781264784734269,
+[2. Score SmolVLM2 Eval HGAI]   "object_micro_recall": 0.6726726726726727,
+[2. Score SmolVLM2 Eval HGAI]   "object_micro_precision": 0.8211143695014663,
+[2. Score SmolVLM2 Eval HGAI]   "object_micro_F1": 0.7395179927368769,
+[2. Score SmolVLM2 Eval HGAI]   "mean_new_tokens": 336.792,
+[2. Score SmolVLM2 Eval HGAI]   "truncation_rate": 0.056,
+[2. Score SmolVLM2 Eval HGAI]   "mean_seconds": 22.327288879199987,
+[2. Score SmolVLM2 Eval HGAI]   "peak_gpu_GiB": 1.774308681488037,
+[2. Score SmolVLM2 Eval HGAI]   "role": "hgai",
+[2. Score SmolVLM2 Eval HGAI]   "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+[2. Score SmolVLM2 Eval HGAI]   "task": "chair",
+[2. Score SmolVLM2 Eval HGAI]   "partition": "eval_common_unmatched500",
+[2. Score SmolVLM2 Eval HGAI]   "model_precision": "nf4",
+[2. Score SmolVLM2 Eval HGAI]   "max_new_tokens": 512,
+[2. Score SmolVLM2 Eval HGAI]   "image_splitting": true,
+[2. Score SmolVLM2 Eval HGAI]   "alpha": 0.035,
+[2. Score SmolVLM2 Eval HGAI]   "condition": "detailed512",
+[2. Score SmolVLM2 Eval HGAI]   "refusal_rate": 0.0,
+[2. Score SmolVLM2 Eval HGAI]   "empty_output_rate": 0.0,
+[2. Score SmolVLM2 Eval HGAI]   "mean_distinct_1": 0.4305360077392943,
+[2. Score SmolVLM2 Eval HGAI]   "mean_repeated_4gram_fraction": 0.049589083226173454,
+[2. Score SmolVLM2 Eval HGAI]   "guard_definition": "English lexical refusal regex; macro per-response Distinct-1 and repeated 4-gram fraction; not gold refusal labels.",
+[2. Score SmolVLM2 Eval HGAI]   "output_sha256": "d666384d70ff1d35a400d3fd029e31ce6375b2cc860eb036dfbd1d72b7733533",
+[2. Score SmolVLM2 Eval HGAI]   "config_sha256": "fd1e5cd08c9fcf40a05130cfe06f869a4eb3890d22fef1eef36996c0e11d3d5d",
+[2. Score SmolVLM2 Eval HGAI]   "scorer_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+[2. Score SmolVLM2 Eval HGAI]   "chair_wrapper_sha256": "8d41efda58fbe9eeddd0448883e6396d399dcce81efd183c0cc4d25dce12c50c",
+[2. Score SmolVLM2 Eval HGAI]   "metric_sources": [
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "LisaAnne/Hallucination",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "data/synonyms.txt",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/chair_official/synonyms.txt",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "b685537b36fe21b791c87151b96a991ceb582edff19f3da204dcc7a7905502f2"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "LisaAnne/Hallucination",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "utils/chair.py",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/chair_official/chair.py",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "b05f701ce6ec0125dd700ffb80ed58bfcf2686df8c9bd62f70169cb928de4627"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "LisaAnne/Hallucination",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "utils/misc.py",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/chair_official/misc.py",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "8339e03d934bd43c34ce79bf71c84ebd7e6f0161574d0421af0df25f74b99697"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "RUCAIBox/POPE",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "LICENSE",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/pope_official/LICENSE",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "e78a0718885c94799b5ad154dcba3ef10c4c388a67568b322a0525ebadbcc6b3"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "RUCAIBox/POPE",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "evaluate.py",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/pope_official/evaluate.py",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "f0371dcec5f1bdbde017d1a02f5a9a04c53cb561a2874f3fb8f0718ce3d87036"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "RUCAIBox/POPE",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "output/coco/coco_pope_adversarial.json",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/pope_official/coco_pope_adversarial.json",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "RUCAIBox/POPE",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "output/coco/coco_pope_popular.json",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/pope_official/coco_pope_popular.json",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "72c1a8ad45d0c13514f5f22598261df41d3b533854d29682e924db50ed8aa753"
+[2. Score SmolVLM2 Eval HGAI]     },
+[2. Score SmolVLM2 Eval HGAI]     {
+[2. Score SmolVLM2 Eval HGAI]       "repo": "RUCAIBox/POPE",
+[2. Score SmolVLM2 Eval HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score SmolVLM2 Eval HGAI]       "source_path": "output/coco/coco_pope_random.json",
+[2. Score SmolVLM2 Eval HGAI]       "local_path": "eda_resources/pope_official/coco_pope_random.json",
+[2. Score SmolVLM2 Eval HGAI]       "sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994"
+[2. Score SmolVLM2 Eval HGAI]     }
+[2. Score SmolVLM2 Eval HGAI]   ]
+[2. Score SmolVLM2 Eval HGAI] }
+[2026-10-10 04:51:29] === STAGE COMPLETED: 2. Score SmolVLM2 Eval HGAI in 18.9s ===
+
+[2026-10-10 04:51:29] === STARTING STAGE: 3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval) ===
+[2026-10-10 04:51:29] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe score_vlm_runs.py --compare experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl experiment_outputs/hgai_campaign/smol_eval_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl --ci-output experiment_outputs/hgai_campaign/paired_smol_eval500_a0035_ci.json
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)] {
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "role": "paired_eval",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "task": "chair",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "images": 500,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "rows": 500,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "bootstrap_unit": "image",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "bootstrap_replicates": 10000,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "seed": 927,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "delta_definition": "intervention minus baseline",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "baseline_sha256": "e6d39429125dc0116d488ca75ae393f89bc38eb3bc6b510bcea95b90cb3272a9",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "intervention_sha256": "d666384d70ff1d35a400d3fd029e31ce6375b2cc860eb036dfbd1d72b7733533",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "code_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "delta_point": {
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     "CHAIR_S_pct": 2.200000000000003,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     "CHAIR_I_pct": 0.5720624284215798,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     "object_micro_F1": 0.0019008575293800734
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   },
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   "paired_ci": {
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     "CHAIR_S_pct": {
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "delta_mean_bootstrap": 2.2151400000000003,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "ci95_low": -1.6000000000000014,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "ci95_high": 6.0,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "valid_replicates": 10000,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "undefined_replicates": 0
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     },
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     "CHAIR_I_pct": {
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "delta_mean_bootstrap": 0.5734955038795956,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "ci95_low": -0.18356771740757993,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "ci95_high": 1.3218520683275754,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "valid_replicates": 10000,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "undefined_replicates": 0
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     },
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     "object_F1": {
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "delta_mean_bootstrap": 0.0018409167369392145,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "ci95_low": -0.009422712365667035,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "ci95_high": 0.013125654622344109,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "valid_replicates": 10000,
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]       "undefined_replicates": 0
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]     }
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)]   }
+[3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval)] }
+[2026-10-10 04:52:04] === STAGE COMPLETED: 3. Paired Bootstrap CI (Baseline Eval vs HGAI Eval) in 35.2s ===
+
+[2026-10-10 04:52:04] === STARTING STAGE: 4. Update Experiment Status ===
+[2026-10-10 04:52:04] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe build_experiment_status.py
+[4. Update Experiment Status] Actual run statuses: 64
+[2026-10-10 04:52:05] === STAGE COMPLETED: 4. Update Experiment Status in 0.8s ===
+
+[2026-10-10 04:52:05] === STARTING STAGE: 5a. Build Final HGAI Report ===
+[2026-10-10 04:52:05] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe build_hgai_report_final.py
+[5a. Build Final HGAI Report] Wrote C:\Users\Admin\Downloads\HGAI_data\_archive\EDA_COCO_vs_VizWiz_Report.md 82 sections and tables
+[2026-10-10 04:52:07] === STAGE COMPLETED: 5a. Build Final HGAI Report in 1.9s ===
+
+[2026-10-10 04:52:07] === STARTING STAGE: 5b. Build HGAI Notebook ===
+[2026-10-10 04:52:07] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe build_hgai_notebook.py
+[5b. Build HGAI Notebook] Notebook built: 10 cells; embedded figures exactly once.
+[2026-10-10 04:52:07] === STAGE COMPLETED: 5b. Build HGAI Notebook in 0.1s ===
+
+[2026-10-10 04:52:07] === STARTING STAGE: 5c. Publish Reports & HTML ===
+[2026-10-10 04:52:07] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe publish_hgai_report.py
+[5c. Publish Reports & HTML] C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+[5c. Publish Reports & HTML]   self._get_loop()
+[5c. Publish Reports & HTML] Wrote C:\Users\Admin\Downloads\HGAI_data\_archive\EDA_COCO_vs_VizWiz_Report.md 82 sections and tables
+[5c. Publish Reports & HTML] Notebook built: 10 cells; embedded figures exactly once.
+[5c. Publish Reports & HTML] QA: forbidden phrases 0; matching tables 20 ; retired manifest mentions 0; bad number samples 0; unique attachments 7
+[5c. Publish Reports & HTML] TABLE Khớp ID theo nguồn đã kiểm tra 4 | Bộ ảnh | Mô hình hoặc recipe | ID khớp | Giới hạn kết luận |
+[5c. Publish Reports & HTML] TABLE Quy mô và độ khớp nguồn của ba bộ ảnh 3 | Bộ ảnh | Số ảnh | Seed | Khớp nguồn đã kiểm tra | Chưa khớp nguồn đã kiểm tra |
+[5c. Publish Reports & HTML] TABLE Dịch chuyển hình học giữa các bộ ảnh 3 | Bộ ảnh | Ảnh dọc | Ảnh vuông | Token ảnh Smol trung bình | Token caption P50 | Lệch tâm vật thể P50 |
+[5c. Publish Reports & HTML] TABLE Phân bố token ảnh theo processor 19 | Bộ ảnh | Chế độ | Token ảnh | Số ảnh |
+[5c. Publish Reports & HTML] TABLE Hình học và ngân sách token theo processor 4 | Mô hình/chế độ | Token ảnh | Đệm/cắt | Méo trung vị | Hình học |
+[5c. Publish Reports & HTML] TABLE Độ phủ cặp ảnh–lớp sau cắt giữa 2 | Phạm vi | Số cặp ảnh–lớp | Mọi instance ở ngoài | Bị cắt một phần |
+[5c. Publish Reports & HTML] TABLE Độ dài caption theo tokenizer 4 | Bộ dữ liệu | Mô hình | Số ảnh | Trung bình | Nhỏ nhất | P50 | P90 | P95 | P99 | Lớn nhất |
+[5c. Publish Reports & HTML] TABLE Độ nhạy của ranh giới theo ngưỡng và layer 0 6 | Ngưỡng | Layer 0 | Số layer xét | Dải mô tả |
+[5c. Publish Reports & HTML] TABLE Tần suất dải v2 qua bootstrap theo ảnh 4 | Mô hình | Dải v2 | Số lần / 1.000 | Tần suất |
+[5c. Publish Reports & HTML] TABLE Kiểm chứng phép đo VAR trên 20 ảnh dev 2 | Mô hình | Ảnh dev | Vị trí ảnh | Vị trí đầu | Vị trí cuối | Sai số tổng hàng lớn nhất | Sai lệch eager–SDPA lớn nhất |
+[5c. Publish Reports & HTML] TABLE Phép dò liều α ghép cặp trên 20 ảnh dev 15 | Chế độ | α | Tỷ lệ độ dài TB | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB |
+[5c. Publish Reports & HTML] TABLE Trung vị độ dài, chạm trần và lặp trong phép dò α 15 | Chế độ | α | Trung vị tỷ lệ độ dài | Chạm trần 512 | Có lặp 4-gram | Phần 4-gram lặp TB |
+[5c. Publish Reports & HTML] TABLE Phép dò liều α của TinyLLaVA trên 20 ảnh dev 6 | α | Tỷ lệ độ dài TB | Trung vị tỷ lệ độ dài | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB | Chạm trần 512 | Có lặp 4-gram |
+[5c. Publish Reports & HTML] TABLE Số layer chung giữa dải v2 và các dải định trước 4 | Mô hình | Dải v2 | Đối chứng | Dải đối chứng | Số layer chung | Layer chung |
+[5c. Publish Reports & HTML] TABLE Dò độ dài trên dải v2, 20 ảnh dev 10 | Mô hình | α | Tỷ lệ độ dài TB | Trung vị tỷ lệ độ dài | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB | Chạm trần 512 | Có lặp 4-gram | Phần 4-gram lặp TB |
+[5c. Publish Reports & HTML] TABLE Ngân sách theo thời gian pilot 27 | Mô hình | Nhánh | Cấu hình | Ảnh/câu mỗi cấu hình | Tổng lượt sinh | Giây/lượt từ pilot | Giờ quy đổi | Thời gian đã đo |
+[5c. Publish Reports & HTML] TABLE Đối chiếu checkpoint TinyLLaVA 2 | Checkpoint | Cấu hình | Trọng số / hash | Nạp trong môi trường hiện tại | Can thiệp attention |
+[5c. Publish Reports & HTML] TABLE Nhóm từ chỉ người COCO và VizWiz 2 | Bộ dữ liệu | Caption chọn | Lượt nhắc nhóm người | Caption nhắc nhóm người |
+[5c. Publish Reports & HTML] TABLE Tỷ lệ ảnh chứa từng lớp COCO-80 80 | Lớp | Nhóm 2.977 ảnh | Toàn val2014 | Hiệu (điểm %) | CI 95% (điểm %) |
+[5c. Publish Reports & HTML] TABLE 12 siêu danh mục COCO val2014 12 | Siêu danh mục | Số instance |
+[5c. Publish Reports & HTML] Notebook built: 10 cells; embedded figures exactly once.
+[5c. Publish Reports & HTML] HTML exported with embedded figures and 15 verified local document links.
+[2026-10-10 04:52:16] === STAGE COMPLETED: 5c. Publish Reports & HTML in 9.5s ===
+
+[2026-10-10 04:52:16] === STARTING STAGE: 6. Validate HGAI Repository Integrity ===
+[2026-10-10 04:52:16] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe validate_hgai.py
+[6. Validate HGAI Repository Integrity] {
+[6. Validate HGAI Repository Integrity]   "status": "passed",
+[6. Validate HGAI Repository Integrity]   "locked_partitions": 5,
+[6. Validate HGAI Repository Integrity]   "images_per_partition": 500,
+[6. Validate HGAI Repository Integrity]   "actual_image_bytes_verified": 2500,
+[6. Validate HGAI Repository Integrity]   "git_locked_sources_verified": [
+[6. Validate HGAI Repository Integrity]     "eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv",
+[6. Validate HGAI Repository Integrity]     "eda_results/vlm_extensions/val_image_hashes.csv"
+[6. Validate HGAI Repository Integrity]   ],
+[6. Validate HGAI Repository Integrity]   "processor_rows": 7500,
+[6. Validate HGAI Repository Integrity]   "caption_token_rows": 96092,
+[6. Validate HGAI Repository Integrity]   "executed_notebook_code_cells": 1,
+[6. Validate HGAI Repository Integrity]   "embedded_figures": 7,
+[6. Validate HGAI Repository Integrity]   "local_report_links_checked": 15,
+[6. Validate HGAI Repository Integrity]   "verified_scored_runs": [
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/smol_baseline/pope_adversarial_nf4_split_on_n60.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/smol_baseline/pope_popular_nf4_split_on_n60.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/smol_baseline/pope_random_nf4_split_on_n60.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/smol_baseline/smoke1b_nf4.jsonl"
+[6. Validate HGAI Repository Integrity]   ],
+[6. Validate HGAI Repository Integrity]   "local_html_links_checked": 15,
+[6. Validate HGAI Repository Integrity]   "verified_new_scored_runs": [
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/adapter_smoke/smol_alpha05_dev2.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/adapter_smoke/smol_alpha0_dev2.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/hgai_campaign/smol_dev_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/hgai_campaign/smol_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl",
+[6. Validate HGAI Repository Integrity]     "experiment_outputs/hgai_campaign/smol_eval_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl"
+[6. Validate HGAI Repository Integrity]   ],
+[6. Validate HGAI Repository Integrity]   "tiny_checkpoint_tensor_names_verified": 877,
+[6. Validate HGAI Repository Integrity]   "campaign_plan_sha256": "987d5316eb8103f9d4dfd51bc3ef65702a4f9456db3053f25eb842dc91f6f6f3",
+[6. Validate HGAI Repository Integrity]   "full_campaign_complete": false,
+[6. Validate HGAI Repository Integrity]   "report_sha256": "1e94cbffa65d8017e12a13bea94b86d375cc3d0879928871b45d413e828634be",
+[6. Validate HGAI Repository Integrity]   "notebook_sha256": "8269853bf5503c5ca4edf1f5a3f09e367fe711646cbe440cd4296d45950282c3"
+[6. Validate HGAI Repository Integrity] }
+[2026-10-10 04:53:59] === STAGE COMPLETED: 6. Validate HGAI Repository Integrity in 102.9s ===
+
+[2026-10-10 04:53:59] ALL PIPELINE STAGES COMPLETED SUCCESSFULLY!

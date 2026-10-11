@@ -9,9 +9,9 @@
   ],
   "processor_rows": 7500,
   "caption_token_rows": 96092,
-  "executed_notebook_code_cells": 11,
-  "embedded_figures": 6,
-  "local_report_links_checked": 24,
+  "executed_notebook_code_cells": 1,
+  "embedded_figures": 7,
+  "local_report_links_checked": 15,
   "verified_scored_runs": [
     "experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl",
     "experiment_outputs/smol_baseline/pope_adversarial_nf4_split_on_n60.jsonl",
@@ -19,15 +19,20 @@
     "experiment_outputs/smol_baseline/pope_random_nf4_split_on_n60.jsonl",
     "experiment_outputs/smol_baseline/smoke1b_nf4.jsonl"
   ],
-  "local_html_links_checked": 24,
+  "local_html_links_checked": 15,
   "verified_new_scored_runs": [
     "experiment_outputs/adapter_smoke/smol_alpha05_dev2.jsonl",
     "experiment_outputs/adapter_smoke/smol_alpha0_dev2.jsonl",
-    "experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl"
+    "experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl",
+    "experiment_outputs/hgai_campaign/smol_dev_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl",
+    "experiment_outputs/hgai_campaign/smol_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl",
+    "experiment_outputs/hgai_campaign/smol_eval_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl",
+    "experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0.045_l5-18.jsonl",
+    "experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl"
   ],
   "tiny_checkpoint_tensor_names_verified": 877,
   "campaign_plan_sha256": "987d5316eb8103f9d4dfd51bc3ef65702a4f9456db3053f25eb842dc91f6f6f3",
   "full_campaign_complete": false,
-  "report_sha256": "ff867afe1cbcd3354a69be92f75516545d6b0cf9f7743871e5b72afa93653218",
-  "notebook_sha256": "0bdf45abde019a03e0b1765a2e6e259914b4c38b193ec3721c7959d5feb7c8b0"
+  "report_sha256": "1e94cbffa65d8017e12a13bea94b86d375cc3d0879928871b45d413e828634be",
+  "notebook_sha256": "e125f1f39d73ec14c39bcf1c5183aa418344426ceab0ad5b4040a0070861bfa7"
 }

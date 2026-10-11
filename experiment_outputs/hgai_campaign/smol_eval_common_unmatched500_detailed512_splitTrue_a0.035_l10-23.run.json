@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "rows": 500,
+  "role": "hgai",
+  "output_sha256": "d666384d70ff1d35a400d3fd029e31ce6375b2cc860eb036dfbd1d72b7733533",
+  "config_sha256": "fd1e5cd08c9fcf40a05130cfe06f869a4eb3890d22fef1eef36996c0e11d3d5d",
+  "seconds_this_run": 11245.6191535,
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "torch": "2.5.1+cu121",
+  "device_map": "{'': 0}",
+  "adapter_calls": 2357544,
+  "modified_calls": 2357544
+}

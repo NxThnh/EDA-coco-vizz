@@ -1,0 +1,73 @@
+RUN 0
+Loading tiny precision nf4
+tiny chair 1 / 10 244 tokens 15.3 s
+tiny chair 2 / 10 179 tokens 10.95 s
+tiny chair 3 / 10 139 tokens 9.72 s
+tiny chair 4 / 10 271 tokens 21.11 s
+tiny chair 5 / 10 187 tokens 11.02 s
+tiny chair 6 / 10 133 tokens 10.27 s
+tiny chair 7 / 10 247 tokens 18.03 s
+tiny chair 8 / 10 203 tokens 13.28 s
+tiny chair 9 / 10 112 tokens 7.1 s
+tiny chair 10 / 10 114 tokens 8.28 s
+RUN 0.02
+Loading tiny precision nf4
+tiny chair 1 / 10 176 tokens 14.79 s
+tiny chair 2 / 10 179 tokens 14.87 s
+tiny chair 3 / 10 138 tokens 11.88 s
+tiny chair 4 / 10 239 tokens 19.83 s
+tiny chair 5 / 10 187 tokens 15.55 s
+tiny chair 6 / 10 133 tokens 11.31 s
+tiny chair 7 / 10 247 tokens 20.03 s
+tiny chair 8 / 10 203 tokens 17.7 s
+tiny chair 9 / 10 112 tokens 10.04 s
+tiny chair 10 / 10 114 tokens 10.2 s
+RUN 0.035
+Loading tiny precision nf4
+tiny chair 1 / 10 176 tokens 15.44 s
+tiny chair 2 / 10 278 tokens 24.76 s
+tiny chair 3 / 10 139 tokens 11.62 s
+tiny chair 4 / 10 250 tokens 20.82 s
+tiny chair 5 / 10 187 tokens 17.81 s
+tiny chair 6 / 10 133 tokens 11.64 s
+tiny chair 7 / 10 248 tokens 20.99 s
+tiny chair 8 / 10 225 tokens 18.22 s
+tiny chair 9 / 10 112 tokens 9.35 s
+tiny chair 10 / 10 116 tokens 10.28 s
+RUN 0.05
+Loading tiny precision nf4
+tiny chair 1 / 10 248 tokens 21.82 s
+tiny chair 2 / 10 226 tokens 18.97 s
+tiny chair 3 / 10 225 tokens 18.12 s
+tiny chair 4 / 10 265 tokens 21.69 s
+tiny chair 5 / 10 186 tokens 14.68 s
+tiny chair 6 / 10 131 tokens 10.9 s
+tiny chair 7 / 10 245 tokens 21.0 s
+tiny chair 8 / 10 225 tokens 18.2 s
+tiny chair 9 / 10 130 tokens 10.15 s
+tiny chair 10 / 10 119 tokens 9.48 s
+RUN 0.075
+Loading tiny precision nf4
+tiny chair 1 / 10 237 tokens 18.82 s
+tiny chair 2 / 10 182 tokens 14.75 s
+tiny chair 3 / 10 260 tokens 20.44 s
+tiny chair 4 / 10 271 tokens 22.11 s
+tiny chair 5 / 10 232 tokens 21.13 s
+tiny chair 6 / 10 131 tokens 10.14 s
+tiny chair 7 / 10 274 tokens 20.82 s
+tiny chair 8 / 10 202 tokens 15.72 s
+tiny chair 9 / 10 130 tokens 10.27 s
+tiny chair 10 / 10 106 tokens 9.05 s
+RUN 0.1
+Loading tiny precision nf4
+tiny chair 1 / 10 228 tokens 18.68 s
+tiny chair 2 / 10 214 tokens 16.37 s
+tiny chair 3 / 10 242 tokens 18.51 s
+tiny chair 4 / 10 228 tokens 18.78 s
+tiny chair 5 / 10 232 tokens 18.06 s
+tiny chair 6 / 10 134 tokens 10.53 s
+tiny chair 7 / 10 247 tokens 19.5 s
+tiny chair 8 / 10 178 tokens 14.94 s
+tiny chair 9 / 10 147 tokens 11.64 s
+tiny chair 10 / 10 106 tokens 8.51 s
+TINY_PROBE_COMPLETE

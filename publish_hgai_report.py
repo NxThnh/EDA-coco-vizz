@@ -58,6 +58,7 @@ def main():
     text = (ARCHIVE / MARKDOWN.name).read_text(encoding='utf-8')
     text = text.replace('eda_results/', '_archive/eda_results/')
     text = text.replace('experiment_outputs/', '_archive/experiment_outputs/')
+    text = text.replace('data_prepared/', '_archive/data_prepared/')
     MARKDOWN.write_text(text, encoding='utf-8')
     build_hgai_notebook.ROOT = ROOT
     build_hgai_notebook.REPORT = MARKDOWN

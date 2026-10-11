@@ -1,0 +1,1347 @@
+[2026-10-10 04:57:11] TinyLLaVA HGAI Campaign started.
+[2026-10-10 04:57:11] === STARTING STAGE: 1. TinyLLaVA Dev Baseline (500 images) ===
+[2026-10-10 04:57:11] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe vlm_experiment.py --model tiny --task chair --partition dev_common_unmatched500 --condition detailed512 --alpha 0 --layers 5 18 --limit 500 --output experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl --resume
+[1. TinyLLaVA Dev Baseline (500 images)] Loading tiny precision nf4
+[1. TinyLLaVA Dev Baseline (500 images)] Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]
+[1. TinyLLaVA Dev Baseline (500 images)] Loading checkpoint shards:  33%|███▎      | 1/3 [00:09<00:18,  9.25s/it]
+[1. TinyLLaVA Dev Baseline (500 images)] Loading checkpoint shards:  67%|██████▋   | 2/3 [00:17<00:08,  8.69s/it]
+[1. TinyLLaVA Dev Baseline (500 images)] Loading checkpoint shards: 100%|██████████| 3/3 [00:22<00:00,  7.03s/it]
+[1. TinyLLaVA Dev Baseline (500 images)] Loading checkpoint shards: 100%|██████████| 3/3 [00:22<00:00,  7.54s/it]
+[1. TinyLLaVA Dev Baseline (500 images)] Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 1 / 500 244 tokens 15.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 2 / 500 179 tokens 11.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 3 / 500 139 tokens 8.1 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 4 / 500 271 tokens 15.8 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 5 / 500 187 tokens 10.86 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 6 / 500 133 tokens 7.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 7 / 500 247 tokens 14.19 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 8 / 500 203 tokens 11.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 9 / 500 112 tokens 6.82 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 10 / 500 114 tokens 7.23 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 11 / 500 160 tokens 9.31 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 12 / 500 167 tokens 9.82 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 13 / 500 130 tokens 7.77 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 14 / 500 151 tokens 8.88 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 15 / 500 110 tokens 6.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 16 / 500 123 tokens 7.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 17 / 500 253 tokens 14.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 18 / 500 214 tokens 12.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 19 / 500 273 tokens 16.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 20 / 500 266 tokens 15.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 21 / 500 165 tokens 9.77 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 22 / 500 211 tokens 12.59 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 23 / 500 212 tokens 12.49 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 24 / 500 144 tokens 8.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 25 / 500 228 tokens 13.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 26 / 500 200 tokens 11.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 27 / 500 164 tokens 9.87 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 28 / 500 211 tokens 12.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 29 / 500 252 tokens 14.4 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 30 / 500 217 tokens 12.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 31 / 500 218 tokens 12.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 32 / 500 188 tokens 10.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 33 / 500 183 tokens 10.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 34 / 500 184 tokens 10.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 35 / 500 120 tokens 7.18 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 36 / 500 147 tokens 8.79 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 37 / 500 172 tokens 10.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 38 / 500 127 tokens 7.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 39 / 500 217 tokens 12.65 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 40 / 500 232 tokens 13.53 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 41 / 500 202 tokens 11.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 42 / 500 216 tokens 12.65 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 43 / 500 190 tokens 11.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 44 / 500 184 tokens 10.89 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 45 / 500 198 tokens 11.8 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 46 / 500 213 tokens 12.62 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 47 / 500 201 tokens 11.96 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 48 / 500 149 tokens 8.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 49 / 500 229 tokens 13.42 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 50 / 500 145 tokens 8.83 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 51 / 500 222 tokens 13.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 52 / 500 216 tokens 12.7 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 53 / 500 202 tokens 12.05 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 54 / 500 214 tokens 12.46 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 55 / 500 201 tokens 11.69 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 56 / 500 153 tokens 9.09 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 57 / 500 157 tokens 9.39 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 58 / 500 269 tokens 15.47 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 59 / 500 201 tokens 11.73 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 60 / 500 183 tokens 10.68 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 61 / 500 133 tokens 7.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 62 / 500 212 tokens 12.27 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 63 / 500 122 tokens 7.39 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 64 / 500 159 tokens 9.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 65 / 500 149 tokens 8.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 66 / 500 170 tokens 10.19 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 67 / 500 142 tokens 8.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 68 / 500 161 tokens 9.46 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 69 / 500 237 tokens 13.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 70 / 500 237 tokens 13.78 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 71 / 500 251 tokens 14.94 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 72 / 500 202 tokens 11.77 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 73 / 500 238 tokens 13.72 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 74 / 500 213 tokens 12.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 75 / 500 130 tokens 7.82 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 76 / 500 175 tokens 10.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 77 / 500 178 tokens 10.69 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 78 / 500 163 tokens 9.72 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 79 / 500 242 tokens 14.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 80 / 500 131 tokens 7.96 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 81 / 500 143 tokens 8.77 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 82 / 500 160 tokens 9.59 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 83 / 500 206 tokens 12.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 84 / 500 229 tokens 13.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 85 / 500 250 tokens 14.52 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 86 / 500 152 tokens 9.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 87 / 500 125 tokens 7.69 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 88 / 500 219 tokens 12.86 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 89 / 500 512 tokens 29.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 90 / 500 297 tokens 17.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 91 / 500 250 tokens 14.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 92 / 500 247 tokens 14.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 93 / 500 264 tokens 15.23 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 94 / 500 216 tokens 12.89 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 95 / 500 137 tokens 8.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 96 / 500 253 tokens 14.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 97 / 500 173 tokens 10.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 98 / 500 119 tokens 7.21 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 99 / 500 179 tokens 10.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 100 / 500 170 tokens 10.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 101 / 500 206 tokens 11.99 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 102 / 500 208 tokens 12.51 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 103 / 500 153 tokens 9.04 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 104 / 500 172 tokens 10.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 105 / 500 255 tokens 15.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 106 / 500 236 tokens 13.93 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 107 / 500 218 tokens 12.98 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 108 / 500 256 tokens 14.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 109 / 500 206 tokens 12.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 110 / 500 206 tokens 12.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 111 / 500 223 tokens 13.02 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 112 / 500 199 tokens 11.92 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 113 / 500 211 tokens 12.4 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 114 / 500 251 tokens 14.79 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 115 / 500 196 tokens 11.44 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 116 / 500 177 tokens 10.56 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 117 / 500 221 tokens 13.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 118 / 500 273 tokens 15.79 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 119 / 500 216 tokens 12.73 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 120 / 500 126 tokens 7.54 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 121 / 500 132 tokens 7.96 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 122 / 500 182 tokens 10.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 123 / 500 112 tokens 6.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 124 / 500 150 tokens 9.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 125 / 500 187 tokens 10.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 126 / 500 214 tokens 12.54 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 127 / 500 158 tokens 9.44 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 128 / 500 198 tokens 11.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 129 / 500 197 tokens 11.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 130 / 500 223 tokens 13.25 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 131 / 500 132 tokens 7.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 132 / 500 238 tokens 13.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 133 / 500 245 tokens 14.25 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 134 / 500 181 tokens 10.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 135 / 500 219 tokens 13.33 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 136 / 500 288 tokens 16.59 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 137 / 500 144 tokens 8.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 138 / 500 136 tokens 8.05 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 139 / 500 232 tokens 13.57 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 140 / 500 279 tokens 16.46 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 141 / 500 134 tokens 7.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 142 / 500 198 tokens 11.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 143 / 500 233 tokens 13.69 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 144 / 500 209 tokens 12.25 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 145 / 500 242 tokens 14.19 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 146 / 500 222 tokens 13.05 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 147 / 500 126 tokens 7.58 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 148 / 500 147 tokens 9.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 149 / 500 276 tokens 16.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 150 / 500 234 tokens 13.56 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 151 / 500 238 tokens 14.13 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 152 / 500 206 tokens 12.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 153 / 500 136 tokens 8.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 154 / 500 128 tokens 7.83 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 155 / 500 225 tokens 13.21 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 156 / 500 183 tokens 10.83 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 157 / 500 245 tokens 14.44 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 158 / 500 174 tokens 10.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 159 / 500 127 tokens 7.72 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 160 / 500 128 tokens 7.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 161 / 500 200 tokens 11.71 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 162 / 500 126 tokens 7.54 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 163 / 500 213 tokens 12.31 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 164 / 500 210 tokens 12.4 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 165 / 500 147 tokens 8.76 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 166 / 500 309 tokens 17.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 167 / 500 186 tokens 10.88 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 168 / 500 117 tokens 7.09 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 169 / 500 175 tokens 10.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 170 / 500 222 tokens 13.03 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 171 / 500 263 tokens 15.43 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 172 / 500 127 tokens 7.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 173 / 500 248 tokens 14.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 174 / 500 141 tokens 8.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 175 / 500 128 tokens 7.92 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 176 / 500 220 tokens 12.87 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 177 / 500 166 tokens 9.86 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 178 / 500 221 tokens 12.92 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 179 / 500 211 tokens 12.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 180 / 500 189 tokens 11.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 181 / 500 191 tokens 11.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 182 / 500 188 tokens 11.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 183 / 500 205 tokens 12.14 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 184 / 500 154 tokens 9.12 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 185 / 500 156 tokens 9.15 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 186 / 500 114 tokens 6.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 187 / 500 160 tokens 9.74 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 188 / 500 271 tokens 15.85 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 189 / 500 169 tokens 10.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 190 / 500 169 tokens 10.03 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 191 / 500 151 tokens 9.09 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 192 / 500 512 tokens 29.85 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 193 / 500 187 tokens 10.93 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 194 / 500 199 tokens 11.92 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 195 / 500 203 tokens 12.08 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 196 / 500 190 tokens 11.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 197 / 500 144 tokens 8.8 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 198 / 500 218 tokens 12.96 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 199 / 500 140 tokens 8.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 200 / 500 99 tokens 6.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 201 / 500 138 tokens 8.44 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 202 / 500 170 tokens 10.21 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 203 / 500 153 tokens 9.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 204 / 500 143 tokens 8.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 205 / 500 118 tokens 7.17 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 206 / 500 169 tokens 10.15 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 207 / 500 212 tokens 12.7 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 208 / 500 116 tokens 7.15 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 209 / 500 156 tokens 9.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 210 / 500 204 tokens 12.26 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 211 / 500 153 tokens 9.27 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 212 / 500 161 tokens 9.71 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 213 / 500 189 tokens 11.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 214 / 500 135 tokens 8.14 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 215 / 500 199 tokens 11.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 216 / 500 186 tokens 11.25 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 217 / 500 131 tokens 7.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 218 / 500 110 tokens 6.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 219 / 500 191 tokens 11.09 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 220 / 500 117 tokens 7.15 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 221 / 500 273 tokens 16.04 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 222 / 500 153 tokens 9.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 223 / 500 172 tokens 10.24 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 224 / 500 203 tokens 12.41 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 225 / 500 193 tokens 11.29 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 226 / 500 198 tokens 11.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 227 / 500 208 tokens 12.14 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 228 / 500 160 tokens 9.56 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 229 / 500 169 tokens 9.94 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 230 / 500 284 tokens 16.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 231 / 500 179 tokens 10.53 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 232 / 500 122 tokens 7.27 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 233 / 500 228 tokens 13.24 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 234 / 500 211 tokens 12.18 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 235 / 500 163 tokens 9.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 236 / 500 214 tokens 12.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 237 / 500 228 tokens 13.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 238 / 500 213 tokens 12.51 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 239 / 500 162 tokens 9.74 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 240 / 500 240 tokens 13.82 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 241 / 500 187 tokens 11.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 242 / 500 192 tokens 11.35 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 243 / 500 236 tokens 13.86 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 244 / 500 254 tokens 14.72 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 245 / 500 221 tokens 12.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 246 / 500 135 tokens 8.35 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 247 / 500 221 tokens 13.12 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 248 / 500 206 tokens 12.14 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 249 / 500 252 tokens 14.8 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 250 / 500 172 tokens 10.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 251 / 500 159 tokens 9.31 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 252 / 500 185 tokens 11.12 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 253 / 500 260 tokens 14.97 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 254 / 500 222 tokens 12.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 255 / 500 199 tokens 11.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 256 / 500 103 tokens 6.4 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 257 / 500 218 tokens 12.7 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 258 / 500 216 tokens 12.61 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 259 / 500 228 tokens 13.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 260 / 500 265 tokens 15.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 261 / 500 143 tokens 8.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 262 / 500 158 tokens 9.42 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 263 / 500 155 tokens 9.24 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 264 / 500 246 tokens 14.33 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 265 / 500 121 tokens 7.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 266 / 500 149 tokens 8.83 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 267 / 500 195 tokens 11.37 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 268 / 500 218 tokens 12.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 269 / 500 230 tokens 13.4 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 270 / 500 103 tokens 6.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 271 / 500 279 tokens 16.25 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 272 / 500 130 tokens 7.94 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 273 / 500 130 tokens 7.73 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 274 / 500 190 tokens 11.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 275 / 500 217 tokens 12.59 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 276 / 500 204 tokens 11.89 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 277 / 500 134 tokens 8.16 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 278 / 500 252 tokens 14.85 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 279 / 500 206 tokens 11.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 280 / 500 231 tokens 13.78 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 281 / 500 252 tokens 14.94 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 282 / 500 164 tokens 9.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 283 / 500 130 tokens 7.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 284 / 500 140 tokens 8.24 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 285 / 500 230 tokens 13.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 286 / 500 120 tokens 7.21 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 287 / 500 185 tokens 11.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 288 / 500 261 tokens 14.98 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 289 / 500 190 tokens 11.37 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 290 / 500 124 tokens 7.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 291 / 500 189 tokens 11.04 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 292 / 500 159 tokens 9.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 293 / 500 207 tokens 12.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 294 / 500 123 tokens 7.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 295 / 500 227 tokens 13.41 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 296 / 500 319 tokens 18.33 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 297 / 500 175 tokens 10.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 298 / 500 196 tokens 11.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 299 / 500 188 tokens 11.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 300 / 500 150 tokens 8.87 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 301 / 500 237 tokens 13.74 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 302 / 500 146 tokens 8.65 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 303 / 500 214 tokens 12.61 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 304 / 500 146 tokens 8.76 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 305 / 500 116 tokens 7.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 306 / 500 234 tokens 13.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 307 / 500 133 tokens 8.17 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 308 / 500 105 tokens 6.42 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 309 / 500 147 tokens 8.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 310 / 500 180 tokens 10.57 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 311 / 500 219 tokens 13.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 312 / 500 242 tokens 14.49 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 313 / 500 241 tokens 14.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 314 / 500 189 tokens 10.96 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 315 / 500 187 tokens 11.07 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 316 / 500 229 tokens 13.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 317 / 500 135 tokens 8.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 318 / 500 144 tokens 8.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 319 / 500 174 tokens 10.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 320 / 500 287 tokens 16.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 321 / 500 243 tokens 14.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 322 / 500 182 tokens 11.05 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 323 / 500 142 tokens 8.52 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 324 / 500 248 tokens 14.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 325 / 500 212 tokens 12.41 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 326 / 500 274 tokens 15.94 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 327 / 500 229 tokens 13.47 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 328 / 500 214 tokens 12.68 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 329 / 500 230 tokens 13.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 330 / 500 175 tokens 10.52 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 331 / 500 251 tokens 14.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 332 / 500 225 tokens 13.08 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 333 / 500 182 tokens 11.04 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 334 / 500 234 tokens 13.5 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 335 / 500 161 tokens 9.57 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 336 / 500 225 tokens 13.08 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 337 / 500 196 tokens 11.68 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 338 / 500 199 tokens 11.71 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 339 / 500 117 tokens 6.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 340 / 500 177 tokens 10.35 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 341 / 500 229 tokens 13.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 342 / 500 165 tokens 9.82 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 343 / 500 229 tokens 13.45 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 344 / 500 176 tokens 10.77 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 345 / 500 205 tokens 12.08 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 346 / 500 226 tokens 13.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 347 / 500 199 tokens 11.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 348 / 500 202 tokens 11.83 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 349 / 500 235 tokens 14.21 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 350 / 500 261 tokens 15.37 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 351 / 500 256 tokens 15.37 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 352 / 500 156 tokens 9.35 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 353 / 500 189 tokens 11.12 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 354 / 500 192 tokens 11.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 355 / 500 249 tokens 14.74 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 356 / 500 203 tokens 12.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 357 / 500 211 tokens 12.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 358 / 500 151 tokens 9.02 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 359 / 500 167 tokens 9.98 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 360 / 500 237 tokens 13.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 361 / 500 144 tokens 8.58 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 362 / 500 200 tokens 11.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 363 / 500 283 tokens 16.61 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 364 / 500 203 tokens 11.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 365 / 500 180 tokens 10.68 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 366 / 500 129 tokens 8.07 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 367 / 500 148 tokens 8.84 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 368 / 500 125 tokens 7.52 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 369 / 500 243 tokens 14.42 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 370 / 500 221 tokens 12.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 371 / 500 177 tokens 10.3 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 372 / 500 216 tokens 12.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 373 / 500 137 tokens 8.1 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 374 / 500 171 tokens 10.12 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 375 / 500 199 tokens 11.54 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 376 / 500 132 tokens 7.79 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 377 / 500 239 tokens 13.73 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 378 / 500 190 tokens 11.35 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 379 / 500 133 tokens 7.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 380 / 500 207 tokens 12.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 381 / 500 156 tokens 9.03 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 382 / 500 140 tokens 8.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 383 / 500 189 tokens 10.99 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 384 / 500 139 tokens 8.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 385 / 500 226 tokens 13.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 386 / 500 229 tokens 13.33 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 387 / 500 189 tokens 11.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 388 / 500 129 tokens 7.95 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 389 / 500 120 tokens 7.26 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 390 / 500 222 tokens 12.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 391 / 500 202 tokens 12.1 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 392 / 500 211 tokens 12.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 393 / 500 259 tokens 14.85 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 394 / 500 178 tokens 10.47 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 395 / 500 235 tokens 13.85 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 396 / 500 299 tokens 17.26 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 397 / 500 221 tokens 12.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 398 / 500 189 tokens 11.11 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 399 / 500 203 tokens 11.78 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 400 / 500 114 tokens 6.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 401 / 500 241 tokens 14.13 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 402 / 500 269 tokens 15.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 403 / 500 173 tokens 10.15 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 404 / 500 224 tokens 13.14 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 405 / 500 104 tokens 6.27 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 406 / 500 154 tokens 9.05 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 407 / 500 221 tokens 13.1 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 408 / 500 183 tokens 10.69 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 409 / 500 235 tokens 13.61 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 410 / 500 278 tokens 16.03 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 411 / 500 282 tokens 16.22 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 412 / 500 231 tokens 13.76 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 413 / 500 191 tokens 11.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 414 / 500 101 tokens 6.25 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 415 / 500 147 tokens 8.72 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 416 / 500 157 tokens 9.32 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 417 / 500 225 tokens 13.26 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 418 / 500 280 tokens 16.71 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 419 / 500 227 tokens 13.71 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 420 / 500 244 tokens 14.26 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 421 / 500 146 tokens 8.66 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 422 / 500 232 tokens 13.47 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 423 / 500 216 tokens 12.81 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 424 / 500 213 tokens 12.4 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 425 / 500 213 tokens 12.62 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 426 / 500 306 tokens 17.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 427 / 500 187 tokens 11.06 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 428 / 500 234 tokens 14.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 429 / 500 109 tokens 6.51 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 430 / 500 144 tokens 8.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 431 / 500 173 tokens 10.51 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 432 / 500 162 tokens 9.62 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 433 / 500 191 tokens 11.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 434 / 500 136 tokens 8.05 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 435 / 500 195 tokens 11.77 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 436 / 500 229 tokens 13.18 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 437 / 500 208 tokens 12.41 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 438 / 500 217 tokens 12.59 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 439 / 500 263 tokens 15.14 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 440 / 500 227 tokens 13.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 441 / 500 129 tokens 7.78 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 442 / 500 259 tokens 15.18 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 443 / 500 130 tokens 7.62 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 444 / 500 131 tokens 7.78 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 445 / 500 150 tokens 8.87 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 446 / 500 256 tokens 14.8 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 447 / 500 136 tokens 8.11 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 448 / 500 228 tokens 13.23 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 449 / 500 228 tokens 13.28 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 450 / 500 305 tokens 17.39 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 451 / 500 239 tokens 14.15 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 452 / 500 237 tokens 13.6 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 453 / 500 176 tokens 10.37 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 454 / 500 210 tokens 12.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 455 / 500 246 tokens 14.29 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 456 / 500 312 tokens 18.04 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 457 / 500 260 tokens 14.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 458 / 500 178 tokens 10.41 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 459 / 500 230 tokens 13.23 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 460 / 500 199 tokens 11.64 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 461 / 500 220 tokens 12.9 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 462 / 500 170 tokens 9.91 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 463 / 500 271 tokens 15.8 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 464 / 500 188 tokens 10.94 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 465 / 500 137 tokens 8.17 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 466 / 500 129 tokens 7.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 467 / 500 184 tokens 11.18 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 468 / 500 290 tokens 17.01 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 469 / 500 243 tokens 14.41 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 470 / 500 249 tokens 14.7 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 471 / 500 216 tokens 12.87 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 472 / 500 135 tokens 8.31 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 473 / 500 145 tokens 8.87 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 474 / 500 149 tokens 9.02 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 475 / 500 135 tokens 8.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 476 / 500 189 tokens 11.33 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 477 / 500 161 tokens 9.67 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 478 / 500 297 tokens 17.43 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 479 / 500 167 tokens 9.98 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 480 / 500 140 tokens 8.52 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 481 / 500 194 tokens 11.63 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 482 / 500 156 tokens 9.34 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 483 / 500 237 tokens 13.75 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 484 / 500 259 tokens 15.23 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 485 / 500 299 tokens 17.38 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 486 / 500 159 tokens 9.49 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 487 / 500 183 tokens 10.72 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 488 / 500 170 tokens 10.0 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 489 / 500 209 tokens 12.46 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 490 / 500 225 tokens 13.2 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 491 / 500 289 tokens 16.74 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 492 / 500 279 tokens 16.17 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 493 / 500 209 tokens 12.36 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 494 / 500 207 tokens 12.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 495 / 500 196 tokens 11.48 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 496 / 500 157 tokens 9.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 497 / 500 213 tokens 12.21 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 498 / 500 142 tokens 8.54 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 499 / 500 215 tokens 12.55 s
+[1. TinyLLaVA Dev Baseline (500 images)] tiny chair 500 / 500 190 tokens 11.49 s
+[2026-10-10 06:34:44] === STAGE COMPLETED: 1. TinyLLaVA Dev Baseline (500 images) in 5853.4s ===
+
+[2026-10-10 06:34:44] === STARTING STAGE: 2. Score TinyLLaVA Dev Baseline ===
+[2026-10-10 06:34:44] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe score_vlm_runs.py experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl
+[2. Score TinyLLaVA Dev Baseline] {
+[2. Score TinyLLaVA Dev Baseline]   "images": 500,
+[2. Score TinyLLaVA Dev Baseline]   "hallucinated_captions": 140,
+[2. Score TinyLLaVA Dev Baseline]   "hallucinated_object_mentions": 234,
+[2. Score TinyLLaVA Dev Baseline]   "generated_object_mentions": 3355,
+[2. Score TinyLLaVA Dev Baseline]   "CHAIR_S_pct": 28.0,
+[2. Score TinyLLaVA Dev Baseline]   "CHAIR_I_pct": 6.9746646795827125,
+[2. Score TinyLLaVA Dev Baseline]   "object_micro_recall": 0.6057748968768415,
+[2. Score TinyLLaVA Dev Baseline]   "object_micro_precision": 0.8595317725752508,
+[2. Score TinyLLaVA Dev Baseline]   "object_micro_F1": 0.7106809540269616,
+[2. Score TinyLLaVA Dev Baseline]   "mean_new_tokens": 194.872,
+[2. Score TinyLLaVA Dev Baseline]   "truncation_rate": 0.004,
+[2. Score TinyLLaVA Dev Baseline]   "mean_seconds": 11.50786549699992,
+[2. Score TinyLLaVA Dev Baseline]   "peak_gpu_GiB": 2.310962200164795,
+[2. Score TinyLLaVA Dev Baseline]   "role": "baseline",
+[2. Score TinyLLaVA Dev Baseline]   "model": "bczhou/TinyLLaVA-3.1B",
+[2. Score TinyLLaVA Dev Baseline]   "task": "chair",
+[2. Score TinyLLaVA Dev Baseline]   "partition": "dev_common_unmatched500",
+[2. Score TinyLLaVA Dev Baseline]   "model_precision": "nf4",
+[2. Score TinyLLaVA Dev Baseline]   "max_new_tokens": 512,
+[2. Score TinyLLaVA Dev Baseline]   "image_splitting": null,
+[2. Score TinyLLaVA Dev Baseline]   "alpha": 0.0,
+[2. Score TinyLLaVA Dev Baseline]   "condition": "detailed512",
+[2. Score TinyLLaVA Dev Baseline]   "refusal_rate": 0.0,
+[2. Score TinyLLaVA Dev Baseline]   "empty_output_rate": 0.0,
+[2. Score TinyLLaVA Dev Baseline]   "mean_distinct_1": 0.562491698897385,
+[2. Score TinyLLaVA Dev Baseline]   "mean_repeated_4gram_fraction": 0.00899474442329915,
+[2. Score TinyLLaVA Dev Baseline]   "guard_definition": "English lexical refusal regex; macro per-response Distinct-1 and repeated 4-gram fraction; not gold refusal labels.",
+[2. Score TinyLLaVA Dev Baseline]   "output_sha256": "82ee1745bbacce4bc4343524a3e7ee6da5360a4e551d0de35d4fdfe36a50a64e",
+[2. Score TinyLLaVA Dev Baseline]   "config_sha256": "4a59f087ace6f35ff22d15ce48befb144f747c6196303d338e3fc6b88a49eb82",
+[2. Score TinyLLaVA Dev Baseline]   "scorer_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+[2. Score TinyLLaVA Dev Baseline]   "chair_wrapper_sha256": "8d41efda58fbe9eeddd0448883e6396d399dcce81efd183c0cc4d25dce12c50c",
+[2. Score TinyLLaVA Dev Baseline]   "metric_sources": [
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "LisaAnne/Hallucination",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "data/synonyms.txt",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/chair_official/synonyms.txt",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "b685537b36fe21b791c87151b96a991ceb582edff19f3da204dcc7a7905502f2"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "LisaAnne/Hallucination",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "utils/chair.py",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/chair_official/chair.py",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "b05f701ce6ec0125dd700ffb80ed58bfcf2686df8c9bd62f70169cb928de4627"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "LisaAnne/Hallucination",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "utils/misc.py",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/chair_official/misc.py",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "8339e03d934bd43c34ce79bf71c84ebd7e6f0161574d0421af0df25f74b99697"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "RUCAIBox/POPE",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "LICENSE",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/pope_official/LICENSE",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "e78a0718885c94799b5ad154dcba3ef10c4c388a67568b322a0525ebadbcc6b3"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "RUCAIBox/POPE",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "evaluate.py",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/pope_official/evaluate.py",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "f0371dcec5f1bdbde017d1a02f5a9a04c53cb561a2874f3fb8f0718ce3d87036"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "RUCAIBox/POPE",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "output/coco/coco_pope_adversarial.json",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/pope_official/coco_pope_adversarial.json",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "RUCAIBox/POPE",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "output/coco/coco_pope_popular.json",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/pope_official/coco_pope_popular.json",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "72c1a8ad45d0c13514f5f22598261df41d3b533854d29682e924db50ed8aa753"
+[2. Score TinyLLaVA Dev Baseline]     },
+[2. Score TinyLLaVA Dev Baseline]     {
+[2. Score TinyLLaVA Dev Baseline]       "repo": "RUCAIBox/POPE",
+[2. Score TinyLLaVA Dev Baseline]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[2. Score TinyLLaVA Dev Baseline]       "source_path": "output/coco/coco_pope_random.json",
+[2. Score TinyLLaVA Dev Baseline]       "local_path": "eda_resources/pope_official/coco_pope_random.json",
+[2. Score TinyLLaVA Dev Baseline]       "sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994"
+[2. Score TinyLLaVA Dev Baseline]     }
+[2. Score TinyLLaVA Dev Baseline]   ]
+[2. Score TinyLLaVA Dev Baseline] }
+[2026-10-10 06:34:59] === STAGE COMPLETED: 2. Score TinyLLaVA Dev Baseline in 14.9s ===
+
+[2026-10-10 06:34:59] === STARTING STAGE: 3. TinyLLaVA Dev HGAI (500 images) ===
+[2026-10-10 06:34:59] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe vlm_experiment.py --model tiny --task chair --partition dev_common_unmatched500 --condition detailed512 --alpha 0.045 --layers 5 18 --limit 500 --output experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0.045_l5-18.jsonl --resume
+[3. TinyLLaVA Dev HGAI (500 images)] Loading tiny precision nf4
+[3. TinyLLaVA Dev HGAI (500 images)] Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]
+[3. TinyLLaVA Dev HGAI (500 images)] Loading checkpoint shards:  33%|███▎      | 1/3 [00:08<00:17,  8.93s/it]
+[3. TinyLLaVA Dev HGAI (500 images)] Loading checkpoint shards:  67%|██████▋   | 2/3 [00:16<00:08,  8.39s/it]
+[3. TinyLLaVA Dev HGAI (500 images)] Loading checkpoint shards: 100%|██████████| 3/3 [00:21<00:00,  6.75s/it]
+[3. TinyLLaVA Dev HGAI (500 images)] Loading checkpoint shards: 100%|██████████| 3/3 [00:21<00:00,  7.25s/it]
+[3. TinyLLaVA Dev HGAI (500 images)] Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 1 / 500 239 tokens 17.79 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 2 / 500 278 tokens 20.43 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 3 / 500 225 tokens 16.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 4 / 500 265 tokens 19.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 5 / 500 187 tokens 13.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 6 / 500 156 tokens 11.64 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 7 / 500 242 tokens 17.58 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 8 / 500 225 tokens 16.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 9 / 500 112 tokens 8.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 10 / 500 119 tokens 8.86 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 11 / 500 166 tokens 12.05 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 12 / 500 212 tokens 15.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 13 / 500 133 tokens 9.8 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 14 / 500 160 tokens 11.91 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 15 / 500 109 tokens 8.17 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 16 / 500 139 tokens 10.37 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 17 / 500 296 tokens 21.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 18 / 500 219 tokens 16.11 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 19 / 500 201 tokens 14.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 20 / 500 222 tokens 16.05 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 21 / 500 142 tokens 10.68 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 22 / 500 206 tokens 14.89 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 23 / 500 215 tokens 15.7 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 24 / 500 134 tokens 10.03 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 25 / 500 259 tokens 18.82 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 26 / 500 260 tokens 18.9 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 27 / 500 232 tokens 17.06 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 28 / 500 278 tokens 20.53 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 29 / 500 244 tokens 17.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 30 / 500 166 tokens 12.27 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 31 / 500 246 tokens 17.96 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 32 / 500 241 tokens 17.66 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 33 / 500 153 tokens 11.32 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 34 / 500 226 tokens 16.54 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 35 / 500 115 tokens 8.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 36 / 500 245 tokens 17.94 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 37 / 500 178 tokens 13.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 38 / 500 117 tokens 8.74 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 39 / 500 227 tokens 16.62 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 40 / 500 218 tokens 15.78 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 41 / 500 142 tokens 10.69 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 42 / 500 250 tokens 18.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 43 / 500 249 tokens 18.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 44 / 500 265 tokens 19.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 45 / 500 198 tokens 14.69 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 46 / 500 209 tokens 15.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 47 / 500 201 tokens 14.57 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 48 / 500 142 tokens 10.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 49 / 500 149 tokens 11.06 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 50 / 500 134 tokens 10.22 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 51 / 500 167 tokens 12.37 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 52 / 500 115 tokens 8.71 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 53 / 500 217 tokens 15.79 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 54 / 500 160 tokens 11.77 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 55 / 500 224 tokens 16.48 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 56 / 500 123 tokens 9.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 57 / 500 157 tokens 11.8 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 58 / 500 269 tokens 19.7 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 59 / 500 204 tokens 14.95 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 60 / 500 172 tokens 12.75 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 61 / 500 158 tokens 11.84 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 62 / 500 240 tokens 17.6 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 63 / 500 121 tokens 9.09 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 64 / 500 181 tokens 13.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 65 / 500 512 tokens 37.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 66 / 500 172 tokens 13.03 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 67 / 500 137 tokens 10.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 68 / 500 158 tokens 11.77 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 69 / 500 163 tokens 12.24 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 70 / 500 238 tokens 17.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 71 / 500 255 tokens 18.8 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 72 / 500 186 tokens 13.69 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 73 / 500 202 tokens 14.99 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 74 / 500 117 tokens 8.82 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 75 / 500 139 tokens 10.59 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 76 / 500 125 tokens 9.47 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 77 / 500 182 tokens 13.58 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 78 / 500 185 tokens 14.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 79 / 500 200 tokens 14.91 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 80 / 500 133 tokens 10.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 81 / 500 143 tokens 10.75 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 82 / 500 138 tokens 10.31 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 83 / 500 190 tokens 14.09 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 84 / 500 200 tokens 14.95 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 85 / 500 238 tokens 17.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 86 / 500 181 tokens 13.47 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 87 / 500 123 tokens 9.31 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 88 / 500 149 tokens 10.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 89 / 500 201 tokens 14.98 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 90 / 500 242 tokens 17.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 91 / 500 250 tokens 18.35 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 92 / 500 227 tokens 16.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 93 / 500 275 tokens 20.12 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 94 / 500 219 tokens 16.17 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 95 / 500 127 tokens 9.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 96 / 500 253 tokens 18.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 97 / 500 172 tokens 12.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 98 / 500 191 tokens 14.39 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 99 / 500 178 tokens 13.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 100 / 500 136 tokens 10.11 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 101 / 500 207 tokens 15.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 102 / 500 192 tokens 14.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 103 / 500 167 tokens 12.58 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 104 / 500 172 tokens 12.84 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 105 / 500 256 tokens 18.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 106 / 500 244 tokens 18.3 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 107 / 500 200 tokens 15.01 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 108 / 500 259 tokens 19.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 109 / 500 198 tokens 15.03 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 110 / 500 183 tokens 13.71 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 111 / 500 186 tokens 13.75 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 112 / 500 192 tokens 14.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 113 / 500 130 tokens 9.9 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 114 / 500 229 tokens 17.04 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 115 / 500 229 tokens 17.3 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 116 / 500 192 tokens 14.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 117 / 500 221 tokens 16.41 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 118 / 500 271 tokens 20.28 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 119 / 500 244 tokens 18.11 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 120 / 500 217 tokens 16.11 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 121 / 500 132 tokens 9.8 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 122 / 500 181 tokens 13.47 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 123 / 500 136 tokens 10.46 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 124 / 500 149 tokens 11.12 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 125 / 500 248 tokens 18.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 126 / 500 234 tokens 17.08 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 127 / 500 274 tokens 20.16 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 128 / 500 264 tokens 19.08 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 129 / 500 227 tokens 16.54 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 130 / 500 252 tokens 18.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 131 / 500 157 tokens 11.85 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 132 / 500 192 tokens 14.2 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 133 / 500 222 tokens 16.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 134 / 500 196 tokens 14.32 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 135 / 500 212 tokens 15.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 136 / 500 249 tokens 18.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 137 / 500 139 tokens 10.52 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 138 / 500 103 tokens 7.87 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 139 / 500 208 tokens 15.13 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 140 / 500 299 tokens 21.73 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 141 / 500 132 tokens 9.94 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 142 / 500 200 tokens 14.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 143 / 500 232 tokens 16.96 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 144 / 500 230 tokens 16.93 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 145 / 500 217 tokens 16.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 146 / 500 160 tokens 11.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 147 / 500 126 tokens 9.3 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 148 / 500 224 tokens 16.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 149 / 500 157 tokens 11.52 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 150 / 500 263 tokens 19.18 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 151 / 500 280 tokens 20.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 152 / 500 207 tokens 15.22 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 153 / 500 249 tokens 18.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 154 / 500 133 tokens 10.0 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 155 / 500 242 tokens 17.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 156 / 500 221 tokens 16.32 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 157 / 500 234 tokens 17.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 158 / 500 230 tokens 16.72 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 159 / 500 127 tokens 9.49 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 160 / 500 154 tokens 11.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 161 / 500 215 tokens 15.79 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 162 / 500 126 tokens 9.39 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 163 / 500 291 tokens 21.37 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 164 / 500 233 tokens 17.01 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 165 / 500 152 tokens 11.26 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 166 / 500 253 tokens 18.59 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 167 / 500 320 tokens 23.27 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 168 / 500 109 tokens 8.29 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 169 / 500 125 tokens 9.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 170 / 500 225 tokens 16.3 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 171 / 500 180 tokens 13.38 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 172 / 500 127 tokens 9.49 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 173 / 500 165 tokens 12.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 174 / 500 121 tokens 9.04 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 175 / 500 128 tokens 9.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 176 / 500 159 tokens 11.77 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 177 / 500 173 tokens 12.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 178 / 500 189 tokens 13.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 179 / 500 153 tokens 11.49 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 180 / 500 189 tokens 14.04 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 181 / 500 191 tokens 14.17 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 182 / 500 189 tokens 14.1 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 183 / 500 215 tokens 15.82 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 184 / 500 136 tokens 10.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 185 / 500 157 tokens 11.52 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 186 / 500 100 tokens 7.55 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 187 / 500 160 tokens 11.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 188 / 500 203 tokens 14.96 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 189 / 500 170 tokens 12.55 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 190 / 500 169 tokens 12.37 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 191 / 500 137 tokens 10.11 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 192 / 500 512 tokens 37.53 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 193 / 500 190 tokens 14.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 194 / 500 211 tokens 15.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 195 / 500 261 tokens 19.35 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 196 / 500 129 tokens 9.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 197 / 500 143 tokens 10.57 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 198 / 500 191 tokens 14.29 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 199 / 500 141 tokens 10.67 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 200 / 500 100 tokens 7.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 201 / 500 138 tokens 10.47 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 202 / 500 223 tokens 16.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 203 / 500 250 tokens 18.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 204 / 500 128 tokens 9.75 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 205 / 500 117 tokens 8.86 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 206 / 500 135 tokens 10.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 207 / 500 179 tokens 13.51 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 208 / 500 141 tokens 10.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 209 / 500 175 tokens 13.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 210 / 500 197 tokens 14.85 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 211 / 500 134 tokens 10.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 212 / 500 223 tokens 16.65 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 213 / 500 162 tokens 12.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 214 / 500 153 tokens 11.52 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 215 / 500 143 tokens 10.68 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 216 / 500 186 tokens 13.8 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 217 / 500 144 tokens 10.89 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 218 / 500 99 tokens 7.53 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 219 / 500 212 tokens 15.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 220 / 500 117 tokens 8.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 221 / 500 216 tokens 15.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 222 / 500 136 tokens 10.22 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 223 / 500 170 tokens 12.91 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 224 / 500 248 tokens 18.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 225 / 500 174 tokens 13.1 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 226 / 500 198 tokens 14.71 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 227 / 500 151 tokens 11.31 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 228 / 500 141 tokens 10.48 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 229 / 500 178 tokens 13.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 230 / 500 175 tokens 13.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 231 / 500 218 tokens 16.26 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 232 / 500 122 tokens 9.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 233 / 500 191 tokens 14.16 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 234 / 500 211 tokens 15.73 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 235 / 500 164 tokens 12.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 236 / 500 188 tokens 14.04 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 237 / 500 222 tokens 16.62 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 238 / 500 248 tokens 18.57 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 239 / 500 176 tokens 13.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 240 / 500 200 tokens 14.9 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 241 / 500 175 tokens 13.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 242 / 500 210 tokens 15.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 243 / 500 230 tokens 16.86 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 244 / 500 243 tokens 18.03 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 245 / 500 153 tokens 11.46 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 246 / 500 128 tokens 9.85 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 247 / 500 212 tokens 15.55 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 248 / 500 209 tokens 15.58 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 249 / 500 225 tokens 16.67 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 250 / 500 125 tokens 9.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 251 / 500 197 tokens 14.62 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 252 / 500 153 tokens 11.55 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 253 / 500 190 tokens 14.11 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 254 / 500 229 tokens 16.74 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 255 / 500 339 tokens 24.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 256 / 500 110 tokens 8.46 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 257 / 500 203 tokens 15.17 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 258 / 500 170 tokens 12.67 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 259 / 500 93 tokens 7.13 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 260 / 500 205 tokens 15.18 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 261 / 500 119 tokens 8.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 262 / 500 183 tokens 13.48 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 263 / 500 106 tokens 7.98 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 264 / 500 261 tokens 19.24 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 265 / 500 106 tokens 8.0 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 266 / 500 144 tokens 10.92 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 267 / 500 162 tokens 12.0 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 268 / 500 200 tokens 14.78 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 269 / 500 207 tokens 15.16 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 270 / 500 135 tokens 9.95 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 271 / 500 279 tokens 20.74 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 272 / 500 130 tokens 9.78 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 273 / 500 167 tokens 12.38 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 274 / 500 176 tokens 13.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 275 / 500 152 tokens 11.27 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 276 / 500 195 tokens 14.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 277 / 500 135 tokens 9.95 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 278 / 500 243 tokens 17.94 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 279 / 500 250 tokens 18.71 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 280 / 500 231 tokens 17.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 281 / 500 241 tokens 17.82 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 282 / 500 242 tokens 17.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 283 / 500 219 tokens 16.2 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 284 / 500 160 tokens 12.13 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 285 / 500 190 tokens 14.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 286 / 500 187 tokens 13.89 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 287 / 500 253 tokens 18.79 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 288 / 500 247 tokens 18.43 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 289 / 500 115 tokens 8.59 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 290 / 500 121 tokens 9.3 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 291 / 500 218 tokens 16.04 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 292 / 500 186 tokens 14.01 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 293 / 500 221 tokens 16.46 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 294 / 500 106 tokens 8.08 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 295 / 500 227 tokens 16.87 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 296 / 500 244 tokens 18.16 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 297 / 500 164 tokens 12.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 298 / 500 162 tokens 12.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 299 / 500 185 tokens 13.7 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 300 / 500 150 tokens 11.34 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 301 / 500 231 tokens 17.29 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 302 / 500 258 tokens 19.17 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 303 / 500 228 tokens 16.89 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 304 / 500 148 tokens 11.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 305 / 500 116 tokens 8.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 306 / 500 173 tokens 12.91 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 307 / 500 146 tokens 11.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 308 / 500 130 tokens 9.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 309 / 500 152 tokens 11.54 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 310 / 500 149 tokens 11.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 311 / 500 246 tokens 18.3 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 312 / 500 237 tokens 17.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 313 / 500 218 tokens 16.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 314 / 500 146 tokens 11.03 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 315 / 500 172 tokens 12.79 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 316 / 500 200 tokens 14.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 317 / 500 132 tokens 10.06 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 318 / 500 137 tokens 10.32 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 319 / 500 223 tokens 16.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 320 / 500 179 tokens 13.34 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 321 / 500 178 tokens 13.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 322 / 500 206 tokens 15.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 323 / 500 111 tokens 8.55 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 324 / 500 252 tokens 18.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 325 / 500 172 tokens 12.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 326 / 500 217 tokens 16.43 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 327 / 500 244 tokens 18.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 328 / 500 244 tokens 18.01 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 329 / 500 243 tokens 18.05 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 330 / 500 227 tokens 17.16 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 331 / 500 267 tokens 19.99 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 332 / 500 233 tokens 17.49 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 333 / 500 212 tokens 15.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 334 / 500 245 tokens 18.27 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 335 / 500 161 tokens 12.09 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 336 / 500 235 tokens 17.31 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 337 / 500 208 tokens 15.32 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 338 / 500 230 tokens 17.01 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 339 / 500 132 tokens 9.85 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 340 / 500 177 tokens 13.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 341 / 500 265 tokens 19.25 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 342 / 500 165 tokens 12.26 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 343 / 500 243 tokens 17.86 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 344 / 500 180 tokens 13.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 345 / 500 125 tokens 9.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 346 / 500 226 tokens 16.73 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 347 / 500 199 tokens 14.74 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 348 / 500 190 tokens 14.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 349 / 500 242 tokens 17.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 350 / 500 286 tokens 21.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 351 / 500 246 tokens 18.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 352 / 500 174 tokens 12.98 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 353 / 500 219 tokens 16.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 354 / 500 191 tokens 14.17 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 355 / 500 214 tokens 15.9 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 356 / 500 166 tokens 12.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 357 / 500 209 tokens 15.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 358 / 500 148 tokens 11.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 359 / 500 174 tokens 12.93 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 360 / 500 237 tokens 17.62 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 361 / 500 125 tokens 9.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 362 / 500 197 tokens 14.71 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 363 / 500 301 tokens 22.06 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 364 / 500 211 tokens 15.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 365 / 500 203 tokens 15.22 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 366 / 500 512 tokens 37.6 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 367 / 500 145 tokens 10.99 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 368 / 500 123 tokens 9.35 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 369 / 500 224 tokens 16.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 370 / 500 201 tokens 14.9 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 371 / 500 173 tokens 12.97 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 372 / 500 246 tokens 18.48 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 373 / 500 187 tokens 14.0 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 374 / 500 168 tokens 12.48 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 375 / 500 211 tokens 15.73 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 376 / 500 151 tokens 11.24 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 377 / 500 219 tokens 16.2 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 378 / 500 226 tokens 16.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 379 / 500 133 tokens 9.94 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 380 / 500 237 tokens 17.4 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 381 / 500 162 tokens 12.08 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 382 / 500 137 tokens 10.34 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 383 / 500 226 tokens 16.74 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 384 / 500 133 tokens 9.99 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 385 / 500 151 tokens 11.36 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 386 / 500 303 tokens 22.34 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 387 / 500 261 tokens 19.13 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 388 / 500 129 tokens 9.68 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 389 / 500 120 tokens 8.99 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 390 / 500 242 tokens 18.1 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 391 / 500 219 tokens 16.64 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 392 / 500 214 tokens 15.72 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 393 / 500 214 tokens 15.75 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 394 / 500 254 tokens 18.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 395 / 500 244 tokens 18.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 396 / 500 304 tokens 22.47 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 397 / 500 221 tokens 16.45 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 398 / 500 211 tokens 15.68 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 399 / 500 225 tokens 16.57 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 400 / 500 106 tokens 8.1 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 401 / 500 248 tokens 18.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 402 / 500 216 tokens 15.97 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 403 / 500 214 tokens 16.08 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 404 / 500 212 tokens 15.79 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 405 / 500 120 tokens 9.2 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 406 / 500 154 tokens 11.51 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 407 / 500 271 tokens 20.25 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 408 / 500 262 tokens 19.58 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 409 / 500 185 tokens 13.98 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 410 / 500 266 tokens 19.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 411 / 500 326 tokens 23.85 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 412 / 500 142 tokens 10.76 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 413 / 500 154 tokens 11.78 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 414 / 500 105 tokens 8.03 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 415 / 500 119 tokens 9.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 416 / 500 155 tokens 11.62 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 417 / 500 294 tokens 21.66 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 418 / 500 255 tokens 18.86 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 419 / 500 170 tokens 12.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 420 / 500 173 tokens 12.93 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 421 / 500 246 tokens 18.06 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 422 / 500 209 tokens 15.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 423 / 500 278 tokens 20.68 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 424 / 500 213 tokens 15.89 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 425 / 500 263 tokens 19.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 426 / 500 252 tokens 18.43 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 427 / 500 211 tokens 15.65 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 428 / 500 163 tokens 12.33 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 429 / 500 182 tokens 13.64 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 430 / 500 191 tokens 14.2 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 431 / 500 181 tokens 13.42 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 432 / 500 146 tokens 10.89 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 433 / 500 231 tokens 17.09 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 434 / 500 136 tokens 10.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 435 / 500 192 tokens 14.24 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 436 / 500 275 tokens 20.25 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 437 / 500 162 tokens 12.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 438 / 500 302 tokens 22.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 439 / 500 213 tokens 16.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 440 / 500 210 tokens 15.51 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 441 / 500 129 tokens 9.61 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 442 / 500 281 tokens 21.24 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 443 / 500 131 tokens 9.95 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 444 / 500 215 tokens 16.25 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 445 / 500 160 tokens 12.06 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 446 / 500 157 tokens 12.0 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 447 / 500 130 tokens 9.94 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 448 / 500 194 tokens 14.35 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 449 / 500 187 tokens 13.93 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 450 / 500 328 tokens 24.28 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 451 / 500 134 tokens 10.19 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 452 / 500 224 tokens 16.58 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 453 / 500 176 tokens 13.4 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 454 / 500 243 tokens 17.96 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 455 / 500 272 tokens 20.23 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 456 / 500 290 tokens 21.46 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 457 / 500 167 tokens 12.35 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 458 / 500 238 tokens 17.63 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 459 / 500 194 tokens 14.56 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 460 / 500 200 tokens 14.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 461 / 500 209 tokens 15.44 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 462 / 500 170 tokens 12.73 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 463 / 500 235 tokens 17.32 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 464 / 500 111 tokens 8.24 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 465 / 500 137 tokens 10.18 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 466 / 500 179 tokens 13.29 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 467 / 500 200 tokens 14.53 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 468 / 500 273 tokens 19.87 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 469 / 500 238 tokens 17.51 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 470 / 500 219 tokens 15.97 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 471 / 500 194 tokens 14.4 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 472 / 500 141 tokens 10.49 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 473 / 500 245 tokens 17.83 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 474 / 500 146 tokens 11.02 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 475 / 500 172 tokens 12.7 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 476 / 500 190 tokens 14.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 477 / 500 166 tokens 12.54 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 478 / 500 330 tokens 23.91 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 479 / 500 150 tokens 11.35 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 480 / 500 140 tokens 10.51 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 481 / 500 194 tokens 14.34 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 482 / 500 181 tokens 13.5 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 483 / 500 212 tokens 15.85 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 484 / 500 235 tokens 17.39 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 485 / 500 270 tokens 19.72 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 486 / 500 159 tokens 11.92 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 487 / 500 210 tokens 15.81 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 488 / 500 132 tokens 10.04 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 489 / 500 201 tokens 14.88 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 490 / 500 204 tokens 15.28 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 491 / 500 230 tokens 17.21 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 492 / 500 257 tokens 18.78 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 493 / 500 223 tokens 16.54 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 494 / 500 204 tokens 15.15 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 495 / 500 192 tokens 14.07 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 496 / 500 135 tokens 10.14 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 497 / 500 238 tokens 17.45 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 498 / 500 112 tokens 8.43 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 499 / 500 221 tokens 16.28 s
+[3. TinyLLaVA Dev HGAI (500 images)] tiny chair 500 / 500 176 tokens 13.25 s
+[2026-10-10 08:37:20] === STAGE COMPLETED: 3. TinyLLaVA Dev HGAI (500 images) in 7340.7s ===
+
+[2026-10-10 08:37:20] === STARTING STAGE: 4. Score TinyLLaVA Dev HGAI ===
+[2026-10-10 08:37:20] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe score_vlm_runs.py experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0.045_l5-18.jsonl
+[4. Score TinyLLaVA Dev HGAI] {
+[4. Score TinyLLaVA Dev HGAI]   "images": 500,
+[4. Score TinyLLaVA Dev HGAI]   "hallucinated_captions": 145,
+[4. Score TinyLLaVA Dev HGAI]   "hallucinated_object_mentions": 248,
+[4. Score TinyLLaVA Dev HGAI]   "generated_object_mentions": 3462,
+[4. Score TinyLLaVA Dev HGAI]   "CHAIR_S_pct": 29.0,
+[4. Score TinyLLaVA Dev HGAI]   "CHAIR_I_pct": 7.1634893125361065,
+[4. Score TinyLLaVA Dev HGAI]   "object_micro_recall": 0.6175604007071303,
+[4. Score TinyLLaVA Dev HGAI]   "object_micro_precision": 0.8520325203252033,
+[4. Score TinyLLaVA Dev HGAI]   "object_micro_F1": 0.7160915613255894,
+[4. Score TinyLLaVA Dev HGAI]   "mean_new_tokens": 195.144,
+[4. Score TinyLLaVA Dev HGAI]   "truncation_rate": 0.006,
+[4. Score TinyLLaVA Dev HGAI]   "mean_seconds": 14.488219232600095,
+[4. Score TinyLLaVA Dev HGAI]   "peak_gpu_GiB": 2.310962200164795,
+[4. Score TinyLLaVA Dev HGAI]   "role": "hgai",
+[4. Score TinyLLaVA Dev HGAI]   "model": "bczhou/TinyLLaVA-3.1B",
+[4. Score TinyLLaVA Dev HGAI]   "task": "chair",
+[4. Score TinyLLaVA Dev HGAI]   "partition": "dev_common_unmatched500",
+[4. Score TinyLLaVA Dev HGAI]   "model_precision": "nf4",
+[4. Score TinyLLaVA Dev HGAI]   "max_new_tokens": 512,
+[4. Score TinyLLaVA Dev HGAI]   "image_splitting": null,
+[4. Score TinyLLaVA Dev HGAI]   "alpha": 0.045,
+[4. Score TinyLLaVA Dev HGAI]   "condition": "detailed512",
+[4. Score TinyLLaVA Dev HGAI]   "refusal_rate": 0.0,
+[4. Score TinyLLaVA Dev HGAI]   "empty_output_rate": 0.0,
+[4. Score TinyLLaVA Dev HGAI]   "mean_distinct_1": 0.560037767379896,
+[4. Score TinyLLaVA Dev HGAI]   "mean_repeated_4gram_fraction": 0.010726741453047698,
+[4. Score TinyLLaVA Dev HGAI]   "guard_definition": "English lexical refusal regex; macro per-response Distinct-1 and repeated 4-gram fraction; not gold refusal labels.",
+[4. Score TinyLLaVA Dev HGAI]   "output_sha256": "21642c326a9718c3dea4108d13d40188f031c0ad8646eecec7e54c2b1d6609c0",
+[4. Score TinyLLaVA Dev HGAI]   "config_sha256": "a2c899bc5b2f40a8b103ad8f4602c5c952911c44e9f0dd45d4014a19680e06a4",
+[4. Score TinyLLaVA Dev HGAI]   "scorer_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+[4. Score TinyLLaVA Dev HGAI]   "chair_wrapper_sha256": "8d41efda58fbe9eeddd0448883e6396d399dcce81efd183c0cc4d25dce12c50c",
+[4. Score TinyLLaVA Dev HGAI]   "metric_sources": [
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "LisaAnne/Hallucination",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "data/synonyms.txt",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/chair_official/synonyms.txt",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "b685537b36fe21b791c87151b96a991ceb582edff19f3da204dcc7a7905502f2"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "LisaAnne/Hallucination",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "utils/chair.py",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/chair_official/chair.py",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "b05f701ce6ec0125dd700ffb80ed58bfcf2686df8c9bd62f70169cb928de4627"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "LisaAnne/Hallucination",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "6e4d33c4bedf6dfcd24c61bf527f40714717be47",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "utils/misc.py",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/chair_official/misc.py",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "8339e03d934bd43c34ce79bf71c84ebd7e6f0161574d0421af0df25f74b99697"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "RUCAIBox/POPE",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "LICENSE",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/pope_official/LICENSE",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "e78a0718885c94799b5ad154dcba3ef10c4c388a67568b322a0525ebadbcc6b3"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "RUCAIBox/POPE",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "evaluate.py",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/pope_official/evaluate.py",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "f0371dcec5f1bdbde017d1a02f5a9a04c53cb561a2874f3fb8f0718ce3d87036"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "RUCAIBox/POPE",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "output/coco/coco_pope_adversarial.json",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/pope_official/coco_pope_adversarial.json",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "RUCAIBox/POPE",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "output/coco/coco_pope_popular.json",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/pope_official/coco_pope_popular.json",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "72c1a8ad45d0c13514f5f22598261df41d3b533854d29682e924db50ed8aa753"
+[4. Score TinyLLaVA Dev HGAI]     },
+[4. Score TinyLLaVA Dev HGAI]     {
+[4. Score TinyLLaVA Dev HGAI]       "repo": "RUCAIBox/POPE",
+[4. Score TinyLLaVA Dev HGAI]       "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+[4. Score TinyLLaVA Dev HGAI]       "source_path": "output/coco/coco_pope_random.json",
+[4. Score TinyLLaVA Dev HGAI]       "local_path": "eda_resources/pope_official/coco_pope_random.json",
+[4. Score TinyLLaVA Dev HGAI]       "sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994"
+[4. Score TinyLLaVA Dev HGAI]     }
+[4. Score TinyLLaVA Dev HGAI]   ]
+[4. Score TinyLLaVA Dev HGAI] }
+[2026-10-10 08:37:35] === STAGE COMPLETED: 4. Score TinyLLaVA Dev HGAI in 14.8s ===
+
+[2026-10-10 08:37:35] === STARTING STAGE: 5. Paired Bootstrap CI (Tiny Baseline vs HGAI) ===
+[2026-10-10 08:37:35] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe score_vlm_runs.py --compare experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0.045_l5-18.jsonl --ci-output experiment_outputs/hgai_campaign/paired_tiny_dev500_a0045_ci.json
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)] {
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "role": "paired_eval",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "task": "chair",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "images": 500,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "rows": 500,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "bootstrap_unit": "image",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "bootstrap_replicates": 10000,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "seed": 927,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "delta_definition": "intervention minus baseline",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "baseline_sha256": "82ee1745bbacce4bc4343524a3e7ee6da5360a4e551d0de35d4fdfe36a50a64e",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "intervention_sha256": "21642c326a9718c3dea4108d13d40188f031c0ad8646eecec7e54c2b1d6609c0",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "code_sha256": "4a7c6d90d9b8bec3ba21613a3b911f9a244cf21735b8e079e5c11567a382b2a5",
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "delta_point": {
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     "CHAIR_S_pct": 1.0,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     "CHAIR_I_pct": 0.18882463295339402,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     "object_micro_F1": 0.005410607298627745
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   },
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   "paired_ci": {
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     "CHAIR_S_pct": {
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "delta_mean_bootstrap": 1.00166,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "ci95_low": -2.1999999999999993,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "ci95_high": 4.0000000000000036,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "valid_replicates": 10000,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "undefined_replicates": 0
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     },
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     "CHAIR_I_pct": {
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "delta_mean_bootstrap": 0.19057959851681652,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "ci95_low": -0.6634526002348385,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "ci95_high": 1.0559279355201094,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "valid_replicates": 10000,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "undefined_replicates": 0
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     },
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     "object_F1": {
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "delta_mean_bootstrap": 0.0054286669684975265,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "ci95_low": -0.0055573235849520255,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "ci95_high": 0.016282424723492762,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "valid_replicates": 10000,
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]       "undefined_replicates": 0
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]     }
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)]   }
+[5. Paired Bootstrap CI (Tiny Baseline vs HGAI)] }
+[2026-10-10 08:38:02] === STAGE COMPLETED: 5. Paired Bootstrap CI (Tiny Baseline vs HGAI) in 27.1s ===
+
+[2026-10-10 08:38:02] === STARTING STAGE: 6a. Update Experiment Status ===
+[2026-10-10 08:38:02] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe build_experiment_status.py
+[6a. Update Experiment Status] Actual run statuses: 66
+[2026-10-10 08:38:03] === STAGE COMPLETED: 6a. Update Experiment Status in 0.9s ===
+
+[2026-10-10 08:38:03] === STARTING STAGE: 6b. Build Final Report ===
+[2026-10-10 08:38:03] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe build_hgai_report_final.py
+[6b. Build Final Report] Wrote C:\Users\Admin\Downloads\HGAI_data\_archive\EDA_COCO_vs_VizWiz_Report.md 82 sections and tables
+[2026-10-10 08:38:04] === STAGE COMPLETED: 6b. Build Final Report in 1.2s ===
+
+[2026-10-10 08:38:04] === STARTING STAGE: 6c. Build Notebook ===
+[2026-10-10 08:38:04] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe build_hgai_notebook.py
+[6c. Build Notebook] Notebook built: 10 cells; embedded figures exactly once.
+[2026-10-10 08:38:04] === STAGE COMPLETED: 6c. Build Notebook in 0.1s ===
+
+[2026-10-10 08:38:04] === STARTING STAGE: 6d. Publish Reports & HTML ===
+[2026-10-10 08:38:04] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe publish_hgai_report.py
+[6d. Publish Reports & HTML] C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+[6d. Publish Reports & HTML]   self._get_loop()
+[6d. Publish Reports & HTML] Wrote C:\Users\Admin\Downloads\HGAI_data\_archive\EDA_COCO_vs_VizWiz_Report.md 82 sections and tables
+[6d. Publish Reports & HTML] Notebook built: 10 cells; embedded figures exactly once.
+[6d. Publish Reports & HTML] QA: forbidden phrases 0; matching tables 20 ; retired manifest mentions 0; bad number samples 0; unique attachments 7
+[6d. Publish Reports & HTML] TABLE Khớp ID theo nguồn đã kiểm tra 4 | Bộ ảnh | Mô hình hoặc recipe | ID khớp | Giới hạn kết luận |
+[6d. Publish Reports & HTML] TABLE Quy mô và độ khớp nguồn của ba bộ ảnh 3 | Bộ ảnh | Số ảnh | Seed | Khớp nguồn đã kiểm tra | Chưa khớp nguồn đã kiểm tra |
+[6d. Publish Reports & HTML] TABLE Dịch chuyển hình học giữa các bộ ảnh 3 | Bộ ảnh | Ảnh dọc | Ảnh vuông | Token ảnh Smol trung bình | Token caption P50 | Lệch tâm vật thể P50 |
+[6d. Publish Reports & HTML] TABLE Phân bố token ảnh theo processor 19 | Bộ ảnh | Chế độ | Token ảnh | Số ảnh |
+[6d. Publish Reports & HTML] TABLE Hình học và ngân sách token theo processor 4 | Mô hình/chế độ | Token ảnh | Đệm/cắt | Méo trung vị | Hình học |
+[6d. Publish Reports & HTML] TABLE Độ phủ cặp ảnh–lớp sau cắt giữa 2 | Phạm vi | Số cặp ảnh–lớp | Mọi instance ở ngoài | Bị cắt một phần |
+[6d. Publish Reports & HTML] TABLE Độ dài caption theo tokenizer 4 | Bộ dữ liệu | Mô hình | Số ảnh | Trung bình | Nhỏ nhất | P50 | P90 | P95 | P99 | Lớn nhất |
+[6d. Publish Reports & HTML] TABLE Độ nhạy của ranh giới theo ngưỡng và layer 0 6 | Ngưỡng | Layer 0 | Số layer xét | Dải mô tả |
+[6d. Publish Reports & HTML] TABLE Tần suất dải v2 qua bootstrap theo ảnh 4 | Mô hình | Dải v2 | Số lần / 1.000 | Tần suất |
+[6d. Publish Reports & HTML] TABLE Kiểm chứng phép đo VAR trên 20 ảnh dev 2 | Mô hình | Ảnh dev | Vị trí ảnh | Vị trí đầu | Vị trí cuối | Sai số tổng hàng lớn nhất | Sai lệch eager–SDPA lớn nhất |
+[6d. Publish Reports & HTML] TABLE Phép dò liều α ghép cặp trên 20 ảnh dev 15 | Chế độ | α | Tỷ lệ độ dài TB | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB |
+[6d. Publish Reports & HTML] TABLE Trung vị độ dài, chạm trần và lặp trong phép dò α 15 | Chế độ | α | Trung vị tỷ lệ độ dài | Chạm trần 512 | Có lặp 4-gram | Phần 4-gram lặp TB |
+[6d. Publish Reports & HTML] TABLE Phép dò liều α của TinyLLaVA trên 20 ảnh dev 6 | α | Tỷ lệ độ dài TB | Trung vị tỷ lệ độ dài | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB | Chạm trần 512 | Có lặp 4-gram |
+[6d. Publish Reports & HTML] TABLE Số layer chung giữa dải v2 và các dải định trước 4 | Mô hình | Dải v2 | Đối chứng | Dải đối chứng | Số layer chung | Layer chung |
+[6d. Publish Reports & HTML] TABLE Dò độ dài trên dải v2, 20 ảnh dev 10 | Mô hình | α | Tỷ lệ độ dài TB | Trung vị tỷ lệ độ dài | Co quá nửa | Caption trùng hệt | Khoảng cách sửa từ TB | Chạm trần 512 | Có lặp 4-gram | Phần 4-gram lặp TB |
+[6d. Publish Reports & HTML] TABLE Ngân sách theo thời gian pilot 27 | Mô hình | Nhánh | Cấu hình | Ảnh/câu mỗi cấu hình | Tổng lượt sinh | Giây/lượt từ pilot | Giờ quy đổi | Thời gian đã đo |
+[6d. Publish Reports & HTML] TABLE Đối chiếu checkpoint TinyLLaVA 2 | Checkpoint | Cấu hình | Trọng số / hash | Nạp trong môi trường hiện tại | Can thiệp attention |
+[6d. Publish Reports & HTML] TABLE Nhóm từ chỉ người COCO và VizWiz 2 | Bộ dữ liệu | Caption chọn | Lượt nhắc nhóm người | Caption nhắc nhóm người |
+[6d. Publish Reports & HTML] TABLE Tỷ lệ ảnh chứa từng lớp COCO-80 80 | Lớp | Nhóm 2.977 ảnh | Toàn val2014 | Hiệu (điểm %) | CI 95% (điểm %) |
+[6d. Publish Reports & HTML] TABLE 12 siêu danh mục COCO val2014 12 | Siêu danh mục | Số instance |
+[6d. Publish Reports & HTML] Notebook built: 10 cells; embedded figures exactly once.
+[6d. Publish Reports & HTML] HTML exported with embedded figures and 15 verified local document links.
+[2026-10-10 08:38:13] === STAGE COMPLETED: 6d. Publish Reports & HTML in 9.0s ===
+
+[2026-10-10 08:38:13] === STARTING STAGE: 6e. Validate Integrity ===
+[2026-10-10 08:38:13] Command: C:\Users\Admin\Downloads\HGAI_data\_archive\.venv-eda\Scripts\python.exe validate_hgai.py
+[6e. Validate Integrity] {
+[6e. Validate Integrity]   "status": "passed",
+[6e. Validate Integrity]   "locked_partitions": 5,
+[6e. Validate Integrity]   "images_per_partition": 500,
+[6e. Validate Integrity]   "actual_image_bytes_verified": 2500,
+[6e. Validate Integrity]   "git_locked_sources_verified": [
+[6e. Validate Integrity]     "eda_results/vlm_extensions/llava15_vg_gqa_alias_overlap.csv",
+[6e. Validate Integrity]     "eda_results/vlm_extensions/val_image_hashes.csv"
+[6e. Validate Integrity]   ],
+[6e. Validate Integrity]   "processor_rows": 7500,
+[6e. Validate Integrity]   "caption_token_rows": 96092,
+[6e. Validate Integrity]   "executed_notebook_code_cells": 1,
+[6e. Validate Integrity]   "embedded_figures": 7,
+[6e. Validate Integrity]   "local_report_links_checked": 15,
+[6e. Validate Integrity]   "verified_scored_runs": [
+[6e. Validate Integrity]     "experiment_outputs/smol_baseline/chair_dev_common_unmatched500_nf4_split_on_n20.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/smol_baseline/pope_adversarial_nf4_split_on_n60.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/smol_baseline/pope_popular_nf4_split_on_n60.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/smol_baseline/pope_random_nf4_split_on_n60.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/smol_baseline/smoke1b_nf4.jsonl"
+[6e. Validate Integrity]   ],
+[6e. Validate Integrity]   "local_html_links_checked": 15,
+[6e. Validate Integrity]   "verified_new_scored_runs": [
+[6e. Validate Integrity]     "experiment_outputs/adapter_smoke/smol_alpha05_dev2.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/adapter_smoke/smol_alpha0_dev2.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/full_baseline/smol_chair_eval500_nf4_detailed512.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/hgai_campaign/smol_dev_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/hgai_campaign/smol_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/hgai_campaign/smol_eval_common_unmatched500_detailed512_splitTrue_a0.035_l10-23.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0.045_l5-18.jsonl",
+[6e. Validate Integrity]     "experiment_outputs/hgai_campaign/tiny_dev_common_unmatched500_detailed512_splitTrue_a0_l5-18.jsonl"
+[6e. Validate Integrity]   ],
+[6e. Validate Integrity]   "tiny_checkpoint_tensor_names_verified": 877,
+[6e. Validate Integrity]   "campaign_plan_sha256": "987d5316eb8103f9d4dfd51bc3ef65702a4f9456db3053f25eb842dc91f6f6f3",
+[6e. Validate Integrity]   "full_campaign_complete": false,
+[6e. Validate Integrity]   "report_sha256": "1e94cbffa65d8017e12a13bea94b86d375cc3d0879928871b45d413e828634be",
+[6e. Validate Integrity]   "notebook_sha256": "e125f1f39d73ec14c39bcf1c5183aa418344426ceab0ad5b4040a0070861bfa7"
+[6e. Validate Integrity] }
+[2026-10-10 08:40:20] === STAGE COMPLETED: 6e. Validate Integrity in 127.1s ===
+
+[2026-10-10 08:40:20] ALL TINYLLAVA PIPELINE STAGES COMPLETED SUCCESSFULLY!

@@ -1,0 +1,73 @@
+{
+  "schema_version": 3,
+  "model": "bczhou/TinyLLaVA-3.1B",
+  "model_key": "tiny",
+  "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+  "task": "chair",
+  "partition": "dev_common_unmatched500",
+  "condition": "detailed64",
+  "manifest_sha256": "580670e35afae240872999d75f9d9f5b9832c418cec6347763b246c54626615b",
+  "weights": [
+    {
+      "repo": "bczhou/TinyLLaVA-3.1B",
+      "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+      "file": "model-00001-of-00003.safetensors",
+      "bytes": 4982355512,
+      "sha256": "adac2836b85d1267a4f4bf6f8a0ed77bc6ed46870daac94100bee1522b203f34"
+    },
+    {
+      "repo": "bczhou/TinyLLaVA-3.1B",
+      "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+      "file": "model-00002-of-00003.safetensors",
+      "bytes": 4982541984,
+      "sha256": "aa3028a5e43d1cc5cb73fd976c36c2030dbfcc7e6d1f0904b85db25b96b1a021"
+    },
+    {
+      "repo": "bczhou/TinyLLaVA-3.1B",
+      "revision": "71e73b5bef64b9e9b10028750d8c9494e904adb2",
+      "file": "model-00003-of-00003.safetensors",
+      "bytes": 2782771216,
+      "sha256": "414bf35a7b5a081cdc2157bf5130ee0435c7eac6d6b148079373f342175bc5a3"
+    }
+  ],
+  "precision": "nf4",
+  "image_splitting": null,
+  "image_mode": "pad",
+  "max_new_tokens": 64,
+  "requested_rows": 1,
+  "benchmark_rows": 500,
+  "smol_longest_edge": null,
+  "role": "feasibility_pilot",
+  "alpha": 0.0,
+  "layers_inclusive": [
+    5,
+    18
+  ],
+  "aggregation": "mean",
+  "intervention": "none",
+  "seed": 927,
+  "do_sample": false,
+  "num_beams": 1,
+  "use_cache": true,
+  "transformers": "4.53.3",
+  "code_sha256": {
+    "vlm_experiment.py": "34ac52e99f669c936ef3843f5b3ad8f98b9166fff69a90ab812833c2e4450178",
+    "hgai_attention.py": "ecbc1197105df72fd402bb002aefa4984a88b870664d700a1c767bee5bb81c47",
+    "tinyllava_model.py": "a7894386d8efb1c9ac06f3f4e6671ad6f7a508f99fb5098f7be576cfb77402ba"
+  },
+  "assets_sha256": {
+    "added_tokens.json": "eca8e90d1be6af3afeb1a37f070f9492645c551a9fb2e1ce2a4a8b21f04ffc8b",
+    "config.json": "9d76ce994457d0aeef81c6d0831e0b78a5380ea1e2a4ba994939141464cd19fc",
+    "generation_config.json": "95c6da4369dd196db04f08e0605c1fff91e57c648d26152c5cc72d717c636b9c",
+    "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5",
+    "model.safetensors.index.json": "0b8634afc1427be75a2ec478e0d4de5ceffa06c3288eac467f0fb80e92b34648",
+    "special_tokens_map.json": "57491904f8680d4b52ed440f1f7ba48cad1c31ecf3eb453b03484e6ff4723ae8",
+    "tokenizer.json": "337da36be7a71a6e88aa9148967a7bc8736f4b47c7de8e19ba92b89e80734cfc",
+    "tokenizer_config.json": "79ee65429f2a3ad2e0575d2b9c081cb2c0d08329e3ae0ddcad1207d9f76c6d9e",
+    "vocab.json": "3ba3c3109ff33976c4bd966589c11ee14fcaa1f4c9e5e154c2ed7f99d80709e7"
+  },
+  "annotation_sha256": {
+    "instances_val2014.json": "e1b4d1bc54906827b1a029981b1c77f2088bd4462569b7615db7929070c3ab47",
+    "captions_val2014.json": "7da4cc45cb76ee1642d163e846e1e0a33feffac2e841c9c426d585ea499165a4"
+  }
+}

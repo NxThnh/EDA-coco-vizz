@@ -1,0 +1,4002 @@
+[
+  {
+    "image_id": 802,
+    "refusal": false,
+    "lexical_tokens": 199,
+    "distinct_1": 0.5728643216080402,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 872,
+    "refusal": false,
+    "lexical_tokens": 146,
+    "distinct_1": 0.4794520547945205,
+    "repeated_4gram_fraction": 0.034965034965035,
+    "empty_output": false
+  },
+  {
+    "image_id": 885,
+    "refusal": false,
+    "lexical_tokens": 119,
+    "distinct_1": 0.6134453781512605,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 1503,
+    "refusal": false,
+    "lexical_tokens": 215,
+    "distinct_1": 0.5302325581395348,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 2153,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.5128205128205128,
+    "repeated_4gram_fraction": 0.013071895424836555,
+    "empty_output": false
+  },
+  {
+    "image_id": 10363,
+    "refusal": false,
+    "lexical_tokens": 112,
+    "distinct_1": 0.5714285714285714,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 10707,
+    "refusal": false,
+    "lexical_tokens": 201,
+    "distinct_1": 0.6169154228855721,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 10995,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.6172839506172839,
+    "repeated_4gram_fraction": 0.0062893081761006275,
+    "empty_output": false
+  },
+  {
+    "image_id": 11615,
+    "refusal": false,
+    "lexical_tokens": 95,
+    "distinct_1": 0.631578947368421,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 12748,
+    "refusal": false,
+    "lexical_tokens": 96,
+    "distinct_1": 0.5729166666666666,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 13348,
+    "refusal": false,
+    "lexical_tokens": 132,
+    "distinct_1": 0.5909090909090909,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 15746,
+    "refusal": false,
+    "lexical_tokens": 131,
+    "distinct_1": 0.6030534351145038,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 17031,
+    "refusal": false,
+    "lexical_tokens": 106,
+    "distinct_1": 0.6981132075471698,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 17178,
+    "refusal": false,
+    "lexical_tokens": 127,
+    "distinct_1": 0.6062992125984252,
+    "repeated_4gram_fraction": 0.008064516129032251,
+    "empty_output": false
+  },
+  {
+    "image_id": 18770,
+    "refusal": false,
+    "lexical_tokens": 92,
+    "distinct_1": 0.717391304347826,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 20992,
+    "refusal": false,
+    "lexical_tokens": 105,
+    "distinct_1": 0.5904761904761905,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 23751,
+    "refusal": false,
+    "lexical_tokens": 213,
+    "distinct_1": 0.5023474178403756,
+    "repeated_4gram_fraction": 0.004761904761904745,
+    "empty_output": false
+  },
+  {
+    "image_id": 25386,
+    "refusal": false,
+    "lexical_tokens": 178,
+    "distinct_1": 0.5393258426966292,
+    "repeated_4gram_fraction": 0.011428571428571455,
+    "empty_output": false
+  },
+  {
+    "image_id": 27620,
+    "refusal": false,
+    "lexical_tokens": 220,
+    "distinct_1": 0.5681818181818182,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 27768,
+    "refusal": false,
+    "lexical_tokens": 224,
+    "distinct_1": 0.5223214285714286,
+    "repeated_4gram_fraction": 0.004524886877828038,
+    "empty_output": false
+  },
+  {
+    "image_id": 28449,
+    "refusal": false,
+    "lexical_tokens": 142,
+    "distinct_1": 0.5915492957746479,
+    "repeated_4gram_fraction": 0.007194244604316502,
+    "empty_output": false
+  },
+  {
+    "image_id": 30213,
+    "refusal": false,
+    "lexical_tokens": 168,
+    "distinct_1": 0.5595238095238095,
+    "repeated_4gram_fraction": 0.0060606060606061,
+    "empty_output": false
+  },
+  {
+    "image_id": 30494,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.5227272727272727,
+    "repeated_4gram_fraction": 0.023121387283236983,
+    "empty_output": false
+  },
+  {
+    "image_id": 31296,
+    "refusal": false,
+    "lexical_tokens": 121,
+    "distinct_1": 0.6198347107438017,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 31735,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.544973544973545,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 33638,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.6296296296296297,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 33759,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5333333333333333,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 35197,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5465116279069767,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 35963,
+    "refusal": false,
+    "lexical_tokens": 205,
+    "distinct_1": 0.5902439024390244,
+    "repeated_4gram_fraction": 0.004950495049504955,
+    "empty_output": false
+  },
+  {
+    "image_id": 36494,
+    "refusal": false,
+    "lexical_tokens": 170,
+    "distinct_1": 0.6470588235294118,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 36861,
+    "refusal": false,
+    "lexical_tokens": 178,
+    "distinct_1": 0.5617977528089888,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 40471,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5947712418300654,
+    "repeated_4gram_fraction": 0.00666666666666671,
+    "empty_output": false
+  },
+  {
+    "image_id": 42888,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.5310344827586206,
+    "repeated_4gram_fraction": 0.014084507042253502,
+    "empty_output": false
+  },
+  {
+    "image_id": 43435,
+    "refusal": false,
+    "lexical_tokens": 151,
+    "distinct_1": 0.5165562913907285,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 44068,
+    "refusal": false,
+    "lexical_tokens": 99,
+    "distinct_1": 0.5858585858585859,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 47010,
+    "refusal": false,
+    "lexical_tokens": 115,
+    "distinct_1": 0.6,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 47571,
+    "refusal": false,
+    "lexical_tokens": 137,
+    "distinct_1": 0.6204379562043796,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 51610,
+    "refusal": false,
+    "lexical_tokens": 107,
+    "distinct_1": 0.5327102803738317,
+    "repeated_4gram_fraction": 0.009615384615384581,
+    "empty_output": false
+  },
+  {
+    "image_id": 51938,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.6101694915254238,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 52007,
+    "refusal": false,
+    "lexical_tokens": 182,
+    "distinct_1": 0.5934065934065934,
+    "repeated_4gram_fraction": 0.005586592178770999,
+    "empty_output": false
+  },
+  {
+    "image_id": 52996,
+    "refusal": false,
+    "lexical_tokens": 165,
+    "distinct_1": 0.5696969696969697,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 53505,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5755813953488372,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 54931,
+    "refusal": false,
+    "lexical_tokens": 161,
+    "distinct_1": 0.5403726708074534,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 56344,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.6577181208053692,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 56350,
+    "refusal": false,
+    "lexical_tokens": 161,
+    "distinct_1": 0.639751552795031,
+    "repeated_4gram_fraction": 0.006329113924050667,
+    "empty_output": false
+  },
+  {
+    "image_id": 57150,
+    "refusal": false,
+    "lexical_tokens": 178,
+    "distinct_1": 0.5337078651685393,
+    "repeated_4gram_fraction": 0.005714285714285672,
+    "empty_output": false
+  },
+  {
+    "image_id": 57597,
+    "refusal": false,
+    "lexical_tokens": 165,
+    "distinct_1": 0.509090909090909,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 58655,
+    "refusal": false,
+    "lexical_tokens": 127,
+    "distinct_1": 0.6456692913385826,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 60363,
+    "refusal": false,
+    "lexical_tokens": 187,
+    "distinct_1": 0.5133689839572193,
+    "repeated_4gram_fraction": 0.02717391304347827,
+    "empty_output": false
+  },
+  {
+    "image_id": 60886,
+    "refusal": false,
+    "lexical_tokens": 121,
+    "distinct_1": 0.6363636363636364,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 63154,
+    "refusal": false,
+    "lexical_tokens": 179,
+    "distinct_1": 0.5139664804469274,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 63965,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.31958762886597936,
+    "repeated_4gram_fraction": 0.0680628272251309,
+    "empty_output": false
+  },
+  {
+    "image_id": 64084,
+    "refusal": false,
+    "lexical_tokens": 161,
+    "distinct_1": 0.6024844720496895,
+    "repeated_4gram_fraction": 0.006329113924050667,
+    "empty_output": false
+  },
+  {
+    "image_id": 64868,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.6136363636363636,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 65736,
+    "refusal": false,
+    "lexical_tokens": 165,
+    "distinct_1": 0.5333333333333333,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 67315,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.6230769230769231,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 69795,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5481481481481482,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 70048,
+    "refusal": false,
+    "lexical_tokens": 218,
+    "distinct_1": 0.4724770642201835,
+    "repeated_4gram_fraction": 0.037209302325581395,
+    "empty_output": false
+  },
+  {
+    "image_id": 71226,
+    "refusal": false,
+    "lexical_tokens": 163,
+    "distinct_1": 0.5214723926380368,
+    "repeated_4gram_fraction": 0.06874999999999998,
+    "empty_output": false
+  },
+  {
+    "image_id": 74733,
+    "refusal": false,
+    "lexical_tokens": 154,
+    "distinct_1": 0.5584415584415584,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 76261,
+    "refusal": false,
+    "lexical_tokens": 111,
+    "distinct_1": 0.6666666666666666,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 77396,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.5497076023391813,
+    "repeated_4gram_fraction": 0.017857142857142905,
+    "empty_output": false
+  },
+  {
+    "image_id": 78959,
+    "refusal": false,
+    "lexical_tokens": 101,
+    "distinct_1": 0.6138613861386139,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 79014,
+    "refusal": false,
+    "lexical_tokens": 137,
+    "distinct_1": 0.5547445255474452,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 79031,
+    "refusal": false,
+    "lexical_tokens": 116,
+    "distinct_1": 0.5775862068965517,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 79229,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5407407407407407,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 82085,
+    "refusal": false,
+    "lexical_tokens": 125,
+    "distinct_1": 0.552,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 82765,
+    "refusal": false,
+    "lexical_tokens": 136,
+    "distinct_1": 0.6544117647058824,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 82812,
+    "refusal": false,
+    "lexical_tokens": 193,
+    "distinct_1": 0.616580310880829,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 84031,
+    "refusal": false,
+    "lexical_tokens": 195,
+    "distinct_1": 0.558974358974359,
+    "repeated_4gram_fraction": 0.02604166666666663,
+    "empty_output": false
+  },
+  {
+    "image_id": 84664,
+    "refusal": false,
+    "lexical_tokens": 196,
+    "distinct_1": 0.5255102040816326,
+    "repeated_4gram_fraction": 0.005181347150259086,
+    "empty_output": false
+  },
+  {
+    "image_id": 87476,
+    "refusal": false,
+    "lexical_tokens": 159,
+    "distinct_1": 0.5283018867924528,
+    "repeated_4gram_fraction": 0.0064102564102563875,
+    "empty_output": false
+  },
+  {
+    "image_id": 88848,
+    "refusal": false,
+    "lexical_tokens": 190,
+    "distinct_1": 0.5473684210526316,
+    "repeated_4gram_fraction": 0.010695187165775444,
+    "empty_output": false
+  },
+  {
+    "image_id": 88951,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.5819209039548022,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 89271,
+    "refusal": false,
+    "lexical_tokens": 104,
+    "distinct_1": 0.625,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 89296,
+    "refusal": false,
+    "lexical_tokens": 148,
+    "distinct_1": 0.5135135135135135,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 89648,
+    "refusal": false,
+    "lexical_tokens": 143,
+    "distinct_1": 0.6153846153846154,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 90284,
+    "refusal": false,
+    "lexical_tokens": 141,
+    "distinct_1": 0.6099290780141844,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 92177,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5154639175257731,
+    "repeated_4gram_fraction": 0.010471204188481686,
+    "empty_output": false
+  },
+  {
+    "image_id": 92939,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.6,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 93965,
+    "refusal": false,
+    "lexical_tokens": 121,
+    "distinct_1": 0.6198347107438017,
+    "repeated_4gram_fraction": 0.008474576271186418,
+    "empty_output": false
+  },
+  {
+    "image_id": 94326,
+    "refusal": false,
+    "lexical_tokens": 137,
+    "distinct_1": 0.5474452554744526,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 96427,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.5847953216374269,
+    "repeated_4gram_fraction": 0.011904761904761862,
+    "empty_output": false
+  },
+  {
+    "image_id": 98716,
+    "refusal": false,
+    "lexical_tokens": 187,
+    "distinct_1": 0.5989304812834224,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 98853,
+    "refusal": false,
+    "lexical_tokens": 205,
+    "distinct_1": 0.5317073170731708,
+    "repeated_4gram_fraction": 0.00990099009900991,
+    "empty_output": false
+  },
+  {
+    "image_id": 100428,
+    "refusal": false,
+    "lexical_tokens": 132,
+    "distinct_1": 0.5227272727272727,
+    "repeated_4gram_fraction": 0.015503875968992276,
+    "empty_output": false
+  },
+  {
+    "image_id": 101420,
+    "refusal": false,
+    "lexical_tokens": 106,
+    "distinct_1": 0.5754716981132075,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 102356,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.43915343915343913,
+    "repeated_4gram_fraction": 0.021505376344086002,
+    "empty_output": false
+  },
+  {
+    "image_id": 102805,
+    "refusal": false,
+    "lexical_tokens": 445,
+    "distinct_1": 0.21797752808988763,
+    "repeated_4gram_fraction": 0.39366515837104077,
+    "empty_output": false
+  },
+  {
+    "image_id": 103548,
+    "refusal": false,
+    "lexical_tokens": 257,
+    "distinct_1": 0.45136186770428016,
+    "repeated_4gram_fraction": 0.03149606299212604,
+    "empty_output": false
+  },
+  {
+    "image_id": 105912,
+    "refusal": false,
+    "lexical_tokens": 205,
+    "distinct_1": 0.44878048780487806,
+    "repeated_4gram_fraction": 0.02970297029702973,
+    "empty_output": false
+  },
+  {
+    "image_id": 106266,
+    "refusal": false,
+    "lexical_tokens": 202,
+    "distinct_1": 0.5297029702970297,
+    "repeated_4gram_fraction": 0.01005025125628145,
+    "empty_output": false
+  },
+  {
+    "image_id": 107094,
+    "refusal": false,
+    "lexical_tokens": 204,
+    "distinct_1": 0.5441176470588235,
+    "repeated_4gram_fraction": 0.00497512437810943,
+    "empty_output": false
+  },
+  {
+    "image_id": 107226,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.5625,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 109055,
+    "refusal": false,
+    "lexical_tokens": 116,
+    "distinct_1": 0.5517241379310345,
+    "repeated_4gram_fraction": 0.008849557522123908,
+    "empty_output": false
+  },
+  {
+    "image_id": 109798,
+    "refusal": false,
+    "lexical_tokens": 188,
+    "distinct_1": 0.5053191489361702,
+    "repeated_4gram_fraction": 0.032432432432432434,
+    "empty_output": false
+  },
+  {
+    "image_id": 109827,
+    "refusal": false,
+    "lexical_tokens": 146,
+    "distinct_1": 0.547945205479452,
+    "repeated_4gram_fraction": 0.034965034965035,
+    "empty_output": false
+  },
+  {
+    "image_id": 109992,
+    "refusal": false,
+    "lexical_tokens": 100,
+    "distinct_1": 0.64,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 111086,
+    "refusal": false,
+    "lexical_tokens": 144,
+    "distinct_1": 0.5555555555555556,
+    "repeated_4gram_fraction": 0.007092198581560294,
+    "empty_output": false
+  },
+  {
+    "image_id": 113235,
+    "refusal": false,
+    "lexical_tokens": 140,
+    "distinct_1": 0.5285714285714286,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 114871,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.47530864197530864,
+    "repeated_4gram_fraction": 0.0062893081761006275,
+    "empty_output": false
+  },
+  {
+    "image_id": 117425,
+    "refusal": false,
+    "lexical_tokens": 167,
+    "distinct_1": 0.5269461077844312,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 118594,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.6,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 119038,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.5570469798657718,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 122927,
+    "refusal": false,
+    "lexical_tokens": 211,
+    "distinct_1": 0.5213270142180095,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 123131,
+    "refusal": false,
+    "lexical_tokens": 202,
+    "distinct_1": 0.4900990099009901,
+    "repeated_4gram_fraction": 0.005025125628140725,
+    "empty_output": false
+  },
+  {
+    "image_id": 123633,
+    "refusal": false,
+    "lexical_tokens": 170,
+    "distinct_1": 0.5588235294117647,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 125072,
+    "refusal": false,
+    "lexical_tokens": 204,
+    "distinct_1": 0.553921568627451,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 125211,
+    "refusal": false,
+    "lexical_tokens": 158,
+    "distinct_1": 0.6518987341772152,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 127182,
+    "refusal": false,
+    "lexical_tokens": 165,
+    "distinct_1": 0.5818181818181818,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 128658,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.5310734463276836,
+    "repeated_4gram_fraction": 0.011494252873563204,
+    "empty_output": false
+  },
+  {
+    "image_id": 130699,
+    "refusal": false,
+    "lexical_tokens": 169,
+    "distinct_1": 0.5384615384615384,
+    "repeated_4gram_fraction": 0.0060240963855421326,
+    "empty_output": false
+  },
+  {
+    "image_id": 132408,
+    "refusal": false,
+    "lexical_tokens": 179,
+    "distinct_1": 0.4860335195530726,
+    "repeated_4gram_fraction": 0.011363636363636354,
+    "empty_output": false
+  },
+  {
+    "image_id": 133244,
+    "refusal": false,
+    "lexical_tokens": 209,
+    "distinct_1": 0.4880382775119617,
+    "repeated_4gram_fraction": 0.01941747572815533,
+    "empty_output": false
+  },
+  {
+    "image_id": 136600,
+    "refusal": false,
+    "lexical_tokens": 160,
+    "distinct_1": 0.56875,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 136772,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5424836601307189,
+    "repeated_4gram_fraction": 0.013333333333333308,
+    "empty_output": false
+  },
+  {
+    "image_id": 140840,
+    "refusal": false,
+    "lexical_tokens": 180,
+    "distinct_1": 0.5833333333333334,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 141671,
+    "refusal": false,
+    "lexical_tokens": 232,
+    "distinct_1": 0.43103448275862066,
+    "repeated_4gram_fraction": 0.02183406113537123,
+    "empty_output": false
+  },
+  {
+    "image_id": 145665,
+    "refusal": false,
+    "lexical_tokens": 180,
+    "distinct_1": 0.5666666666666667,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 147740,
+    "refusal": false,
+    "lexical_tokens": 109,
+    "distinct_1": 0.5779816513761468,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 150930,
+    "refusal": false,
+    "lexical_tokens": 102,
+    "distinct_1": 0.6470588235294118,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 151820,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.6644295302013423,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 153299,
+    "refusal": false,
+    "lexical_tokens": 90,
+    "distinct_1": 0.5222222222222223,
+    "repeated_4gram_fraction": 0.011494252873563204,
+    "empty_output": false
+  },
+  {
+    "image_id": 153782,
+    "refusal": false,
+    "lexical_tokens": 122,
+    "distinct_1": 0.6557377049180327,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 154339,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.6442953020134228,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 155051,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.5738636363636364,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 156292,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.6,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 157213,
+    "refusal": false,
+    "lexical_tokens": 167,
+    "distinct_1": 0.5508982035928144,
+    "repeated_4gram_fraction": 0.0060975609756097615,
+    "empty_output": false
+  },
+  {
+    "image_id": 157418,
+    "refusal": false,
+    "lexical_tokens": 160,
+    "distinct_1": 0.54375,
+    "repeated_4gram_fraction": 0.01273885350318471,
+    "empty_output": false
+  },
+  {
+    "image_id": 158227,
+    "refusal": false,
+    "lexical_tokens": 175,
+    "distinct_1": 0.56,
+    "repeated_4gram_fraction": 0.005813953488372103,
+    "empty_output": false
+  },
+  {
+    "image_id": 158956,
+    "refusal": false,
+    "lexical_tokens": 113,
+    "distinct_1": 0.6017699115044248,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 159684,
+    "refusal": false,
+    "lexical_tokens": 186,
+    "distinct_1": 0.6129032258064516,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 160666,
+    "refusal": false,
+    "lexical_tokens": 188,
+    "distinct_1": 0.574468085106383,
+    "repeated_4gram_fraction": 0.01621621621621616,
+    "empty_output": false
+  },
+  {
+    "image_id": 161925,
+    "refusal": false,
+    "lexical_tokens": 154,
+    "distinct_1": 0.5844155844155844,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 163155,
+    "refusal": false,
+    "lexical_tokens": 186,
+    "distinct_1": 0.5161290322580645,
+    "repeated_4gram_fraction": 0.016393442622950838,
+    "empty_output": false
+  },
+  {
+    "image_id": 164115,
+    "refusal": false,
+    "lexical_tokens": 239,
+    "distinct_1": 0.5104602510460251,
+    "repeated_4gram_fraction": 0.004237288135593209,
+    "empty_output": false
+  },
+  {
+    "image_id": 165257,
+    "refusal": false,
+    "lexical_tokens": 116,
+    "distinct_1": 0.6810344827586207,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 165336,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.6181818181818182,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 168330,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.582010582010582,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 170670,
+    "refusal": false,
+    "lexical_tokens": 224,
+    "distinct_1": 0.5267857142857143,
+    "repeated_4gram_fraction": 0.009049773755656076,
+    "empty_output": false
+  },
+  {
+    "image_id": 170893,
+    "refusal": false,
+    "lexical_tokens": 117,
+    "distinct_1": 0.5384615384615384,
+    "repeated_4gram_fraction": 0.00877192982456143,
+    "empty_output": false
+  },
+  {
+    "image_id": 171611,
+    "refusal": false,
+    "lexical_tokens": 159,
+    "distinct_1": 0.5408805031446541,
+    "repeated_4gram_fraction": 0.0064102564102563875,
+    "empty_output": false
+  },
+  {
+    "image_id": 172571,
+    "refusal": false,
+    "lexical_tokens": 199,
+    "distinct_1": 0.5125628140703518,
+    "repeated_4gram_fraction": 0.005102040816326481,
+    "empty_output": false
+  },
+  {
+    "image_id": 173004,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.543859649122807,
+    "repeated_4gram_fraction": 0.011904761904761862,
+    "empty_output": false
+  },
+  {
+    "image_id": 173799,
+    "refusal": false,
+    "lexical_tokens": 196,
+    "distinct_1": 0.5918367346938775,
+    "repeated_4gram_fraction": 0.005181347150259086,
+    "empty_output": false
+  },
+  {
+    "image_id": 175438,
+    "refusal": false,
+    "lexical_tokens": 180,
+    "distinct_1": 0.6666666666666666,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 176701,
+    "refusal": false,
+    "lexical_tokens": 107,
+    "distinct_1": 0.5887850467289719,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 177213,
+    "refusal": false,
+    "lexical_tokens": 122,
+    "distinct_1": 0.639344262295082,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 177935,
+    "refusal": false,
+    "lexical_tokens": 222,
+    "distinct_1": 0.5315315315315315,
+    "repeated_4gram_fraction": 0.004566210045662156,
+    "empty_output": false
+  },
+  {
+    "image_id": 179112,
+    "refusal": false,
+    "lexical_tokens": 201,
+    "distinct_1": 0.5223880597014925,
+    "repeated_4gram_fraction": 0.010101010101010055,
+    "empty_output": false
+  },
+  {
+    "image_id": 179141,
+    "refusal": false,
+    "lexical_tokens": 191,
+    "distinct_1": 0.6073298429319371,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 179265,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5523255813953488,
+    "repeated_4gram_fraction": 0.017751479289940808,
+    "empty_output": false
+  },
+  {
+    "image_id": 180792,
+    "refusal": false,
+    "lexical_tokens": 114,
+    "distinct_1": 0.6140350877192983,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 180798,
+    "refusal": false,
+    "lexical_tokens": 107,
+    "distinct_1": 0.6261682242990654,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 182155,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5519125683060109,
+    "repeated_4gram_fraction": 0.005555555555555536,
+    "empty_output": false
+  },
+  {
+    "image_id": 182923,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5490196078431373,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 183049,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.544973544973545,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 183246,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.5503355704697986,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 185250,
+    "refusal": false,
+    "lexical_tokens": 104,
+    "distinct_1": 0.5961538461538461,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 185599,
+    "refusal": false,
+    "lexical_tokens": 102,
+    "distinct_1": 0.5980392156862745,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 187055,
+    "refusal": false,
+    "lexical_tokens": 165,
+    "distinct_1": 0.509090909090909,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 187243,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.5909090909090909,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 188906,
+    "refusal": false,
+    "lexical_tokens": 179,
+    "distinct_1": 0.49162011173184356,
+    "repeated_4gram_fraction": 0.005681818181818232,
+    "empty_output": false
+  },
+  {
+    "image_id": 197388,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.5549132947976878,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 197658,
+    "refusal": false,
+    "lexical_tokens": 124,
+    "distinct_1": 0.5887096774193549,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 198510,
+    "refusal": false,
+    "lexical_tokens": 254,
+    "distinct_1": 0.484251968503937,
+    "repeated_4gram_fraction": 0.007968127490039834,
+    "empty_output": false
+  },
+  {
+    "image_id": 199395,
+    "refusal": false,
+    "lexical_tokens": 148,
+    "distinct_1": 0.6283783783783784,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 199551,
+    "refusal": false,
+    "lexical_tokens": 99,
+    "distinct_1": 0.5858585858585859,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 202228,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5032679738562091,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 202445,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5191256830601093,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 203629,
+    "refusal": false,
+    "lexical_tokens": 211,
+    "distinct_1": 0.5876777251184834,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 205289,
+    "refusal": false,
+    "lexical_tokens": 108,
+    "distinct_1": 0.5833333333333334,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 206027,
+    "refusal": false,
+    "lexical_tokens": 203,
+    "distinct_1": 0.5467980295566502,
+    "repeated_4gram_fraction": 0.030000000000000027,
+    "empty_output": false
+  },
+  {
+    "image_id": 206411,
+    "refusal": false,
+    "lexical_tokens": 126,
+    "distinct_1": 0.5317460317460317,
+    "repeated_4gram_fraction": 0.008130081300813052,
+    "empty_output": false
+  },
+  {
+    "image_id": 206487,
+    "refusal": false,
+    "lexical_tokens": 104,
+    "distinct_1": 0.6346153846153846,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 206831,
+    "refusal": false,
+    "lexical_tokens": 180,
+    "distinct_1": 0.4888888888888889,
+    "repeated_4gram_fraction": 0.016949152542372836,
+    "empty_output": false
+  },
+  {
+    "image_id": 206838,
+    "refusal": false,
+    "lexical_tokens": 138,
+    "distinct_1": 0.5797101449275363,
+    "repeated_4gram_fraction": 0.007407407407407418,
+    "empty_output": false
+  },
+  {
+    "image_id": 207538,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5628415300546448,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 209142,
+    "refusal": false,
+    "lexical_tokens": 166,
+    "distinct_1": 0.6024096385542169,
+    "repeated_4gram_fraction": 0.006134969325153339,
+    "empty_output": false
+  },
+  {
+    "image_id": 210273,
+    "refusal": false,
+    "lexical_tokens": 146,
+    "distinct_1": 0.6712328767123288,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 212895,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.5555555555555556,
+    "repeated_4gram_fraction": 0.0062893081761006275,
+    "empty_output": false
+  },
+  {
+    "image_id": 213224,
+    "refusal": false,
+    "lexical_tokens": 146,
+    "distinct_1": 0.589041095890411,
+    "repeated_4gram_fraction": 0.006993006993006978,
+    "empty_output": false
+  },
+  {
+    "image_id": 213830,
+    "refusal": false,
+    "lexical_tokens": 169,
+    "distinct_1": 0.5739644970414202,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 213935,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.5769230769230769,
+    "repeated_4gram_fraction": 0.007874015748031482,
+    "empty_output": false
+  },
+  {
+    "image_id": 214869,
+    "refusal": false,
+    "lexical_tokens": 129,
+    "distinct_1": 0.5813953488372093,
+    "repeated_4gram_fraction": 0.007936507936507908,
+    "empty_output": false
+  },
+  {
+    "image_id": 215114,
+    "refusal": false,
+    "lexical_tokens": 93,
+    "distinct_1": 0.6129032258064516,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 215245,
+    "refusal": false,
+    "lexical_tokens": 131,
+    "distinct_1": 0.6259541984732825,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 217753,
+    "refusal": false,
+    "lexical_tokens": 221,
+    "distinct_1": 0.5746606334841629,
+    "repeated_4gram_fraction": 0.004587155963302725,
+    "empty_output": false
+  },
+  {
+    "image_id": 219271,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.5172413793103449,
+    "repeated_4gram_fraction": 0.014084507042253502,
+    "empty_output": false
+  },
+  {
+    "image_id": 224222,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5333333333333333,
+    "repeated_4gram_fraction": 0.007575757575757569,
+    "empty_output": false
+  },
+  {
+    "image_id": 226111,
+    "refusal": false,
+    "lexical_tokens": 127,
+    "distinct_1": 0.5984251968503937,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 226154,
+    "refusal": false,
+    "lexical_tokens": 280,
+    "distinct_1": 0.15,
+    "repeated_4gram_fraction": 0.779783393501805,
+    "empty_output": false
+  },
+  {
+    "image_id": 229111,
+    "refusal": false,
+    "lexical_tokens": 157,
+    "distinct_1": 0.5987261146496815,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 229948,
+    "refusal": false,
+    "lexical_tokens": 159,
+    "distinct_1": 0.610062893081761,
+    "repeated_4gram_fraction": 0.0064102564102563875,
+    "empty_output": false
+  },
+  {
+    "image_id": 232649,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.5802469135802469,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 234413,
+    "refusal": false,
+    "lexical_tokens": 152,
+    "distinct_1": 0.5723684210526315,
+    "repeated_4gram_fraction": 0.006711409395973145,
+    "empty_output": false
+  },
+  {
+    "image_id": 235057,
+    "refusal": false,
+    "lexical_tokens": 113,
+    "distinct_1": 0.6460176991150443,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 235241,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.5649717514124294,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 235778,
+    "refusal": false,
+    "lexical_tokens": 117,
+    "distinct_1": 0.5641025641025641,
+    "repeated_4gram_fraction": 0.01754385964912286,
+    "empty_output": false
+  },
+  {
+    "image_id": 236592,
+    "refusal": false,
+    "lexical_tokens": 84,
+    "distinct_1": 0.5952380952380952,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 236784,
+    "refusal": false,
+    "lexical_tokens": 122,
+    "distinct_1": 0.4672131147540984,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 238410,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.5862068965517241,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 239318,
+    "refusal": false,
+    "lexical_tokens": 126,
+    "distinct_1": 0.6031746031746031,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 239537,
+    "refusal": false,
+    "lexical_tokens": 123,
+    "distinct_1": 0.5772357723577236,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 240250,
+    "refusal": false,
+    "lexical_tokens": 104,
+    "distinct_1": 0.5769230769230769,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 242724,
+    "refusal": false,
+    "lexical_tokens": 140,
+    "distinct_1": 0.5857142857142857,
+    "repeated_4gram_fraction": 0.007299270072992692,
+    "empty_output": false
+  },
+  {
+    "image_id": 243148,
+    "refusal": false,
+    "lexical_tokens": 180,
+    "distinct_1": 0.5277777777777778,
+    "repeated_4gram_fraction": 0.04519774011299438,
+    "empty_output": false
+  },
+  {
+    "image_id": 243344,
+    "refusal": false,
+    "lexical_tokens": 99,
+    "distinct_1": 0.6262626262626263,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 245026,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5481481481481482,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 246968,
+    "refusal": false,
+    "lexical_tokens": 161,
+    "distinct_1": 0.5962732919254659,
+    "repeated_4gram_fraction": 0.01898734177215189,
+    "empty_output": false
+  },
+  {
+    "image_id": 248284,
+    "refusal": false,
+    "lexical_tokens": 127,
+    "distinct_1": 0.6692913385826772,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 248334,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5925925925925926,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 248752,
+    "refusal": false,
+    "lexical_tokens": 158,
+    "distinct_1": 0.5569620253164557,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 249025,
+    "refusal": false,
+    "lexical_tokens": 107,
+    "distinct_1": 0.5700934579439252,
+    "repeated_4gram_fraction": 0.009615384615384581,
+    "empty_output": false
+  },
+  {
+    "image_id": 249786,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.6089743589743589,
+    "repeated_4gram_fraction": 0.006535947712418277,
+    "empty_output": false
+  },
+  {
+    "image_id": 250127,
+    "refusal": false,
+    "lexical_tokens": 152,
+    "distinct_1": 0.4868421052631579,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 250758,
+    "refusal": false,
+    "lexical_tokens": 106,
+    "distinct_1": 0.6415094339622641,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 250901,
+    "refusal": false,
+    "lexical_tokens": 92,
+    "distinct_1": 0.6086956521739131,
+    "repeated_4gram_fraction": 0.011235955056179803,
+    "empty_output": false
+  },
+  {
+    "image_id": 252507,
+    "refusal": false,
+    "lexical_tokens": 155,
+    "distinct_1": 0.5935483870967742,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 252701,
+    "refusal": false,
+    "lexical_tokens": 92,
+    "distinct_1": 0.6086956521739131,
+    "repeated_4gram_fraction": 0.011235955056179803,
+    "empty_output": false
+  },
+  {
+    "image_id": 253742,
+    "refusal": false,
+    "lexical_tokens": 239,
+    "distinct_1": 0.4769874476987448,
+    "repeated_4gram_fraction": 0.029661016949152574,
+    "empty_output": false
+  },
+  {
+    "image_id": 255664,
+    "refusal": false,
+    "lexical_tokens": 123,
+    "distinct_1": 0.5934959349593496,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 255747,
+    "refusal": false,
+    "lexical_tokens": 147,
+    "distinct_1": 0.5170068027210885,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 256916,
+    "refusal": false,
+    "lexical_tokens": 166,
+    "distinct_1": 0.6024096385542169,
+    "repeated_4gram_fraction": 0.006134969325153339,
+    "empty_output": false
+  },
+  {
+    "image_id": 261982,
+    "refusal": false,
+    "lexical_tokens": 154,
+    "distinct_1": 0.5584415584415584,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 265518,
+    "refusal": false,
+    "lexical_tokens": 167,
+    "distinct_1": 0.5688622754491018,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 269121,
+    "refusal": false,
+    "lexical_tokens": 175,
+    "distinct_1": 0.5657142857142857,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 270474,
+    "refusal": false,
+    "lexical_tokens": 138,
+    "distinct_1": 0.5579710144927537,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 272566,
+    "refusal": false,
+    "lexical_tokens": 138,
+    "distinct_1": 0.5797101449275363,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 273420,
+    "refusal": false,
+    "lexical_tokens": 237,
+    "distinct_1": 0.5021097046413502,
+    "repeated_4gram_fraction": 0.021367521367521403,
+    "empty_output": false
+  },
+  {
+    "image_id": 273642,
+    "refusal": false,
+    "lexical_tokens": 143,
+    "distinct_1": 0.4755244755244755,
+    "repeated_4gram_fraction": 0.014285714285714235,
+    "empty_output": false
+  },
+  {
+    "image_id": 276720,
+    "refusal": false,
+    "lexical_tokens": 103,
+    "distinct_1": 0.5922330097087378,
+    "repeated_4gram_fraction": 0.010000000000000009,
+    "empty_output": false
+  },
+  {
+    "image_id": 278006,
+    "refusal": false,
+    "lexical_tokens": 178,
+    "distinct_1": 0.5898876404494382,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 279278,
+    "refusal": false,
+    "lexical_tokens": 168,
+    "distinct_1": 0.5535714285714286,
+    "repeated_4gram_fraction": 0.0060606060606061,
+    "empty_output": false
+  },
+  {
+    "image_id": 279730,
+    "refusal": false,
+    "lexical_tokens": 125,
+    "distinct_1": 0.688,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 280891,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5081967213114754,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 281179,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5355191256830601,
+    "repeated_4gram_fraction": 0.011111111111111072,
+    "empty_output": false
+  },
+  {
+    "image_id": 281447,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.5511363636363636,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 284623,
+    "refusal": false,
+    "lexical_tokens": 134,
+    "distinct_1": 0.5447761194029851,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 284698,
+    "refusal": false,
+    "lexical_tokens": 208,
+    "distinct_1": 0.4230769230769231,
+    "repeated_4gram_fraction": 0.029268292682926855,
+    "empty_output": false
+  },
+  {
+    "image_id": 284764,
+    "refusal": false,
+    "lexical_tokens": 152,
+    "distinct_1": 0.5394736842105263,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 286907,
+    "refusal": false,
+    "lexical_tokens": 157,
+    "distinct_1": 0.5605095541401274,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 286908,
+    "refusal": false,
+    "lexical_tokens": 190,
+    "distinct_1": 0.5263157894736842,
+    "repeated_4gram_fraction": 0.053475935828877,
+    "empty_output": false
+  },
+  {
+    "image_id": 287347,
+    "refusal": false,
+    "lexical_tokens": 210,
+    "distinct_1": 0.5095238095238095,
+    "repeated_4gram_fraction": 0.009661835748792313,
+    "empty_output": false
+  },
+  {
+    "image_id": 287649,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.5084745762711864,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 288391,
+    "refusal": false,
+    "lexical_tokens": 114,
+    "distinct_1": 0.543859649122807,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 288430,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.5681818181818182,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 288762,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.5263157894736842,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 289992,
+    "refusal": false,
+    "lexical_tokens": 193,
+    "distinct_1": 0.533678756476684,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 290081,
+    "refusal": false,
+    "lexical_tokens": 140,
+    "distinct_1": 0.55,
+    "repeated_4gram_fraction": 0.007299270072992692,
+    "empty_output": false
+  },
+  {
+    "image_id": 290293,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5777777777777777,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 292415,
+    "refusal": false,
+    "lexical_tokens": 143,
+    "distinct_1": 0.5804195804195804,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 292997,
+    "refusal": false,
+    "lexical_tokens": 206,
+    "distinct_1": 0.5048543689320388,
+    "repeated_4gram_fraction": 0.009852216748768461,
+    "empty_output": false
+  },
+  {
+    "image_id": 296284,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.5606936416184971,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 296634,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.5185185185185185,
+    "repeated_4gram_fraction": 0.037735849056603765,
+    "empty_output": false
+  },
+  {
+    "image_id": 297084,
+    "refusal": false,
+    "lexical_tokens": 87,
+    "distinct_1": 0.5747126436781609,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 297147,
+    "refusal": false,
+    "lexical_tokens": 188,
+    "distinct_1": 0.5212765957446809,
+    "repeated_4gram_fraction": 0.01621621621621616,
+    "empty_output": false
+  },
+  {
+    "image_id": 297562,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.5789473684210527,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 297578,
+    "refusal": false,
+    "lexical_tokens": 196,
+    "distinct_1": 0.4744897959183674,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 299609,
+    "refusal": false,
+    "lexical_tokens": 215,
+    "distinct_1": 0.5348837209302325,
+    "repeated_4gram_fraction": 0.004716981132075526,
+    "empty_output": false
+  },
+  {
+    "image_id": 300913,
+    "refusal": false,
+    "lexical_tokens": 121,
+    "distinct_1": 0.5619834710743802,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 301981,
+    "refusal": false,
+    "lexical_tokens": 133,
+    "distinct_1": 0.6015037593984962,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 302452,
+    "refusal": false,
+    "lexical_tokens": 126,
+    "distinct_1": 0.5634920634920635,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 303653,
+    "refusal": false,
+    "lexical_tokens": 205,
+    "distinct_1": 0.526829268292683,
+    "repeated_4gram_fraction": 0.00990099009900991,
+    "empty_output": false
+  },
+  {
+    "image_id": 303893,
+    "refusal": false,
+    "lexical_tokens": 105,
+    "distinct_1": 0.5714285714285714,
+    "repeated_4gram_fraction": 0.0490196078431373,
+    "empty_output": false
+  },
+  {
+    "image_id": 304817,
+    "refusal": false,
+    "lexical_tokens": 121,
+    "distinct_1": 0.628099173553719,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 308394,
+    "refusal": false,
+    "lexical_tokens": 164,
+    "distinct_1": 0.5487804878048781,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 309938,
+    "refusal": false,
+    "lexical_tokens": 174,
+    "distinct_1": 0.5287356321839081,
+    "repeated_4gram_fraction": 0.03508771929824561,
+    "empty_output": false
+  },
+  {
+    "image_id": 309964,
+    "refusal": false,
+    "lexical_tokens": 197,
+    "distinct_1": 0.48223350253807107,
+    "repeated_4gram_fraction": 0.005154639175257714,
+    "empty_output": false
+  },
+  {
+    "image_id": 312549,
+    "refusal": false,
+    "lexical_tokens": 83,
+    "distinct_1": 0.6385542168674698,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 316015,
+    "refusal": false,
+    "lexical_tokens": 230,
+    "distinct_1": 0.5869565217391305,
+    "repeated_4gram_fraction": 0.004405286343612369,
+    "empty_output": false
+  },
+  {
+    "image_id": 316404,
+    "refusal": false,
+    "lexical_tokens": 112,
+    "distinct_1": 0.5446428571428571,
+    "repeated_4gram_fraction": 0.07339449541284404,
+    "empty_output": false
+  },
+  {
+    "image_id": 317999,
+    "refusal": false,
+    "lexical_tokens": 104,
+    "distinct_1": 0.5961538461538461,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 319100,
+    "refusal": false,
+    "lexical_tokens": 150,
+    "distinct_1": 0.5266666666666666,
+    "repeated_4gram_fraction": 0.006802721088435382,
+    "empty_output": false
+  },
+  {
+    "image_id": 322944,
+    "refusal": false,
+    "lexical_tokens": 185,
+    "distinct_1": 0.4864864864864865,
+    "repeated_4gram_fraction": 0.02197802197802201,
+    "empty_output": false
+  },
+  {
+    "image_id": 323799,
+    "refusal": false,
+    "lexical_tokens": 170,
+    "distinct_1": 0.6058823529411764,
+    "repeated_4gram_fraction": 0.005988023952095856,
+    "empty_output": false
+  },
+  {
+    "image_id": 324158,
+    "refusal": false,
+    "lexical_tokens": 113,
+    "distinct_1": 0.6194690265486725,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 325306,
+    "refusal": false,
+    "lexical_tokens": 203,
+    "distinct_1": 0.4482758620689655,
+    "repeated_4gram_fraction": 0.0050000000000000044,
+    "empty_output": false
+  },
+  {
+    "image_id": 325347,
+    "refusal": false,
+    "lexical_tokens": 175,
+    "distinct_1": 0.5942857142857143,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 328430,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5618556701030928,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 329827,
+    "refusal": false,
+    "lexical_tokens": 201,
+    "distinct_1": 0.6169154228855721,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 330818,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.6384615384615384,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 332455,
+    "refusal": false,
+    "lexical_tokens": 111,
+    "distinct_1": 0.5135135135135135,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 333069,
+    "refusal": false,
+    "lexical_tokens": 112,
+    "distinct_1": 0.6071428571428571,
+    "repeated_4gram_fraction": 0.01834862385321101,
+    "empty_output": false
+  },
+  {
+    "image_id": 333697,
+    "refusal": false,
+    "lexical_tokens": 185,
+    "distinct_1": 0.5405405405405406,
+    "repeated_4gram_fraction": 0.01098901098901095,
+    "empty_output": false
+  },
+  {
+    "image_id": 333772,
+    "refusal": false,
+    "lexical_tokens": 99,
+    "distinct_1": 0.5353535353535354,
+    "repeated_4gram_fraction": 0.04166666666666663,
+    "empty_output": false
+  },
+  {
+    "image_id": 334309,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5424836601307189,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 334719,
+    "refusal": false,
+    "lexical_tokens": 212,
+    "distinct_1": 0.5047169811320755,
+    "repeated_4gram_fraction": 0.014354066985645897,
+    "empty_output": false
+  },
+  {
+    "image_id": 335450,
+    "refusal": false,
+    "lexical_tokens": 162,
+    "distinct_1": 0.5802469135802469,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 335658,
+    "refusal": false,
+    "lexical_tokens": 103,
+    "distinct_1": 0.5631067961165048,
+    "repeated_4gram_fraction": 0.030000000000000027,
+    "empty_output": false
+  },
+  {
+    "image_id": 337987,
+    "refusal": false,
+    "lexical_tokens": 159,
+    "distinct_1": 0.5345911949685535,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 338191,
+    "refusal": false,
+    "lexical_tokens": 128,
+    "distinct_1": 0.5625,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 338625,
+    "refusal": false,
+    "lexical_tokens": 165,
+    "distinct_1": 0.5212121212121212,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 338901,
+    "refusal": false,
+    "lexical_tokens": 106,
+    "distinct_1": 0.5566037735849056,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 338986,
+    "refusal": false,
+    "lexical_tokens": 185,
+    "distinct_1": 0.5243243243243243,
+    "repeated_4gram_fraction": 0.02197802197802201,
+    "empty_output": false
+  },
+  {
+    "image_id": 340175,
+    "refusal": false,
+    "lexical_tokens": 259,
+    "distinct_1": 0.4864864864864865,
+    "repeated_4gram_fraction": 0.0078125,
+    "empty_output": false
+  },
+  {
+    "image_id": 340930,
+    "refusal": false,
+    "lexical_tokens": 148,
+    "distinct_1": 0.5945945945945946,
+    "repeated_4gram_fraction": 0.04137931034482756,
+    "empty_output": false
+  },
+  {
+    "image_id": 341681,
+    "refusal": false,
+    "lexical_tokens": 169,
+    "distinct_1": 0.5798816568047337,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 341921,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.5833333333333334,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 343076,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.5461538461538461,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 344621,
+    "refusal": false,
+    "lexical_tokens": 195,
+    "distinct_1": 0.5743589743589743,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 345261,
+    "refusal": false,
+    "lexical_tokens": 118,
+    "distinct_1": 0.6694915254237288,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 346703,
+    "refusal": false,
+    "lexical_tokens": 170,
+    "distinct_1": 0.4588235294117647,
+    "repeated_4gram_fraction": 0.08383233532934131,
+    "empty_output": false
+  },
+  {
+    "image_id": 347370,
+    "refusal": false,
+    "lexical_tokens": 123,
+    "distinct_1": 0.5609756097560976,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 350148,
+    "refusal": false,
+    "lexical_tokens": 101,
+    "distinct_1": 0.5841584158415841,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 350679,
+    "refusal": false,
+    "lexical_tokens": 193,
+    "distinct_1": 0.5492227979274611,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 352618,
+    "refusal": false,
+    "lexical_tokens": 109,
+    "distinct_1": 0.6330275229357798,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 353027,
+    "refusal": false,
+    "lexical_tokens": 90,
+    "distinct_1": 0.5777777777777777,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 353518,
+    "refusal": false,
+    "lexical_tokens": 114,
+    "distinct_1": 0.6578947368421053,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 355610,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.5103448275862069,
+    "repeated_4gram_fraction": 0.05633802816901412,
+    "empty_output": false
+  },
+  {
+    "image_id": 355817,
+    "refusal": false,
+    "lexical_tokens": 168,
+    "distinct_1": 0.5952380952380952,
+    "repeated_4gram_fraction": 0.0060606060606061,
+    "empty_output": false
+  },
+  {
+    "image_id": 356248,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5927835051546392,
+    "repeated_4gram_fraction": 0.005235602094240788,
+    "empty_output": false
+  },
+  {
+    "image_id": 357060,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5309278350515464,
+    "repeated_4gram_fraction": 0.005235602094240788,
+    "empty_output": false
+  },
+  {
+    "image_id": 357081,
+    "refusal": false,
+    "lexical_tokens": 161,
+    "distinct_1": 0.5527950310559007,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 357941,
+    "refusal": false,
+    "lexical_tokens": 159,
+    "distinct_1": 0.5471698113207547,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 358195,
+    "refusal": false,
+    "lexical_tokens": 191,
+    "distinct_1": 0.5078534031413613,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 359135,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.6090909090909091,
+    "repeated_4gram_fraction": 0.009345794392523366,
+    "empty_output": false
+  },
+  {
+    "image_id": 359677,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.6636363636363637,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 361147,
+    "refusal": false,
+    "lexical_tokens": 147,
+    "distinct_1": 0.5782312925170068,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 361506,
+    "refusal": false,
+    "lexical_tokens": 227,
+    "distinct_1": 0.5638766519823789,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 362434,
+    "refusal": false,
+    "lexical_tokens": 195,
+    "distinct_1": 0.5897435897435898,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 363875,
+    "refusal": false,
+    "lexical_tokens": 142,
+    "distinct_1": 0.5563380281690141,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 365886,
+    "refusal": false,
+    "lexical_tokens": 125,
+    "distinct_1": 0.504,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 366141,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5670103092783505,
+    "repeated_4gram_fraction": 0.010471204188481686,
+    "empty_output": false
+  },
+  {
+    "image_id": 367095,
+    "refusal": false,
+    "lexical_tokens": 176,
+    "distinct_1": 0.5965909090909091,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 367386,
+    "refusal": false,
+    "lexical_tokens": 225,
+    "distinct_1": 0.5111111111111111,
+    "repeated_4gram_fraction": 0.018018018018018056,
+    "empty_output": false
+  },
+  {
+    "image_id": 367569,
+    "refusal": false,
+    "lexical_tokens": 182,
+    "distinct_1": 0.5824175824175825,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 368038,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5988372093023255,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 368940,
+    "refusal": false,
+    "lexical_tokens": 188,
+    "distinct_1": 0.5691489361702128,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 371552,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.5655172413793104,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 372203,
+    "refusal": false,
+    "lexical_tokens": 203,
+    "distinct_1": 0.5665024630541872,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 375078,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5191256830601093,
+    "repeated_4gram_fraction": 0.01666666666666672,
+    "empty_output": false
+  },
+  {
+    "image_id": 375469,
+    "refusal": false,
+    "lexical_tokens": 139,
+    "distinct_1": 0.60431654676259,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 376264,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.6084656084656085,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 377113,
+    "refusal": false,
+    "lexical_tokens": 137,
+    "distinct_1": 0.5766423357664233,
+    "repeated_4gram_fraction": 0.007462686567164201,
+    "empty_output": false
+  },
+  {
+    "image_id": 377368,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5737704918032787,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 378454,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.5705128205128205,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 379441,
+    "refusal": false,
+    "lexical_tokens": 152,
+    "distinct_1": 0.6052631578947368,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 379453,
+    "refusal": false,
+    "lexical_tokens": 92,
+    "distinct_1": 0.6847826086956522,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 379476,
+    "refusal": false,
+    "lexical_tokens": 147,
+    "distinct_1": 0.6122448979591837,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 381587,
+    "refusal": false,
+    "lexical_tokens": 192,
+    "distinct_1": 0.4739583333333333,
+    "repeated_4gram_fraction": 0.07407407407407407,
+    "empty_output": false
+  },
+  {
+    "image_id": 383339,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.6,
+    "repeated_4gram_fraction": 0.007575757575757569,
+    "empty_output": false
+  },
+  {
+    "image_id": 383386,
+    "refusal": false,
+    "lexical_tokens": 186,
+    "distinct_1": 0.5268817204301075,
+    "repeated_4gram_fraction": 0.03825136612021862,
+    "empty_output": false
+  },
+  {
+    "image_id": 383606,
+    "refusal": false,
+    "lexical_tokens": 137,
+    "distinct_1": 0.6204379562043796,
+    "repeated_4gram_fraction": 0.007462686567164201,
+    "empty_output": false
+  },
+  {
+    "image_id": 383676,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.4913294797687861,
+    "repeated_4gram_fraction": 0.0117647058823529,
+    "empty_output": false
+  },
+  {
+    "image_id": 385029,
+    "refusal": false,
+    "lexical_tokens": 190,
+    "distinct_1": 0.5368421052631579,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 387383,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.5833333333333334,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 388927,
+    "refusal": false,
+    "lexical_tokens": 170,
+    "distinct_1": 0.45294117647058824,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 389109,
+    "refusal": false,
+    "lexical_tokens": 192,
+    "distinct_1": 0.5989583333333334,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 389381,
+    "refusal": false,
+    "lexical_tokens": 221,
+    "distinct_1": 0.5067873303167421,
+    "repeated_4gram_fraction": 0.013761467889908285,
+    "empty_output": false
+  },
+  {
+    "image_id": 389804,
+    "refusal": false,
+    "lexical_tokens": 203,
+    "distinct_1": 0.5714285714285714,
+    "repeated_4gram_fraction": 0.0050000000000000044,
+    "empty_output": false
+  },
+  {
+    "image_id": 389933,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.5230769230769231,
+    "repeated_4gram_fraction": 0.015748031496062964,
+    "empty_output": false
+  },
+  {
+    "image_id": 390301,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.5637583892617449,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 392818,
+    "refusal": false,
+    "lexical_tokens": 163,
+    "distinct_1": 0.5460122699386503,
+    "repeated_4gram_fraction": 0.018750000000000044,
+    "empty_output": false
+  },
+  {
+    "image_id": 393226,
+    "refusal": false,
+    "lexical_tokens": 202,
+    "distinct_1": 0.5148514851485149,
+    "repeated_4gram_fraction": 0.005025125628140725,
+    "empty_output": false
+  },
+  {
+    "image_id": 394510,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5,
+    "repeated_4gram_fraction": 0.00591715976331364,
+    "empty_output": false
+  },
+  {
+    "image_id": 395388,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.5953757225433526,
+    "repeated_4gram_fraction": 0.00588235294117645,
+    "empty_output": false
+  },
+  {
+    "image_id": 396338,
+    "refusal": false,
+    "lexical_tokens": 125,
+    "distinct_1": 0.64,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 397303,
+    "refusal": false,
+    "lexical_tokens": 141,
+    "distinct_1": 0.6312056737588653,
+    "repeated_4gram_fraction": 0.007246376811594235,
+    "empty_output": false
+  },
+  {
+    "image_id": 397327,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5463917525773195,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 397351,
+    "refusal": false,
+    "lexical_tokens": 124,
+    "distinct_1": 0.5645161290322581,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 398237,
+    "refusal": false,
+    "lexical_tokens": 161,
+    "distinct_1": 0.5900621118012422,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 398652,
+    "refusal": false,
+    "lexical_tokens": 229,
+    "distinct_1": 0.5283842794759825,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 400082,
+    "refusal": false,
+    "lexical_tokens": 168,
+    "distinct_1": 0.5773809523809523,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 404568,
+    "refusal": false,
+    "lexical_tokens": 142,
+    "distinct_1": 0.5352112676056338,
+    "repeated_4gram_fraction": 0.014388489208633115,
+    "empty_output": false
+  },
+  {
+    "image_id": 405306,
+    "refusal": false,
+    "lexical_tokens": 107,
+    "distinct_1": 0.5794392523364486,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 406570,
+    "refusal": false,
+    "lexical_tokens": 127,
+    "distinct_1": 0.5354330708661418,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 406997,
+    "refusal": false,
+    "lexical_tokens": 105,
+    "distinct_1": 0.5904761904761905,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 407614,
+    "refusal": false,
+    "lexical_tokens": 196,
+    "distinct_1": 0.5663265306122449,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 407943,
+    "refusal": false,
+    "lexical_tokens": 186,
+    "distinct_1": 0.543010752688172,
+    "repeated_4gram_fraction": 0.005464480874316946,
+    "empty_output": false
+  },
+  {
+    "image_id": 409268,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.5436241610738255,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 410650,
+    "refusal": false,
+    "lexical_tokens": 182,
+    "distinct_1": 0.554945054945055,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 415238,
+    "refusal": false,
+    "lexical_tokens": 112,
+    "distinct_1": 0.5803571428571429,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 416256,
+    "refusal": false,
+    "lexical_tokens": 134,
+    "distinct_1": 0.5746268656716418,
+    "repeated_4gram_fraction": 0.022900763358778664,
+    "empty_output": false
+  },
+  {
+    "image_id": 417285,
+    "refusal": false,
+    "lexical_tokens": 157,
+    "distinct_1": 0.5732484076433121,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 418696,
+    "refusal": false,
+    "lexical_tokens": 109,
+    "distinct_1": 0.6330275229357798,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 419408,
+    "refusal": false,
+    "lexical_tokens": 190,
+    "distinct_1": 0.6263157894736842,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 422886,
+    "refusal": false,
+    "lexical_tokens": 157,
+    "distinct_1": 0.4968152866242038,
+    "repeated_4gram_fraction": 0.012987012987012991,
+    "empty_output": false
+  },
+  {
+    "image_id": 423617,
+    "refusal": false,
+    "lexical_tokens": 114,
+    "distinct_1": 0.6491228070175439,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 424349,
+    "refusal": false,
+    "lexical_tokens": 160,
+    "distinct_1": 0.59375,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 425221,
+    "refusal": false,
+    "lexical_tokens": 132,
+    "distinct_1": 0.6136363636363636,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 425390,
+    "refusal": false,
+    "lexical_tokens": 117,
+    "distinct_1": 0.5982905982905983,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 426203,
+    "refusal": false,
+    "lexical_tokens": 151,
+    "distinct_1": 0.6821192052980133,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 426297,
+    "refusal": false,
+    "lexical_tokens": 109,
+    "distinct_1": 0.6146788990825688,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 426329,
+    "refusal": false,
+    "lexical_tokens": 187,
+    "distinct_1": 0.6417112299465241,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 426372,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.582010582010582,
+    "repeated_4gram_fraction": 0.010752688172043001,
+    "empty_output": false
+  },
+  {
+    "image_id": 426376,
+    "refusal": false,
+    "lexical_tokens": 144,
+    "distinct_1": 0.5833333333333334,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 430377,
+    "refusal": false,
+    "lexical_tokens": 113,
+    "distinct_1": 0.584070796460177,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 432085,
+    "refusal": false,
+    "lexical_tokens": 99,
+    "distinct_1": 0.5959595959595959,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 433134,
+    "refusal": false,
+    "lexical_tokens": 181,
+    "distinct_1": 0.56353591160221,
+    "repeated_4gram_fraction": 0.005617977528089901,
+    "empty_output": false
+  },
+  {
+    "image_id": 433980,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.47398843930635837,
+    "repeated_4gram_fraction": 0.0117647058823529,
+    "empty_output": false
+  },
+  {
+    "image_id": 438862,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.5375722543352601,
+    "repeated_4gram_fraction": 0.00588235294117645,
+    "empty_output": false
+  },
+  {
+    "image_id": 439525,
+    "refusal": false,
+    "lexical_tokens": 217,
+    "distinct_1": 0.46543778801843316,
+    "repeated_4gram_fraction": 0.004672897196261627,
+    "empty_output": false
+  },
+  {
+    "image_id": 439593,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.6206896551724138,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 440475,
+    "refusal": false,
+    "lexical_tokens": 191,
+    "distinct_1": 0.5968586387434555,
+    "repeated_4gram_fraction": 0.005319148936170248,
+    "empty_output": false
+  },
+  {
+    "image_id": 444275,
+    "refusal": false,
+    "lexical_tokens": 253,
+    "distinct_1": 0.525691699604743,
+    "repeated_4gram_fraction": 0.0040000000000000036,
+    "empty_output": false
+  },
+  {
+    "image_id": 448365,
+    "refusal": false,
+    "lexical_tokens": 182,
+    "distinct_1": 0.5274725274725275,
+    "repeated_4gram_fraction": 0.005586592178770999,
+    "empty_output": false
+  },
+  {
+    "image_id": 449996,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.5961538461538461,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 451879,
+    "refusal": false,
+    "lexical_tokens": 163,
+    "distinct_1": 0.5460122699386503,
+    "repeated_4gram_fraction": 0.012499999999999956,
+    "empty_output": false
+  },
+  {
+    "image_id": 454798,
+    "refusal": false,
+    "lexical_tokens": 95,
+    "distinct_1": 0.5368421052631579,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 455597,
+    "refusal": false,
+    "lexical_tokens": 203,
+    "distinct_1": 0.4827586206896552,
+    "repeated_4gram_fraction": 0.04500000000000004,
+    "empty_output": false
+  },
+  {
+    "image_id": 456143,
+    "refusal": false,
+    "lexical_tokens": 213,
+    "distinct_1": 0.5258215962441315,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 458410,
+    "refusal": false,
+    "lexical_tokens": 141,
+    "distinct_1": 0.6099290780141844,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 458663,
+    "refusal": false,
+    "lexical_tokens": 182,
+    "distinct_1": 0.5659340659340659,
+    "repeated_4gram_fraction": 0.011173184357541888,
+    "empty_output": false
+  },
+  {
+    "image_id": 459437,
+    "refusal": false,
+    "lexical_tokens": 92,
+    "distinct_1": 0.532608695652174,
+    "repeated_4gram_fraction": 0.011235955056179803,
+    "empty_output": false
+  },
+  {
+    "image_id": 461405,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.5923076923076923,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 461751,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5027322404371585,
+    "repeated_4gram_fraction": 0.005555555555555536,
+    "empty_output": false
+  },
+  {
+    "image_id": 462371,
+    "refusal": false,
+    "lexical_tokens": 155,
+    "distinct_1": 0.5225806451612903,
+    "repeated_4gram_fraction": 0.006578947368421018,
+    "empty_output": false
+  },
+  {
+    "image_id": 462904,
+    "refusal": false,
+    "lexical_tokens": 189,
+    "distinct_1": 0.5714285714285714,
+    "repeated_4gram_fraction": 0.005376344086021501,
+    "empty_output": false
+  },
+  {
+    "image_id": 463918,
+    "refusal": false,
+    "lexical_tokens": 221,
+    "distinct_1": 0.5520361990950227,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 464689,
+    "refusal": false,
+    "lexical_tokens": 227,
+    "distinct_1": 0.5770925110132159,
+    "repeated_4gram_fraction": 0.004464285714285698,
+    "empty_output": false
+  },
+  {
+    "image_id": 466125,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.4690721649484536,
+    "repeated_4gram_fraction": 0.010471204188481686,
+    "empty_output": false
+  },
+  {
+    "image_id": 466986,
+    "refusal": false,
+    "lexical_tokens": 156,
+    "distinct_1": 0.6025641025641025,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 468577,
+    "refusal": false,
+    "lexical_tokens": 85,
+    "distinct_1": 0.6,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 471087,
+    "refusal": false,
+    "lexical_tokens": 127,
+    "distinct_1": 0.5826771653543307,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 471450,
+    "refusal": false,
+    "lexical_tokens": 134,
+    "distinct_1": 0.5970149253731343,
+    "repeated_4gram_fraction": 0.01526717557251911,
+    "empty_output": false
+  },
+  {
+    "image_id": 472375,
+    "refusal": false,
+    "lexical_tokens": 188,
+    "distinct_1": 0.5212765957446809,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 474021,
+    "refusal": false,
+    "lexical_tokens": 228,
+    "distinct_1": 0.5219298245614035,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 474854,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5792349726775956,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 475223,
+    "refusal": false,
+    "lexical_tokens": 201,
+    "distinct_1": 0.5024875621890548,
+    "repeated_4gram_fraction": 0.015151515151515138,
+    "empty_output": false
+  },
+  {
+    "image_id": 475678,
+    "refusal": false,
+    "lexical_tokens": 117,
+    "distinct_1": 0.6581196581196581,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 476119,
+    "refusal": false,
+    "lexical_tokens": 174,
+    "distinct_1": 0.5344827586206896,
+    "repeated_4gram_fraction": 0.005847953216374324,
+    "empty_output": false
+  },
+  {
+    "image_id": 476415,
+    "refusal": false,
+    "lexical_tokens": 185,
+    "distinct_1": 0.572972972972973,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 476770,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.519774011299435,
+    "repeated_4gram_fraction": 0.02298850574712641,
+    "empty_output": false
+  },
+  {
+    "image_id": 477955,
+    "refusal": false,
+    "lexical_tokens": 166,
+    "distinct_1": 0.536144578313253,
+    "repeated_4gram_fraction": 0.018404907975460127,
+    "empty_output": false
+  },
+  {
+    "image_id": 478136,
+    "refusal": false,
+    "lexical_tokens": 237,
+    "distinct_1": 0.4767932489451477,
+    "repeated_4gram_fraction": 0.05128205128205132,
+    "empty_output": false
+  },
+  {
+    "image_id": 479448,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5751633986928104,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 479953,
+    "refusal": false,
+    "lexical_tokens": 202,
+    "distinct_1": 0.47029702970297027,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 480275,
+    "refusal": false,
+    "lexical_tokens": 97,
+    "distinct_1": 0.5463917525773195,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 481567,
+    "refusal": false,
+    "lexical_tokens": 118,
+    "distinct_1": 0.6440677966101694,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 484351,
+    "refusal": false,
+    "lexical_tokens": 136,
+    "distinct_1": 0.5955882352941176,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 486479,
+    "refusal": false,
+    "lexical_tokens": 141,
+    "distinct_1": 0.5460992907801419,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 489842,
+    "refusal": false,
+    "lexical_tokens": 163,
+    "distinct_1": 0.5950920245398773,
+    "repeated_4gram_fraction": 0.006249999999999978,
+    "empty_output": false
+  },
+  {
+    "image_id": 491725,
+    "refusal": false,
+    "lexical_tokens": 112,
+    "distinct_1": 0.6428571428571429,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 491757,
+    "refusal": false,
+    "lexical_tokens": 158,
+    "distinct_1": 0.6075949367088608,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 492878,
+    "refusal": false,
+    "lexical_tokens": 181,
+    "distinct_1": 0.5966850828729282,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 498857,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.5146198830409356,
+    "repeated_4gram_fraction": 0.005952380952380931,
+    "empty_output": false
+  },
+  {
+    "image_id": 499768,
+    "refusal": false,
+    "lexical_tokens": 177,
+    "distinct_1": 0.5649717514124294,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 500478,
+    "refusal": false,
+    "lexical_tokens": 220,
+    "distinct_1": 0.5318181818181819,
+    "repeated_4gram_fraction": 0.01382488479262678,
+    "empty_output": false
+  },
+  {
+    "image_id": 504711,
+    "refusal": false,
+    "lexical_tokens": 192,
+    "distinct_1": 0.5729166666666666,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 508482,
+    "refusal": false,
+    "lexical_tokens": 109,
+    "distinct_1": 0.5963302752293578,
+    "repeated_4gram_fraction": 0.018867924528301883,
+    "empty_output": false
+  },
+  {
+    "image_id": 508639,
+    "refusal": false,
+    "lexical_tokens": 205,
+    "distinct_1": 0.5170731707317073,
+    "repeated_4gram_fraction": 0.004950495049504955,
+    "empty_output": false
+  },
+  {
+    "image_id": 511321,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.5909090909090909,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 516318,
+    "refusal": false,
+    "lexical_tokens": 99,
+    "distinct_1": 0.5858585858585859,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 520301,
+    "refusal": false,
+    "lexical_tokens": 128,
+    "distinct_1": 0.609375,
+    "repeated_4gram_fraction": 0.008000000000000007,
+    "empty_output": false
+  },
+  {
+    "image_id": 520324,
+    "refusal": false,
+    "lexical_tokens": 212,
+    "distinct_1": 0.5471698113207547,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 520832,
+    "refusal": false,
+    "lexical_tokens": 114,
+    "distinct_1": 0.5789473684210527,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 521540,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.5300546448087432,
+    "repeated_4gram_fraction": 0.011111111111111072,
+    "empty_output": false
+  },
+  {
+    "image_id": 523100,
+    "refusal": false,
+    "lexical_tokens": 192,
+    "distinct_1": 0.5208333333333334,
+    "repeated_4gram_fraction": 0.015873015873015928,
+    "empty_output": false
+  },
+  {
+    "image_id": 526197,
+    "refusal": false,
+    "lexical_tokens": 232,
+    "distinct_1": 0.39655172413793105,
+    "repeated_4gram_fraction": 0.1266375545851528,
+    "empty_output": false
+  },
+  {
+    "image_id": 527029,
+    "refusal": false,
+    "lexical_tokens": 211,
+    "distinct_1": 0.4218009478672986,
+    "repeated_4gram_fraction": 0.038461538461538436,
+    "empty_output": false
+  },
+  {
+    "image_id": 527528,
+    "refusal": false,
+    "lexical_tokens": 194,
+    "distinct_1": 0.5721649484536082,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 527695,
+    "refusal": false,
+    "lexical_tokens": 140,
+    "distinct_1": 0.6642857142857143,
+    "repeated_4gram_fraction": 0.007299270072992692,
+    "empty_output": false
+  },
+  {
+    "image_id": 527750,
+    "refusal": false,
+    "lexical_tokens": 173,
+    "distinct_1": 0.630057803468208,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 534041,
+    "refusal": false,
+    "lexical_tokens": 197,
+    "distinct_1": 0.5279187817258884,
+    "repeated_4gram_fraction": 0.005154639175257714,
+    "empty_output": false
+  },
+  {
+    "image_id": 536947,
+    "refusal": false,
+    "lexical_tokens": 249,
+    "distinct_1": 0.4859437751004016,
+    "repeated_4gram_fraction": 0.012195121951219523,
+    "empty_output": false
+  },
+  {
+    "image_id": 537506,
+    "refusal": false,
+    "lexical_tokens": 216,
+    "distinct_1": 0.5694444444444444,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 538364,
+    "refusal": false,
+    "lexical_tokens": 147,
+    "distinct_1": 0.5102040816326531,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 539883,
+    "refusal": false,
+    "lexical_tokens": 192,
+    "distinct_1": 0.546875,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 541664,
+    "refusal": false,
+    "lexical_tokens": 158,
+    "distinct_1": 0.5253164556962026,
+    "repeated_4gram_fraction": 0.01935483870967747,
+    "empty_output": false
+  },
+  {
+    "image_id": 542625,
+    "refusal": false,
+    "lexical_tokens": 180,
+    "distinct_1": 0.5333333333333333,
+    "repeated_4gram_fraction": 0.005649717514124242,
+    "empty_output": false
+  },
+  {
+    "image_id": 543043,
+    "refusal": false,
+    "lexical_tokens": 145,
+    "distinct_1": 0.5517241379310345,
+    "repeated_4gram_fraction": 0.021126760563380254,
+    "empty_output": false
+  },
+  {
+    "image_id": 544444,
+    "refusal": false,
+    "lexical_tokens": 222,
+    "distinct_1": 0.5495495495495496,
+    "repeated_4gram_fraction": 0.004566210045662156,
+    "empty_output": false
+  },
+  {
+    "image_id": 545100,
+    "refusal": false,
+    "lexical_tokens": 149,
+    "distinct_1": 0.5771812080536913,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 545129,
+    "refusal": false,
+    "lexical_tokens": 109,
+    "distinct_1": 0.6238532110091743,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 545594,
+    "refusal": false,
+    "lexical_tokens": 108,
+    "distinct_1": 0.6203703703703703,
+    "repeated_4gram_fraction": 0.00952380952380949,
+    "empty_output": false
+  },
+  {
+    "image_id": 545826,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.5490196078431373,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 546964,
+    "refusal": false,
+    "lexical_tokens": 233,
+    "distinct_1": 0.592274678111588,
+    "repeated_4gram_fraction": 0.004347826086956497,
+    "empty_output": false
+  },
+  {
+    "image_id": 547144,
+    "refusal": false,
+    "lexical_tokens": 201,
+    "distinct_1": 0.5621890547263682,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 547816,
+    "refusal": false,
+    "lexical_tokens": 198,
+    "distinct_1": 0.5353535353535354,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 548246,
+    "refusal": false,
+    "lexical_tokens": 183,
+    "distinct_1": 0.4918032786885246,
+    "repeated_4gram_fraction": 0.005555555555555536,
+    "empty_output": false
+  },
+  {
+    "image_id": 549220,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.5272727272727272,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 551304,
+    "refusal": false,
+    "lexical_tokens": 118,
+    "distinct_1": 0.5677966101694916,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 551794,
+    "refusal": false,
+    "lexical_tokens": 119,
+    "distinct_1": 0.5966386554621849,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 553776,
+    "refusal": false,
+    "lexical_tokens": 118,
+    "distinct_1": 0.576271186440678,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 554291,
+    "refusal": false,
+    "lexical_tokens": 154,
+    "distinct_1": 0.5324675324675324,
+    "repeated_4gram_fraction": 0.013245033112582738,
+    "empty_output": false
+  },
+  {
+    "image_id": 554328,
+    "refusal": false,
+    "lexical_tokens": 130,
+    "distinct_1": 0.5846153846153846,
+    "repeated_4gram_fraction": 0.015748031496062964,
+    "empty_output": false
+  },
+  {
+    "image_id": 555009,
+    "refusal": false,
+    "lexical_tokens": 234,
+    "distinct_1": 0.5213675213675214,
+    "repeated_4gram_fraction": 0.017316017316017285,
+    "empty_output": false
+  },
+  {
+    "image_id": 555705,
+    "refusal": false,
+    "lexical_tokens": 146,
+    "distinct_1": 0.4315068493150685,
+    "repeated_4gram_fraction": 0.06293706293706292,
+    "empty_output": false
+  },
+  {
+    "image_id": 555972,
+    "refusal": false,
+    "lexical_tokens": 110,
+    "distinct_1": 0.6727272727272727,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 559160,
+    "refusal": false,
+    "lexical_tokens": 153,
+    "distinct_1": 0.6143790849673203,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 559707,
+    "refusal": false,
+    "lexical_tokens": 128,
+    "distinct_1": 0.546875,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 560279,
+    "refusal": false,
+    "lexical_tokens": 196,
+    "distinct_1": 0.5306122448979592,
+    "repeated_4gram_fraction": 0.015544041450777257,
+    "empty_output": false
+  },
+  {
+    "image_id": 560880,
+    "refusal": false,
+    "lexical_tokens": 210,
+    "distinct_1": 0.5047619047619047,
+    "repeated_4gram_fraction": 0.004830917874396157,
+    "empty_output": false
+  },
+  {
+    "image_id": 561889,
+    "refusal": false,
+    "lexical_tokens": 244,
+    "distinct_1": 0.46311475409836067,
+    "repeated_4gram_fraction": 0.09128630705394192,
+    "empty_output": false
+  },
+  {
+    "image_id": 563267,
+    "refusal": false,
+    "lexical_tokens": 141,
+    "distinct_1": 0.524822695035461,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 565853,
+    "refusal": false,
+    "lexical_tokens": 151,
+    "distinct_1": 0.6158940397350994,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 566042,
+    "refusal": false,
+    "lexical_tokens": 142,
+    "distinct_1": 0.6126760563380281,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 567740,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5348837209302325,
+    "repeated_4gram_fraction": 0.011834319526627168,
+    "empty_output": false
+  },
+  {
+    "image_id": 568147,
+    "refusal": false,
+    "lexical_tokens": 184,
+    "distinct_1": 0.5597826086956522,
+    "repeated_4gram_fraction": 0.011049723756906049,
+    "empty_output": false
+  },
+  {
+    "image_id": 569273,
+    "refusal": false,
+    "lexical_tokens": 237,
+    "distinct_1": 0.5021097046413502,
+    "repeated_4gram_fraction": 0.042735042735042694,
+    "empty_output": false
+  },
+  {
+    "image_id": 570456,
+    "refusal": false,
+    "lexical_tokens": 227,
+    "distinct_1": 0.5726872246696035,
+    "repeated_4gram_fraction": 0.004464285714285698,
+    "empty_output": false
+  },
+  {
+    "image_id": 570736,
+    "refusal": false,
+    "lexical_tokens": 164,
+    "distinct_1": 0.5914634146341463,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 572462,
+    "refusal": false,
+    "lexical_tokens": 169,
+    "distinct_1": 0.5680473372781065,
+    "repeated_4gram_fraction": 0.0060240963855421326,
+    "empty_output": false
+  },
+  {
+    "image_id": 575970,
+    "refusal": false,
+    "lexical_tokens": 160,
+    "distinct_1": 0.51875,
+    "repeated_4gram_fraction": 0.006369426751592355,
+    "empty_output": false
+  },
+  {
+    "image_id": 576031,
+    "refusal": false,
+    "lexical_tokens": 135,
+    "distinct_1": 0.5407407407407407,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 578500,
+    "refusal": false,
+    "lexical_tokens": 171,
+    "distinct_1": 0.5847953216374269,
+    "repeated_4gram_fraction": 0.005952380952380931,
+    "empty_output": false
+  },
+  {
+    "image_id": 580418,
+    "refusal": false,
+    "lexical_tokens": 114,
+    "distinct_1": 0.6140350877192983,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 580757,
+    "refusal": false,
+    "lexical_tokens": 172,
+    "distinct_1": 0.5406976744186046,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  },
+  {
+    "image_id": 581317,
+    "refusal": false,
+    "lexical_tokens": 164,
+    "distinct_1": 0.573170731707317,
+    "repeated_4gram_fraction": 0.0,
+    "empty_output": false
+  }
+]
